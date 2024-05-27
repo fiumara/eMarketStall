@@ -1,0 +1,2 @@
+module AcquirentesHelper
+end
