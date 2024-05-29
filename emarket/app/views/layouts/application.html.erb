@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Emarket</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+<head>
+    <title>MyApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
-  </head>
-
-  <body>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
     <%= yield %>
-  </body>
+</body>
 </html>
