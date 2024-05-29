@@ -1,0 +1,2 @@
+module NegoziosHelper
+end

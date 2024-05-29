@@ -1,0 +1,2 @@
+module VariantisHelper
+end

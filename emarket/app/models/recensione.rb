@@ -1,0 +1,2 @@
+class Recensione < ApplicationRecord
+end

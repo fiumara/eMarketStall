@@ -1,0 +1,2 @@
+class Negozio < ApplicationRecord
+end
