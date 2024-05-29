@@ -1,7 +1,6 @@
 class CreateProdottos < ActiveRecord::Migration[6.1]
   def change
-    create_table :prodottos do |t|
-      t.integer :id_prodotto
+    create_table :prodottos, id: :uuid do |t|
       t.string :nome_prodotto
       t.string :descrizione
       t.float :prezzo

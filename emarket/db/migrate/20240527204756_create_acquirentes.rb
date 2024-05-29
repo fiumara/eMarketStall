@@ -1,7 +1,6 @@
 class CreateAcquirentes < ActiveRecord::Migration[6.1]
   def change
-    create_table :acquirentes do |t|
-      t.integer :id_acquirente
+    create_table :acquirentes, id: :uuid do |t|
       t.string :nome
       t.string :cognome
       t.string :telefono

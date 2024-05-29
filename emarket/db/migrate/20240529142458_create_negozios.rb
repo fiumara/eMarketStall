@@ -1,7 +1,6 @@
 class CreateNegozios < ActiveRecord::Migration[6.1]
   def change
-    create_table :negozios do |t|
-      t.integer :id_negozio
+    create_table :negozios, id: :uuid do |t|
       t.string :nome_negozio
       t.string :email
       t.string :telefono
