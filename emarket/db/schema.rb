@@ -12,23 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2024_05_29_150350) do
 
-  create_table "acquirentes", force: :cascade do |t|
-    t.string "nome"
-    t.string "cognome"
-    t.string "telefono"
-    t.string "nome_utente"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+# Could not dump table "acquirentes" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
-  create_table "amministratores", force: :cascade do |t|
-    t.string "nome"
-    t.string "cognome"
-    t.string "telefono"
-    t.integer "id_amministratore"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+# Could not dump table "amministratores" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
 # Could not dump table "negozios" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
