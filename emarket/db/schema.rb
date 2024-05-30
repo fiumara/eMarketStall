@@ -21,8 +21,13 @@ ActiveRecord::Schema.define(version: 2024_05_29_150350) do
 # Could not dump table "negozios" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
 
-# Could not dump table "prodottos" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
+  create_table "prodottos", force: :cascade do |t|
+    t.string "nome_prodotto"
+    t.string "descrizione"
+    t.float "prezzo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 # Could not dump table "recensiones" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
@@ -37,6 +42,5 @@ ActiveRecord::Schema.define(version: 2024_05_29_150350) do
   end
 
   add_foreign_key "negozios", "acquirentes"
-  add_foreign_key "prodottos", "negozios"
   add_foreign_key "variantis", "prodottos"
 end

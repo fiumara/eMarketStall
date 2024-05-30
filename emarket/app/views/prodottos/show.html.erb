@@ -1,4 +1,72 @@
-<p id="notice"><%= notice %></p>
+#<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_prodotto_path(@prodotto) %> |
-<%= link_to 'Back', prodottos_path %>
+#<%= link_to 'Edit', edit_prodotto_path(@prodotto) %> |
+#<%= link_to 'Back', prodottos_path %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizzazione Prodotto</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="<%= root_path %>">Logo/Home</a>
+            <nav>
+                <a href="#">Preferiti</a>
+                <div class="hamburger-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1><%= @prodotto.nome_prodotto %></h1>
+        <div class="prodotto-container">
+
+                <button class="arrow left">‹</button>
+                <button class="arrow right">›</button>
+                <div class="image-pagination">.....</div>
+            </div>
+            <div class="prodotto-details">
+                <div class="prodotto-description">
+                    <h2>Descrizione</h2>
+                    <p><%= @prodotto.descrizione %></p>
+                    <button class="store-button">Negozio</button>
+                    <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
+ 
+                    <div class="reviews">
+                        <p>Recensioni</p>
+                        <span class="stars">★★★★★</span>
+                        <button class="reviews-button">Vedi tutte le recensioni</button>
+                    </div>
+                </div>
+                <div class="prodotto-options">
+                    <label for="quantity">Quantità</label>
+                    <select id="quantity" name="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <label for="size">Taglia/colore</label>
+                    <select id="size" name="size">
+                        <option value="s">S</option>
+                        <option value="m">M</option>
+                        <option value="l">L</option>
+                        <option value="xl">XL</option>
+                    </select>
+                    <label for="customization">Personalizzazione</label>
+                    <textarea id="customization" name="customization"></textarea>
+                    <button class="add-to-cart-button">Aggiungi al carrello</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

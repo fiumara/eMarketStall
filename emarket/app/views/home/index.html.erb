@@ -11,19 +11,19 @@
 <body>
     <header>
         <div class="header-content">
-        <div class="logo-home">Logo/Home</div>
+        <button class="logo-home">Logo/Home</button>
         <div class="menu-icon">&#9776;</div>
         </div>
     </header>
     <nav class="categories">
-        <a href="#">GIOIELLI </a>
-        <a href="#">BORSE </a>
-        <a href="#">CINTURE </a>
-        <a href="#">SCARPE </a>
-        <a href="#">ABBIGLIAMENTO </a>
-        <a href="#">CASA </a>
-        <a href="#">Categoria 7</a>
-        <a href="#">Categoria 8</a>
+        <button>GIOIELLI</button>
+        <button>BORSE </button>
+        <button>CINTURE </button>
+        <button>SCARPE </button>
+        <button>ABBIGLIAMENTO </button>
+        <button>CASA </button>
+        <button>Categoria 7</button>
+        <button>Categoria 8</button>
     </nav>
     <main>
         <div class="filter-search">
@@ -45,23 +45,31 @@
             </div>
             <div class="show-promo">Mostra promo</div>
         </div>
-        <div class="products">
-            <div class="product">
+        <div class="prodottos">
+        <% if @prodottos.present? %>
+            <% @prodottos.each do |prodotto| %>
+                <div class="prodotto">
+                    <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %>
+                    <p><%= prodotto.descrizione %></p>
+            </div>
+            <% end %>
+        <% else %>
+            <p>No products available.</p>
+        <% end %>
+
+            <div class="prodotto">
                 <h3>Nome prodotto</h3>
                 <p>Descrizione</p>
             </div>
-            <div class="product">
+            <div class="prodotto">
                 <h3>Nome prodotto</h3>
                 <p>Descrizione</p>
             </div>
-            <div class="product">
+            <div class="prodotto">
                 <h3>Nome prodotto</h3>
                 <p>Descrizione</p>
-            </div>
-            <div class="product">
-                <h3>Nome prodotto</h3>
-                <p>Descrizione</p>
-            </div>
+   
+                </div>
         </div>
     </main>
 </body>

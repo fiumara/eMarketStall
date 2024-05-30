@@ -8,6 +8,7 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos/1 or /prodottos/1.json
   def show
+    @prodotto = @prodotto = Prodotto.find(params[:id])
   end
 
   # GET /prodottos/new
@@ -57,6 +58,11 @@ class ProdottosController < ApplicationController
     end
   end
 
+
+  def name
+    self.nome_prodotto
+  end 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_prodotto
