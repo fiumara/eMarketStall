@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <header>
+    <div>
+      <a href="<%= root_path %>">Logo/Home</a>
+    </div>
+  </header>
+
+  <main>
+  <h2>Accedi</h2>
+
+  <%= form_with url: new_session_path, local: true do |form| %>
+    <div>
+      <%= form.label :role, "Tipo di Utente" %>
+      <%= form.select :role, [['Acquirente', 'acquirente'], ['Amministratore', 'amministratore']], prompt: "Seleziona un ruolo" %>
+    </div>
+  
+    <div>
+      <%= form.label :email %>
+      <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+  
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password, autocomplete: "current-password" %>
+    </div>
+  
+    <div>
+      <%= form.submit "Accedi" %>
+    </div>
+  <% end %>
+  
+  </main>
+</body>
+</html>

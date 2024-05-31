@@ -23,6 +23,14 @@ class AmministratoresController < ApplicationController
   def create
     @amministratore = Amministratore.new(amministratore_params)
 
+    if @amministratore.save
+      session[:user_id] = @amministratore.id
+      session[:role] = 'amministratore'
+      redirect_to root_path, notice: "Registrazione completata!"
+    else
+      render :new
+    end
+
     respond_to do |format|
       if @amministratore.save
         format.html { redirect_to amministratore_url(@amministratore), notice: "Amministratore was successfully created." }
@@ -65,6 +73,7 @@ class AmministratoresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def amministratore_params
-      params.fetch(:amministratore, {})
+    #  params.fetch(:amministratore, {})
+    params.require(:amministratore).permit(:email, :password, :password_confirmation)
     end
 end

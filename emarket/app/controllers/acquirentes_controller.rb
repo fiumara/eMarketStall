@@ -23,6 +23,35 @@ class AcquirentesController < ApplicationController
   def create
     @acquirente = Acquirente.new(acquirente_params)
 
+    class SessionsController < ApplicationController
+      def new
+      end
+    
+      def create
+        user = if params[:role] == 'acquirente'
+                 Acquirente.find_by(email: params[:email])
+               elsif params[:role] == 'amministratore'
+                 Amministratore.find_by(email: params[:email])
+               end
+    
+        if user && user.authenticate(params[:password])
+          session[:user_id] = user.id
+          session[:role] = params[:role]
+          redirect_to root_path, notice: "Accesso effettuato!"
+        else
+          flash.now[:alert] = "Email o password non validi"
+          render :new
+        end
+      end
+    
+      def destroy
+        session[:user_id] = nil
+        session[:role] = nil
+        redirect_to root_path, notice: "Disconnessione effettuata!"
+      end
+    end
+    
+
     respond_to do |format|
       if @acquirente.save
         format.html { redirect_to acquirente_url(@acquirente), notice: "Acquirente was successfully created." }
@@ -65,6 +94,7 @@ class AcquirentesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def acquirente_params
-      params.fetch(:acquirente, {})
+    #  params.fetch(:acquirente, {})
+    params.require(:acquirente).permit(:email, :password, :password_confirmation)
     end
 end

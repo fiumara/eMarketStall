@@ -7,21 +7,59 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
-        <button class="logo-home">Logo/Home</button>
-        <div class="menu-icon">&#9776;</div>
+            <button class="logo-home">Logo/Home</button>
+            <div class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <%= link_to 'Accedi', new_session_path %>
+                    
+                </div>
+            </div>
         </div>
     </header>
     <nav class="categories">
         <button>GIOIELLI</button>
-        <button>BORSE </button>
-        <button>CINTURE </button>
-        <button>SCARPE </button>
-        <button>ABBIGLIAMENTO </button>
-        <button>CASA </button>
+        <button>BORSE</button>
+        <button>CINTURE</button>
+        <button>SCARPE</button>
+        <button>ABBIGLIAMENTO</button>
+        <button>CASA</button>
         <button>Categoria 7</button>
         <button>Categoria 8</button>
     </nav>
@@ -46,30 +84,16 @@
             <div class="show-promo">Mostra promo</div>
         </div>
         <div class="prodottos">
-        <% if @prodottos.present? %>
-            <% @prodottos.each do |prodotto| %>
-                <div class="prodotto">
-                    <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %>
-                    <p><%= prodotto.descrizione %></p>
-            </div>
+            <% if @prodottos.present? %>
+                <% @prodottos.each do |prodotto| %>
+                    <div class="prodotto">
+                        <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %>
+                        <p><%= prodotto.descrizione %></p>
+                    </div>
+                <% end %>
+            <% else %>
+                <p>No products available.</p>
             <% end %>
-        <% else %>
-            <p>No products available.</p>
-        <% end %>
-
-            <div class="prodotto">
-                <h3>Nome prodotto</h3>
-                <p>Descrizione</p>
-            </div>
-            <div class="prodotto">
-                <h3>Nome prodotto</h3>
-                <p>Descrizione</p>
-            </div>
-            <div class="prodotto">
-                <h3>Nome prodotto</h3>
-                <p>Descrizione</p>
-   
-                </div>
         </div>
     </main>
 </body>
