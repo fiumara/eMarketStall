@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
+  #get 'sessions/new'
   root 'home#index'
 
   get 'signup', to: 'acquirentes#new', as: 'signup'
   get 'admin_signup', to: 'amministratores#new', as: 'admin_signup'
 
-  get 'login', to: 'sessions#new', as: 'new_session'
-  post 'login', to: 'sessions#create', as: 'sessions'
+  get 'login', to: 'sessions#new', as: 'login'
+  post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+
+  get 'profile', to: 'users#profile', as: 'profile'
 
 #  get 'home/index'
   resources :prodottos, only: [:index, :show]

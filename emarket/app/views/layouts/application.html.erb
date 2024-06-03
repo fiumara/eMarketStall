@@ -9,6 +9,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
+<header>
+<div class="header-content">
+  <button class="logo-home">Logo/Home</button>
+  <div class="menu-icon">&#9776;</div>
+  <nav class="dropdown-menu">
+    <%= link_to 'Accedi',login_path, class: 'dropdown-item' %>
+  </nav>
+</div>
+</header>
     <%= yield %>
 </body>
 </html>
