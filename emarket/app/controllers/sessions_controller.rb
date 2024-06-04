@@ -25,6 +25,8 @@ class SessionsController < ApplicationController
     redirect_to root_path, notice: "Disconnessione effettuata!"
   end
 
+
+
   private
 
   def profile_path(user)
