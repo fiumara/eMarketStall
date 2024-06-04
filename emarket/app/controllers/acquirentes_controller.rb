@@ -7,7 +7,8 @@ class AcquirentesController < ApplicationController
   end
 
   # GET /acquirentes/1 or /acquirentes/1.json
-  def show
+ def show
+    @acquirente = Acquirente.find(params[:id])
   end
 
   # GET /acquirentes/new
@@ -22,45 +23,6 @@ class AcquirentesController < ApplicationController
   # POST /acquirentes or /acquirentes.json
   def create
     @acquirente = Acquirente.new(acquirente_params)
-
-    class SessionsController < ApplicationController
-      def new
-      end
-    
-      def create
-        user = if params[:role] == 'acquirente'
-                 Acquirente.find_by(email: params[:email])
-               elsif params[:role] == 'amministratore'
-                 Amministratore.find_by(email: params[:email])
-               end
-    
-        if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
-          session[:role] = params[:role]
-          redirect_to root_path, notice: "Accesso effettuato!"
-        else
-          flash.now[:alert] = "Email o password non validi"
-          render :new
-        end
-      end
-    
-      def destroy
-        session[:user_id] = nil
-        session[:role] = nil
-        redirect_to root_path, notice: "Disconnessione effettuata!"
-      end
-    end
-    
-
-    respond_to do |format|
-      if @acquirente.save
-        format.html { redirect_to acquirente_url(@acquirente), notice: "Acquirente was successfully created." }
-        format.json { render :show, status: :created, location: @acquirente }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @acquirente.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /acquirentes/1 or /acquirentes/1.json
@@ -98,3 +60,4 @@ class AcquirentesController < ApplicationController
     params.require(:acquirente).permit(:email, :password, :password_confirmation)
     end
 end
+

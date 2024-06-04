@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>eMarket</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= yield :title %></title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-<div class="header-content">
-  <button class="logo-home">Logo/Home</button>
-  <div class="menu-icon">&#9776;</div>
-  <nav class="dropdown-menu">
-    <%= link_to 'Accedi',login_path, class: 'dropdown-item' %>
-  </nav>
-</div>
-</header>
+  <header>
+    <div class="header-content">
+      <%= link_to 'Logo/Home', root_path, class: 'logo-home' %>
+      <div class="dropdown">
+      <button class="dropbtn">Menu</button>
+        <% if logged_in? %>
+          <% if current_user.is_a?(Acquirente) %>
+          <div class="dropdown-content">
+            <%= link_to 'Profilo Acquirente', acquirente_path(current_user)%>
+          <% elsif current_user.is_a?(Amministratore) %>
+            <div class="dropdown-content">
+            <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
+          <% end %>
+          <div class="dropdown-content">
+          <%= link_to 'Logout', logout_path, method: :delete %>
+        <% else %>
+          <div class="dropdown-content">
+          <%= link_to 'Accedi', login_path%>
+        <% end %>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
     <%= yield %>
+  </main>
 </body>
 </html>

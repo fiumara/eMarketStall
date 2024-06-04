@@ -8,6 +8,7 @@ class AmministratoresController < ApplicationController
 
   # GET /amministratores/1 or /amministratores/1.json
   def show
+    @amministratore = Amministratore.find(params[:id])
   end
 
   # GET /amministratores/new

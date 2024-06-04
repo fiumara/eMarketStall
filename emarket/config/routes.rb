@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
 
-  get 'profile', to: 'users#profile', as: 'profile'
+#  get 'profile', to: 'users#profile', as: 'profile'
 
 #  get 'home/index'
   resources :prodottos, only: [:index, :show]
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :variantis
   resources :prodottos
   resources :negozios
-  resources :acquirentes, only: [:create]
-  resources :amministratores, only: [:create]
+  resources :acquirentes, only: [:create, :show]
+  resources :amministratores, only: [:create, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
