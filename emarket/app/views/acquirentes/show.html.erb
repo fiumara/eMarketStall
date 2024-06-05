@@ -2,6 +2,29 @@
 
 
 <h1>Profilo Acquirente</h1>
-<p>Nome: <%= @acquirente.nome %></p>
-<p>Cognome: <%= @acquirente.cognome %></p>
 
+<div class="profile-container">
+    <nav class="sidebar">
+      <button class="sidebar-btn">LISTA DESIDERI</button>
+      <button class="sidebar-btn">ARCHIVIO ORDINI</button>
+      <button class="sidebar-btn">CRONOLOGIA RICERCHE</button>
+      <button class="sidebar-btn">I TUOI NEGOZI</button>
+      <button class="sidebar-btn">FAQ</button>
+      <button class="sidebar-btn">MESSAGGI</button>
+    </nav>
+
+<body>
+
+<p>  <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
+
+<p>  Nome utente: <%= @acquirente.nome_utente %></p>
+<p>  Email: <%= @acquirente.email %>    Tel: <%= @acquirente.telefono %></p>
+
+<p><button>Seguiti</button></p>
+<p>Punti Fedeltà: 0</p>
+
+</body>
+
+<button>Modifica Profilo</button>
+
+<button>Elimina Profilo</button>

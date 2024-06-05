@@ -1,8 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 
-
 <h1>Profilo Amministratore</h1>
-<p>Nome: <%= @amministratore.nome %></p>
-<p>Cognome: <%= @amministratore.cognome %></p>
+
+<div class="profile-container">
+    <nav class="sidebar">
+      <button class="sidebar-btn">GESTIONE ACCOUNT</button>
+      <button class="sidebar-btn">STATISTICHE</button>
+      <button class="sidebar-btn">GESTIONI FEEDBACK</button>
+      <button class="sidebar-btn">PROMOZIONI</button>
+      <button class="sidebar-btn">GESTIONE FAQ</button>
+      <button class="sidebar-btn">MESSAGGI</button>
+    </nav>
+
+<body>
+
+<p>  <%= @amministratore.nome %> <%= @amministratore.cognome %></p>
+
+<p>  ID amministratore: <%= @amministratore.id %></p>
+<p>  Email: <%= @amministratore.email %>    Tel: <%= @amministratore.telefono %></p>
+
+</body>
+
+<button>Modifica Profilo</button>
 
