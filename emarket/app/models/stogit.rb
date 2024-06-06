@@ -1,0 +1,2 @@
+class Stogit < ApplicationRecord
+end

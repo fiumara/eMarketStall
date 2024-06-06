@@ -19,5 +19,8 @@ Rails.application.routes.draw do
   resources :negozios
   resources :acquirentes, only: [:create, :show]
   resources :amministratores, only: [:create, :show]
+# config/routes.rb
+  resources :stores
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

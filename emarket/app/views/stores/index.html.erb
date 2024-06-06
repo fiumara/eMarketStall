@@ -1,0 +1,12 @@
+<!-- app/views/stores/index.html.erb -->
+<h1>GESTIONE NEGOZI</h1>
+<ul>
+  <% @stores.each do |store| %>
+    <li>
+      <strong><%= store.name %></strong>
+      <p><%= store.description %></p>
+      <%= link_to 'Modifica', edit_store_path(store) %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Crea un nuovo negozio', new_store_path %>

@@ -1,0 +1,2 @@
+module GestioneNegoziHelper
+end

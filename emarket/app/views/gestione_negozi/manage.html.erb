@@ -1,0 +1,79 @@
+<!-- app/views/gestione_negozi/manage.html.erb -->
+<div class="container">
+  <header>
+    <h1>GESTIONE NEGOZI <%= current_user.nome %> <%= current_user.cognome %></h1>
+    <a href="<%= root_path %>">Logo/Home</a>
+  </header>
+
+  <nav class="sidebar">
+    <%= link_to 'I TUOI NEGOZI', gestione_negozi_path, class: 'sidebar-btn' %>
+  </nav>
+
+  <main>
+    <h2>Gestione negozi</h2>
+    <% @stores.each do |store| %>
+      <div class="store-container">
+        <div class="store-item">
+          <p><strong><%= store.name %></strong></p>
+          <div class="store-description">
+            <p><%= store.description %></p>
+            <%= link_to 'Modifica', edit_store_path(store), class: 'btn' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to 'Crea un nuovo negozio', new_store_path, class: 'btn create-btn' %>
+  </main>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .sidebar-btn {
+    margin: 5px 0;
+  }
+  main {
+    margin-top: 20px;
+    width: 80%;
+  }
+  .store-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .store-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .btn {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+  }
+  .create-btn {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+    margin: auto;
+  }
+</style>
