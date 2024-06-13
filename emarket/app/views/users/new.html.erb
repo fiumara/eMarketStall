@@ -1,50 +1,49 @@
-<h1>Registrazione Acquirente</h1>
+<h1>Creazione/modifica profilo</h1>
 
-<%= form_with(model: @acquirente, local: true) do |form| %>
+<%= form_with(model: @user, local: true) do |form| %>
   <div>
     <%= form.label :nome %>
     <%= form.text_field :nome %>
   </div>
-
+  
   <div>
     <%= form.label :cognome %>
     <%= form.text_field :cognome %>
   </div>
-
+  
   <div>
     <%= form.label :nome_utente %>
     <%= form.text_field :nome_utente %>
   </div>
-
+  
   <div>
     <%= form.label :telefono %>
     <%= form.text_field :telefono %>
   </div>
-
+  
   <div>
     <%= form.label :email %>
     <%= form.email_field :email %>
   </div>
-
+  
   <div>
     <%= form.label :password %>
     <%= form.password_field :password %>
   </div>
-
+  
   <div>
     <%= form.label :password_confirmation, "Ripeti password" %>
     <%= form.password_field :password_confirmation %>
   </div>
-
-   
+  
   <div>
-    <%# <%= form.label :indirizzo, "Indirizzo (solo per acquirente)" %> 
-    <%#  <%= form.text_field :indirizzo %>
+    <%= form.label :indirizzo, "Indirizzo (solo per acquirente)" %>
+    <%= form.text_field :indirizzo %>
   </div>
   
   <div>
-    <%# <%= form.check_box :profilo_privato %>
-    <%#  <%= form.label :profilo_privato, "Profilo privato (solo per acquirente)" %>
+    <%= form.check_box :profilo_privato %>
+    <%= form.label :profilo_privato, "Profilo privato (solo per acquirente)" %>
   </div>
   
   <div>
@@ -52,5 +51,3 @@
     <%= link_to 'Annulla', root_path, class: "btn" %>
   </div>
 <% end %>
-
-

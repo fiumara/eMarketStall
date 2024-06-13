@@ -23,6 +23,11 @@ class AcquirentesController < ApplicationController
   # POST /acquirentes or /acquirentes.json
   def create
     @acquirente = Acquirente.new(acquirente_params)
+    if @acquirente.save
+      redirect_to @acquirente, notice: 'Acquirente registrato con successo.'
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /acquirentes/1 or /acquirentes/1.json
@@ -57,7 +62,7 @@ class AcquirentesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def acquirente_params
     #  params.fetch(:acquirente, {})
-    params.require(:acquirente).permit(:email, :password, :password_confirmation)
+    params.require(:acquirente).permit(:nome, :cognome, :nome_utente, :telefono, :email, :password, :password_confirmation, :indirizzo, :profilo_privato)
     end
 end
 
