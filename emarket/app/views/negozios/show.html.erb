@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
 <h1>NEGOZIO</h1>
 
 <div class="profile-container">
@@ -9,23 +8,34 @@
       <button class="sidebar-btn">STATISTICHE</button>
       <button class="sidebar-btn">PROMOZIONI</button>
       <button class="sidebar-btn">AGGIUNGI PRODOTTO</button>
+      <%= link_to 'Aggiungi Prodotto', new_negozio_prodotto_path(@negozio), class: 'btn btn-primary' %>
       <button class="sidebar-btn">MESSAGGI</button>
       <button class="sidebar-btn">GESTIONE RESI</button>
     </nav>
 
 <body>
 
-<p>  nome negozio: <%= @nome_negozio %></p>
-
-<p>  <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
+<p>  nome negozio: <%= @negozio.nome_negozio %></p>
 
 
 <p>  Email: <%= @negozio.email %>    Tel: <%= @negozio.telefono %></p>
+
+<p><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
 
 <p><button>Seguiti</button></p>
 
 
 </body>
+
+<div class="prodottos">
+            <% if @negozio.prodottos.present? %>
+                <% @negozio.prodottos.each do |prodotto| %>
+                    <p><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %></p>
+                <% end %>
+            <% else %>
+                <p>No products available.</p>
+            <% end %>
+        </div>
 
 <button>Modifica Profilo</button>
 

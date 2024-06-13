@@ -8,11 +8,12 @@ class NegoziosController < ApplicationController
 
   # GET /negozios/1 or /negozios/1.json
   def show
+    @acquirente = @negozio.acquirente
   end
 
   # GET /negozios/new
   def new
-    @negozio = Negozio.new
+    @negozio = current_user.build_negozio
   end
 
   # GET /negozios/1/edit
@@ -21,16 +22,11 @@ class NegoziosController < ApplicationController
 
   # POST /negozios or /negozios.json
   def create
-    @negozio = Negozio.new(negozio_params)
-
-    respond_to do |format|
-      if @negozio.save
-        format.html { redirect_to negozio_url(@negozio), notice: "Negozio was successfully created." }
-        format.json { render :show, status: :created, location: @negozio }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @negozio.errors, status: :unprocessable_entity }
-      end
+    @negozio = current_user.build_negozio(negozio_params)
+    if @negozio.save
+      redirect_to @negozio, notice: 'Negozio creato con successo!'
+    else
+      render :new
     end
   end
 
@@ -65,6 +61,6 @@ class NegoziosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def negozio_params
-      params.fetch(:negozio, {})
+      params.require(:negozio).permit(:nome_negozio, :email, :telefono)
     end
 end

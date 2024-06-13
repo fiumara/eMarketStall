@@ -8,7 +8,12 @@
       <button class="sidebar-btn">LISTA DESIDERI</button>
       <button class="sidebar-btn">ARCHIVIO ORDINI</button>
       <button class="sidebar-btn">CRONOLOGIA RICERCHE</button>
-      <button class="sidebar-btn">I TUOI NEGOZI</button>
+      <% if @negozio %>
+          <%= link_to 'IL TUO NEGOZIO', negozio_path(@negozio), class: 'btn btn-primary' %>
+        <% else %>
+          <%= link_to 'CREA IL TUO NEGOZIO', new_negozio_path, class: 'btn btn-primary' %>
+        <% end %>
+      
       <button class="sidebar-btn">FAQ</button>
       <button class="sidebar-btn">MESSAGGI</button>
     </nav>

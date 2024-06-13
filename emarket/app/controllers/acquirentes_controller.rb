@@ -9,6 +9,7 @@ class AcquirentesController < ApplicationController
   # GET /acquirentes/1 or /acquirentes/1.json
  def show
     @acquirente = Acquirente.find(params[:id])
+    @negozio = @acquirente.negozio
   end
 
   # GET /acquirentes/new

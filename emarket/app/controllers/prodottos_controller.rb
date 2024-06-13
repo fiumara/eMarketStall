@@ -1,5 +1,5 @@
 class ProdottosController < ApplicationController
-  before_action :set_prodotto, only: %i[ show edit update destroy ]
+  before_action :set_negozio, only: [:new, :create]
 
   # GET /prodottos or /prodottos.json
   def index
@@ -13,7 +13,7 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos/new
   def new
-    @prodotto = Prodotto.new
+    @prodotto = @negozio.prodottos.build
   end
 
   # GET /prodottos/1/edit
@@ -22,17 +22,13 @@ class ProdottosController < ApplicationController
 
   # POST /prodottos or /prodottos.json
   def create
-    @prodotto = Prodotto.new(prodotto_params)
-
-    respond_to do |format|
-      if @prodotto.save
-        format.html { redirect_to prodotto_url(@prodotto), notice: "Prodotto was successfully created." }
-        format.json { render :show, status: :created, location: @prodotto }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @prodotto.errors, status: :unprocessable_entity }
-      end
+    @prodotto = @negozio.prodottos.build(prodotto_params)
+    if @prodotto.save
+      redirect_to @negozio, notice: 'Prodotto creato con successo.'
+    else
+      render :new
     end
+
   end
 
   # PATCH/PUT /prodottos/1 or /prodottos/1.json
@@ -64,13 +60,11 @@ class ProdottosController < ApplicationController
   end 
   
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_prodotto
-      @prodotto = Prodotto.find(params[:id])
-    end
+  def set_negozio
+    @negozio = Negozio.find(params[:negozio_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def prodotto_params
-      params.fetch(:prodotto, {})
-    end
+  def prodotto_params
+    params.require(:prodotto).permit(:nome_prodotto, :descrizione, :prezzo)
+  end
 end
