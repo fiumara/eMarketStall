@@ -2,8 +2,6 @@
 
 <%= render 'form', prodotto: @prodotto %>
 
-<%= link_to 'Back', prodottos_path %>
-
 <%= form_with(model: [@negozio, @prodotto], local: true) do |form| %>
     <% if @prodotto.errors.any? %>
       <div id="error_explanation">

@@ -15,8 +15,7 @@ Rails.application.routes.draw do
   resources :prodottos, only: [:index, :show]
   resources :recensiones
   resources :variantis
-  resources :prodottos
-  resources :negozios do
+  resources :negozios, only: [:new, :create, :show] do
     resources :prodottos, only: [:new, :create]
   end
   resources :acquirentes, only: [:new, :create, :show]
