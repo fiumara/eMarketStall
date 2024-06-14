@@ -12,11 +12,11 @@ Rails.application.routes.draw do
 #  get 'profile', to: 'users#profile', as: 'profile'
 
 #  get 'home/index'
-  resources :prodottos, only: [:index, :show]
+  resources :prodottos, only: [ :show]
   resources :recensiones
   resources :variantis
-  resources :prodottos
-  resources :negozios do
+  
+  resources :negozios, only: [:new, :create, :show] do
     resources :prodottos, only: [:new, :create]
   end
   resources :acquirentes, only: [:new, :create, :show]
