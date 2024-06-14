@@ -47,8 +47,10 @@ ActiveRecord::Schema.define(version: 2024_05_29_150350) do
     t.string "nome_prodotto"
     t.string "descrizione"
     t.float "prezzo"
+    t.integer "negozio_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["negozio_id"], name: "index_prodottos_on_negozio_id"
   end
 
   create_table "recensiones", force: :cascade do |t|
@@ -64,5 +66,6 @@ ActiveRecord::Schema.define(version: 2024_05_29_150350) do
   end
 
   add_foreign_key "negozios", "acquirentes"
+  add_foreign_key "prodottos", "negozios"
   add_foreign_key "variantis", "prodottos"
 end

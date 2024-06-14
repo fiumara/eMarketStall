@@ -1,5 +1,45 @@
-<h1>New Negozio</h1>
 
-<%= render 'form', negozio: @negozio %>
 
 <%= link_to 'Back', negozios_path %>
+
+<div class="container">
+    <h1>Crea il tuo Negozio</h1>
+    <%= form_with(model: @negozio, local: true) do |form| %>
+      <% if @negozio.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@negozio.errors.count, "error") %> impedisce la creazione del negozio:</h2>
+          <ul>
+            <% @negozio.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :nome %>
+        <%= form.text_field :nome %>
+      </div>
+
+      <div class="field">
+        <%= form.label :descrizione %>
+        <%= form.text_area :descrizione %>
+      </div>
+
+      <div class="field">
+        <%= form.label :indirizzo %>
+        <%= form.text_field :indirizzo %>
+      </div>
+
+      <div class="field">
+        <%= form.label :telefono %>
+        <%= form.text_field :telefono %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Crea Negozio", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</body>
+</html>

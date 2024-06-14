@@ -3,3 +3,36 @@
 <%= render 'form', prodotto: @prodotto %>
 
 <%= link_to 'Back', prodottos_path %>
+
+<%= form_with(model: [@negozio, @prodotto], local: true) do |form| %>
+    <% if @prodotto.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@prodotto.errors.count, "error") %> prohibited this prodotto from being saved:</h2>
+        <ul>
+          <% @prodotto.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :nome_prodotto %>
+      <%= form.text_field :nome_prodotto %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :descrizione %>
+      <%= form.text_area :descrizione %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :prezzo %>
+      <%= form.number_field :prezzo, step: 0.01 %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit "Crea Prodotto" %>
+    </div>
+  <% end %>
+  

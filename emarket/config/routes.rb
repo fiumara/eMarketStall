@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resources :recensiones
   resources :variantis
   resources :prodottos
-  resources :negozios
+  resources :negozios do
+    resources :prodottos, only: [:new, :create]
+  end
   resources :acquirentes, only: [:create, :show]
   resources :amministratores, only: [:create, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
