@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resources :prodottos, only: [ :show]
   resources :recensiones
   resources :variantis
-  
   resources :negozios, only: [:new, :create, :show] do
     resources :prodottos, only: [:new, :create]
   end
