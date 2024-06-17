@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'cronologia_ricerche/index'
+  get 'archivio_ordini/index'
+  get 'lista_desideri/index'
   #get 'sessions/new'
   root 'home#index'
 
@@ -8,6 +11,11 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+
+
+  get 'lista_desideri', to: 'lista_desideri#index'
+  get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
+  get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
 
 #  get 'profile', to: 'users#profile', as: 'profile'
 

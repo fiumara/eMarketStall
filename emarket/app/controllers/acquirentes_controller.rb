@@ -25,11 +25,7 @@ class AcquirentesController < ApplicationController
   def create
     @acquirente = Acquirente.new(acquirente_params)
     if @acquirente.save
-<<<<<<< HEAD
-      redirect_to login_path, notice: 'Acquirente registrato con successo.'
-=======
-      redirect_to login_path, notice: 'Acquirente registrato con successo. Per favore, effettua l\'accesso.'
->>>>>>> 6ecb59420a66bc3e6024a3f7840d170ccae870b6
+      redirect_to login_path, notice: 'Acquirente registrato con successo. Per favore, effettuare l\'accesso.'
     else
       render :new
     end

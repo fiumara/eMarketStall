@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista Desideri</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header>
+    <h1>LISTA PREFERITI acquirente/utente non registrato</h1>
+    <%= link_to 'Logo/Home', root_path %>
+  </header>
+
+  <div class="lista-desideri">
+    <h2>Lista desideri</h2>
+    <div class="prodotto">
+      <p><strong>Nome prodotto</strong></p>
+      <div class="prodotto-dettagli">
+        <div class="immagine-prodotto">
+          <!-- Inserisci qui l'immagine del prodotto -->
+        </div>
+        <div class="descrizione">
+          <p>Descrizione prodotto</p>
+          <p>Prezzo</p>
+        </div>
+        <div class="rating">
+          <p>★★★★★</p>
+        </div>
+        <div class="elimina">
+          <%= button_to 'Elimina', '#', method: :delete, class: 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+    <p>...</p>
+  </div>
+</body>
+</html>
