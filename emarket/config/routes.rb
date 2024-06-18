@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'messaggi/index'
+  get 'faq/index'
   get 'cronologia_ricerche/index'
   get 'archivio_ordini/index'
   get 'lista_desideri/index'
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   get 'lista_desideri', to: 'lista_desideri#index'
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
+  get 'faq', to: 'faq#index', as: 'faq'
+  get 'messaggi', to: 'messaggi#index', as: 'messaggi'
 
 #  get 'profile', to: 'users#profile', as: 'profile'
 
