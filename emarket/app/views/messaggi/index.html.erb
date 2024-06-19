@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h1>MESSAGGI</h1>
+
+<div class="profile-container">
+  <body>
+    <% @messaggi.each do |messaggio| %>
+      <div class="message-item">
+        <p>Nome utente: <%= messaggio.nome_utente %></p>
+        <p>Tipo utente: <%= messaggio.tipo_utente %></p>
+        <p><%= messaggio.contenuto %></p>
+        <button>Rispondi</button>
+        <button>Elimina</button>
+      </div>
+    <% end %>
+  </body>
+</div>
+
