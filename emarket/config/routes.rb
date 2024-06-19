@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  get 'statistiche/show'
   get 'cronologia_ricerche/index'
   get 'archivio_ordini/index'
   get 'lista_desideri/index'
   #get 'sessions/new'
   root 'home#index'
+
+  get 'gestione_account', to: 'gestione_account#manage'
+  get 'statistiche', to: 'statistiche#show'
 
   get 'signup', to: 'acquirentes#new', as: 'signup'
   get 'admin_signup', to: 'amministratores#new', as: 'admin_signup'
@@ -16,6 +20,8 @@ Rails.application.routes.draw do
   get 'lista_desideri', to: 'lista_desideri#index'
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
+
+
 
 #  get 'profile', to: 'users#profile', as: 'profile'
 

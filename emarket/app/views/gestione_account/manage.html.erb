@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestione Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background-color: #f8f8f8;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 10px;
+    }
+    section {
+      margin: 20px;
+    }
+    .account-box {
+      border: 1px solid #000;
+      padding: 20px;
+      margin: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .account-box button {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GESTIONE ACCOUNT amministratore</h1>
+    <nav>
+      <%= link_to 'Logo/Home', root_path %>
+    </nav>
+  </header>
+  <section>
+    <h2>Gestione account</h2>
+    <div>
+      <label for="user_type">Tipo utente</label>
+      <select id="user_type">
+        <option value="all">Tutti</option>
+        <option value="admin">Amministratori</option>
+        <option value="user">Utenti</option>
+      </select>
+      <input type="text" placeholder="Cerca">
+      <button>Cerca</button>
+    </div>
+    <% @users.each do |user| %>
+      <div class="account-box">
+        <div>
+          <h3><%= user.name %></h3>
+          <p><%= user.description %></p>
+        </div>
+        <div>
+          <button>Blocca</button>
+          <button>Elimina</button>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</body>
+</html>
