@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  get 'messaggi/index'
-  get 'faq/index'
-  get 'cronologia_ricerche/index'
-  get 'archivio_ordini/index'
-  get 'lista_desideri/index'
+
   #get 'sessions/new'
   root 'home#index'
 

@@ -1,4 +1,5 @@
 class NegoziosController < ApplicationController
+  before_action :authenticate_acquirente!
   before_action :set_negozio, only: %i[ show edit update destroy ]
 
   # GET /negozios or /negozios.json
