@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'gestione_feedback/show'
   #get 'sessions/new'
   root 'home#index'
 
   get 'gestione_account', to: 'gestione_account#manage'
   get 'statistiche', to: 'statistiche#show'
-
+  get 'gestione_feedback', to: 'gestione_feedback#show'
   get 'signup', to: 'acquirentes#new', as: 'signup'
   get 'admin_signup', to: 'amministratores#new', as: 'admin_signup'
 
