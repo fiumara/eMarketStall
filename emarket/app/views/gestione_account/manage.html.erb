@@ -42,35 +42,59 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>GESTIONE ACCOUNT amministratore</h1>
-    <nav>
-      <%= link_to 'Logo/Home', root_path %>
-    </nav>
-  </header>
   <section>
     <h2>Gestione account</h2>
     <div>
-      <label for="user_type">Tipo utente</label>
-      <select id="user_type">
-        <option value="all">Tutti</option>
-        <option value="admin">Amministratori</option>
-        <option value="user">Utenti</option>
-      </select>
-      <input type="text" placeholder="Cerca">
-      <button>Cerca</button>
+      <form action="<%= gestione_account_path %>" method="get">
+        <label for="user_type">Tipo utente</label>
+        <select id="user_type" name="user_type">
+          <option value="all" <%= 'selected' if params[:user_type] == 'all' %>>Tutti</option>
+          <option value="acquirente" <%= 'selected' if params[:user_type] == 'acquirente' %>>Acquirenti</option>
+          <option value="venditore" <%= 'selected' if params[:user_type] == 'venditore' %>>Venditori</option>
+        </select>
+        <input type="text" name="search" placeholder="Cerca" value="<%= params[:search] %>">
+        <button type="submit">Cerca</button>
+      </form>
     </div>
-    <% @users.each do |user| %>
-      <div class="account-box">
-        <div>
-          <h3><%= user.name %></h3>
-          <p><%= user.description %></p>
+    <% @acquirente.each do |acquirente| %>
+      <% if params[:user_type] == "venditore" && acquirente.negozio.present? %>
+        <div class="account-box">
+          <div>
+            <h3><%= acquirente.nome_utente %></h3>
+            <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
+            <p>Negozio: <%= acquirente.negozio.nome_negozio %></p>
+          </div>
+          <div>
+            <button>Blocca</button>
+            <button>Elimina</button>
+          </div>
         </div>
-        <div>
-          <button>Blocca</button>
-          <button>Elimina</button>
+      <% elsif params[:user_type] == "acquirente" && acquirente.negozio.blank? %>
+        <div class="account-box">
+          <div>
+            <h3><%= acquirente.nome_utente %></h3>
+            <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
+          </div>
+          <div>
+            <button>Blocca</button>
+            <button>Elimina</button>
+          </div>
         </div>
-      </div>
+      <% elsif params[:user_type] == "all" %>
+        <div class="account-box">
+          <div>
+            <h3><%= acquirente.nome_utente %></h3>
+            <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
+            <% if acquirente.negozio.present? %>
+              <p>Negozio: <%= acquirente.negozio.nome_negozio %></p>
+            <% end %>
+          </div>
+          <div>
+            <button>Blocca</button>
+            <button>Elimina</button>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </section>
 </body>
