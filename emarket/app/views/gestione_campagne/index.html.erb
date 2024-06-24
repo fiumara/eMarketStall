@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gestione Campagne Promozionali</title>
+  <style>
+    .campaign-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .campaign-header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .campaign-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .campaign-actions button {
+      background-color: black;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .add-campaign {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      display: block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+  
+  <section>
+    <h2>Campagne promozionali</h2>
+    
+    <% @promozioni.each do |promozioni| %>
+      <div class="campaign-container">
+        <div class="campaign-header">
+          <div>
+            <h3><%= promozioni.nome %></h3>
+            <p><%= promozionni.descrizione %></p>
+          </div>
+          <div>
+            <p>Sconto: <%= promozioni.sconto %>%</p>
+            <p>Data: <%= promozioni.data %></p>
+            <p>Categoria/Utenti: <%= promozioni.categoria %></p>
+          </div>
+        </div>
+        <div class="campaign-actions">
+          <button>Modifica</button>
+          <button>Elimina</button>
+        </div>
+      </div>
+    <% end %>
+    
+    <button class="add-campaign">Aggiungi promozione</button>
+  </section>
+</body>
+</html>
+
