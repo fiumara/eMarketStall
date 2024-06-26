@@ -35,14 +35,15 @@ class AcquirentesController < ApplicationController
   def update
     respond_to do |format|
       if @acquirente.update(acquirente_params)
-        format.html { redirect_to acquirente_url(@acquirente), notice: "Acquirente was successfully updated." }
+        format.html { redirect_to @acquirente, notice: "Acquirente aggiornato con successo." }
         format.json { render :show, status: :ok, location: @acquirente }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit }
         format.json { render json: @acquirente.errors, status: :unprocessable_entity }
       end
     end
   end
+  
 
   # DELETE /acquirentes/1 or /acquirentes/1.json
   def destroy
