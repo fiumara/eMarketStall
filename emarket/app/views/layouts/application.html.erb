@@ -17,18 +17,18 @@
         <% if logged_in? %>
           <% if current_user.is_a?(Acquirente) %>
           <div class="dropdown-content">
-            <%= link_to 'Profilo Acquirente', acquirente_path(current_user)%>
-            <%= link_to 'FAQs', faqs_path %>
+            <p><%= link_to 'Profilo Acquirente', acquirente_path(current_user)%></p>
+            <p><%= link_to 'FAQs', faqs_path %></p>
           <% elsif current_user.is_a?(Amministratore) %>
             <div class="dropdown-content">
-            <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
+            <p><%= link_to 'Profilo Amministratore', amministratore_path(current_user) %></p>
           <% end %>
           <div class="dropdown-content">
-          <%= link_to 'Logout', logout_path, method: :delete %>
+          <p><%= link_to 'Logout', logout_path, method: :delete %></p>
         <% else %>
           <div class="dropdown-content">
-          <%= link_to 'Accedi', login_path%>
-          <%= link_to 'FAQs', faqs_path %>
+          <p><%= link_to 'Accedi', login_path%></p>
+          <p><%= link_to 'FAQs', faqs_path %></p>
         <% end %>
       </nav>
     </div>

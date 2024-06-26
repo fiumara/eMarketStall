@@ -4,10 +4,10 @@
 
 <% @faqs.each do |faq| %>
   <div class="faq-item">
-    <p><%= faq.domanda %></p>
-    <select>
-      <option><%= faq.risposta %></option>
-    </select>
+
+    <p><%= faq.id %>.<%= faq.domanda %></p>
+    <p><%= faq.risposta %></p>
+
   </div>
 <% end %>
 
