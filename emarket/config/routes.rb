@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :negozios, only: [:new, :create, :show] do
     resources :prodottos, only: [:new, :create]
   end
-  resources :acquirentes, only: [:new, :create, :show]
+  resources :acquirentes, only: [:new, :create, :show,  :edit, :update]
   resources :amministratores, only: [:create, :show]
   
   resources :faqs do
