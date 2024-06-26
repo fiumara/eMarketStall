@@ -1,7 +1,9 @@
 class FaqsController < ApplicationController
-  before_action :authenticate_acquirente!, only: [:index]
+  
   before_action :authenticate_amministratore!, except: [:index]
-  before_action :set_faq, only: [:show, :edit, :update, :destroy]
+  before_action :set_amministratore, only: [:admin]
+  before_action :set_faq, only: [ :edit, :update, :destroy]
+  
 
   def index
     @faqs = Faq.all
@@ -9,9 +11,6 @@ class FaqsController < ApplicationController
 
   def admin
     @faqs = Faq.all
-  end
-
-  def show
   end
 
   def new
@@ -45,6 +44,10 @@ class FaqsController < ApplicationController
 
   private
 
+  def set_amministratore
+    @amministratore = current_user if current_user.is_a?(Amministratore)
+  end
+
   def set_faq
     Rails.logger.debug("Params: #{params.inspect}")
     @faq = Faq.find(params[:id])
@@ -53,4 +56,5 @@ class FaqsController < ApplicationController
   def faq_params
     params.require(:faq).permit(:domanda, :risposta)
   end
+
 end

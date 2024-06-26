@@ -30,7 +30,7 @@
 <div class="prodottos">
             <% if @negozio.prodottos.present? %>
                 <% @negozio.prodottos.each do |prodotto| %>
-                    <p><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %></p>
+                    <p><%= link_to prodotto.nome_prodotto, prodottos_path(prodotto) %></p>
                 <% end %>
             <% else %>
                 <p>No products available.</p>

@@ -18,6 +18,7 @@
           <% if current_user.is_a?(Acquirente) %>
           <div class="dropdown-content">
             <%= link_to 'Profilo Acquirente', acquirente_path(current_user)%>
+            <%= link_to 'FAQs', faqs_path %>
           <% elsif current_user.is_a?(Amministratore) %>
             <div class="dropdown-content">
             <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
@@ -27,6 +28,7 @@
         <% else %>
           <div class="dropdown-content">
           <%= link_to 'Accedi', login_path%>
+          <%= link_to 'FAQs', faqs_path %>
         <% end %>
       </nav>
     </div>

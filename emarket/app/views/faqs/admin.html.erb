@@ -1,30 +1,26 @@
+
 <p id="notice"><%= notice %></p>
 
 <h1>Gestione FAQ</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Domanda</th>
-      <th>Risposta</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="faq-management">
   <% if @faqs.present? %>
-      <% @faqs.each do |faq| %>
-        <tr>
-          <td><%= faq.domanda %></td>
-          <td><%= faq.risposta %></td>
-          <td><%= link_to 'Show', faq %></td>
-          <td><%= link_to 'Edit', edit_faq_path(faq) %></td>
-          <td><%= link_to 'Destroy', faq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
+    <% @faqs.each do |faq| %>
+      <div class="faq-item">
+        <p><%= faq.id %>. <%= faq.domanda %></p>
+        <%= faq.risposta %>
+        <div class="faq-actions">
+          <%= link_to 'Modifica', edit_faq_path(faq), class: 'btn btn-primary' %>
+          <%= link_to 'Elimina', faq, method: :delete, data: { confirm: 'Sei sicuro?' }, class: 'btn btn-danger' %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  <% else %>
+    <p>Nessuna FAQ presente</p>
+  <% end %>
+  
+  <%= link_to 'Aggiungi domanda', new_faq_path, class: 'btn btn-success' %>
+</div>
 
-<%= link_to 'New FAQ', new_faq_path %>
-<%= link_to 'Back to FAQ', faqs_path %>
+<%= link_to 'Torna al profilo', amministratore_path(@amministratore) %>
+

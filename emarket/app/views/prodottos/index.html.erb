@@ -12,9 +12,12 @@
   <tbody>
     <% @prodottos.each do |prodotto| %>
       <tr>
-        <td><%= link_to 'Show', prodotto %></td>
-        <td><%= link_to 'Edit', edit_prodotto_path(prodotto) %></td>
-        <td><%= link_to 'Destroy', prodotto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      
+      <div class="prodotto">
+      <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %>
+      <p><%= prodotto.descrizione %></p>
+      </div>
+        
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Prodotto', new_prodotto_path %>
+

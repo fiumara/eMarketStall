@@ -38,10 +38,7 @@
         .dropdown:hover .dropbtn {
             background-color: #3e8e41;
         }
-
-
     </style>
-
 </head>
 <body>
     <header>
@@ -59,9 +56,10 @@
     </nav>
     <main>
         <div class="filter-search">
-            <button class="filter-btn">Filtra</button>
-            <input type="text" placeholder="Cerca">
-            <button type="submit">Cerca</button>
+            <%= form_with url: prodottos_path, method: :get, local: true do %>
+                <input type="text" name="search" placeholder="Cerca" value="<%= params[:search] %>">
+                <button type="submit">Cerca</button>
+            <% end %>
         </div>
         <div class="promotions">
             <div class="promotion">
@@ -79,7 +77,6 @@
             <div class="show-promo">Mostra promo</div>
         </div>
         <div class="prodottos">
-            
             <% if @prodottos.present? %>
                 <% @prodottos.each do |prodotto| %>
                     <div class="prodotto">
@@ -91,6 +88,8 @@
                 <p>No products available.</p>
             <% end %>
         </div>
+        <br>
+        
     </main>
 </body>
 </html>
