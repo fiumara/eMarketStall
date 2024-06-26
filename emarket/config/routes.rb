@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'lista_desideri', to: 'lista_desideri#index'
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
-  get 'faq', to: 'faq#index', as: 'faq'
+  
   get 'messaggi', to: 'messaggi#index', as: 'messaggi'
 
 
@@ -34,6 +34,14 @@ Rails.application.routes.draw do
   end
   resources :acquirentes, only: [:new, :create, :show]
   resources :amministratores, only: [:create, :show]
+  
+  resources :faqs do
+    collection do
+      get 'admin'
+    end
+  end
+
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

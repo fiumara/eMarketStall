@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1>FAQ</h1>
+
+<% @faqs.each do |faq| %>
+  <div class="faq-item">
+    <p><%= faq.question %></p>
+    <select>
+      <option><%= faq.answer %></option>
+    </select>
+  </div>
+<% end %>
+
