@@ -3,7 +3,7 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos or /prodottos.json
   def index
-    @prodottos = Prodotto.all
+    @prodottos = Prodotto.search(params[:search])
   end
 
   # GET /prodottos/1 or /prodottos/1.json

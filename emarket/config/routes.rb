@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 #  get 'profile', to: 'users#profile', as: 'profile'
 
 #  get 'home/index'
-  resources :prodottos, only: [ :show]
+  resources :prodottos
   resources :recensiones
   resources :variantis
   resources :negozios, only: [:new, :create, :show] do

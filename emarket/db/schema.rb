@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_18_160943) do
+ActiveRecord::Schema.define(version: 2024_06_21_142957) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(version: 2024_06_18_160943) do
     t.string "nome"
     t.string "cognome"
     t.string "telefono"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "faqs", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -67,6 +72,11 @@ ActiveRecord::Schema.define(version: 2024_06_18_160943) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["negozio_id"], name: "index_prodottos_on_negozio_id"
+  end
+
+  create_table "promozionis", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "recensiones", force: :cascade do |t|
