@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,48 +9,52 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-
     <main>
         <h1><%= @prodotto.nome_prodotto %></h1>
         <div class="prodotto-container">
+            <button class="arrow left">‹</button>
+            <button class="arrow right">›</button>
+            <div class="image-pagination">.....</div>
+        </div>
+        <div class="prodotto-details">
+            <div class="prodotto-description">
+                <h2>Descrizione</h2>
+                <p><%= @prodotto.descrizione %></p>
+                <button class="store-button">Negozio</button>
+                <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
 
-                <button class="arrow left">‹</button>
-                <button class="arrow right">›</button>
-                <div class="image-pagination">.....</div>
+                <div class="reviews">
+                    <p>Recensioni</p>
+                    <span class="stars">★★★★★</span>
+                    <button class="reviews-button">Vedi tutte le recensioni</button>
+                </div>
             </div>
-            <div class="prodotto-details">
-                <div class="prodotto-description">
-                    <h2>Descrizione</h2>
-                    <p><%= @prodotto.descrizione %></p>
-                    <button class="store-button">Negozio</button>
-                    <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
- 
-                    <div class="reviews">
-                        <p>Recensioni</p>
-                        <span class="stars">★★★★★</span>
-                        <button class="reviews-button">Vedi tutte le recensioni</button>
-                    </div>
-                </div>
-                <div class="prodotto-options">
-                    <label for="quantity">Quantità</label>
-                    <select id="quantity" name="quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <label for="size">Taglia/colore</label>
-                    <select id="size" name="size">
-                        <option value="s">S</option>
-                        <option value="m">M</option>
-                        <option value="l">L</option>
-                        <option value="xl">XL</option>
-                    </select>
-                    <label for="customization">Personalizzazione</label>
-                    <textarea id="customization" name="customization"></textarea>
-                    <button class="add-to-cart-button">Aggiungi al carrello</button>
-                </div>
+            <div class="prodotto-options">
+                <label for="quantity">Quantità</label>
+                <select id="quantity" name="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="size">Taglia/colore</label>
+                <select id="size" name="size">
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                </select>
+                <label for="customization">Personalizzazione</label>
+                <textarea id="customization" name="customization"></textarea>
+                <button class="add-to-cart-button">Aggiungi al carrello</button>
+            </div>
+            <!-- Aggiungi il pulsante a forma di cuore -->
+            <div class="wishlist-button">
+                <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
+                    <%= hidden_field_tag :redirect_back, request.original_url %>
+                    <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
+                <% end %>
             </div>
         </div>
     </main>

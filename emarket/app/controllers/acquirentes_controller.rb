@@ -15,10 +15,12 @@ class AcquirentesController < ApplicationController
   # GET /acquirentes/new
   def new
     @acquirente = Acquirente.new
+    @is_new = true
   end
 
   # GET /acquirentes/1/edit
   def edit
+    @is_new = false
   end
 
   # POST /acquirentes or /acquirentes.json

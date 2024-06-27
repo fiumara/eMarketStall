@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_24_132634) do
+ActiveRecord::Schema.define(version: 2024_06_27_141525) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 2024_06_24_132634) do
     t.string "nome_utente"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "acquirentes_prodottos", id: false, force: :cascade do |t|
+    t.integer "acquirente_id", null: false
+    t.integer "prodotto_id", null: false
   end
 
   create_table "amministratores", force: :cascade do |t|
@@ -100,7 +105,18 @@ ActiveRecord::Schema.define(version: 2024_06_24_132634) do
     t.index ["prodotto_id"], name: "index_variantis_on_prodotto_id"
   end
 
+  create_table "wishlist_items", force: :cascade do |t|
+    t.integer "acquirente_id", null: false
+    t.integer "prodotto_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_wishlist_items_on_acquirente_id"
+    t.index ["prodotto_id"], name: "index_wishlist_items_on_prodotto_id"
+  end
+
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "negozios"
   add_foreign_key "variantis", "prodottos"
+  add_foreign_key "wishlist_items", "acquirentes"
+  add_foreign_key "wishlist_items", "prodottos"
 end

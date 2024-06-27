@@ -29,11 +29,13 @@
     <%= form.label :telefono %>
     <%= form.text_field :telefono %>
   </div>
-
+  
+  <% if @is_new %>
   <div>
     <%= form.label :email %>
     <%= form.email_field :email %>
   </div>
+  <% end %>
 
   <div>
     <%= form.label :password %>

@@ -125,3 +125,15 @@ main {
     margin-right: 0;
 }
 
+.heart-button {
+    font-size: 24px;
+    color: grey;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .heart-button:active {
+    color: red;
+  }
+  
