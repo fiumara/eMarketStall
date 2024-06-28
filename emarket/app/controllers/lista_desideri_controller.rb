@@ -16,4 +16,15 @@ class ListaDesideriController < ApplicationController
 
     redirect_back(fallback_location: root_path, notice: notice)
   end
+
+  def remove
+    @prodotto = Prodotto.find(params[:id])
+    if current_user.wishlist.delete(@prodotto)
+      notice = 'Prodotto rimosso dalla lista desideri.'
+    else
+      notice = 'Impossibile rimuovere il prodotto dalla lista desideri.'
+    end
+
+    redirect_to lista_desideri_path, notice: notice
+  end
 end

@@ -17,14 +17,12 @@ Rails.application.routes.draw do
 
   get 'lista_desideri', to: 'lista_desideri#index'
   post 'add_to_wishlist/:id', to: 'lista_desideri#add', as: 'add_to_wishlist'
+  delete 'remove_from_wishlist/:id', to: 'lista_desideri#remove', as: 'remove_from_wishlist'
+
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
   
   get 'messaggi', to: 'messaggi#index', as: 'messaggi'
-
-  
-
-
 
 #  get 'profile', to: 'users#profile', as: 'profile'
 

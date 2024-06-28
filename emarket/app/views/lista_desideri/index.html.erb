@@ -22,7 +22,9 @@
               <p>★★★★★</p>
             </div>
             <div class="elimina">
-              <%= button_to 'Elimina', '#', method: :delete, class: 'btn btn-danger' %>
+              <%= form_with(url: remove_from_wishlist_path(prodotto), method: :delete, local: true) do %>
+                <%= submit_tag 'Elimina', class: 'btn btn-danger' %>
+              <% end %>
             </div>
           </div>
         </div>
