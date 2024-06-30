@@ -1,6 +1,7 @@
 class ProdottosController < ApplicationController
   before_action :set_negozio, only: [:new, :create]
-
+  before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_owner!, only: [:edit, :update, :destroy]
   # GET /prodottos or /prodottos.json
   def index
     @prodottos = Prodotto.search(params[:search])
@@ -8,7 +9,7 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos/1 or /prodottos/1.json
   def show
-    @prodotto = @prodotto = Prodotto.find(params[:id])
+
   end
 
   # GET /prodottos/new
@@ -18,13 +19,14 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos/1/edit
   def edit
+    @prodotto = Prodotto.find(params[:id])
   end
 
   # POST /prodottos or /prodottos.json
   def create
     @prodotto = @negozio.prodottos.build(prodotto_params)
     if @prodotto.save
-      redirect_to @negozio, notice: 'Prodotto creato con successo.'
+      redirect_to @prodotto, notice: 'Prodotto creato con successo.'
     else
       render :new
     end
@@ -49,7 +51,7 @@ class ProdottosController < ApplicationController
     @prodotto.destroy
 
     respond_to do |format|
-      format.html { redirect_to prodottos_url, notice: "Prodotto was successfully destroyed." }
+      format.html { redirect_to prodottos_url, notice: "Prodotto eliminato con successo." }
       format.json { head :no_content }
     end
   end
@@ -62,6 +64,16 @@ class ProdottosController < ApplicationController
   private
   def set_negozio
     @negozio = Negozio.find(params[:negozio_id])
+  end
+
+  def set_prodotto
+    @prodotto = Prodotto.find(params[:id])
+  end
+
+  def authorize_owner!
+    unless current_user == @prodotto.negozio.acquirente
+      redirect_to root_path, alert: 'Non sei autorizzato a modificare questo prodotto.'
+    end
   end
 
   def prodotto_params
