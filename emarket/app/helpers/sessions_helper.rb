@@ -30,6 +30,10 @@ module SessionsHelper
       redirect_to root_path, alert: 'Accesso negato: questa pagina è riservata agli amministratori'
     end
   end
+
+  def unauthenticated_user?
+    session[:role].nil? || session[:user_id].nil?
+  end
 end
 
   
