@@ -18,13 +18,14 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos/1/edit
   def edit
+    
   end
 
   # POST /prodottos or /prodottos.json
   def create
     @prodotto = @negozio.prodottos.build(prodotto_params)
     if @prodotto.save
-      redirect_to @negozio, notice: 'Prodotto creato con successo.'
+      redirect_to @prodotto, notice: 'Prodotto creato con successo.'
     else
       render :new
     end
@@ -49,7 +50,7 @@ class ProdottosController < ApplicationController
     @prodotto.destroy
 
     respond_to do |format|
-      format.html { redirect_to prodottos_url, notice: "Prodotto was successfully destroyed." }
+      format.html { redirect_to prodottos_url, notice: "Prodotto eliminato con successo." }
       format.json { head :no_content }
     end
   end
@@ -64,7 +65,14 @@ class ProdottosController < ApplicationController
     @negozio = Negozio.find(params[:negozio_id])
   end
 
+  def set_prodotto
+    @prodotto = Prodotto.find(params[:id])
+  end
+
+  
+  
+
   def prodotto_params
-    params.require(:prodotto).permit(:nome_prodotto, :descrizione, :prezzo)
+    params.require(:prodotto).permit(:nome_prodotto, :descrizione, :prezzo, :categorium_id, :negozio_id)
   end
 end

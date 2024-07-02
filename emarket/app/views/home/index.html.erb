@@ -45,14 +45,9 @@
     
     </header>
     <nav class="categories">
-        <button>GIOIELLI</button>
-        <button>BORSE</button>
-        <button>CINTURE</button>
-        <button>SCARPE</button>
-        <button>ABBIGLIAMENTO</button>
-        <button>CASA</button>
-        <button>Categoria 7</button>
-        <button>Categoria 8</button>
+        <% Categorium.all.each do |categorium| %>
+            <%= link_to categorium.nome, categoria_path(categorium), class: "btn btn-primary" %>
+        <% end %>
     </nav>
     <main>
         <div class="filter-search">
@@ -93,3 +88,4 @@
     </main>
 </body>
 </html>
+

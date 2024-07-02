@@ -48,15 +48,15 @@
                 <label for="customization">Personalizzazione</label>
                 <textarea id="customization" name="customization"></textarea>
                 <button class="add-to-cart-button">Aggiungi al carrello</button>
-            </div>
-            <!-- Aggiungi il pulsante a forma di cuore -->
-            <div class="wishlist-button">
-                <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
-                    <%= hidden_field_tag :redirect_back, request.original_url %>
-                    <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
+                </div>
+                <!-- Aggiungi il pulsante a forma di cuore -->
+                <div class="wishlist-button">
+                    <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
+                        <%= hidden_field_tag :redirect_back, request.original_url %>
+                        <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
                 <% end %>
             </div>
-        </div>
-    </main>
-</body>
-</html>
+            </div>
+            </main>
+        </body>
+        </html>

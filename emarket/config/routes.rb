@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 #  get 'profile', to: 'users#profile', as: 'profile'
 
 #  get 'home/index'
+
+
+
+  resources :categorias, only: [:show]
+
   resources :prodottos
   resources :recensiones
   resources :variantis
