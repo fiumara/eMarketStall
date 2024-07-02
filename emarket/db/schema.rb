@@ -23,11 +23,6 @@ ActiveRecord::Schema.define(version: 2024_06_27_141525) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "acquirentes_prodottos", id: false, force: :cascade do |t|
-    t.integer "acquirente_id", null: false
-    t.integer "prodotto_id", null: false
-  end
-
   create_table "amministratores", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -110,6 +105,7 @@ ActiveRecord::Schema.define(version: 2024_06_27_141525) do
     t.integer "prodotto_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id", "prodotto_id"], name: "index_wishlist_items_on_acquirente_id_and_prodotto_id", unique: true
     t.index ["acquirente_id"], name: "index_wishlist_items_on_acquirente_id"
     t.index ["prodotto_id"], name: "index_wishlist_items_on_prodotto_id"
   end

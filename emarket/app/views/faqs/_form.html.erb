@@ -1,0 +1,27 @@
+<%= form_with(model: @faq, local: true) do |form| %>
+    <% if @faq.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@faq.errors.count, "error") %> impediscono di salvare questo acquirente:</h2>
+        <ul>
+          <% @faq.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+    <%= form.label :question %>
+    <%= form.text_field :domanda %>
+  </div>
+
+  <div>
+    <%= form.label :answer %>
+    <%= form.text_field :risposta %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Salva" %>
+  </div>
+
+<% end %>
