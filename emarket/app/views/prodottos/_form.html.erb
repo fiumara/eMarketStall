@@ -3,29 +3,11 @@
     <div id="error_explanation">
       <h2><%= pluralize(prodotto.errors.count, "error") %> prohibited this prodotto from being saved:</h2>
       <ul>
-        <% prodotto.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% prodotto.errors.each do |error| %>
+          <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :nome_prodotto %>
-    <%= form.text_field :nome_prodotto %>
-  </div>
-
-  <div class="field">
-    <%= form.label :descrizione %>
-    <%= form.text_area :descrizione %>
-  </div>
-
-  <div class="field">
-    <%= form.label :prezzo %>
-    <%= form.number_field :prezzo, step: 0.01 %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

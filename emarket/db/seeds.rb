@@ -96,3 +96,15 @@ Amministratore.create!(
 
 Messaggio.create(nome_utente: 'Utente1', tipo_utente: 'Acquirente', contenuto: 'Contenuto del messaggio 1')
 Messaggio.create(nome_utente: 'Utente2', tipo_utente: 'Negozio', contenuto: 'Contenuto del messaggio 2')
+
+# Creazione delle categorie
+Categorium.create(nome: 'Gioielli')
+Categorium.create(nome: 'Accessori')
+Categorium.create(nome: 'Abbigliamento')
+Categorium.create(nome: 'Casa')
+Categorium.create(nome: 'Articoli Ufficio')
+Categorium.create(nome: 'Salute e Benessere')
+
+
+
+

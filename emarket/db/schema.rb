@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_27_141525) do
+ActiveRecord::Schema.define(version: 2024_07_01_122419) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -23,17 +23,18 @@ ActiveRecord::Schema.define(version: 2024_06_27_141525) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "acquirentes_prodottos", id: false, force: :cascade do |t|
-    t.integer "acquirente_id", null: false
-    t.integer "prodotto_id", null: false
-  end
-
   create_table "amministratores", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.string "nome"
     t.string "cognome"
     t.string "telefono"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categoria", force: :cascade do |t|
+    t.string "nome"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -76,8 +77,10 @@ ActiveRecord::Schema.define(version: 2024_06_27_141525) do
     t.string "descrizione"
     t.float "prezzo"
     t.integer "negozio_id", null: false
+    t.integer "categorium_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["categorium_id"], name: "index_prodottos_on_categorium_id"
     t.index ["negozio_id"], name: "index_prodottos_on_negozio_id"
   end
 
@@ -110,11 +113,13 @@ ActiveRecord::Schema.define(version: 2024_06_27_141525) do
     t.integer "prodotto_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id", "prodotto_id"], name: "index_wishlist_items_on_acquirente_id_and_prodotto_id", unique: true
     t.index ["acquirente_id"], name: "index_wishlist_items_on_acquirente_id"
     t.index ["prodotto_id"], name: "index_wishlist_items_on_prodotto_id"
   end
 
   add_foreign_key "negozios", "acquirentes"
+  add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
   add_foreign_key "variantis", "prodottos"
   add_foreign_key "wishlist_items", "acquirentes"

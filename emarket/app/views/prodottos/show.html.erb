@@ -54,13 +54,9 @@
                     <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
                         <%= hidden_field_tag :redirect_back, request.original_url %>
                         <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
-                    <% end %>
-                </div>
-                <!-- Pulsante Modifica Prodotto -->
-                <% if current_user == @prodotto.negozio.acquirente %>
-                    <%= link_to 'Modifica Prodotto', edit_prodotto_path(@prodotto), class: 'btn btn-primary' %>
                 <% end %>
             </div>
-        </main>
-    </body>
-    </html>
+            </div>
+            </main>
+        </body>
+        </html>
