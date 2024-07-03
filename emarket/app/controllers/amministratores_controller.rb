@@ -1,5 +1,7 @@
 class AmministratoresController < ApplicationController
   before_action :set_amministratore, only: %i[ show edit update destroy ]
+  before_action :authenticate_amministratore!, only: %i[ show edit update destroy ]
+  before_action :authorize_amministratore, only: %i[ show edit update destroy ]
 
   # GET /amministratores or /amministratores.json
   def index
@@ -76,5 +78,11 @@ class AmministratoresController < ApplicationController
     def amministratore_params
     #  params.fetch(:amministratore, {})
     params.require(:amministratore).permit(:email, :password, :password_confirmation)
+    end
+
+    def authorize_amministratore
+      unless current_user == @amministratore
+        redirect_to root_path, alert: "Accesso negato: non sei autorizzato ad accedere a questa pagina." and return
+      end
     end
 end

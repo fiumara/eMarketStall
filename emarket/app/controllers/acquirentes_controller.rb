@@ -1,10 +1,10 @@
 class AcquirentesController < ApplicationController
   before_action :set_acquirente, only: %i[ show edit update destroy ]
+  before_action :authenticate_acquirente!, only: %i[ show edit update destroy ]
+  before_action :authorize_acquirente, only: %i[ show edit update destroy ]
 
   # GET /acquirentes or /acquirentes.json
-  def index
-    @acquirentes = Acquirente.all
-  end
+  
 
   # GET /acquirentes/1 or /acquirentes/1.json
  def show
@@ -67,6 +67,12 @@ class AcquirentesController < ApplicationController
     def acquirente_params
     #  params.fetch(:acquirente, {})
     params.require(:acquirente).permit(:nome, :cognome, :nome_utente, :telefono, :email, :password, :password_confirmation, :indirizzo, :profilo_privato)
+    end
+
+    def authorize_acquirente
+      unless current_user == @acquirente
+        redirect_to root_path, alert: "Accesso negato: non sei autorizzato ad accedere a questa pagina." and return
+      end
     end
 end
 

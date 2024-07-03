@@ -13,21 +13,21 @@ module SessionsHelper
 
   def authenticate_user!
     unless logged_in?
-      redirect_to login_path, alert: 'Devi effettuare il login per accedere a questa pagina'
+      redirect_to login_path, alert: 'Devi effettuare il login per accedere a questa pagina' and return
     end
   end
 
   def authenticate_acquirente!
     authenticate_user!
     unless session[:role] == 'acquirente'
-      redirect_to root_path, alert: 'Accesso negato: questa pagina è riservata agli acquirenti'
+      redirect_to root_path, alert: 'Accesso negato: questa pagina è riservata agli acquirenti' and return
     end
   end
 
   def authenticate_amministratore!
     authenticate_user!
     unless session[:role] == 'amministratore'
-      redirect_to root_path, alert: 'Accesso negato: questa pagina è riservata agli amministratori'
+      redirect_to root_path, alert: 'Accesso negato: questa pagina è riservata agli amministratori' and return
     end
   end
 
@@ -35,5 +35,3 @@ module SessionsHelper
     session[:role].nil? || session[:user_id].nil?
   end
 end
-
-  
