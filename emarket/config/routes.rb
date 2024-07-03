@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   resources :variantis
   resources :negozios, only: [:new, :create, :show] do
     resources :prodottos, only: [:new, :create]
+    member do
+      get 'visualizza', to: 'negozios#visualizza'
+    end
   end
   resources :acquirentes, only: [:new, :create, :show,  :edit, :update]
   resources :amministratores, only: [:create, :show, :edit, :update]
