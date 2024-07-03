@@ -49,10 +49,10 @@ class AmministratoresController < ApplicationController
   def update
     respond_to do |format|
       if @amministratore.update(amministratore_params)
-        format.html { redirect_to amministratore_url(@amministratore), notice: "Amministratore was successfully updated." }
+        format.html { redirect_to @amministratore, notice: "Amministratore aggiornato con successo." }
         format.json { render :show, status: :ok, location: @amministratore }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit }
         format.json { render json: @amministratore.errors, status: :unprocessable_entity }
       end
     end
@@ -77,7 +77,7 @@ class AmministratoresController < ApplicationController
     # Only allow a list of trusted parameters through.
     def amministratore_params
     #  params.fetch(:amministratore, {})
-    params.require(:amministratore).permit(:email, :password, :password_confirmation)
+    params.require(:amministratore).permit(:nome, :cognome, :email, :password, :password_confirmation)
     end
 
     def authorize_amministratore
