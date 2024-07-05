@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_01_122419) do
+ActiveRecord::Schema.define(version: 2024_07_05_134440) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -90,6 +90,18 @@ ActiveRecord::Schema.define(version: 2024_07_01_122419) do
   end
 
   create_table "recensiones", force: :cascade do |t|
+  end
+
+  create_table "resos", force: :cascade do |t|
+    t.string "nome_prodotto"
+    t.string "nome_acquirente"
+    t.string "id_ordine"
+    t.text "motivazione_reso"
+    t.date "data_reso"
+    t.string "stato"
+    t.text "note_acquirente"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

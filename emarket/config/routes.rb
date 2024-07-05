@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #get 'sessions/new'
   root 'home#index'
 
+
   get 'gestione_account', to: 'gestione_account#manage'
   get 'statistiche', to: 'statistiche#show'
   get 'gestione_feedback', to: 'gestione_feedback#show'
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
 #  get 'home/index'
 
+  resources :resi, only: [:index, :update]
 
 
   resources :categorias, only: [:show]

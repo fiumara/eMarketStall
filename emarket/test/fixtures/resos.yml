@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_prodotto: MyString
+  nome_acquirente: MyString
+  id_ordine: MyString
+  motivazione_reso: MyText
+  data_reso: 2024-07-05
+  stato: MyString
+  note_acquirente: MyText
+
+two:
+  nome_prodotto: MyString
+  nome_acquirente: MyString
+  id_ordine: MyString
+  motivazione_reso: MyText
+  data_reso: 2024-07-05
+  stato: MyString
+  note_acquirente: MyText
