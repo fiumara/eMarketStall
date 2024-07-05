@@ -5,6 +5,9 @@ class Prodotto < ApplicationRecord
     has_many :wishlist_items, dependent: :destroy
     has_many :wishlisted_by, through: :wishlist_items, source: :acquirente
 
+    has_one :statistica, dependent: :destroy
+    accepts_nested_attributes_for :statistica
+
     def self.search(term)
         if term
           where('LOWER(nome_prodotto) LIKE ? OR LOWER(descrizione) LIKE ?', "%#{term.downcase}%", "%#{term.downcase}%")

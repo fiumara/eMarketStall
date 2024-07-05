@@ -31,6 +31,16 @@ Rails.application.routes.draw do
 
   resources :resi, only: [:index, :update]
 
+  resources :negozios do
+    member do
+      get 'statistiche', to: 'statistichenegozio#index'
+    end
+  end
+
+  resources :prodotti do
+    resources :statistiche, only: [:index, :show]
+  end
+
 
   resources :categorias, only: [:show]
 

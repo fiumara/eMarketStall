@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_05_134440) do
+ActiveRecord::Schema.define(version: 2024_07_05_143803) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(version: 2024_07_05_134440) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "statisticas", force: :cascade do |t|
+    t.integer "prodotto_id", null: false
+    t.integer "visualizzazioni"
+    t.integer "vendite"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prodotto_id"], name: "index_statisticas_on_prodotto_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -135,6 +144,7 @@ ActiveRecord::Schema.define(version: 2024_07_05_134440) do
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
+  add_foreign_key "statisticas", "prodottos"
   add_foreign_key "variantis", "prodottos"
   add_foreign_key "wishlist_items", "acquirentes"
   add_foreign_key "wishlist_items", "prodottos"
