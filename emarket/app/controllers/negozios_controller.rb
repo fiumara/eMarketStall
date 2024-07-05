@@ -1,6 +1,6 @@
 class NegoziosController < ApplicationController
   before_action :authenticate_acquirente!
-  before_action :set_negozio, only: %i[ show edit update destroy ]
+  before_action :set_negozio, only: [:show, :edit, :update, :destroy, :visualizza]
 
   # GET /negozios or /negozios.json
   def index
@@ -10,6 +10,9 @@ class NegoziosController < ApplicationController
   # GET /negozios/1 or /negozios/1.json
   def show
     @acquirente = @negozio.acquirente
+  end
+
+  def visualizza
   end
 
   # GET /negozios/new
@@ -62,6 +65,6 @@ class NegoziosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def negozio_params
-      params.require(:negozio).permit(:nome_negozio, :email, :telefono)
+      params.require(:negozio).permit(:nome_negozio, :descrizione, :indirizzo, :email, :telefono)
     end
 end

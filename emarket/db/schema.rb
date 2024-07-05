@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2024_07_05_134440) do
 
   create_table "negozios", force: :cascade do |t|
     t.string "nome_negozio"
+    t.string "descrizione"
+    t.string "indirizzo"
     t.string "email"
     t.string "telefono"
     t.integer "acquirente_id", null: false

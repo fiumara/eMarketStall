@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <main>
+    <section>
+      <% if @negozio.present? %>
+        <h1><%= @negozio.nome_negozio %></h1>
+        <p>Descrizione: <%= @negozio.descrizione %></p>
+        <p>Indirizzo: <%= @negozio.indirizzo %></p>
+        <p>Telefono: <%= @negozio.telefono %></p>
+        <button>Segui</button>
+        <button>Segnala</button>
+        <p>Followers: 0</p> <!-- Se il conteggio dei followers è disponibile, sostituire 0 con il valore reale -->
+      <% else %>
+        <p>Il negozio non è stato trovato.</p>
+      <% end %>
+    </section>
+
+    <section>
+      <% if @negozio&.acquirente.present? %>
+        <div class="owner-details">
+          <p>Nome utente: <%= @negozio.acquirente.nome_utente %></p>
+          <p>Email: <%= @negozio.acquirente.email %></p>
+          <p>Telefono: <%= @negozio.acquirente.telefono %></p>
+          <button>Scrivici</button>
+        </div>
+      <% else %>
+        <p>Informazioni sul proprietario non disponibili.</p>
+      <% end %>
+    </section>
+
+    <section class="products">
+      <% if @negozio&.prodottos.present? %>
+        <% @negozio.prodottos.each do |prodotto| %>
+          <div class="product">
+            <p>Nome prodotto: <%= prodotto.nome_prodotto %></p>
+            <p>Descrizione: <%= prodotto.descrizione %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <p>Non ci sono prodotti disponibili.</p>
+      <% end %>
+    </section>
+  </main>
+</body>
+</html>
