@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  descrizione: MyText
+  inizio: 2024-07-03 14:28:16
+  fine: 2024-07-03 14:28:16
+  sconto: 9.99
+  tipo: MyString
+  prodotto: one
+  categoria: one
+  negozio: one
+
+two:
+  nome: MyString
+  descrizione: MyText
+  inizio: 2024-07-03 14:28:16
+  fine: 2024-07-03 14:28:16
+  sconto: 9.99
+  tipo: MyString
+  prodotto: two
+  categoria: two
+  negozio: two

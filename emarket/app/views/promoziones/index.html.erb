@@ -1,0 +1,25 @@
+<h1>Promozioni</h1>
+
+
+<table>
+
+  <tbody>
+    <% @promoziones.each do |promozione| %>
+      <tr>
+        <td><%= promozione.nome %></td>
+        <td><%= promozione.descrizione %></td>
+        <td><%= promozione.inizio %></td>
+        <td><%= promozione.fine %></td>
+        <td><%= number_to_percentage(promozione.sconto * 100, precision: 2) %></td>
+        <td><%= promozione.tipo %></td>
+        <td><%= promozione.prodotto&.nome_prodotto %></td>
+        <td><%= promozione.categoria&.nome_categoria %></td>
+        <td>
+          <%= link_to 'Show', promozione %>
+          <%= link_to 'Edit', edit_promozione_path(promozione) %>
+          <%= link_to 'Destroy', promozione, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

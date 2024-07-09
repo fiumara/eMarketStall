@@ -28,8 +28,27 @@ Rails.application.routes.draw do
 
 #  get 'home/index'
 
+resources :resi, only: [:index, :update]
+
+resources :negozios do
+  member do
+    get 'statistiche', to: 'statistichenegozio#index'
+  end
+end
+
+resources :prodotti do
+  resources :statistiche, only: [:index, :show]
+end
 
 
+  resources :promoziones do
+    collection do
+      get 'admin'
+    
+      get 'negozio'
+    end
+  end
+  
   resources :categorias, only: [:show]
 
   resources :prodottos

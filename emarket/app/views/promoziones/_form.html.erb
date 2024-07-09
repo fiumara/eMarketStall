@@ -1,0 +1,57 @@
+<%= form_with(model: promozione, local: true) do |form| %>
+    <% if promozione.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(promozione.errors.count, "error") %> prohibited this promozione from being saved:</h2>
+        <ul>
+          <% promozione.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :nome %>
+      <%= form.text_field :nome %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :descrizione %>
+      <%= form.text_area :descrizione %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :inizio %>
+      <%= form.datetime_select :inizio %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :fine %>
+      <%= form.datetime_select :fine %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :sconto %>
+      <%= form.number_field :sconto, step: 0.01 %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :tipo %>
+      <%= form.select :tipo, options_for_select([['Singolo Prodotto', 'singolo_prodotto'], ['Intero Sito', 'intero_sito'], ['Categoria', 'categoria']]) %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :prodotto_id, 'Prodotto' %>
+      <%= form.collection_select :prodotto_id, Prodotto.all, :id, :nome_prodotto, include_blank: 'Seleziona Prodotto' %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :categorium_id, 'Categoria' %>
+      <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, include_blank: 'Seleziona Categoria' %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+  

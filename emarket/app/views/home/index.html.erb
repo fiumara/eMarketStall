@@ -69,7 +69,9 @@
                 <h2>Nome promozione</h2>
                 <p>Descrizione</p>
             </div>
-            <div class="show-promo">Mostra promo</div>
+            <div class="show-promo">
+            <%= link_to "Mostra promo", promoziones_path %>
+            </div>
         </div>
         <div class="prodottos">
             <% if @prodottos.present? %>
