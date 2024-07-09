@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2024_07_03_122816) do
+=======
+ActiveRecord::Schema.define(version: 2024_07_05_143803) do
+>>>>>>> 6a0e014094a102233d05e5a825e76e9545f76b2e
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -64,6 +68,8 @@ ActiveRecord::Schema.define(version: 2024_07_03_122816) do
 
   create_table "negozios", force: :cascade do |t|
     t.string "nome_negozio"
+    t.string "descrizione"
+    t.string "indirizzo"
     t.string "email"
     t.string "telefono"
     t.integer "acquirente_id", null: false
@@ -105,6 +111,27 @@ ActiveRecord::Schema.define(version: 2024_07_03_122816) do
   create_table "recensiones", force: :cascade do |t|
   end
 
+  create_table "resos", force: :cascade do |t|
+    t.string "nome_prodotto"
+    t.string "nome_acquirente"
+    t.string "id_ordine"
+    t.text "motivazione_reso"
+    t.date "data_reso"
+    t.string "stato"
+    t.text "note_acquirente"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "statisticas", force: :cascade do |t|
+    t.integer "prodotto_id", null: false
+    t.integer "visualizzazioni"
+    t.integer "vendite"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prodotto_id"], name: "index_statisticas_on_prodotto_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -134,9 +161,13 @@ ActiveRecord::Schema.define(version: 2024_07_03_122816) do
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
+<<<<<<< HEAD
   add_foreign_key "promoziones", "categoria"
   add_foreign_key "promoziones", "negozios"
   add_foreign_key "promoziones", "prodottos"
+=======
+  add_foreign_key "statisticas", "prodottos"
+>>>>>>> 6a0e014094a102233d05e5a825e76e9545f76b2e
   add_foreign_key "variantis", "prodottos"
   add_foreign_key "wishlist_items", "acquirentes"
   add_foreign_key "wishlist_items", "prodottos"

@@ -1,0 +1,2 @@
+module ResiHelper
+end

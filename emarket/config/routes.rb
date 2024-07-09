@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #get 'sessions/new'
   root 'home#index'
 
+
   get 'gestione_account', to: 'gestione_account#manage'
   get 'statistiche', to: 'statistiche#show'
   get 'gestione_feedback', to: 'gestione_feedback#show'
@@ -28,17 +29,17 @@ Rails.application.routes.draw do
 
 #  get 'home/index'
 
-resources :resi, only: [:index, :update]
+  resources :resi, only: [:index, :update]
 
-resources :negozios do
-  member do
-    get 'statistiche', to: 'statistichenegozio#index'
+  resources :negozios do
+    member do
+      get 'statistiche', to: 'statistichenegozio#index'
+    end
   end
-end
 
-resources :prodotti do
-  resources :statistiche, only: [:index, :show]
-end
+  resources :prodotti do
+    resources :statistiche, only: [:index, :show]
+  end
 
 
   resources :promoziones do
@@ -56,6 +57,9 @@ end
   resources :variantis
   resources :negozios, only: [:new, :create, :show] do
     resources :prodottos, only: [:new, :create]
+    member do
+      get 'visualizza', to: 'negozios#visualizza'
+    end
   end
   resources :acquirentes, only: [:new, :create, :show,  :edit, :update]
   resources :amministratores, only: [:create, :show, :edit, :update]

@@ -10,6 +10,9 @@ class Prodotto < ApplicationRecord
     accepts_nested_attributes_for :statistica
 
 
+    has_one :statistica, dependent: :destroy
+    accepts_nested_attributes_for :statistica
+
     def self.search(term)
         if term
           where('LOWER(nome_prodotto) LIKE ? OR LOWER(descrizione) LIKE ?', "%#{term.downcase}%", "%#{term.downcase}%")

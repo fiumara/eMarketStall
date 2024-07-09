@@ -20,7 +20,7 @@
             <div class="prodotto-description">
                 <h2>Descrizione</h2>
                 <p><%= @prodotto.descrizione %></p>
-                <button class="store-button">Negozio</button>
+                <%= link_to 'Visualizza Negozio', visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
                 <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
 
                 <p>Categoria: <%= @prodotto.categorium.nome %></p> <!-- Mostra il nome della categoria -->
