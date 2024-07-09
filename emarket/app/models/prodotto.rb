@@ -1,6 +1,8 @@
 class Prodotto < ApplicationRecord
     belongs_to :negozio
     belongs_to :categorium
+    
+    has_many :recensioni, dependent: :destroy
 
     has_many :wishlist_items, dependent: :destroy
     has_many :wishlisted_by, through: :wishlist_items, source: :acquirente

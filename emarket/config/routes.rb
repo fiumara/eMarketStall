@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :negozios do
     member do
       get 'statistiche', to: 'statistichenegozio#index'
+      get 'recensioni', to: 'recensioninegozio#index'
     end
   end
 

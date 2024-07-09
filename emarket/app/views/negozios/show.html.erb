@@ -4,12 +4,12 @@
 
 <div class="profile-container">
     <nav class="sidebar">
-      <button class="sidebar-btn">RECENSIONI</button>
       <%= link_to 'STATISTICHE', statistiche_negozio_path(@negozio), class: 'btn btn-primary' %>
       <button class="sidebar-btn">PROMOZIONI</button>
       <%= link_to 'Aggiungi Prodotto', new_negozio_prodotto_path(@negozio), class: 'btn btn-primary' %>
       <button class="sidebar-btn">MESSAGGI</button>
       <%= link_to 'GESTIONE RESI', resi_index_path, class: 'btn btn-primary' %>
+      <%= link_to 'RECENSIONI', recensioni_negozio_path(@negozio), class: 'btn btn-primary' %>
     </nav>
 
 <body>
