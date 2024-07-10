@@ -7,35 +7,127 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <style>
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .logo-home {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #007bff;
+    }
+    
+    /* Hamburger Menu Icon */
+    .hamburger-menu {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      z-index: 1001; /* Ensure it is on top */
+    }
+    
+    .hamburger-menu div {
+      width: 30px;
+      height: 3px;
+      background-color: #007bff;
+      border-radius: 5px;
+      transition: all 0.3s linear;
+      position: relative;
+    }
+
+    /* Right side menu */
+    .right-side-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      color: white;
+      padding: 20px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      overflow-y: auto;
+    }
+    
+    .right-side-menu a {
+      color: white;
+      font-size: 1.2rem;
+      display: block;
+      margin: 20px 0;
+      text-decoration: none;
+    }
+
+    .right-side-menu a:hover {
+      color: #ddd;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="header-content">
       <%= link_to 'Logo/Home', root_path, class: 'logo-home' %>
-      <div class="dropdown">
-      <button class="dropbtn">Menu</button>
-        <% if logged_in? %>
-          <% if current_user.is_a?(Acquirente) %>
-          <div class="dropdown-content">
-            <p><%= link_to 'Profilo Acquirente', acquirente_path(current_user)%></p>
-            <p><%= link_to 'FAQs', faqs_path %></p>
-          <% elsif current_user.is_a?(Amministratore) %>
-            <div class="dropdown-content">
-            <p><%= link_to 'Profilo Amministratore', amministratore_path(current_user) %></p>
-          <% end %>
-          <div class="dropdown-content">
-          <p><%= link_to 'Logout', logout_path, method: :delete %></p>
-        <% else %>
-          <div class="dropdown-content">
-          <p><%= link_to 'Accedi', login_path%></p>
-          <p><%= link_to 'FAQs', faqs_path %></p>
-        <% end %>
-      </nav>
+      <button class="hamburger-menu" onclick="toggleRightSideMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
     </div>
   </header>
   
-  <main>
+  <div id="rightSideMenu" class="right-side-menu">
+    <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
+    <% if logged_in? %>
+      <% if current_user.is_a?(Acquirente) %>
+        <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
+        <%= link_to 'FAQs', faqs_path %>
+      <% elsif current_user.is_a?(Amministratore) %>
+        <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
+      <% end %>
+        <%= link_to 'Logout', logout_path, method: :delete %>
+    <% else %>
+        <%= link_to 'Accedi', login_path %>
+        <%= link_to 'FAQs', faqs_path %>
+    <% end %>
+  </div>
+
+  <main class="container mt-4">
     <%= yield %>
   </main>
+
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity: 'sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin: 'anonymous' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity: 'sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGaZ5tgkIoGQjYI38tALe10aD5', crossorigin: 'anonymous' %>
+  <%= javascript_include_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity: 'sha384-smHYkd5q/lz2INN2yjn3iycfw8KkxFO1EVc2TTzIT6EGGoebh9aJF4JG2PphfF7L', crossorigin: 'anonymous' %>
+  <script>
+    function toggleRightSideMenu() {
+      var menu = document.getElementById("rightSideMenu");
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>

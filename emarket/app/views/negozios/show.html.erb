@@ -1,41 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<h1>NEGOZIO</h1>
-
-<div class="profile-container">
-    <nav class="sidebar">
-      <%= link_to 'STATISTICHE', statistiche_negozio_path(@negozio), class: 'btn btn-primary' %>
-      <button class="sidebar-btn">PROMOZIONI</button>
-      <%= link_to 'Aggiungi Prodotto', new_negozio_prodotto_path(@negozio), class: 'btn btn-primary' %>
-      <button class="sidebar-btn">MESSAGGI</button>
-      <%= link_to 'GESTIONE RESI', resi_index_path, class: 'btn btn-primary' %>
-      <%= link_to 'RECENSIONI', recensioni_negozio_path(@negozio), class: 'btn btn-primary' %>
-    </nav>
-
-<body>
-
-<p>  nome negozio: <%= @negozio.nome_negozio %></p>
-
-
-<p>  Email: <%= @acquirente.email %>    Tel: <%= @negozio.telefono %></p>
-
-<p><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
-
-<p><button>Seguiti</button></p>
-
-
-</body>
-
-<div class="prodottos">
-            <% if @negozio.prodottos.present? %>
-                <% @negozio.prodottos.each do |prodotto| %>
-                    <p><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %></p>
-                <% end %>
-            <% else %>
-                <p>No products available.</p>
-            <% end %>
+<div class="container mt-5">
+  <h1 class="mb-4">NEGOZIO</h1>
+  
+  <div class="row">
+    <div class="col-md-3">
+      <nav class="nav flex-column nav-pills">
+        <%= link_to 'STATISTICHE', statistiche_negozio_path(@negozio), class: 'nav-link btn btn-primary mb-2' %>
+        <button class="nav-link btn btn-secondary mb-2">PROMOZIONI</button>
+        <%= link_to 'Aggiungi Prodotto', new_negozio_prodotto_path(@negozio), class: 'nav-link btn btn-primary mb-2' %>
+        <%= link_to 'MESSAGGI', messaggi_negozio_index_path, class: 'nav-link btn btn-primary mb-2' %>
+        <%= link_to 'GESTIONE RESI', resi_index_path, class: 'nav-link btn btn-primary mb-2' %>
+        <%= link_to 'RECENSIONI', recensioni_negozio_path(@negozio), class: 'nav-link btn btn-primary mb-2' %>
+      </nav>
+    </div>
+    
+    <div class="col-md-9">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Dettagli del Negozio</h5>
+          <p class="card-text"><strong>Nome negozio:</strong> <%= @negozio.nome_negozio %></p>
+          <p class="card-text"><strong>Email:</strong> <%= @acquirente.email %></p>
+          <p class="card-text"><strong>Telefono:</strong> <%= @negozio.telefono %></p>
+          <p class="card-text"><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
+          <p><button class="btn btn-outline-primary">seguaci</button></p>
         </div>
-
-<button>Modifica Profilo</button>
-
-<button>Elimina Profilo</button>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Prodotti</h5>
+          <% if @negozio.prodottos.present? %>
+            <ul class="list-group list-group-flush">
+              <% @negozio.prodottos.each do |prodotto| %>
+                <li class="list-group-item"><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="card-text">No products available.</p>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="d-flex">
+        <%= link_to 'Modifica Profilo', edit_negozio_path(@negozio), class: 'btn btn-warning mr-2' %>
+        <%= link_to 'Elimina Profilo', negozio_path(@negozio), method: :delete, data: { confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,11 +30,13 @@ Rails.application.routes.draw do
 #  get 'home/index'
 
   resources :resi, only: [:index, :update]
+  resources :messaggi_negozio, only: [:index, :create, :destroy]
 
   resources :negozios do
     member do
       get 'statistiche', to: 'statistichenegozio#index'
       get 'recensioni', to: 'recensioninegozio#index'
+      get 'messaggi', to: 'messaggi_negozio#index'
     end
   end
 
