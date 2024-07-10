@@ -87,7 +87,7 @@
 <body>
   <header>
     <div class="header-content">
-      <%= link_to 'Logo/Home', root_path, class: 'logo-home' %>
+      <%= link_to 'Home', root_path, class: 'logo-home' %>
       <button class="hamburger-menu" onclick="toggleRightSideMenu()">
         <div></div>
         <div></div>
@@ -102,6 +102,9 @@
       <% if current_user.is_a?(Acquirente) %>
         <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
         <%= link_to 'FAQs', faqs_path %>
+        <% if current_user.negozio.present? %>
+        <%= link_to 'IL TUO NEGOZIO', negozio_path(current_user.negozio) %>
+        <% end %>
       <% elsif current_user.is_a?(Amministratore) %>
         <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
       <% end %>
