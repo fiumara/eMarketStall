@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reset Password</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <main>
+    <h2>Reset Password</h2>
+    <%= form_with model: @user, url: password_reset_path(params[:id]), local: true do |form| %>
+      <div>
+        <%= form.label :password %>
+        <%= form.password_field :password, autofocus: true %>
+      </div>
+      <div>
+        <%= form.label :password_confirmation %>
+        <%= form.password_field :password_confirmation %>
+      </div>
+      <div>
+        <%= form.submit "Aggiorna Password", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </main>
+</body>
+</html>

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :resi, only: [:index, :update]
   resources :messaggi_negozio, only: [:index, :create, :destroy]
+  get 'negozios/:negozio_id/messaggio', to: 'messaggi_negozio#new', as: 'new_messaggio_negozio'
 
   resources :negozios do
     member do
@@ -55,6 +56,7 @@ Rails.application.routes.draw do
     member do
       get 'visualizza', to: 'negozios#visualizza'
     end
+    resources :messaggi_negozio, only: [:new, :create]
   end
   resources :acquirentes, only: [:new, :create, :show,  :edit, :update]
   resources :amministratores, only: [:create, :show, :edit, :update]
@@ -72,6 +74,4 @@ Rails.application.routes.draw do
       get 'rispondi'
     end
   end
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
