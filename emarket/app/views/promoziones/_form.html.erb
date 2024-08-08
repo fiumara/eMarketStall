@@ -1,57 +1,88 @@
 <%= form_with(model: promozione, local: true) do |form| %>
-    <% if promozione.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(promozione.errors.count, "error") %> prohibited this promozione from being saved:</h2>
-        <ul>
-          <% promozione.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  
-    <div class="field">
-      <%= form.label :nome %>
-      <%= form.text_field :nome %>
+  <% if promozione.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(promozione.errors.count, "error") %> prohibited this promozione from being saved:</h2>
+      <ul>
+        <% promozione.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
-  
-    <div class="field">
-      <%= form.label :descrizione %>
-      <%= form.text_area :descrizione %>
-    </div>
-  
-    <div class="field">
-      <%= form.label :inizio %>
-      <%= form.datetime_select :inizio %>
-    </div>
-  
-    <div class="field">
-      <%= form.label :fine %>
-      <%= form.datetime_select :fine %>
-    </div>
-  
-    <div class="field">
-      <%= form.label :sconto %>
-      <%= form.number_field :sconto, step: 0.01 %>
-    </div>
-  
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descrizione %>
+    <%= form.text_area :descrizione %>
+  </div>
+
+  <div class="field">
+    <%= form.label :inizio %>
+    <%= form.datetime_select :inizio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fine %>
+    <%= form.datetime_select :fine %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sconto %>
+    <%= form.number_field :sconto, step: 0.01 %>
+  </div>
+
+  <% if current_user.is_a?(Amministratore) %>
     <div class="field">
       <%= form.label :tipo %>
-      <%= form.select :tipo, options_for_select([['Singolo Prodotto', 'singolo_prodotto'], ['Intero Sito', 'intero_sito'], ['Categoria', 'categoria']]) %>
+      <%= form.select :tipo, options_for_select([['Intero Sito', 'intero_sito'], ['Categoria', 'categoria']], selected: promozione.tipo), id: 'promozione_tipo' %>
     </div>
-  
-    <div class="field">
+
+    <div class="field" id="prodotto_field">
       <%= form.label :prodotto_id, 'Prodotto' %>
       <%= form.collection_select :prodotto_id, Prodotto.all, :id, :nome_prodotto, include_blank: 'Seleziona Prodotto' %>
     </div>
-  
-    <div class="field">
+
+    <div class="field" id="categoria_field">
       <%= form.label :categorium_id, 'Categoria' %>
       <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, include_blank: 'Seleziona Categoria' %>
     </div>
-  
-    <div class="actions">
-      <%= form.submit %>
+  <% elsif current_user.is_a?(Acquirente) && current_user.negozio.present? %>
+    <div class="field">
+      <%= form.hidden_field :tipo, value: 'singolo_prodotto' %>
+      <%= form.label :prodotto_id, 'Prodotto' %>
+      <%= form.collection_select :prodotto_id, current_user.negozio.prodottos, :id, :nome_prodotto, include_blank: 'Seleziona Prodotto' %>
     </div>
   <% end %>
-  
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function toggleFields() {
+      var tipo = document.getElementById('promozione_tipo').value;
+      var prodottoField = document.getElementById('prodotto_field');
+      var categoriaField = document.getElementById('categoria_field');
+
+      if (tipo === 'intero_sito') {
+        prodottoField.style.display = 'none';
+        categoriaField.style.display = 'none';
+      } else if (tipo === 'singolo_prodotto') {
+        prodottoField.style.display = 'block';
+        categoriaField.style.display = 'none';
+      } else if (tipo === 'categoria') {
+        prodottoField.style.display = 'none';
+        categoriaField.style.display = 'block';
+      }
+    }
+
+    document.getElementById('promozione_tipo').addEventListener('change', toggleFields);
+    toggleFields();
+  });
+</script>

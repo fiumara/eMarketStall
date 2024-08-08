@@ -1,6 +1,9 @@
 class Acquirente < ApplicationRecord
     has_secure_password
 
+    has_many :recensioni, dependent: :destroy
+    has_many :messaggi, dependent: :destroy
+
     has_one :negozio, dependent: :destroy
 
     has_many :wishlist_items, dependent: :destroy

@@ -13,11 +13,11 @@ class PromozionesController < ApplicationController
     end
 
     def admin
-      @promoziones = Promozione.all
+      @promoziones = Promozione.where(created_by: 'admin')
     end
 
     def negozio
-      @promoziones = Promozione.all
+      @promoziones = Promozione.where(negozio: current_user.negozio)
     end
   
     # GET /promoziones/new
@@ -32,7 +32,14 @@ class PromozionesController < ApplicationController
     # POST /promoziones or /promoziones.json
     def create
       @promozione = Promozione.new(promozione_params)
-      @promozione.created_by = current_user.is_a?(Amministratore) ? 'admin' : 'negozio'
+      if current_user.is_a?(Acquirente) && current_user.negozio.present?
+           @promozione.negozio = current_user.negozio
+           @promozione.created_by = 'negozio'
+            @promozione.tipo = 'singolo_prodotto'
+          elsif current_user.is_a?(Amministratore)
+            @promozione.created_by = 'admin'
+          end
+        
   
       respond_to do |format|
         if @promozione.save
@@ -74,7 +81,7 @@ class PromozionesController < ApplicationController
     end
   
     def promozione_params
-      params.require(:promozione).permit(:nome, :descrizione, :inizio, :fine, :sconto, :tipo, :prodotto_id, :categoria_id)
+      params.require(:promozione).permit(:nome, :descrizione, :inizio, :fine, :sconto, :tipo, :prodotto_id, :categorium_id)
     end
   
     def authorize_negozio_or_admin

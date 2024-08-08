@@ -1,36 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-
-<h1>Profilo Acquirente</h1>
-
-<div class="profile-container">
-    <nav class="sidebar">
-      <%= link_to 'LISTA DESIDERI', lista_desideri_path, class: 'btn btn-primary' %>
-      <%= link_to 'ARCHIVIO ORDINI', archivio_ordini_path, class: 'btn btn-primary' %>
-      <%= link_to 'CRONOLOGIA RICERCHE', cronologia_ricerche_path, class: 'btn btn-primary' %>
-      <%= link_to 'MESSAGGI', messaggi_path, class: 'btn btn-primary' %>
-      <% if @negozio %>
-          <%= link_to 'IL TUO NEGOZIO', negozio_path(@negozio), class: 'btn btn-primary' %>
+<div class="container mt-5">
+  <h1 class="mb-4">Profilo Acquirente</h1>
+  
+  <div class="row">
+    <div class="col-md-3">
+      <nav class="nav flex-column nav-pills">
+        <%= link_to 'LISTA DESIDERI', lista_desideri_path, class: 'nav-link btn btn-primary mb-2' %>
+        <%= link_to 'ARCHIVIO ORDINI', archivio_ordini_path, class: 'nav-link btn btn-primary mb-2' %>
+        <%= link_to 'CRONOLOGIA RICERCHE', cronologia_ricerche_path, class: 'nav-link btn btn-primary mb-2' %>
+        <%= link_to 'MESSAGGI', messaggi_path, class: 'nav-link btn btn-primary mb-2' %>
+        <% if @negozio %>
+          <%= link_to 'IL TUO NEGOZIO', negozio_path(@negozio), class: 'nav-link btn btn-primary mb-2' %>
         <% else %>
-          <%= link_to 'CREA IL TUO NEGOZIO', new_negozio_path, class: 'btn btn-primary' %>
+          <%= link_to 'CREA IL TUO NEGOZIO', new_negozio_path, class: 'nav-link btn btn-primary mb-2' %>
         <% end %>
-    </nav>
-
-<body>
-
-<p>  <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
-
-<p>  Nome utente: <%= @acquirente.nome_utente %></p>
-<p>  Email: <%= @acquirente.email %>    Tel: <%= @acquirente.telefono %></p>
-
-<p><button>Seguiti</button></p>
-<p>Punti Fedeltà: 0</p>
-
-</body>
-
-<div>
-<%= link_to 'Modifica Profilo', edit_acquirente_path(@acquirente), class: 'btn btn-primary' %>
-
+      </nav>
+    </div>
+    
+    <div class="col-md-9">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Dettagli dell'Acquirente</h5>
+          <p class="card-text"><strong>Nome:</strong> <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
+          <p class="card-text"><strong>Nome utente:</strong> <%= @acquirente.nome_utente %></p>
+          <p class="card-text"><strong>Email:</strong> <%= @acquirente.email %></p>
+          <p class="card-text"><strong>Telefono:</strong> <%= @acquirente.telefono %></p>
+          <p><button class="btn btn-outline-primary">Seguiti</button></p>
+          <p class="card-text"><strong>Punti Fedeltà:</strong> 0</p>
+        </div>
+      </div>
+      
+      <div class="d-flex">
+        <%= link_to 'Modifica Profilo', edit_acquirente_path(@acquirente), class: 'btn btn-warning mr-2' %>
+        <%= link_to 'Elimina Profilo', acquirente_path(@acquirente), method: :delete, data: { confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<button>Elimina Profilo</button>

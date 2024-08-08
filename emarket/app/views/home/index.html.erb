@@ -46,14 +46,14 @@
     </header>
     <nav class="categories">
         <% Categorium.all.each do |categorium| %>
-            <%= link_to categorium.nome, categoria_path(categorium), class: "btn btn-primary" %>
+            <%= link_to categorium.nome, categoria_path(categorium), class: " nav-link btn btn-primary" %>
         <% end %>
     </nav>
     <main>
         <div class="filter-search">
             <%= form_with url: prodottos_path, method: :get, local: true do %>
                 <input type="text" name="search" placeholder="Cerca" value="<%= params[:search] %>">
-                <button type="submit">Cerca</button>
+                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
             <% end %>
         </div>
         <div class="promotions">
@@ -73,17 +73,26 @@
             <%= link_to "Mostra promo", promoziones_path %>
             </div>
         </div>
-        <div class="prodottos">
-            <% if @prodottos.present? %>
-                <% @prodottos.each do |prodotto| %>
-                    <div class="prodotto">
-                        <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %>
-                        <p><%= prodotto.descrizione %></p>
-                    </div>
-                <% end %>
-            <% else %>
-                <p>No products available.</p>
-            <% end %>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Prodotti</h2>
+                <div class="row">
+                    <% if @prodottos.present? %>
+                        <% @prodottos.each do |prodotto| %>
+                            <div class="col-md-4">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "card-title" %>
+                                        <p class="card-text"><%= prodotto.descrizione %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% else %>
+                        <p>No products available.</p>
+                    <% end %>
+                </div>
+            </div>
         </div>
         <br>
         

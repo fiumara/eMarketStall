@@ -35,7 +35,27 @@
                 <p>No products available.</p>
             <% end %>
         </div>
-
-<button>Modifica Profilo</button>
-
-<button>Elimina Profilo</button>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Prodotti</h5>
+          <% if @negozio.prodottos.present? %>
+            <ul class="list-group list-group-flush">
+              <% @negozio.prodottos.each do |prodotto| %>
+                <li class="list-group-item"><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="card-text">No products available.</p>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="d-flex">
+        <%= link_to 'Modifica Profilo', edit_negozio_path(@negozio), class: 'btn btn-warning mr-2' %>
+        <%= link_to 'Elimina Profilo', negozio_path(@negozio), method: :delete, data: { confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>

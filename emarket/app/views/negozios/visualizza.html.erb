@@ -29,7 +29,7 @@
           <p>Nome utente: <%= @negozio.acquirente.nome_utente %></p>
           <p>Email: <%= @negozio.acquirente.email %></p>
           <p>Telefono: <%= @negozio.acquirente.telefono %></p>
-          <button>Scrivici</button>
+          <%= link_to 'Scrivici', new_messaggio_negozio_path(@negozio), class: 'button' %>
         </div>
       <% else %>
         <p>Informazioni sul proprietario non disponibili.</p>

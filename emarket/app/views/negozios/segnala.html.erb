@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>Segnala negozio</h1>
+      <form action="<%= segnala_negozio_path(@negozio) %>" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="form-group">
+          <label for="motivo">Motivazione</label>
+          <select id="motivo" name="motivo">
+            <option value="frodi">Frodi</option>
+            <option value="contenuti_inappropriati">Contenuti inappropriati</option>
+            <option value="altro">Altro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="note">Note (opzionale)</label>
+          <textarea id="note" name="note"></textarea>
+        </div>
+        <button type="submit">Invia</button>
+        <button type="button" onclick="window.location='<%= negozio_path(@negozio) %>'">Annulla</button>
+      </form>
+    </section>
+  </main>
+
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity: 'sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin: 'anonymous' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity: 'sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGaZ5tgkIoGQjYI38tALe10aD5', crossorigin: 'anonymous' %>
+  <%= javascript_include_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity: 'sha384-smHYkd5q/lz2INN2yjn3iycfw8KkxFO1EVc2TTzIT6EGGoebh9aJF4JG2PphfF7L', crossorigin: 'anonymous' %>
+  <script>
+    function toggleRightSideMenu() {
+      var menu = document.getElementById("rightSideMenu");
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

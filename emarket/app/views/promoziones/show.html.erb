@@ -35,8 +35,6 @@
 
 <p>
   <strong>Categoria:</strong>
-  <%= @promozione.categoria&.nome_categoria %>
+  <%= @promozione.categorium&.nome %>
 </p>
 
-<%= link_to 'Edit', edit_promozione_path(@promozione) %> |
-<%= link_to 'Back', promoziones_path %>

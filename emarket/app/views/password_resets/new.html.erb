@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recupero Password</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <main>
+    <h2>Recupero credenziali</h2>
+    <%= form_with url: password_resets_path, local: true do |form| %>
+      <div>
+        <%= form.label :email %>
+        <%= form.text_field :email, autofocus: true %>
+      </div>
+      <div>
+        <%= form.submit "Invia", class: "btn btn-primary" %>
+        <%= link_to 'Annulla', root_path, class: "btn" %>
+      </div>
+    <% end %>
+  </main>
+</body>
+</html>

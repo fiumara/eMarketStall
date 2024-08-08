@@ -20,8 +20,9 @@
                         <td>
                             <% if promozione.prodotto.present? %>
                                 Prodotto: <%= promozione.prodotto.nome_prodotto %>
-                            <% elsif promozione.categoria.present? %>
-                                Categoria: <%= promozione.categoria.nome_categoria %>
+                                <% elsif promozione.categorium.present? %>
+                                Categoria: <%= promozione.categorium.nome %>
+                                
                             <% else %>
                                 Tutto il sito
                             <% end %>
