@@ -23,21 +23,17 @@ Rails.application.routes.draw do
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
   
-  get 'messaggi', to: 'messaggi#index', as: 'messaggi'
 
 #  get 'profile', to: 'users#profile', as: 'profile'
 
 #  get 'home/index'
 
   resources :resi, only: [:index, :update]
-  resources :messaggi_negozio, only: [:index, :create, :destroy]
-  get 'negozios/:negozio_id/messaggio', to: 'messaggi_negozio#new', as: 'new_messaggio_negozio'
 
   resources :negozios do
     member do
       get 'statistiche', to: 'statistichenegozio#index'
       get 'recensioni', to: 'recensioninegozio#index'
-      get 'messaggi', to: 'messaggi_negozio#index'
     end
   end
 
@@ -64,7 +60,6 @@ Rails.application.routes.draw do
     member do
       get 'visualizza', to: 'negozios#visualizza'
     end
-    resources :messaggi_negozio, only: [:new, :create]
   end
   resources :acquirentes, only: [:new, :create, :show,  :edit, :update]
   resources :amministratores, only: [:create, :show, :edit, :update]
@@ -72,14 +67,6 @@ Rails.application.routes.draw do
   resources :faqs do
     collection do
       get 'admin'
-    end
-  end
-  
-
-
-  resources :messaggi, only: [:index, :show, :destroy] do
-    member do
-      get 'rispondi'
     end
   end
 end

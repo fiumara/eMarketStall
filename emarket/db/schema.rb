@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2024_07_03_122816) do
-=======
 ActiveRecord::Schema.define(version: 2024_07_05_143803) do
->>>>>>> 6a0e014094a102233d05e5a825e76e9545f76b2e
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -46,22 +42,6 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
   create_table "faqs", force: :cascade do |t|
     t.string "domanda"
     t.string "risposta"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.string "nome_utente"
-    t.string "tipo_utente"
-    t.text "contenuto"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "messaggios", force: :cascade do |t|
-    t.string "nome_utente"
-    t.string "tipo_utente"
-    t.text "contenuto"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -161,13 +141,10 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
-<<<<<<< HEAD
   add_foreign_key "promoziones", "categoria"
   add_foreign_key "promoziones", "negozios"
   add_foreign_key "promoziones", "prodottos"
-=======
   add_foreign_key "statisticas", "prodottos"
->>>>>>> 6a0e014094a102233d05e5a825e76e9545f76b2e
   add_foreign_key "variantis", "prodottos"
   add_foreign_key "wishlist_items", "acquirentes"
   add_foreign_key "wishlist_items", "prodottos"
