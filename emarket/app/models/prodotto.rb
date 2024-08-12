@@ -22,4 +22,15 @@ class Prodotto < ApplicationRecord
           all
         end
       end
+
+
+      def promozione_attiva
+        Promozione.where("inizio <= ? AND fine >= ?", Date.today, Date.today)
+                  .find_by("(tipo = ? AND prodotto_id = ?) OR 
+                            (tipo = ? AND categorium_id = ?) OR 
+                            (tipo = ?)",
+                           'singolo_prodotto', self.id,
+                           'categoria', self.categorium_id,
+                           'intero_sito')
+      end
 end

@@ -1,5 +1,5 @@
 class NegoziosController < ApplicationController
-  before_action :authenticate_acquirente!
+  before_action :authenticate_acquirente!, except: [:visualizza]
   before_action :set_negozio, only: [:show, :edit, :update, :destroy, :visualizza]
 
   # GET /negozios or /negozios.json
