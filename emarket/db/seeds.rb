@@ -92,10 +92,6 @@ Amministratore.create!(
   ]
 )
 
-#crea record di messaggi esempio
-
-Messaggio.create(nome_utente: 'Utente1', tipo_utente: 'Acquirente', contenuto: 'Contenuto del messaggio 1')
-Messaggio.create(nome_utente: 'Utente2', tipo_utente: 'Negozio', contenuto: 'Contenuto del messaggio 2')
 
 # Creazione delle categorie
 Categorium.create(nome: 'Gioielli')

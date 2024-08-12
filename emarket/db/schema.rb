@@ -50,22 +50,6 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "nome_utente"
-    t.string "tipo_utente"
-    t.text "contenuto"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "messaggios", force: :cascade do |t|
-    t.string "nome_utente"
-    t.string "tipo_utente"
-    t.text "contenuto"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "negozios", force: :cascade do |t|
     t.string "nome_negozio"
     t.string "descrizione"
@@ -90,9 +74,22 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
     t.index ["negozio_id"], name: "index_prodottos_on_negozio_id"
   end
 
-  create_table "promozionis", force: :cascade do |t|
+  create_table "promoziones", force: :cascade do |t|
+    t.string "nome"
+    t.text "descrizione"
+    t.datetime "inizio"
+    t.datetime "fine"
+    t.decimal "sconto"
+    t.string "tipo"
+    t.integer "prodotto_id"
+    t.integer "categorium_id"
+    t.integer "negozio_id"
+    t.string "created_by", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["categorium_id"], name: "index_promoziones_on_categorium_id"
+    t.index ["negozio_id"], name: "index_promoziones_on_negozio_id"
+    t.index ["prodotto_id"], name: "index_promoziones_on_prodotto_id"
   end
 
   create_table "recensiones", force: :cascade do |t|
@@ -148,6 +145,9 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
+  add_foreign_key "promoziones", "categoria"
+  add_foreign_key "promoziones", "negozios"
+  add_foreign_key "promoziones", "prodottos"
   add_foreign_key "statisticas", "prodottos"
   add_foreign_key "variantis", "prodottos"
   add_foreign_key "wishlist_items", "acquirentes"

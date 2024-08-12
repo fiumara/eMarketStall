@@ -1,0 +1,33 @@
+
+
+
+<table>
+
+  <tbody>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Promozioni</h1>
+      <div class="row">
+
+    <% @promoziones.each do |promozione| %>
+      <div class="col-md-4">
+       <div class="card mb-4">
+       <div class="card-body">
+       <p class="card-title"><%= promozione.nome %></p>
+       <p class="card-text"><%= promozione.descrizione %></p>
+       <p class="card-text"><%= promozione.inizio %></p>
+       <p class="card-text"><%= promozione.fine %></p>
+       <p class="card-text"><%= number_to_percentage(promozione.sconto * 100, precision: 2) %></p>
+       <p class="card-text"><%= promozione.tipo %></p>
+       <p class="card-text"><%= promozione.prodotto&.nome_prodotto %></p>
+       <p class="card-text"><%= promozione.categorium&.nome %></p>
+       <p class="card-text"><%= link_to 'Show', promozione %>
+     </div>
+       </div>
+       </div>
+     <% end %>
+   </div>
+ </div>
+
+  </tbody>
+</table>

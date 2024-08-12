@@ -57,19 +57,23 @@
             <% end %>
         </div>
         <div class="promotions">
-            <div class="promotion">
-                <h2>Nome promozione</h2>
-                <p>Descrizione</p>
+        <div class="col-md-12">
+                <h2>Promozioni</h2>
+                <div class="row">
+        <% if @promoziones.present? %>
+            <% @promoziones.each do |promozione| %>
+                <div class="promotion">
+                    <h2><%= link_to promozione.nome, promozione_path(promozione), class: "card-title" %></h2>
+                    <p><%= promozione.descrizione %></p>
+                </div>
+            <% end %>
             </div>
-            <div class="promotion">
-                <h2>Nome promozione</h2>
-                <p>Descrizione</p>
+            <div class="show-promo">
+                <%= link_to "Mostra promo", promoziones_path %>
             </div>
-            <div class="promotion">
-                <h2>Nome promozione</h2>
-                <p>Descrizione</p>
-            </div>
-            <div class="show-promo">Mostra promo</div>
+        <% end %> 
+        
+        </div>
         </div>
         <div class="row">
             <div class="col-md-12">

@@ -1,0 +1,40 @@
+<p>
+  <strong>Nome:</strong>
+  <%= @promozione.nome %>
+</p>
+
+<p>
+  <strong>Descrizione:</strong>
+  <%= @promozione.descrizione %>
+</p>
+
+<p>
+  <strong>Inizio:</strong>
+  <%= @promozione.inizio %>
+</p>
+
+<p>
+  <strong>Fine:</strong>
+  <%= @promozione.fine %>
+</p>
+
+<p>
+  <strong>Sconto:</strong>
+  <%= number_to_percentage(@promozione.sconto * 100, precision: 2) %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @promozione.tipo %>
+</p>
+
+<p>
+  <strong>Prodotto:</strong>
+  <%= @promozione.prodotto&.nome_prodotto %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @promozione.categorium&.nome %>
+</p>
+
