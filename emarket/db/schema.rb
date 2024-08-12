@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
     t.string "nome_utente"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   create_table "amministratores", force: :cascade do |t|
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
     t.string "telefono"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   create_table "categoria", force: :cascade do |t|

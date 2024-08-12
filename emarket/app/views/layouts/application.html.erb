@@ -102,9 +102,7 @@
       <% if current_user.is_a?(Acquirente) %>
         <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
         <%= link_to 'FAQs', faqs_path %>
-        <% if current_user.negozio.present? %>
-        <%= link_to 'IL TUO NEGOZIO', negozio_path(current_user.negozio) %>
-        <% end %>
+        
       <% elsif current_user.is_a?(Amministratore) %>
         <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
       <% end %>
