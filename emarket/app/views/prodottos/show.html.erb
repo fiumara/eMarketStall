@@ -23,6 +23,16 @@
                 <%= link_to 'Visualizza Negozio', visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
                 <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
 
+                <% if @promozione %>
+                  <div class="promozione-attiva">
+                  <h2>Promozione Attiva</h2>
+                  <p><strong><%= @promozione.nome %></strong></p>
+                  <p><%= @promozione.descrizione %></p>
+                  <p>Sconto: <%= number_to_percentage(@promozione.sconto, precision: 2) %></p>
+                  <p>Valida dal <%= @promozione.inizio.strftime("%d %b %Y") %> al <%= @promozione.fine.strftime("%d %b %Y") %></p>
+                  </div>
+                <% end %>
+
                 <p>Categoria: <%= @prodotto.categorium.nome %></p> <!-- Mostra il nome della categoria -->
 
                 <div class="reviews">
