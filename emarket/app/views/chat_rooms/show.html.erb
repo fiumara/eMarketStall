@@ -1,0 +1,15 @@
+<div id="chat-room">
+  <h2>Chat Room</h2>
+
+  <div id="messages" data-chat-room-id="<%= @chat_room.id %>">
+  <% if @messaggi.present? %>
+  <%= render @messaggi %>
+<% else %>
+  <p>Nessun messaggio ancora. Scrivi il primo messaggio!</p>
+<% end %>
+  </div>
+
+  <div id="new_message_form">
+  <%= render 'messaggi/form', chat_room: @chat_room, destinatario: @destinatario %> <!-- Passa il destinatario -->
+  </div>
+</div>

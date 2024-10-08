@@ -1,0 +1,20 @@
+<div class="message">
+  <strong>
+    Mittente: 
+    <% if messaggio.mittente_id.is_a?(Amministratore) || messaggio.mittente_id.is_a?(Acquirente) %>
+      <%= messaggio.mittente.nome %> <%= messaggio.mittente.cognome %>
+    <% elsif messaggio.mittente_id.is_a?(Negozio) %>
+      <%= messaggio.mittente.nome_negozio %>
+    <% end %>
+  </strong>
+  <br>
+  <strong>
+    Destinatario: 
+    <% if messaggio.destinatario_id.is_a?(Amministratore) || messaggio.destinatario_id.is_a?(Acquirente) %>
+      <%= messaggio.destinatario.nome %> <%= messaggio.destinatario.cognome %>
+    <% elsif messaggio.destinatario_id.is_a?(Negozio) %>
+      <%= messaggio.destinatario.nome_negozio %>
+    <% end %>
+  </strong>
+  <p><%= messaggio.contenuto %></p>
+</div>

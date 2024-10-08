@@ -1,0 +1,26 @@
+<h1>Nuova Chat Room</h1>
+
+<%= form_with model: @chat_room, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :nome, 'Nome della Chat Room' %>
+    <%= form.text_field :nome, class: 'form-control' %>
+  </div>
+
+  <!-- Selezione del destinatario -->
+  <div class="form-group">
+  <%= form.label :destinatario_id, "Seleziona Destinatario" %>
+  <% if @destinatari_options.present? %>
+    <%= form.select :destinatario_id, options_for_select(@destinatari_options.map { |d| [d.nome_completo, d.id] }), include_blank: true %>
+  <% else %>
+    <p>Nessun destinatario disponibile</p>
+  <% end %>
+</div>
+
+  <!-- Assicurati di avere anche un campo per destinatario_type -->
+  <%= form.hidden_field :destinatario_type, value: @destinatari_options.first.class.name %>
+
+  <%= form.submit 'Crea Chat Room', class: 'btn btn-primary' %>
+<% end %>
+
+
+<%= link_to 'Torna alla lista delle chat rooms', chat_rooms_path, class: 'btn btn-secondary' %>

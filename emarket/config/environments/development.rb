@@ -73,4 +73,17 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # Action Cable permette tutte le origini in sviluppo
+config.action_cable.allowed_request_origins = ['http://localhost:3000', /http:\/\/localhost.*/]
+
+# Usa la connessione locale WebSocket per lo sviluppo
+config.action_cable.url = 'ws://localhost:3000/cable'
+
+config.action_cable.log_tags = [
+  -> request { request.env['warden'].user.try(:email) || 'Guest' },
+  -> request { request.uuid }
+]
+
+
 end

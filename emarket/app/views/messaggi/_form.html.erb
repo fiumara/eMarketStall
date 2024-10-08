@@ -1,0 +1,14 @@
+<%= form_with(model: [@chat_room, Messaggio.new], local: true, id: 'new_message') do |form| %>
+  <div class="form-group">
+    <%= form.text_area :contenuto, placeholder: "Scrivi un messaggio..." %>
+  </div>
+
+  <!-- Campo nascosto per il destinatario -->
+  <%= form.hidden_field :destinatario_id, value: destinatario.id %>
+  <%= form.hidden_field :destinatario_type, value: destinatario.class.name %>
+
+  <%= form.submit 'Invia', class: 'btn btn-primary' %>
+<% end %>
+
+
+  

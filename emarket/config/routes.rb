@@ -69,4 +69,12 @@ Rails.application.routes.draw do
       get 'admin'
     end
   end
+
+  resources :chat_rooms, only: [:index, :show, :new, :create] do
+    resources :messaggi, only: [:create]
+  end
+  
+
+  # Monta Action Cable
+  mount ActionCable.server => '/cable'
 end
