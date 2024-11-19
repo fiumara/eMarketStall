@@ -1,0 +1,8 @@
+// Aggiungi il nuovo messaggio alla lista
+$("#messages").append("<%= j render partial: 'messaggi/messaggio', locals: { messaggio: @chat_room.messaggi.last } %>");
+
+// Scorri automaticamente alla fine della chat
+$("#messages").scrollTop($("#messages")[0].scrollHeight);
+
+// Svuota il campo di testo
+$("#new_message textarea").val("");

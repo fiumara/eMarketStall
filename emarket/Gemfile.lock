@@ -136,6 +136,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.0)
     rack (2.2.9)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
     rack-test (2.1.0)
@@ -174,6 +176,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
+    redis (4.8.1)
     regexp_parser (2.9.2)
     rexml (3.2.8)
       strscan (>= 3.0.9)
@@ -239,9 +242,11 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.3)
   puma (~> 5.0)
+  rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.7)
   rails-ujs
+  redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   sqlite3 (~> 1.4.0)

@@ -1,23 +1,20 @@
-import consumer from "./consumer"
+import consumer from "./consumer";
 
-document.addEventListener('turbolinks:load', () => {
-  const chatRoomElement = document.getElementById('messages');
-  if (chatRoomElement) {
-    const chatRoomId = chatRoomElement.getAttribute('data-chat-room-id');
-    console.log("Connesso al canale della chat room ID:", chatRoomId);
+document.addEventListener("turbolinks:load", () => {
+  const chatRoomElement = document.getElementById("chat-room");
+  if (!chatRoomElement) return;
 
-    consumer.subscriptions.create({ channel: "ChatRoomChannel", chat_room_id: chatRoomId }, {
+  const chatRoomId = chatRoomElement.dataset.chatRoomId;
+
+  consumer.subscriptions.create(
+    { channel: "ChatRoomChannel", chat_id: chatRoomId },
+    {
       received(data) {
-        console.log("Nuovo messaggio ricevuto: ", data);  // Log per verificare l'arrivo del messaggio
-        const messagesContainer = document.getElementById('messages');
-        messagesContainer.insertAdjacentHTML('beforeend', data.message);
-
+        // Aggiungi il messaggio al contenitore della chat
+        const messagesContainer = document.getElementById("messages");
+        messagesContainer.insertAdjacentHTML("beforeend", data);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-    });
-  }
+      },
+    }
+  );
 });
-
-
-
-

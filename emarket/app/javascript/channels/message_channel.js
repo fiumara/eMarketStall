@@ -1,6 +1,13 @@
 import consumer from "./consumer"
 
-const chatId = document.getElementById('chat-room').dataset.chatId
+const chatRoomElement = document.getElementById('chat-room');
+if (!chatRoomElement) {
+  console.warn("Elemento 'chat-room' non trovato");
+  return;
+}
+
+const chatId = chatRoomElement.dataset.chatId;
+
 
 consumer.subscriptions.create({ channel: "MessageChannel", chat_id: chatId }, {
   connected() {
@@ -8,14 +15,19 @@ consumer.subscriptions.create({ channel: "MessageChannel", chat_id: chatId }, {
   },
 
   disconnected() {
-    // Chiamato quando la connessione al canale è interrotta
+    console.log("Connessione persa. Tentativo di riconnessione...");
   },
+  
 
   received(data) {
-    // Ricevi i dati dal server e aggiorna il DOM (visualizzazione del nuovo messaggio)
-    const messagesContainer = document.getElementById('messages')
-    messagesContainer.innerHTML += data.message
+    const messagesContainer = document.getElementById('messages');
+    if (!messagesContainer) {
+      console.warn("Container dei messaggi non trovato");
+      return;
+    }
+    messagesContainer.innerHTML += data.message;
   },
+  
 
   speak(message) {
     // Invia il messaggio al canale

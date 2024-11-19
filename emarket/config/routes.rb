@@ -71,7 +71,7 @@ Rails.application.routes.draw do
   end
 
   resources :chat_rooms, only: [:index, :show, :new, :create] do
-    resources :messaggi, only: [:create]
+    post 'messages', to: 'chat_rooms#create_message', as: :messages
   end
   
 

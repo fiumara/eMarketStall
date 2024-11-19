@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= yield :title %></title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application', type: 'module', crossorigin: 'anonymous', 'data-turbo-track': 'reload' %>
+ 
+
+
   <%= csrf_meta_tags %>
   <style>
     .header-content {
@@ -117,9 +120,6 @@
     <%= yield %>
   </main>
 
-  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity: 'sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin: 'anonymous' %>
-  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity: 'sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGaZ5tgkIoGQjYI38tALe10aD5', crossorigin: 'anonymous' %>
-  <%= javascript_include_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity: 'sha384-smHYkd5q/lz2INN2yjn3iycfw8KkxFO1EVc2TTzIT6EGGoebh9aJF4JG2PphfF7L', crossorigin: 'anonymous' %>
   <script>
     function toggleRightSideMenu() {
       var menu = document.getElementById("rightSideMenu");
