@@ -9,8 +9,12 @@ class ChatRoomChannel < ApplicationCable::Channel
       contenuto: data['message'],
       mittente: current_user
     )
-    ChatRoomChannel.broadcast_to(@chat_room, render_message(messaggio))
-  end
+    message_html = ApplicationController.render(
+      partial: 'messaggi/messaggio',
+      locals: { messaggio: messaggio }
+    )
+    ChatRoomChannel.broadcast_to(@chat_room, { message_html: message_html })
+    end
 
   private
 
