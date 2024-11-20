@@ -1,0 +1,20 @@
+
+<h1 class="text-center my-4">Chat Rooms</h1>
+
+<div class="text-center mb-4">
+  <%= link_to 'Crea una nuova Chat Room', new_chat_room_path, class: 'btn btn-success' %>
+</div>
+
+<div class="row">
+  <% @chat_rooms.each do |chat_room| %>
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= chat_room.nome %></h5>
+          <%= link_to 'Entra nella Chat', chat_room_path(chat_room), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

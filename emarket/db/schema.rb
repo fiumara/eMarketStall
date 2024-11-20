@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_05_143803) do
+ActiveRecord::Schema.define(version: 2024_09_25_110925) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -43,11 +43,37 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "nome"
+    t.string "mittente_type", null: false
+    t.integer "mittente_id", null: false
+    t.string "destinatario_type", null: false
+    t.integer "destinatario_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["destinatario_type", "destinatario_id"], name: "index_chat_rooms_on_destinatario"
+    t.index ["mittente_type", "mittente_id"], name: "index_chat_rooms_on_mittente"
+  end
+
   create_table "faqs", force: :cascade do |t|
     t.string "domanda"
     t.string "risposta"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messaggi", force: :cascade do |t|
+    t.text "contenuto"
+    t.integer "chat_room_id", null: false
+    t.string "mittente_type", null: false
+    t.integer "mittente_id", null: false
+    t.string "destinatario_type", null: false
+    t.integer "destinatario_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chat_room_id"], name: "index_messaggi_on_chat_room_id"
+    t.index ["destinatario_type", "destinatario_id"], name: "index_messaggi_on_destinatario"
+    t.index ["mittente_type", "mittente_id"], name: "index_messaggi_on_mittente"
   end
 
   create_table "negozios", force: :cascade do |t|
@@ -142,6 +168,7 @@ ActiveRecord::Schema.define(version: 2024_07_05_143803) do
     t.index ["prodotto_id"], name: "index_wishlist_items_on_prodotto_id"
   end
 
+  add_foreign_key "messaggi", "chat_rooms"
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"

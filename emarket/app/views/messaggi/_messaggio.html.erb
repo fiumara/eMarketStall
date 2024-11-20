@@ -1,0 +1,13 @@
+<div class="message <%= 'mine' if messaggio.mittente == current_user %>">
+  <strong>
+    Mittente:
+    <% if messaggio.mittente.is_a?(Amministratore) || messaggio.mittente.is_a?(Acquirente) %>
+      <%= messaggio.mittente.nome %> <%= messaggio.mittente.cognome %>
+    <% elsif messaggio.mittente.is_a?(Negozio) %>
+      <%= messaggio.mittente.nome_negozio %>
+    <% else %>
+      <%= messaggio.mittente.name %>
+    <% end %>
+  </strong>
+  <p><%= messaggio.contenuto %></p>
+</div>
