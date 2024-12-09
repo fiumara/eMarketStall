@@ -51,12 +51,19 @@ class ChatRoomsController < ApplicationController
 
   private
 
-  def set_chat_room
-    @chat_room = ChatRoom.find_by(id: params[:id] || params[:chat_room_id])
-    unless @chat_room
-      redirect_to chat_rooms_path, alert: 'Chat room non trovata.'
-    end
+def set_chat_room
+  @chat_room = ChatRoom.find_by(id: params[:id] || params[:chat_room_id])
+  
+  if @chat_room.nil?
+    redirect_to chat_rooms_path, alert: 'Chat room non trovata.'
+  elsif !authorized_user?(@chat_room)
+    redirect_to chat_rooms_path, alert: 'Non sei autorizzato ad accedere a questa chatroom.'
   end
+end
+
+def authorized_user?(chat_room)
+  current_user.id == chat_room.mittente_id || current_user.id == chat_room.destinatario_id
+end
 
   def set_destinatari_options
     @destinatari_options = Acquirente.all + Amministratore.all + Negozio.all
