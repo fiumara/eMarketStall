@@ -26,6 +26,33 @@ class SessionsController < ApplicationController
     redirect_to root_path, notice: "Disconnessione effettuata!"
   end
 
+  def failure
+    redirect_to root_path, alert: "Errore di autenticazione: #{params[:message]}"
+  end
+
+  def google_auth
+    user_info = request.env['omniauth.auth']
+    email = user_info['info']['email']
+    
+    # Trova o crea l'utente in base al ruolo
+    user = Acquirente.find_or_create_by(email: email) do |u|
+      u.nome = user_info['info']['name']
+      # Aggiungi altre proprietà necessarie
+
+      Rails.logger.info("Auth Hash: #{request.env['omniauth.auth'].inspect}")
+  Rails.logger.info("Error: #{request.env['omniauth.error']}")
+  # Logica di autenticazione
+rescue StandardError => e
+  Rails.logger.error("Errore durante l'autenticazione: #{e.message}")
+  redirect_to root_path, alert: "Errore di autenticazione"
+    end
+  
+    session[:user_id] = user.id
+    session[:role] = 'acquirente' # Definisci il ruolo
+    redirect_to profile_path(user), notice: 'Login effettuato con successo'
+  rescue StandardError => e
+    redirect_to root_path, alert: "Errore: #{e.message}"
+  end
 
 
   private

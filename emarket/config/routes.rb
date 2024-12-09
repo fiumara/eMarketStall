@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   get 'gestione_feedback/show'
   #get 'sessions/new'
   root 'home#index'
+    
+  get '/auth/google_oauth2', to: 'auth#google', as: :google_auth
+  get '/auth/google_oauth2/callback', to: 'auth#callback'
+  get '/auth/failure', to: 'auth#failure'
+
+  
+  
 
 
   get 'gestione_account', to: 'gestione_account#manage'
