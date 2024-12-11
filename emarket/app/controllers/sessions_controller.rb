@@ -8,15 +8,17 @@ class SessionsController < ApplicationController
            elsif params[:role] == 'amministratore'
              Amministratore.find_by(email: params[:email])
            end
-
+  
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       session[:role] = params[:role]
-      redirect_to profile_path(user), notice: "Accesso effettuato!"
-    else
-      flash.now[:alert] = "Email o password non validi"
+      redirect_to profile_path(user), notice: "Accesso effettuato con successo!"
+    elsif user && user.password_digest.blank?
+      flash.now[:alert] = "Questo account è stato creato tramite Google. Usa il login con Google per accedere."
       render :new
-
+    else
+      flash.now[:alert] = "Email o password non validi."
+      render :new
     end
   end
 
@@ -34,24 +36,19 @@ class SessionsController < ApplicationController
     user_info = request.env['omniauth.auth']
     email = user_info['info']['email']
     
-    # Trova o crea l'utente in base al ruolo
     user = Acquirente.find_or_create_by(email: email) do |u|
-      u.nome = user_info['info']['name']
-      # Aggiungi altre proprietà necessarie
-
-      Rails.logger.info("Auth Hash: #{request.env['omniauth.auth'].inspect}")
-  Rails.logger.info("Error: #{request.env['omniauth.error']}")
-  # Logica di autenticazione
-rescue StandardError => e
-  Rails.logger.error("Errore durante l'autenticazione: #{e.message}")
-  redirect_to root_path, alert: "Errore di autenticazione"
+      u.nome = user_info['info']['first_name']
+      u.cognome = user_info['info']['last_name']
+      u.password = SecureRandom.hex(10) # Password casuale per compatibilità con has_secure_password
+      u.id_acquirente = user_info['uid']
+      u.image_url = user_info['info']['image']
     end
   
     session[:user_id] = user.id
-    session[:role] = 'acquirente' # Definisci il ruolo
-    redirect_to profile_path(user), notice: 'Login effettuato con successo'
+    session[:role] = 'acquirente'
+    redirect_to profile_path(user), notice: 'Login effettuato con successo tramite Google!'
   rescue StandardError => e
-    redirect_to root_path, alert: "Errore: #{e.message}"
+    redirect_to root_path, alert: "Errore durante l'autenticazione: #{e.message}"
   end
 
 
