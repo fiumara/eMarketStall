@@ -10,4 +10,7 @@
     <% end %>
   </strong>
   <p><%= messaggio.contenuto %></p>
+  <small class="text-muted">
+  Inviato il: <%= messaggio.created_at.strftime("%d/%m/%Y %H:%M") %>
+</small>
 </div>
