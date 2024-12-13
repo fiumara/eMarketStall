@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.string "nome_utente"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_reset_token"
-    t.datetime "password_reset_sent_at"
     t.string "id_acquirente"
     t.string "image_url"
   end
@@ -35,8 +33,6 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.string "telefono"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_reset_token"
-    t.datetime "password_reset_sent_at"
   end
 
   create_table "categoria", force: :cascade do |t|
@@ -64,14 +60,6 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "nome_utente"
-    t.string "tipo_utente"
-    t.text "contenuto"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "messaggi", force: :cascade do |t|
     t.text "contenuto"
     t.integer "chat_room_id", null: false
@@ -84,14 +72,6 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.index ["chat_room_id"], name: "index_messaggi_on_chat_room_id"
     t.index ["destinatario_type", "destinatario_id"], name: "index_messaggi_on_destinatario"
     t.index ["mittente_type", "mittente_id"], name: "index_messaggi_on_mittente"
-  end
-
-  create_table "messaggios", force: :cascade do |t|
-    t.string "nome_utente"
-    t.string "tipo_utente"
-    t.text "contenuto"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "negozios", force: :cascade do |t|
@@ -134,11 +114,6 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.index ["categorium_id"], name: "index_promoziones_on_categorium_id"
     t.index ["negozio_id"], name: "index_promoziones_on_negozio_id"
     t.index ["prodotto_id"], name: "index_promoziones_on_prodotto_id"
-  end
-
-  create_table "promozionis", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "recensiones", force: :cascade do |t|

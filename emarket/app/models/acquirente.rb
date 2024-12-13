@@ -15,7 +15,8 @@ class Acquirente < ApplicationRecord
 
   # Validazioni
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }, if: -> { new_record? && password_digest.blank? }
+  validates :password, presence: true, length: { minimum: 6 }, unless: -> { id_acquirente.present? }
+
   validates :id_acquirente, uniqueness: true, allow_nil: true
 
   # Metodi di utilità
