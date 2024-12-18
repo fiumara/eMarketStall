@@ -13,6 +13,9 @@ class Acquirente < ApplicationRecord
   has_many :messaggi_inviati, as: :mittente, class_name: 'Messaggio'
   has_many :messaggi_ricevuti, as: :destinatario, class_name: 'Messaggio'
 
+  has_one :carrello, dependent: :destroy
+  after_create :create_carrello
+
   # Validazioni
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, unless: -> { id_acquirente.present? }
@@ -26,5 +29,9 @@ class Acquirente < ApplicationRecord
 
   def to_s
     nome_completo
+  end
+
+  def create_carrello
+    Carrello.create(acquirente: self)
   end
 end

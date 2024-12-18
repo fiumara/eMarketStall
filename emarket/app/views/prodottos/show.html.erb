@@ -41,42 +41,30 @@
                     <button class="reviews-button">Vedi tutte le recensioni</button>
                 </div>
             </div>
-            <div class="prodotto-options">
-                <label for="quantity">Quantità</label>
-                <select id="quantity" name="quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <label for="size">Taglia/colore</label>
-                <select id="size" name="size">
-                    <option value="s">S</option>
-                    <option value="m">M</option>
-                    <option value="l">L</option>
-                    <option value="xl">XL</option>
-                </select>
-                <label for="customization">Personalizzazione</label>
-                <textarea id="customization" name="customization"></textarea>
-                <button class="add-to-cart-button">Aggiungi al carrello</button>
-            </div>
+
+            <% if logged_in? && current_user.is_a?(Acquirente) %>
+              <div class="prodotto-options">
+                <%= form_with url: carrello_items_path, method: :post do %>
+                  <%= hidden_field_tag :prodotto_id, @prodotto.id %>
+                  <div>
+                    <%= label_tag :quantity, "Quantità:" %>
+                    <%= number_field_tag :quantity, 1, min: 1 %>
+                  </div>
+                  <%= submit_tag "Aggiungi al carrello", class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            <% end %>
+            
             <!-- Mostra il pulsante a forma di cuore solo agli utenti che non sono amministratori -->
-      <% if unauthenticated_user? || session[:role] == 'acquirente' %>
-        <div class="wishlist-button">
-          <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
-            <%= hidden_field_tag :redirect_back, request.original_url %>
-            <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
-          <% end %>
+            <% if unauthenticated_user? || session[:role] == 'acquirente' %>
+              <div class="wishlist-button">
+                <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
+                  <%= hidden_field_tag :redirect_back, request.original_url %>
+                  <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
+                <% end %>
+              </div>
+            <% end %>
         </div>
-      <% end %>
-      
-    </div>
-  </main>
+    </main>
 </body>
 </html>
-
-
-
-
-

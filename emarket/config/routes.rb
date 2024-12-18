@@ -81,6 +81,8 @@ Rails.application.routes.draw do
     post 'messages', to: 'chat_rooms#create_message', as: :messages
   end
   
+  resource :carrello, only: :show
+  resources :carrello_items, only: [:create, :destroy]
 
   # Monta Action Cable
   mount ActionCable.server => '/cable'

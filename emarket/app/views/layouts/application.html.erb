@@ -100,21 +100,22 @@
   </header>
   
   <div id="rightSideMenu" class="right-side-menu">
-    <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
-    <% if logged_in? %>
-      <% if current_user.is_a?(Acquirente) %>
-        <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
-        <%= link_to 'FAQs', faqs_path %>
-        
-      <% elsif current_user.is_a?(Amministratore) %>
-        <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
-      <% end %>
-        <%= link_to 'Logout', logout_path, method: :delete %>
-    <% else %>
-        <%= link_to 'Accedi', login_path %>
-        <%= link_to 'FAQs', faqs_path %>
+  <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
+  <% if logged_in? %>
+    <% if current_user.is_a?(Acquirente) %>
+      <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
+      <%= link_to 'Carrello', carrello_path %> <!-- Link al carrello -->
+      <%= link_to 'FAQs', faqs_path %>
+    <% elsif current_user.is_a?(Amministratore) %>
+      <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
     <% end %>
-  </div>
+    <%= link_to 'Logout', logout_path, method: :delete %>
+  <% else %>
+    <%= link_to 'Accedi', login_path %>
+    <%= link_to 'FAQs', faqs_path %>
+  <% end %>
+</div>
+
 
   <main class="container mt-4">
     <%= yield %>

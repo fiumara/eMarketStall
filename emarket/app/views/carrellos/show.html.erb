@@ -1,0 +1,32 @@
+<h1>Il tuo carrello</h1>
+
+<% if @carrello.carrello_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Prodotto</th>
+        <th>Quantità</th>
+        <th>Prezzo</th>
+        <th>Totale</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @carrello.carrello_items.each do |item| %>
+        <tr>
+          <td><%= item.prodotto.nome_prodotto %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.prodotto.prezzo) %></td>
+          <td><%= number_to_currency(item.quantity * item.prodotto.prezzo) %></td>
+          <td>
+            <%= button_to "Rimuovi", carrello_item_path(item), method: :delete, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p><strong>Totale carrello:</strong> <%= number_to_currency(@carrello.carrello_items.sum { |item| item.quantity * item.prodotto.prezzo }) %></p>
+<% else %>
+  <p>Il tuo carrello è vuoto.</p>
+<% end %>

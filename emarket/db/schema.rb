@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_09_160005) do
+ActiveRecord::Schema.define(version: 2024_12_16_170411) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -33,6 +33,23 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.string "telefono"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carrello_items", force: :cascade do |t|
+    t.integer "carrello_id", null: false
+    t.integer "prodotto_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["carrello_id"], name: "index_carrello_items_on_carrello_id"
+    t.index ["prodotto_id"], name: "index_carrello_items_on_prodotto_id"
+  end
+
+  create_table "carrellos", force: :cascade do |t|
+    t.integer "acquirente_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_carrellos_on_acquirente_id"
   end
 
   create_table "categoria", force: :cascade do |t|
@@ -166,6 +183,9 @@ ActiveRecord::Schema.define(version: 2024_12_09_160005) do
     t.index ["prodotto_id"], name: "index_wishlist_items_on_prodotto_id"
   end
 
+  add_foreign_key "carrello_items", "carrellos"
+  add_foreign_key "carrello_items", "prodottos"
+  add_foreign_key "carrellos", "acquirentes"
   add_foreign_key "messaggi", "chat_rooms"
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "prodottos", "categoria"
