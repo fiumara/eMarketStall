@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2025_02_26_192438) do
   create_table "carrello_items", force: :cascade do |t|
     t.integer "carrello_id", null: false
     t.integer "prodotto_id", null: false
+    t.integer "ordine_id"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "ordine_id"
     t.index ["carrello_id"], name: "index_carrello_items_on_carrello_id"
     t.index ["ordine_id"], name: "index_carrello_items_on_ordine_id"
     t.index ["prodotto_id"], name: "index_carrello_items_on_prodotto_id"
