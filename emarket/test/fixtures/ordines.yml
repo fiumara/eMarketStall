@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  acquirente: one
+  totale: 9.99
+  stato: MyString
+
+two:
+  acquirente: two
+  totale: 9.99
+  stato: MyString

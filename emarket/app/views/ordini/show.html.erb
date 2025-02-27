@@ -1,0 +1,28 @@
+<h2>Dettaglio Ordine: <%= @ordine.codice_ordine %></h2>
+
+<p><strong>Data:</strong> <%= @ordine.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong>Totale:</strong> €<%= @ordine.totale %></p>
+<p><strong>Stato:</strong> <%= @ordine.stato.capitalize %></p>
+<p><strong>Indirizzo:</strong> <%= @ordine.indirizzo %></p>
+
+<h3>Prodotti nell'ordine:</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Quantità</th>
+      <th>Prezzo</th>
+      <th>Totale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ordine.carrello_items.each do |item| %>
+      <tr>
+        <td><%= item.prodotto.nome_prodotto %></td>
+        <td><%= item.quantity %></td>
+        <td>€<%= item.prodotto.prezzo %></td>
+        <td>€<%= item.prodotto.prezzo * item.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

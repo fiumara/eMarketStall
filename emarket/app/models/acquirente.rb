@@ -16,6 +16,8 @@ class Acquirente < ApplicationRecord
   has_one :carrello, dependent: :destroy
   after_create :create_carrello
 
+  has_many :ordini, class_name: "Ordine", dependent: :destroy
+
   # Validazioni
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, unless: -> { id_acquirente.present? }

@@ -30,3 +30,6 @@
 <% else %>
   <p>Il tuo carrello è vuoto.</p>
 <% end %>
+
+<%= button_to "Procedi al pagamento", ordini_path, method: :post, class: "btn btn-success" %>
+

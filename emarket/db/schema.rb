@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_16_170411) do
+ActiveRecord::Schema.define(version: 2025_02_26_192438) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -41,7 +41,9 @@ ActiveRecord::Schema.define(version: 2024_12_16_170411) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "ordine_id"
     t.index ["carrello_id"], name: "index_carrello_items_on_carrello_id"
+    t.index ["ordine_id"], name: "index_carrello_items_on_ordine_id"
     t.index ["prodotto_id"], name: "index_carrello_items_on_prodotto_id"
   end
 
@@ -101,6 +103,18 @@ ActiveRecord::Schema.define(version: 2024_12_16_170411) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["acquirente_id"], name: "index_negozios_on_acquirente_id"
+  end
+
+  create_table "ordini", force: :cascade do |t|
+    t.integer "acquirente_id", null: false
+    t.string "codice_ordine", null: false
+    t.decimal "totale"
+    t.string "stato"
+    t.string "indirizzo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_ordini_on_acquirente_id"
+    t.index ["codice_ordine"], name: "index_ordini_on_codice_ordine", unique: true
   end
 
   create_table "prodottos", force: :cascade do |t|
@@ -184,10 +198,12 @@ ActiveRecord::Schema.define(version: 2024_12_16_170411) do
   end
 
   add_foreign_key "carrello_items", "carrellos"
+  add_foreign_key "carrello_items", "ordini"
   add_foreign_key "carrello_items", "prodottos"
   add_foreign_key "carrellos", "acquirentes"
   add_foreign_key "messaggi", "chat_rooms"
   add_foreign_key "negozios", "acquirentes"
+  add_foreign_key "ordini", "acquirentes"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
   add_foreign_key "promoziones", "categoria"

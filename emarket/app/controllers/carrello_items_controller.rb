@@ -13,7 +13,7 @@ class CarrelloItemsController < ApplicationController
           carrello_item.update(quantity: carrello_item.quantity + params[:quantity].to_i)
         else
           # Aggiungi un nuovo elemento al carrello
-          carrello.carrello_items.create(prodotto: prodotto, quantity: params[:quantity])
+          carrello.carrello_items.create(prodotto: prodotto, quantity: params[:quantity], ordine_id: nil)
         end
     
         redirect_to carrello_path, notice: "#{prodotto.nome_prodotto} aggiunto al carrello!"

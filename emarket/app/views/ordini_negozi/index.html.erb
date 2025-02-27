@@ -1,0 +1,26 @@
+<h2>Ordini ricevuti</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Codice Ordine</th>
+      <th>Data</th>
+      <th>Totale</th>
+      <th>Stato</th>
+      <th>Azioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ordini.each do |ordine| %>
+      <tr>
+        <td><%= ordine.codice_ordine %></td>
+        <td><%= ordine.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td>€<%= ordine.totale %></td>
+        <td><%= ordine.stato.capitalize %></td>
+        <td>
+          <%= link_to "Visualizza", negozio_ordine_path(@negozio, ordine), class: "btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

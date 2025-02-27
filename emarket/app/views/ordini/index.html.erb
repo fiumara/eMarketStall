@@ -1,0 +1,32 @@
+<h1>I tuoi ordini</h1>
+
+<% if @ordini.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Codice Ordine</th>
+        <th>Data</th>
+        <th>Totale</th>
+        <th>Stato</th>
+        <th>Indirizzo</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ordini.each do |ordine| %>
+        <tr>
+          <td><%= ordine.codice_ordine %></td>
+          <td><%= ordine.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+          <td>€<%= ordine.totale %></td>
+          <td><%= ordine.stato.capitalize %></td>
+          <td><%= ordine.indirizzo %></td>
+          <td>
+            <%= link_to "Dettagli", ordine_path(ordine), class: "btn btn-info" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Non hai ancora effettuato ordini.</p>
+<% end %>

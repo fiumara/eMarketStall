@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'ordini_negozi/index'
+  get 'ordini_negozi/show'
+  get 'ordini_negozi/update'
   get 'gestione_feedback/show'
   #get 'sessions/new'
   root 'home#index'
@@ -83,6 +86,24 @@ Rails.application.routes.draw do
   
   resource :carrello, only: :show
   resources :carrello_items, only: [:create, :destroy]
+
+
+  resources :ordini, only: [:new, :create, :show, :index] do
+    collection do
+      get 'successo', to: 'ordini#successo'
+      get 'errore', to: 'ordini#errore'
+    end
+  end
+
+  Rails.application.routes.draw do
+    resources :negozios do
+      resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
+    end
+  end
+  
+  
+
+  
 
   # Monta Action Cable
   mount ActionCable.server => '/cable'
