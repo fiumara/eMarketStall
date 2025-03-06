@@ -7,7 +7,8 @@ class Ordine < ApplicationRecord
 
   has_many :prodottos, through: :carrello_items
   has_many :negozios, -> { distinct }, through: :prodottos
-
+   
+  has_many :return_requests, dependent: :destroy  # Associazione con i resi
   
 
   enum stato: { in_attesa: 'in_attesa', pagato: 'pagato', annullato: 'annullato' }

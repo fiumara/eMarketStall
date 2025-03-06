@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_26_192438) do
+ActiveRecord::Schema.define(version: 2025_02_27_151941) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2025_02_26_192438) do
     t.integer "categorium_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantita_disponibile"
     t.index ["categorium_id"], name: "index_prodottos_on_categorium_id"
     t.index ["negozio_id"], name: "index_prodottos_on_negozio_id"
   end
@@ -160,6 +161,27 @@ ActiveRecord::Schema.define(version: 2025_02_26_192438) do
     t.text "note_acquirente"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "return_items", force: :cascade do |t|
+    t.integer "return_request_id", null: false
+    t.integer "prodotto_id", null: false
+    t.integer "quantita"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prodotto_id"], name: "index_return_items_on_prodotto_id"
+    t.index ["return_request_id"], name: "index_return_items_on_return_request_id"
+  end
+
+  create_table "return_requests", force: :cascade do |t|
+    t.integer "ordine_id", null: false
+    t.integer "acquirente_id", null: false
+    t.string "motivo"
+    t.integer "stato", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_return_requests_on_acquirente_id"
+    t.index ["ordine_id"], name: "index_return_requests_on_ordine_id"
   end
 
   create_table "statisticas", force: :cascade do |t|
@@ -209,6 +231,10 @@ ActiveRecord::Schema.define(version: 2025_02_26_192438) do
   add_foreign_key "promoziones", "categoria"
   add_foreign_key "promoziones", "negozios"
   add_foreign_key "promoziones", "prodottos"
+  add_foreign_key "return_items", "prodottos"
+  add_foreign_key "return_items", "return_requests"
+  add_foreign_key "return_requests", "acquirentes"
+  add_foreign_key "return_requests", "ordini"
   add_foreign_key "statisticas", "prodottos"
   add_foreign_key "variantis", "prodottos"
   add_foreign_key "wishlist_items", "acquirentes"

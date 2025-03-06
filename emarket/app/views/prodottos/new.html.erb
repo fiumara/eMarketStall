@@ -33,6 +33,11 @@
     <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, prompt: "Seleziona una Categoria" %>
   </div>
 
+  <div class="field">
+  <%= form.label :quantita_disponibile, "Quantità Disponibile" %>
+  <%= form.number_field :quantita_disponibile, min: 0 %>
+</div>
+
   <div class="actions">
     <%= form.submit "Crea Prodotto" %>
   </div>

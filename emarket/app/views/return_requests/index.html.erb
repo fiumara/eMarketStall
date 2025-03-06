@@ -1,0 +1,41 @@
+<h1>I Miei Resi</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID Reso</th>
+      <th>Ordine</th>
+      <th>Motivo</th>
+      <th>Data Richiesta</th>
+      <th>Stato</th>
+      <th>Azioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @return_requests.each do |return_request| %>
+      <tr>
+        <td><%= return_request.id %></td>
+        <td><%= link_to "Ordine ##{return_request.ordine.id}", ordine_path(return_request.ordine) %></td>
+        <td><%= return_request.motivo %></td>
+        <td><%= return_request.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td>
+          <%# Mostra lo stato del reso con un colore diverso %>
+          <% case return_request.stato %>
+            <% when "in_attesa" %>
+              <span class="badge bg-warning">In Attesa</span>
+            <% when "approvato" %>
+              <span class="badge bg-success">Approvato</span>
+            <% when "rifiutato" %>
+              <span class="badge bg-danger">Rifiutato</span>
+            <% else %>
+              <span class="badge bg-secondary"><%= return_request.stato.capitalize %></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Dettagli", return_request_path(return_request), class: "btn btn-info btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

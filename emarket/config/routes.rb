@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'return_requests/index'
+  get 'return_requests/new'
+  get 'return_requests/create'
+  get 'return_requests/show'
+  get 'return_requests/update'
   get 'ordini_negozi/index'
   get 'ordini_negozi/show'
   get 'ordini_negozi/update'
@@ -96,10 +101,22 @@ Rails.application.routes.draw do
   end
 
   Rails.application.routes.draw do
+  get 'return_requests/index'
+  get 'return_requests/new'
+  get 'return_requests/create'
+  get 'return_requests/show'
+  get 'return_requests/update'
     resources :negozios do
       resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
     end
   end
+
+  resources :ordini do
+    resources :return_requests, only: [:new, :create]
+  end
+  
+  resources :return_requests, only: [:index, :show, :update]
+  
   
   
 

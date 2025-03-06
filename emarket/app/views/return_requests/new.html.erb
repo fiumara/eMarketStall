@@ -1,0 +1,19 @@
+<h1>Richiesta di Reso</h1>
+
+<%= form_with model: [@ordine, @return_request], local: true do |f| %>
+  <div>
+    <%= f.label :motivo, "Motivo del Reso" %>
+    <%= f.text_field :motivo %>
+  </div>
+
+  <h2>Seleziona i prodotti da restituire</h2>
+  <% @ordine.prodottos.each do |prodotto| %>
+    <div>
+      <%= check_box_tag "return_request[return_items_attributes][][prodotto_id]", prodotto.id %>
+      <%= label_tag "return_request[return_items_attributes][][prodotto_id]", prodotto.nome_prodotto %>
+      <%= number_field_tag "return_request[return_items_attributes][][quantita]", 1, min: 1, max: [prodotto.quantita_disponibile, 1].max %>
+    </div>
+  <% end %>
+
+  <%= f.submit "Invia richiesta di reso" %>
+<% end %>

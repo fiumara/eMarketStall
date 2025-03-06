@@ -12,9 +12,8 @@ class Prodotto < ApplicationRecord
     accepts_nested_attributes_for :statistica
 
 
-    has_one :statistica, dependent: :destroy
-    accepts_nested_attributes_for :statistica
-
+    validates :quantita_disponibile, numericality: { greater_than_or_equal_to: 0 }
+    
     def self.search(term)
         if term
           where('LOWER(nome_prodotto) LIKE ? OR LOWER(descrizione) LIKE ?', "%#{term.downcase}%", "%#{term.downcase}%")
@@ -32,5 +31,10 @@ class Prodotto < ApplicationRecord
                            'singolo_prodotto', self.id,
                            'categoria', self.categorium_id,
                            'intero_sito')
+      end
+
+
+      def quantita_disponibile
+        self[:quantita_disponibile] || 0 # Ritorna 0 se il valore è nullo
       end
 end
