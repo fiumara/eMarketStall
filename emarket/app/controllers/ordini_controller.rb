@@ -31,29 +31,46 @@ class OrdiniController < ApplicationController
         return
       end
     
-      totale = carrello.carrello_items.sum { |item| item.prodotto.prezzo * item.quantity }
+      # 📌 Raggruppiamo i carrello_items per negozio
+      ordini_per_negozio = carrello.carrello_items.group_by { |item| item.prodotto.negozio }
     
-      ordine = current_user.ordini.create!(
-        totale: totale,
-        stato: 'in_attesa',
-        indirizzo: params[:ordine][:indirizzo]
-      )
+      ordini = [] # Array per salvare tutti gli ordini creati
+      stripe_line_items = [] # Array per i prodotti da inviare a Stripe
     
-      # 🔥 **IMPORTANTE**: Associa i carrello_items all'ordine
-      carrello.carrello_items.update_all(ordine_id: ordine.id)
+      ActiveRecord::Base.transaction do
+        ordini_per_negozio.each do |negozio, items|
+          totale = items.sum { |item| item.prodotto.prezzo * item.quantity }
     
+          ordine = current_user.ordini.create!(
+            totale: totale,
+            stato: 'in_attesa',
+            indirizzo: params[:ordine][:indirizzo],
+            negozio: negozio # 📌 Associa il negozio corretto all'ordine
+          )
+    
+          # 📌 Associa i prodotti all'ordine
+          items.each { |item| item.update!(ordine: ordine) }     # items.each { |item| item.update!(ordine_id: ordine.id) }
+    
+          ordini << ordine
+    
+          # 📌 Aggiungi i prodotti alla sessione Stripe
+          stripe_line_items += items.map do |item|
+            {
+              price_data: {
+                currency: 'eur',
+                product_data: { name: item.prodotto.nome_prodotto },
+                unit_amount: (item.prodotto.prezzo * 100).to_i
+              },
+              quantity: item.quantity
+            }
+          end
+        end
+      end
+    
+      # 📌 Creiamo la sessione di pagamento per tutti i prodotti
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
-        line_items: carrello.carrello_items.map do |item|
-          {
-            price_data: {
-              currency: 'eur',
-              product_data: { name: item.prodotto.nome_prodotto },
-              unit_amount: (item.prodotto.prezzo * 100).to_i
-            },
-            quantity: item.quantity
-          }
-        end,
+        line_items: stripe_line_items,
         mode: 'payment',
         success_url: successo_ordini_url,
         cancel_url: errore_ordini_url
@@ -65,10 +82,9 @@ class OrdiniController < ApplicationController
     
   
     def successo
-      # Trova l'ordine in attesa e aggiorna lo stato
-      ordine = current_user.ordini.in_attesa.last
-      ordine.update(stato: 'pagato') if ordine
-  
+      # Trova tutti gli ordini in attesa dell'utente e li imposta come 'pagato'
+      current_user.ordini.in_attesa.update_all(stato: 'pagato')
+    
       redirect_to root_path, notice: "Pagamento completato con successo!"
     end
   

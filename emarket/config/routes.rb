@@ -115,9 +115,12 @@ Rails.application.routes.draw do
     resources :return_requests, only: [:new, :create]
   end
   
-  resources :return_requests, only: [:index, :show, :update]
   
   
+  resources :return_requests, only: [:index, :show, :new, :create, :update]
+
+  resources :negozio_return_requests, only: [:index, :show, :update]
+
   
 
   

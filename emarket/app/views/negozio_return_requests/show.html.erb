@@ -1,0 +1,14 @@
+<h1>Dettaglio Reso #<%= @return_request.id %></h1>
+
+<p><strong>Ordine:</strong> <%= link_to "Ordine ##{@return_request.ordine.id}", ordine_path(@return_request.ordine) %></p>
+<p><strong>Cliente:</strong> <%= @return_request.acquirente.email %></p>
+<p><strong>Motivo:</strong> <%= @return_request.motivo %></p>
+<p><strong>Stato:</strong> <%= @return_request.stato %></p>
+
+<%= form_with(model: @return_request, url: negozio_return_request_path(@return_request), method: :patch) do |f| %>
+  <div class="form-group">
+    <%= f.label :stato, "Aggiorna Stato" %>
+    <%= f.select :stato, ["In attesa", "Approvato", "Rifiutato"], {}, class: "form-control" %>
+  </div>
+  <%= f.submit "Aggiorna Stato", class: "btn btn-primary mt-2" %>
+<% end %>

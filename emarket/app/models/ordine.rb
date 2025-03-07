@@ -2,11 +2,12 @@ class Ordine < ApplicationRecord
   belongs_to :acquirente
 
   before_create :assegna_codice_ordine
+  belongs_to :negozio 
 
   has_many :carrello_items, dependent: :destroy
 
   has_many :prodottos, through: :carrello_items
-  has_many :negozios, -> { distinct }, through: :prodottos
+  
    
   has_many :return_requests, dependent: :destroy  # Associazione con i resi
   

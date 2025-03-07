@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_27_151941) do
+ActiveRecord::Schema.define(version: 2025_03_07_143249) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -113,8 +113,10 @@ ActiveRecord::Schema.define(version: 2025_02_27_151941) do
     t.string "indirizzo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "negozio_id"
     t.index ["acquirente_id"], name: "index_ordini_on_acquirente_id"
     t.index ["codice_ordine"], name: "index_ordini_on_codice_ordine", unique: true
+    t.index ["negozio_id"], name: "index_ordini_on_negozio_id"
   end
 
   create_table "prodottos", force: :cascade do |t|
@@ -226,6 +228,7 @@ ActiveRecord::Schema.define(version: 2025_02_27_151941) do
   add_foreign_key "messaggi", "chat_rooms"
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "ordini", "acquirentes"
+  add_foreign_key "ordini", "negozios"
   add_foreign_key "prodottos", "categoria"
   add_foreign_key "prodottos", "negozios"
   add_foreign_key "promoziones", "categoria"

@@ -14,7 +14,7 @@
     <% when "rifiutato" %>
       <span class="badge bg-danger">Rifiutato</span>
     <% else %>
-      <span class="badge bg-secondary"><%= @return_request.stato.capitalize %></span>
+      <span class="badge bg-secondary"><%= @return_request.stato.present? ? @return_request.stato.capitalize : "Non Specificato" %></span>
   <% end %>
 </p>
 

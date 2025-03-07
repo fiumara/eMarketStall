@@ -1,0 +1,27 @@
+<h1>Gestione Resi</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ordine</th>
+      <th>Cliente</th>
+      <th>Stato</th>
+      <th>Azioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @return_requests.each do |return_request| %>
+      <tr>
+        <td><%= return_request.id %></td>
+        <td><%= link_to "Ordine ##{return_request.ordine.id}", ordine_path(return_request.ordine) %></td>
+        <td><%= return_request.acquirente.email %></td>
+        <td><%= return_request.stato %></td>
+        <td>
+          <%= link_to "Visualizza", negozio_return_request_path(return_request), class: "btn btn-info" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
