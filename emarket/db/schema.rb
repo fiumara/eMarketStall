@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 2025_03_07_143249) do
   create_table "return_items", force: :cascade do |t|
     t.integer "return_request_id", null: false
     t.integer "prodotto_id", null: false
-    t.integer "quantita"
+    t.integer "quantita", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["prodotto_id"], name: "index_return_items_on_prodotto_id"

@@ -9,9 +9,10 @@
   <h2>Seleziona i prodotti da restituire</h2>
   <% @ordine.prodottos.each do |prodotto| %>
     <div>
-      <%= check_box_tag "return_request[return_items_attributes][][prodotto_id]", prodotto.id %>
+      <%= check_box_tag "return_request[return_items_attributes][][prodotto_id]", prodotto.id, false, class: "prodotto-checkbox" %>
       <%= label_tag "return_request[return_items_attributes][][prodotto_id]", prodotto.nome_prodotto %>
-      <%= number_field_tag "return_request[return_items_attributes][][quantita]", 1, min: 1, max: [prodotto.quantita_disponibile, 1].max %>
+      <% quantita_acquistata = @ordine.carrello_items.find_by(prodotto: prodotto)&.quantity || 1 %>
+      <%= number_field_tag "return_request[return_items_attributes][][quantita]", 1, min: 1, max: quantita_acquistata, class: "quantita-input" %>
     </div>
   <% end %>
 

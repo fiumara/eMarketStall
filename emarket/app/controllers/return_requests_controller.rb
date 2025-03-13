@@ -15,13 +15,22 @@ class ReturnRequestsController < ApplicationController
     @ordine = current_user.ordini.find(params[:ordine_id])
     @return_request = @ordine.return_requests.build(return_request_params)
     @return_request.acquirente = current_user
+  
+    # Rimuoviamo gli elementi con quantità 0 o prodotti non selezionati
+    @return_request.return_items.each do |item|
+      unless params[:return_request][:return_items_attributes].any? { |ri| ri["prodotto_id"].to_i == item.prodotto_id && ri["quantita"].to_i > 0 }
 
+        item.mark_for_destruction
+      end
+    end
+  
     if @return_request.save
       redirect_to return_requests_path, notice: "Richiesta di reso inviata con successo."
     else
       render :new
     end
   end
+  
 
   def show
   end
@@ -33,7 +42,7 @@ class ReturnRequestsController < ApplicationController
       render :show
     end
   end
-
+  
   private
 
   def set_return_request

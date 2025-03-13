@@ -119,9 +119,12 @@ Rails.application.routes.draw do
   
   resources :return_requests, only: [:index, :show, :new, :create, :update]
 
-  resources :negozio_return_requests, only: [:index, :show, :update]
-
-  
+  resources :negozio_return_requests, only: [:show, :index, :create] do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
 
   
 

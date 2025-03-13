@@ -1,0 +1,33 @@
+<h1>Dettaglio Reso</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Reso #<%= @return_request.id %></h5>
+    <p><strong>Data Richiesta:</strong> <%= @return_request.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+    <p><strong>Cliente:</strong> <%= @return_request.acquirente.nome_utente %></p>
+    <p><strong>Ordine:</strong> <%= link_to "Ordine ##{@return_request.ordine.id}", ordine_path(@return_request.ordine) %></p>
+    <p><strong>Motivo del Reso:</strong> <%= @return_request.motivo %></p>
+    <p><strong>Stato:</strong> 
+      <% case @return_request.stato %>
+        <% when "in_attesa" %>
+          <span class="badge bg-warning">In Attesa</span>
+        <% when "approvato" %>
+          <span class="badge bg-success">Approvato</span>
+        <% when "rifiutato" %>
+          <span class="badge bg-danger">Rifiutato</span>
+        <% else %>
+          <span class="badge bg-secondary"><%= @return_request.stato.capitalize %></span>
+      <% end %>
+    </p>
+
+    <%= form_with model: @return_request, url: negozio_return_request_path(@return_request), method: :patch, local: true do |f| %>
+      <div class="form-group">
+        <label for="stato">Aggiorna Stato:</label>
+        <%= f.select :stato, ReturnRequest.stati.keys.map { |s| [s.humanize, s] }, {}, class: "form-control" %>
+      </div>
+      <%= f.submit "Aggiorna Stato", class: "btn btn-primary mt-3" %>
+    <% end %>
+
+    <%= link_to 'Torna alla Gestione Resi', negozio_return_requests_path, class: "btn btn-secondary mt-3" %>
+  </div>
+</div>
