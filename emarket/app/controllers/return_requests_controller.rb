@@ -8,21 +8,26 @@ class ReturnRequestsController < ApplicationController
 
   def new
     @ordine = current_user.ordini.find(params[:ordine_id])
+  
+    unless @ordine.completato?
+      redirect_to ordine_path(@ordine), alert: "Puoi richiedere un reso solo per ordini completati."
+      return
+    end
+  
     @return_request = @ordine.return_requests.build
   end
+  
 
   def create
     @ordine = current_user.ordini.find(params[:ordine_id])
+  
+    unless @ordine.completato?
+      redirect_to ordine_path(@ordine), alert: "Puoi richiedere un reso solo per ordini completati."
+      return
+    end
+  
     @return_request = @ordine.return_requests.build(return_request_params)
     @return_request.acquirente = current_user
-  
-    # Rimuoviamo gli elementi con quantità 0 o prodotti non selezionati
-    @return_request.return_items.each do |item|
-      unless params[:return_request][:return_items_attributes].any? { |ri| ri["prodotto_id"].to_i == item.prodotto_id && ri["quantita"].to_i > 0 }
-
-        item.mark_for_destruction
-      end
-    end
   
     if @return_request.save
       redirect_to return_requests_path, notice: "Richiesta di reso inviata con successo."
@@ -30,6 +35,7 @@ class ReturnRequestsController < ApplicationController
       render :new
     end
   end
+  
   
 
   def show

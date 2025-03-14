@@ -32,7 +32,7 @@
 <h3>Aggiorna Stato Ordine</h3>
 <%= form_with url: negozio_ordine_path(@negozio, @ordine), method: :patch do |f| %>
   <%= f.label :stato, "Stato Ordine" %>
-  <%= f.select :stato, ["in attesa", "in preparazione", "spedito", "completato"], {}, class: "form-control" %>
+  <%= f.select :stato, Ordine.statos.keys.map { |s| [s.humanize, s] }, {}, class: "form-control" %>
   <%= f.submit "Aggiorna Stato", class: "btn btn-success mt-2" %>
 <% end %>
 

@@ -28,6 +28,6 @@
   </tbody>
 </table> 
 
-<% if @ordine.stato == 'pagato' %>
+<% if @ordine.stato == 'completato' %>
   <%= link_to 'Richiedi Reso',  return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger' %>
 <% end %>

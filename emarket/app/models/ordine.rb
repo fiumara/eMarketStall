@@ -12,7 +12,14 @@ class Ordine < ApplicationRecord
   has_many :return_requests, dependent: :destroy  # Associazione con i resi
   
 
-  enum stato: { in_attesa: 'in_attesa', pagato: 'pagato', annullato: 'annullato' }
+  enum stato: { 
+    in_attesa: 'in_attesa', 
+    pagato: 'pagato', 
+    annullato: 'annullato',
+    in_preparazione: 'in_preparazione',
+    spedito: 'spedito',
+    completato: 'completato'
+  }
 
   def assegna_codice_ordine
     self.codice_ordine = loop do
