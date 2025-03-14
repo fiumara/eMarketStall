@@ -1,4 +1,5 @@
 class Prodotto < ApplicationRecord
+    has_many_attached :immagini 
     belongs_to :negozio
     belongs_to :categorium
     

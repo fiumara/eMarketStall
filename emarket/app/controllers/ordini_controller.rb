@@ -40,20 +40,20 @@ class OrdiniController < ApplicationController
       ActiveRecord::Base.transaction do
         ordini_per_negozio.each do |negozio, items|
           totale = items.sum { |item| item.prodotto.prezzo * item.quantity }
-    
+      
           ordine = current_user.ordini.create!(
             totale: totale,
             stato: 'in_attesa',
             indirizzo: params[:ordine][:indirizzo],
-            negozio: negozio # 📌 Associa il negozio corretto all'ordine
+            negozio: negozio
           )
-    
+      
           # 📌 Associa i prodotti all'ordine
-          items.each { |item| item.update!(ordine: ordine) }     # items.each { |item| item.update!(ordine_id: ordine.id) }
-    
+          items.each { |item| item.update!(ordine_id: ordine.id) }
+   
+      
           ordini << ordine
-    
-          # 📌 Aggiungi i prodotti alla sessione Stripe
+      
           stripe_line_items += items.map do |item|
             {
               price_data: {
@@ -65,7 +65,13 @@ class OrdiniController < ApplicationController
             }
           end
         end
+      
+        # 📌 Rimuove i carrello_items che sono stati già assegnati agli ordini
+        carrello.carrello_items.update_all(carrello_id: nil)
+
+
       end
+      
     
       # 📌 Creiamo la sessione di pagamento per tutti i prodotti
       session = Stripe::Checkout::Session.create(

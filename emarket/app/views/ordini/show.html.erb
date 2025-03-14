@@ -19,6 +19,7 @@
     <% @ordine.carrello_items.each do |item| %>
       <tr>
         <td><%= item.prodotto.nome_prodotto %></td>
+       
         <td><%= item.quantity %></td>
         <td>€<%= item.prodotto.prezzo %></td>
         <td>€<%= item.prodotto.prezzo * item.quantity %></td>

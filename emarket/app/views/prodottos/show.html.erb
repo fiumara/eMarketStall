@@ -12,6 +12,21 @@
     <main>
         <h1><%= @prodotto.nome_prodotto %></h1>
         <div class="prodotto-container">
+        <% if @prodotto.immagini.attached? %>
+  <div class="image-gallery">
+    <% @prodotto.immagini.each do |img| %>
+      <%= image_tag url_for(img), width: 500, height: 500 %>
+    <% end %>
+  </div>
+<% else %>
+  <p>Nessuna immagine disponibile</p>
+<% end %>
+
+
+
+      
+
+
             <button class="arrow left">‹</button>
             <button class="arrow right">›</button>
             <div class="image-pagination">.....</div>
