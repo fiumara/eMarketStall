@@ -36,8 +36,15 @@
                 <h2>Descrizione</h2>
                 <p><%= @prodotto.descrizione %></p>
                 <%= link_to 'Visualizza Negozio', visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
-                <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
-
+                <p>Prezzo:
+                <% if @promozione %>
+                  <span style="text-decoration: line-through;"><%= number_to_currency(@prodotto.prezzo) %></span>
+                  <strong><%= number_to_currency(@prezzo_scontato) %></strong>
+                <% else %>
+                  <%= number_to_currency(@prodotto.prezzo) %>
+                <% end %>
+              </p>
+              
                 <% if @promozione %>
                   <div class="promozione-attiva">
                   <h2>Promozione Attiva</h2>

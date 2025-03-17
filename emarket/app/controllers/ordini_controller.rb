@@ -31,47 +31,48 @@ class OrdiniController < ApplicationController
         return
       end
     
-      # 📌 Raggruppiamo i carrello_items per negozio
       ordini_per_negozio = carrello.carrello_items.group_by { |item| item.prodotto.negozio }
     
-      ordini = [] # Array per salvare tutti gli ordini creati
-      stripe_line_items = [] # Array per i prodotti da inviare a Stripe
+      ordini = []
+      stripe_line_items = []
     
       ActiveRecord::Base.transaction do
         ordini_per_negozio.each do |negozio, items|
-          totale = items.sum { |item| item.prodotto.prezzo * item.quantity }
-      
+          totale = items.sum { |item| item.prodotto.prezzo_scontato * item.quantity }
+    
           ordine = current_user.ordini.create!(
             totale: totale,
             stato: 'in_attesa',
             indirizzo: params[:ordine][:indirizzo],
             negozio: negozio
           )
-      
-          # 📌 Associa i prodotti all'ordine
-          items.each { |item| item.update!(ordine_id: ordine.id) }
-   
-      
+    
+          # 📌 Creiamo OrdineItems per ogni CarrelloItem
+          items.each do |item|
+            ordine.ordine_items.create!(
+              prodotto: item.prodotto,
+              quantity: item.quantity,
+              prezzo: item.prodotto.prezzo_scontato # Salviamo il prezzo scontato
+            )
+          end
+    
           ordini << ordine
-      
+    
           stripe_line_items += items.map do |item|
             {
               price_data: {
                 currency: 'eur',
                 product_data: { name: item.prodotto.nome_prodotto },
-                unit_amount: (item.prodotto.prezzo * 100).to_i
+                unit_amount: (item.prodotto.prezzo_scontato * 100).to_i
               },
               quantity: item.quantity
             }
           end
         end
-      
-        # 📌 Rimuove i carrello_items che sono stati già assegnati agli ordini
-        carrello.carrello_items.update_all(carrello_id: nil)
-
-
+    
+        # 📌 Svuota il carrello
+        carrello.carrello_items.destroy_all
       end
-      
     
       # 📌 Creiamo la sessione di pagamento per tutti i prodotti
       session = Stripe::Checkout::Session.create(

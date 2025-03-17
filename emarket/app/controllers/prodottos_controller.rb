@@ -10,6 +10,8 @@ class ProdottosController < ApplicationController
   def show
     @prodotto = @prodotto = Prodotto.find(params[:id])
     @promozione = @prodotto.promozione_attiva
+    @prezzo_scontato = @prodotto.prezzo_scontato
+
   end
 
   # GET /prodottos/new

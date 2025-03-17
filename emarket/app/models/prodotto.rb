@@ -26,13 +26,23 @@ class Prodotto < ApplicationRecord
 
       def promozione_attiva
         Promozione.where("inizio <= ? AND fine >= ?", Date.today, Date.today)
-                  .find_by("(tipo = ? AND prodotto_id = ?) OR 
-                            (tipo = ? AND categorium_id = ?) OR 
-                            (tipo = ?)",
-                           'singolo_prodotto', self.id,
-                           'categoria', self.categorium_id,
-                           'intero_sito')
+                  .where("(tipo = ? AND prodotto_id = ?) OR 
+                          (tipo = ? AND categorium_id = ?) OR 
+                          (tipo = ?)",
+                         'singolo_prodotto', self.id,
+                         'categoria', self.categorium_id,
+                         'intero_sito')
+                  .order(created_at: :desc)
+                  .first
       end
+      def prezzo_scontato
+        if (promo = promozione_attiva)
+          prezzo - (prezzo * promo.sconto / 100.0)
+        else
+          prezzo
+        end
+      end
+      
 
 
       def quantita_disponibile

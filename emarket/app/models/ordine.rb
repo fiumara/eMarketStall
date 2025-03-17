@@ -1,17 +1,14 @@
 class Ordine < ApplicationRecord
   belongs_to :acquirente
-
-  before_create :assegna_codice_ordine
   belongs_to :negozio 
 
-  has_many :carrello_items, dependent: :destroy
+  before_create :assegna_codice_ordine
 
-  has_many :prodottos, through: :carrello_items
-  
-   
+  has_many :ordine_items, dependent: :destroy
+  has_many :prodottos, through: :ordine_items
+
   has_many :return_requests, dependent: :destroy  # Associazione con i resi
   
-
   enum stato: { 
     in_attesa: 'in_attesa', 
     pagato: 'pagato', 
@@ -20,6 +17,12 @@ class Ordine < ApplicationRecord
     spedito: 'spedito',
     completato: 'completato'
   }
+
+  def totale
+    ordine_items.sum(&:totale)
+  end
+
+  private
 
   def assegna_codice_ordine
     self.codice_ordine = loop do

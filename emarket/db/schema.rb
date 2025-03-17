@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_03_14_122320) do
+ActiveRecord::Schema.define(version: 2025_03_17_145623) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 2025_03_14_122320) do
   create_table "carrello_items", force: :cascade do |t|
     t.integer "carrello_id"
     t.integer "prodotto_id", null: false
+    t.integer "ordine_id"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "ordine_id"
     t.index ["carrello_id"], name: "index_carrello_items_on_carrello_id"
     t.index ["ordine_id"], name: "index_carrello_items_on_ordine_id"
     t.index ["prodotto_id"], name: "index_carrello_items_on_prodotto_id"
@@ -131,6 +131,17 @@ ActiveRecord::Schema.define(version: 2025_03_14_122320) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["acquirente_id"], name: "index_negozios_on_acquirente_id"
+  end
+
+  create_table "ordine_items", force: :cascade do |t|
+    t.integer "ordine_id", null: false
+    t.integer "prodotto_id", null: false
+    t.integer "quantity", null: false
+    t.decimal "prezzo", precision: 10, scale: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ordine_id"], name: "index_ordine_items_on_ordine_id"
+    t.index ["prodotto_id"], name: "index_ordine_items_on_prodotto_id"
   end
 
   create_table "ordini", force: :cascade do |t|
@@ -257,6 +268,8 @@ ActiveRecord::Schema.define(version: 2025_03_14_122320) do
   add_foreign_key "carrellos", "acquirentes"
   add_foreign_key "messaggi", "chat_rooms"
   add_foreign_key "negozios", "acquirentes"
+  add_foreign_key "ordine_items", "ordini"
+  add_foreign_key "ordine_items", "prodottos"
   add_foreign_key "ordini", "acquirentes"
   add_foreign_key "ordini", "negozios"
   add_foreign_key "prodottos", "categoria"

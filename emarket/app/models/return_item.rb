@@ -9,7 +9,7 @@ class ReturnItem < ApplicationRecord
 
   def quantita_non_superiore_all_acquisto
     ordine = return_request.ordine
-    max_quantita = ordine.carrello_items.find_by(prodotto: prodotto)&.quantity || 0
+    max_quantita = ordine.ordine_items.find_by(prodotto: prodotto)&.quantity || 0
 
     if quantita > max_quantita
       errors.add(:quantita, "non può superare la quantità acquistata")

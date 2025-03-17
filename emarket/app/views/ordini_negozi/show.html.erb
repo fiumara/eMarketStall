@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @ordine.carrello_items.each do |item| %>
+    <% @ordine.ordine_items.each do |item| %>
       <% if item.prodotto.negozio_id == @negozio.id %>
         <tr>
           <td><%= item.prodotto.nome_prodotto %></td>

@@ -8,15 +8,14 @@ class ReturnRequestsController < ApplicationController
 
   def new
     @ordine = current_user.ordini.find(params[:ordine_id])
-  
+    
     unless @ordine.completato?
       redirect_to ordine_path(@ordine), alert: "Puoi richiedere un reso solo per ordini completati."
       return
     end
-  
+
     @return_request = @ordine.return_requests.build
   end
-  
 
   def create
     @ordine = current_user.ordini.find(params[:ordine_id])
@@ -29,6 +28,12 @@ class ReturnRequestsController < ApplicationController
     @return_request = @ordine.return_requests.build(return_request_params)
     @return_request.acquirente = current_user
   
+    if @return_request.return_items.empty?
+      flash.now[:alert] = "Devi selezionare almeno un prodotto per il reso."
+      render :new
+      return
+    end
+  
     if @return_request.save
       redirect_to return_requests_path, notice: "Richiesta di reso inviata con successo."
     else
@@ -36,8 +41,6 @@ class ReturnRequestsController < ApplicationController
     end
   end
   
-  
-
   def show
   end
 
@@ -48,7 +51,7 @@ class ReturnRequestsController < ApplicationController
       render :show
     end
   end
-  
+
   private
 
   def set_return_request
@@ -58,5 +61,5 @@ class ReturnRequestsController < ApplicationController
   def return_request_params
     params.require(:return_request).permit(:motivo, return_items_attributes: [:prodotto_id, :quantita])
   end
+  
 end
-

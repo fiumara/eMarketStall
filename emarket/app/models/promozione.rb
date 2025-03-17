@@ -13,11 +13,12 @@ class Promozione < ApplicationRecord
   def correct_association
     case tipo
     when 'singolo_prodotto'
-      errors.add(:prodotto, 'must be present for singolo_prodotto') unless prodotto.present?
+      errors.add(:prodotto, 'must be present for singolo_prodotto') unless prodotto_id.present?
     when 'categoria'
-      errors.add(:categorium, 'must be present for categoria') unless categorium.present?
+      errors.add(:categorium, 'must be present for categoria') unless categorium_id.present?
     when 'intero_sito'
-      errors.add(:negozio, 'cannot be present for intero_sito') if negozio.present?
+      errors.add(:negozio, 'must be present for intero_sito') unless negozio_id.present?
     end
   end
+  
 end

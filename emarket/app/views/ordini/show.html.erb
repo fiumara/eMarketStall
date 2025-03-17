@@ -16,18 +16,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @ordine.carrello_items.each do |item| %>
+    <% @ordine.ordine_items.each do |item|  %>
       <tr>
-        <td><%= item.prodotto.nome_prodotto %></td>
-       
-        <td><%= item.quantity %></td>
-        <td>€<%= item.prodotto.prezzo %></td>
-        <td>€<%= item.prodotto.prezzo * item.quantity %></td>
+      <td><%= item.prodotto.nome_prodotto %></td>
+      <td><%= item.quantity %></td>
+      <td><%= number_to_currency(item.prezzo) %></td>
+      <td><%= number_to_currency(item.totale) %></td>
       </tr>
     <% end %>
   </tbody>
 </table> 
-
+<p><strong>Totale Ordine:</strong> <%= number_to_currency(@ordine.totale) %></p>
 <% if @ordine.stato == 'completato' %>
   <%= link_to 'Richiedi Reso',  return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger' %>
 <% end %>
