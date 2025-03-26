@@ -98,6 +98,7 @@ Rails.application.routes.draw do
       get 'successo', to: 'ordini#successo'
       get 'errore', to: 'ordini#errore'
     end
+    post :pagamento, on: :member
   end
 
   Rails.application.routes.draw do

@@ -30,3 +30,6 @@
 <% if @ordine.stato == 'completato' %>
   <%= link_to 'Richiedi Reso',  return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger' %>
 <% end %>
+<% if @ordine.stato == "in_attesa" %>
+  <%= button_to "Procedi al Pagamento", pagamento_ordine_path(@ordine), method: :post, class: "btn btn-primary" %>
+<% end %>
