@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_03_17_145623) do
+ActiveRecord::Schema.define(version: 2025_03_26_165443) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2025_03_17_145623) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "id_acquirente"
     t.string "image_url"
+    t.boolean "bloccato", default: false
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -207,7 +208,7 @@ ActiveRecord::Schema.define(version: 2025_03_17_145623) do
   create_table "return_items", force: :cascade do |t|
     t.integer "return_request_id", null: false
     t.integer "prodotto_id", null: false
-    t.integer "quantita", default: 1, null: false
+    t.integer "quantita"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["prodotto_id"], name: "index_return_items_on_prodotto_id"

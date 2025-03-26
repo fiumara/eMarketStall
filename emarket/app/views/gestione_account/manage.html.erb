@@ -65,8 +65,12 @@
             <p>Negozio: <%= acquirente.negozio.nome_negozio %></p>
           </div>
           <div>
-            <button>Blocca</button>
-            <button>Elimina</button>
+          <% if acquirente.bloccato? %>
+          <%= button_to "Sblocca", sblocca_acquirente_path(acquirente), method: :patch, class: "btn-unblock" %>
+        <% else %>
+          <%= button_to "Blocca",  blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+        <% end %>
+        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, class: "btn-delete", data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
           </div>
         </div>
       <% elsif params[:user_type] == "acquirente" && acquirente.negozio.blank? %>
@@ -76,8 +80,12 @@
             <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
           </div>
           <div>
-            <button>Blocca</button>
-            <button>Elimina</button>
+          <% if acquirente.bloccato? %>
+          <%= button_to "Sblocca", sblocca_acquirente_path(acquirente), method: :patch, class: "btn-unblock" %>
+        <% else %>
+          <%= button_to "Blocca",  blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+        <% end %>
+        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, class: "btn-delete", data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
           </div>
         </div>
       <% elsif params[:user_type] == "all" %>
@@ -90,8 +98,12 @@
             <% end %>
           </div>
           <div>
-            <button>Blocca</button>
-            <button>Elimina</button>
+          <% if acquirente.bloccato? %>
+          <%= button_to "Sblocca", sblocca_acquirente_path(acquirente), method: :patch, class: "btn-unblock" %>
+        <% else %>
+          <%= button_to "Blocca",  blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+        <% end %>
+        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, class: "btn-delete", data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
           </div>
         </div>
       <% end %>

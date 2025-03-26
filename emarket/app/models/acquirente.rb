@@ -1,6 +1,9 @@
 class Acquirente < ApplicationRecord
   # Metodo per la gestione della password
   has_secure_password
+  before_create :default_values
+
+ 
 
   # Associazioni
   has_many :recensioni, dependent: :destroy
@@ -36,5 +39,9 @@ class Acquirente < ApplicationRecord
 
   def create_carrello
     Carrello.create(acquirente: self)
+  end
+
+  def default_values
+    self.bloccato ||= false
   end
 end

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'auth#callback'
   get '/auth/failure', to: 'auth#failure'
 
+    
+
   
   
 
@@ -126,6 +128,16 @@ Rails.application.routes.draw do
       patch :reject
     end
   end
+  
+  resources :gestione_account, only: [:index] do
+    member do
+      patch :blocca
+      patch :sblocca
+      delete :elimina
+    end
+  end
+  
+
 
   
 
