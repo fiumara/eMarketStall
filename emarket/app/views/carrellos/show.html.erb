@@ -6,7 +6,8 @@
       <tr>
         <th>Prodotto</th>
         <th>Quantità</th>
-        <th>Prezzo</th>
+        <th>Prezzo originale</th>
+        <th>Prezzo scontato</th>
         <th>Totale</th>
         <th></th>
       </tr>
@@ -17,7 +18,15 @@
           <td><%= item.prodotto.nome_prodotto %></td>
           <td><%= item.quantity %></td>
           <td><%= number_to_currency(item.prodotto.prezzo) %></td>
-          <td><%= number_to_currency(item.quantity * item.prodotto.prezzo) %></td>
+          <td>
+            <% if item.prezzo_unitario < item.prodotto.prezzo %>
+              <strong><%= number_to_currency(item.prezzo_unitario) %></strong>
+              <small class="text-muted">(Scontato!)</small>
+            <% else %>
+              <%= number_to_currency(item.prodotto.prezzo) %>
+            <% end %>
+          </td>
+          <td><%= number_to_currency(item.totale) %></td>
           <td>
             <%= button_to "Rimuovi", carrello_item_path(item), method: :delete, class: "btn btn-danger" %>
           </td>
@@ -26,10 +35,9 @@
     </tbody>
   </table>
 
-  <p><strong>Totale carrello:</strong> <%= number_to_currency(@carrello.carrello_items.sum { |item| item.quantity * item.prodotto.prezzo }) %></p>
+  <p><strong>Totale carrello:</strong> <%= number_to_currency(@carrello.carrello_items.sum(&:totale)) %></p>
 <% else %>
   <p>Il tuo carrello è vuoto.</p>
 <% end %>
 
 <%= button_to "Procedi al pagamento", ordini_path, method: :post, class: "btn btn-success" %>
-
