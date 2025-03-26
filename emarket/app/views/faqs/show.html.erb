@@ -1,0 +1,5 @@
+<h1><%= @faq.domanda %></h1>
+<p><%= @faq.risposta %></p>
+
+<%= link_to 'Torna indietro', admin_faqs_path, class: 'btn btn-primary' %>
+<%= link_to "Elimina", faq_path(@faq), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questa FAQ?" } %>

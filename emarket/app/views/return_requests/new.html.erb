@@ -1,21 +1,24 @@
 <h1>Richiesta di Reso</h1>
 
-<%= form_with model: [@ordine, @return_request], local: true do |f| %>
-  <div>
-    <%= f.label :motivo, "Motivo del Reso" %>
-    <%= f.text_field :motivo %>
-  </div>
+<%= form_with(model: @return_request, url: return_requests_path, method: :post) do |f| %>
+  <%= hidden_field_tag :ordine_id, @ordine.id %>
 
-  <h2>Seleziona i prodotti da restituire</h2>
-  <% @ordine.ordine_items.each_with_index do |ordine_item, index| %>
+  <p><strong>Motivo del reso:</strong></p>
+  <%= f.text_area :motivo, required: true %>
+
+  <h3>Seleziona le quantità dei prodotti da restituire:</h3>
+  <% @ordine.ordine_items.each do |ordine_item| %>
     <div>
-      <%= check_box_tag "return_request[return_items_attributes][#{index}][prodotto_id]", ordine_item.prodotto.id, false, class: "prodotto-checkbox" %>
-      <%= label_tag "return_request[return_items_attributes][#{index}][prodotto_id]", ordine_item.prodotto.nome_prodotto %>
-      
-      <%= number_field_tag "return_request[return_items_attributes][#{index}][quantita]", 1, min: 1, max: ordine_item.quantity, class: "quantita-input" %>
+      <label>
+        <%= ordine_item.prodotto.nome_prodotto %> - Quantità acquistata: <%= ordine_item.quantity %>
+      </label>
+      <input type="number" name="return_request[return_items_attributes][][quantita]" 
+             min="0" max="<%= ordine_item.quantity %>" 
+             class="return-quantity"
+             placeholder="0">
+      <input type="hidden" name="return_request[return_items_attributes][][prodotto_id]" value="<%= ordine_item.prodotto.id %>">
     </div>
   <% end %>
-  
 
   <%= f.submit "Invia richiesta di reso" %>
 <% end %>

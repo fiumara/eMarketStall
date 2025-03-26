@@ -20,14 +20,14 @@ class ReturnRequestsController < ApplicationController
   def create
     @ordine = current_user.ordini.find(params[:ordine_id])
   
-    unless @ordine.completato?
+    unless @ordine&.completato?
       redirect_to ordine_path(@ordine), alert: "Puoi richiedere un reso solo per ordini completati."
       return
     end
   
     @return_request = @ordine.return_requests.build(return_request_params)
     @return_request.acquirente = current_user
-  
+    @return_request.return_items = @return_request.return_items.reject{|item| item.quantita.to_i <= 0}
     if @return_request.return_items.empty?
       flash.now[:alert] = "Devi selezionare almeno un prodotto per il reso."
       render :new
