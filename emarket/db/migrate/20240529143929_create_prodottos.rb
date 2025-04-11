@@ -6,8 +6,8 @@ class CreateProdottos < ActiveRecord::Migration[6.1]
       t.string :descrizione
       t.float :prezzo
       t.integer :quantita_disponibile, default: 0, null: false # Aggiunto il campo quantità disponibile
-      t.references :negozio, null: false, foreign_key: true
-      t.references :categorium, null: false, foreign_key: true
+      t.references :negozio, null: false, foreign_key: { on_delete: :cascade }
+      t.references :categorium, null: false, foreign_key: { on_delete: :cascade }
 
       t.timestamps
     end

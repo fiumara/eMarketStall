@@ -1,5 +1,7 @@
 class ProdottosController < ApplicationController
   before_action :set_negozio, only: [:new, :create]
+  before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_proprietario, only: [:destroy]
 
   # GET /prodottos or /prodottos.json
   def index
@@ -50,13 +52,18 @@ class ProdottosController < ApplicationController
 
   # DELETE /prodottos/1 or /prodottos/1.json
   def destroy
+    if @prodotto.ordine_items.exists?
+      @prodotto.ordine_items.update_all(prodotto_id: nil)
+    end
+    
     @prodotto.destroy
-
+  
     respond_to do |format|
-      format.html { redirect_to prodottos_url, notice: "Prodotto eliminato con successo." }
+      format.html { redirect_to negozio_path(@prodotto.negozio), notice: "Prodotto eliminato con successo." }
       format.json { head :no_content }
     end
   end
+  
 
 
   def name
@@ -72,6 +79,11 @@ class ProdottosController < ApplicationController
     @prodotto = Prodotto.find(params[:id])
   end
 
+  def authorize_proprietario
+    unless @prodotto.negozio.acquirente == current_user
+      redirect_to root_path, alert: "Non sei autorizzato a eliminare questo prodotto."
+    end
+  end
   
   
 

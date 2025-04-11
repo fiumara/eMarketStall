@@ -17,25 +17,26 @@
     </tr>
   </thead>
   <tbody>
-    <% @ordine.ordine_items.each do |item| %>
-      <% if item.prodotto.negozio_id == @negozio.id %>
-        <tr>
-          <td><%= item.prodotto.nome_prodotto %></td>
-          <td><%= item.quantity %></td>
-          <td>€<%= number_to_currency(item.prodotto.prezzo) %></td>
-          <td>
-            <% if item.prodotto.prezzo_scontato < item.prodotto.prezzo %>
-              <strong>€<%= number_to_currency(item.prodotto.prezzo_scontato) %></strong>
-              <small class="text-muted">(Scontato!)</small>
-            <% else %>
-              €<%= number_to_currency(item.prodotto.prezzo) %>
-            <% end %>
-          </td>
-          <td>€<%= number_to_currency(item.prodotto.prezzo_scontato * item.quantity) %></td>
-        </tr>
-      <% end %>
+  <% @ordine.ordine_items.each do |item| %>
+    <% if item.prodotto.nil? || item.prodotto.negozio_id == @negozio.id %>
+      <tr>
+        <td><%= item.nome_prodotto || "Prodotto eliminato" %></td>
+        <td><%= item.quantity %></td>
+        <td>€<%= item.prezzo %></td>
+        <td>
+          <% if item.prodotto && item.prodotto.prezzo_scontato < item.prodotto.prezzo %>
+            <strong>€<%= number_to_currency(item.prodotto.prezzo_scontato) %></strong>
+            <small class="text-muted">(Scontato!)</small>
+          <% else %>
+            €<%= number_to_currency(item.prezzo) %>
+          <% end %>
+        </td>
+        <td>€<%= number_to_currency(item.prezzo * item.quantity) %></td>
+      </tr>
     <% end %>
-  </tbody>
+  <% end %>
+</tbody>
+
 </table>
 
 <h3>Aggiorna Stato Ordine</h3>

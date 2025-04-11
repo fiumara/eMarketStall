@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
 
 
   get 'lista_desideri', to: 'lista_desideri#index'
@@ -78,7 +78,8 @@ Rails.application.routes.draw do
       get 'visualizza', to: 'negozios#visualizza'
     end
   end
-  resources :acquirentes, only: [:new, :create, :show,  :edit, :update]
+  resources :acquirentes
+
   resources :amministratores, only: [:create, :show, :edit, :update]
   
   resources :faqs do

@@ -58,7 +58,7 @@
 
       <div class="d-flex justify-content-end">
         <%= link_to 'Modifica Profilo', edit_negozio_path(@negozio), class: 'btn btn-warning me-2' %>
-        <%= link_to 'Elimina Profilo', negozio_path(@negozio), method: :delete, data: { confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
+        <%= button_to 'Elimina Profilo', negozio_path(@negozio), method: :delete, data: { turbo: false, confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
       </div>
     </div>
   </div>

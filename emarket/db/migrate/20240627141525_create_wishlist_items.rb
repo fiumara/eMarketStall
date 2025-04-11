@@ -1,8 +1,8 @@
 class CreateWishlistItems < ActiveRecord::Migration[6.1]
   def change
     create_table :wishlist_items do |t|
-      t.references :acquirente, null: false, foreign_key: true
-      t.references :prodotto, null: false, foreign_key: true
+      t.references :acquirente, null: false, foreign_key: { on_delete: :cascade }
+      t.references :prodotto, null: false, foreign_key: { on_delete: :cascade }
 
       t.timestamps
     end

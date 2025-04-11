@@ -87,6 +87,11 @@
               </div>
             <% end %>
         </div>
+
+        <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
+        <%= link_to "Elimina Prodotto", prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo prodotto?" }, class: "btn btn-danger" %>
+        <% end %>
+
     </main>
 </body>
 </html>

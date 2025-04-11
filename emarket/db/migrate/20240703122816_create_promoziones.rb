@@ -7,9 +7,9 @@ class CreatePromoziones < ActiveRecord::Migration[6.1]
       t.datetime :fine
       t.decimal :sconto
       t.string :tipo
-      t.references :prodotto, foreign_key: true
-      t.references :categorium, foreign_key: true
-      t.references :negozio, foreign_key: true
+      t.references :prodotto, foreign_key: { on_delete: :cascade }
+      t.references :categorium, foreign_key: { on_delete: :cascade }
+      t.references :negozio, foreign_key: { on_delete: :cascade }
       t.string :created_by, null: false
 
       t.timestamps

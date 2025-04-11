@@ -4,26 +4,29 @@ class OrdiniNegoziController < ApplicationController
 
   def index
     @negozio = current_user.negozio
-    Rails.logger.debug "Negozio trovato: #{@negozio.inspect}" # Log per debug
   
     if @negozio.nil?
       redirect_to root_path, alert: "Devi avere un negozio per visualizzare gli ordini."
       return
     end
   
-    @ordini = Ordine.joins(:prodottos)
-                    .where(prodottos: { negozio_id: @negozio.id })
+    # Trova gli ordini che hanno almeno un prodotto appartenente al negozio, anche se è stato eliminato
+    @ordini = Ordine.joins(:ordine_items)
+                    .where("ordine_items.prodotto_id IN (?) OR ordine_items.prodotto_id IS NULL", @negozio.prodottos.pluck(:id))
                     .distinct
   end
+  
   
 
   def show
     @ordine = Ordine.find(params[:id])
-
-    unless @ordine.prodottos.any? { |p| p.negozio_id == @negozio.id }
+  
+    # Controlliamo se almeno un OrdineItem ha un prodotto del negozio, oppure se il prodotto è stato eliminato
+    unless @ordine.ordine_items.any? { |item| item.prodotto.nil? || item.prodotto.negozio_id == @negozio.id }
       redirect_to negozio_ordini_path(@negozio), alert: "Non hai accesso a questo ordine."
     end
   end
+  
 
   def update
     @ordine = Ordine.find(params[:id])

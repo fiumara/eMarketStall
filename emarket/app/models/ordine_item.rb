@@ -1,6 +1,8 @@
 class OrdineItem < ApplicationRecord
     belongs_to :ordine
-    belongs_to :prodotto
+    belongs_to :prodotto, optional: true
+
+    before_create :salva_nome_prodotto
   
     before_create :applica_sconto
   
@@ -15,6 +17,10 @@ class OrdineItem < ApplicationRecord
   
     def applica_sconto
       self.prezzo = prodotto.prezzo_scontato
+    end
+
+    def salva_nome_prodotto
+      self.nome_prodotto = prodotto.nome_prodotto if prodotto.present?
     end
   end
   

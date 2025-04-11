@@ -52,7 +52,7 @@ class AcquirentesController < ApplicationController
     @acquirente.destroy
 
     respond_to do |format|
-      format.html { redirect_to acquirentes_url, notice: "Acquirente was successfully destroyed." }
+      format.html { redirect_to acquirente_url, notice: "Acquirente was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -70,6 +70,7 @@ class AcquirentesController < ApplicationController
     end
 
     def authorize_acquirente
+      puts "🔹 Controllo autorizzazione per #{current_user&.id} vs #{@acquirente.id}"
       unless current_user == @acquirente
         redirect_to root_path, alert: "Accesso negato: non sei autorizzato ad accedere a questa pagina." and return
       end

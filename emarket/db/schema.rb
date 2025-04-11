@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_03_26_165443) do
+ActiveRecord::Schema.define(version: 2025_04_02_124539) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -136,11 +136,12 @@ ActiveRecord::Schema.define(version: 2025_03_26_165443) do
 
   create_table "ordine_items", force: :cascade do |t|
     t.integer "ordine_id", null: false
-    t.integer "prodotto_id", null: false
+    t.integer "prodotto_id"
     t.integer "quantity", null: false
     t.decimal "prezzo", precision: 10, scale: 2, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "nome_prodotto"
     t.index ["ordine_id"], name: "index_ordine_items_on_ordine_id"
     t.index ["prodotto_id"], name: "index_ordine_items_on_prodotto_id"
   end
@@ -163,11 +164,11 @@ ActiveRecord::Schema.define(version: 2025_03_26_165443) do
     t.string "nome_prodotto"
     t.string "descrizione"
     t.float "prezzo"
+    t.integer "quantita_disponibile", default: 0, null: false
     t.integer "negozio_id", null: false
     t.integer "categorium_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "quantita_disponibile"
     t.index ["categorium_id"], name: "index_prodottos_on_categorium_id"
     t.index ["negozio_id"], name: "index_prodottos_on_negozio_id"
   end
@@ -208,9 +209,11 @@ ActiveRecord::Schema.define(version: 2025_03_26_165443) do
   create_table "return_items", force: :cascade do |t|
     t.integer "return_request_id", null: false
     t.integer "prodotto_id", null: false
-    t.integer "quantita"
+    t.integer "ordine_item_id", null: false
+    t.integer "quantita", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ordine_item_id"], name: "index_return_items_on_ordine_item_id"
     t.index ["prodotto_id"], name: "index_return_items_on_prodotto_id"
     t.index ["return_request_id"], name: "index_return_items_on_return_request_id"
   end
@@ -263,27 +266,28 @@ ActiveRecord::Schema.define(version: 2025_03_26_165443) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "carrello_items", "carrellos"
-  add_foreign_key "carrello_items", "ordini"
-  add_foreign_key "carrello_items", "prodottos"
-  add_foreign_key "carrellos", "acquirentes"
-  add_foreign_key "messaggi", "chat_rooms"
+  add_foreign_key "carrello_items", "carrellos", on_delete: :cascade
+  add_foreign_key "carrello_items", "ordini", on_delete: :cascade
+  add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
+  add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
+  add_foreign_key "messaggi", "chat_rooms", on_delete: :cascade
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "ordine_items", "ordini"
-  add_foreign_key "ordine_items", "prodottos"
-  add_foreign_key "ordini", "acquirentes"
-  add_foreign_key "ordini", "negozios"
-  add_foreign_key "prodottos", "categoria"
-  add_foreign_key "prodottos", "negozios"
-  add_foreign_key "promoziones", "categoria"
-  add_foreign_key "promoziones", "negozios"
-  add_foreign_key "promoziones", "prodottos"
-  add_foreign_key "return_items", "prodottos"
+  add_foreign_key "ordine_items", "prodottos", on_delete: :nullify
+  add_foreign_key "ordini", "acquirentes", on_delete: :cascade
+  add_foreign_key "ordini", "negozios", on_delete: :nullify
+  add_foreign_key "prodottos", "categoria", on_delete: :cascade
+  add_foreign_key "prodottos", "negozios", on_delete: :cascade
+  add_foreign_key "promoziones", "categoria", on_delete: :cascade
+  add_foreign_key "promoziones", "negozios", on_delete: :cascade
+  add_foreign_key "promoziones", "prodottos", on_delete: :cascade
+  add_foreign_key "return_items", "ordine_items"
+  add_foreign_key "return_items", "prodottos", on_delete: :cascade
   add_foreign_key "return_items", "return_requests"
-  add_foreign_key "return_requests", "acquirentes"
+  add_foreign_key "return_requests", "acquirentes", on_delete: :nullify
   add_foreign_key "return_requests", "ordini"
-  add_foreign_key "statisticas", "prodottos"
-  add_foreign_key "variantis", "prodottos"
-  add_foreign_key "wishlist_items", "acquirentes"
-  add_foreign_key "wishlist_items", "prodottos"
+  add_foreign_key "statisticas", "prodottos", on_delete: :cascade
+  add_foreign_key "variantis", "prodottos", on_delete: :cascade
+  add_foreign_key "wishlist_items", "acquirentes", on_delete: :cascade
+  add_foreign_key "wishlist_items", "prodottos", on_delete: :cascade
 end

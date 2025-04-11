@@ -59,7 +59,7 @@ class ReturnRequestsController < ApplicationController
   end
 
   def return_request_params
-    params.require(:return_request).permit(:motivo, return_items_attributes: [:prodotto_id, :quantita])
+    params.require(:return_request).permit(:motivo, return_items_attributes: [:prodotto_id, :quantita, :ordine_item_id])
   end
   
 end

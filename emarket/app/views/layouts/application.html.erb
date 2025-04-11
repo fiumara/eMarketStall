@@ -109,8 +109,8 @@
     <% elsif current_user.is_a?(Amministratore) %>
       <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
     <% end %>
-    <%= link_to 'Logout', logout_path, method: :delete %>
-  <% else %>
+    <%= button_to 'Logout', logout_path, method: :delete %>
+    <% else %>
     <%= link_to 'Accedi', login_path %>
     <%= link_to 'FAQs', faqs_path %>
   <% end %>

@@ -1,6 +1,6 @@
 class Ordine < ApplicationRecord
   belongs_to :acquirente
-  belongs_to :negozio 
+  belongs_to :negozio, optional: true  
 
   before_create :assegna_codice_ordine
 

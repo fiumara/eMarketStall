@@ -16,15 +16,23 @@
     </tr>
   </thead>
   <tbody>
-    <% @ordine.ordine_items.each do |item|  %>
-      <tr>
-      <td><%= item.prodotto.nome_prodotto %></td>
+  <% @ordine.ordine_items.each do |item|  %>
+    <tr>
+      <td>
+        <% if item.prodotto.present? %>
+          <%= item.prodotto.nome_prodotto %>
+        <% else %>
+          <%= item.nome_prodotto || "Prodotto eliminato" %> (Prodotto eliminato)
+          
+        <% end %>
+      </td>
       <td><%= item.quantity %></td>
       <td><%= number_to_currency(item.prezzo) %></td>
-      <td><%= number_to_currency(item.totale) %></td>
-      </tr>
-    <% end %>
-  </tbody>
+      <td><%= number_to_currency(item.prezzo * item.quantity) %></td>
+    </tr>
+  <% end %>
+</tbody>
+
 </table> 
 <p><strong>Totale Ordine:</strong> <%= number_to_currency(@ordine.totale) %></p>
 <% if @ordine.stato == 'completato' %>

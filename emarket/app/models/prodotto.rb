@@ -1,12 +1,13 @@
 class Prodotto < ApplicationRecord
-  has_many_attached :immagini
+  has_many_attached :immagini, dependent: :destroy
   belongs_to :negozio
   belongs_to :categorium
 
-  has_many :recensioni, dependent: :destroy
   has_many :wishlist_items, dependent: :destroy
   has_many :wishlisted_by, through: :wishlist_items, source: :acquirente
-  has_many :promoziones
+  has_many :promoziones, dependent: :destroy
+  has_many :carrello_items, dependent: :destroy
+  has_many :ordine_items
 
   has_one :statistica, dependent: :destroy
   accepts_nested_attributes_for :statistica

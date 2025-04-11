@@ -6,17 +6,17 @@ class Acquirente < ApplicationRecord
  
 
   # Associazioni
-  has_many :recensioni, dependent: :destroy
-  has_many :messaggi, dependent: :destroy
+  
+ 
   has_one :negozio, dependent: :destroy
   has_many :wishlist_items, dependent: :destroy
   has_many :wishlist, through: :wishlist_items, source: :prodotto
   has_many :return_requests, foreign_key: :acquirente_id, dependent: :destroy
 
   # Messaggi personalizzati
-  has_many :messaggi_inviati, as: :mittente, class_name: 'Messaggio'
-  has_many :messaggi_ricevuti, as: :destinatario, class_name: 'Messaggio'
-
+  has_many :messaggi_inviati, as: :mittente, class_name: 'Messaggio', dependent: :destroy
+  has_many :messaggi_ricevuti, as: :destinatario, class_name: 'Messaggio', dependent: :destroy
+  
   has_one :carrello, dependent: :destroy
   after_create :create_carrello
 
