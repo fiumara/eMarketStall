@@ -19,23 +19,23 @@ class GestioneAccountController < ApplicationController
   
   def elimina
     acquirente = Acquirente.find(params[:id])
-
-    # Se l'acquirente ha un negozio, chiama la funzione nel NegoziosController
+  
+    # Se l'acquirente ha un negozio, lo eliminiamo
     if acquirente.negozio.present?
-      redirect_to elimina_gestione_account_path(acquirente.id) and return
+      acquirente.negozio.destroy
     end
-
+  
     # Elimina i messaggi dell'acquirente
     Messaggio.where(mittente_type: "Acquirente", mittente_id: acquirente.id).destroy_all
     Messaggio.where(destinatario_type: "Acquirente", destinatario_id: acquirente.id).destroy_all
-
+  
     # Elimina le recensioni dell'acquirente (se esistono)
     acquirente.recensioni.destroy_all if acquirente.respond_to?(:recensioni)
-
+  
     # Ora elimina l'acquirente
     acquirente.destroy
-
-    redirect_to gestione_account_path, notice: "Utente eliminato con successo"
+  
+    redirect_to gestione_account_path, notice: "Utente e negozio eliminati con successo"
   end
   
   
