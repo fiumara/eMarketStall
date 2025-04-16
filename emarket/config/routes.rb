@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     member do
       get 'statistiche', to: 'statistichenegozio#index'
       get 'recensioni', to: 'recensioninegozio#index'
+      get 'feedbacks', to: 'negozios#feedbacks'
     end
   end
 

@@ -1,0 +1,27 @@
+<h1>Feedback ricevuti - <%= @negozio.nome_negozio %></h1>
+
+<% if @prodottos.empty? %>
+  <p>Questo negozio non ha prodotti.</p>
+<% else %>
+  <% @prodottos.each do |prodotto| %>
+    <div class="card mb-4">
+      <h2><%= prodotto.nome_prodotto %></h2>
+
+      <% if prodotto.feedbacks.any? %>
+        <ul>
+          <% prodotto.feedbacks.each do |feedback| %>
+            <li>
+              <strong>Voto:</strong> <%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %><br>
+              <% if feedback.nota.present? %>
+                <strong>Nota:</strong> <%= feedback.nota %><br>
+              <% end %>
+              <em>Da: <%= feedback.acquirente&.nome || "Utente eliminato" %> | il <%= feedback.created_at.strftime("%d/%m/%Y") %></em>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>Nessuna recensione per questo prodotto.</p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

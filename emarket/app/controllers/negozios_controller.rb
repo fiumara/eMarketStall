@@ -47,6 +47,12 @@ class NegoziosController < ApplicationController
     end
   end
 
+  def feedbacks
+    @negozio = Negozio.find(params[:id])
+    @prodottos = @negozio.prodottos.includes(feedbacks: :acquirente)
+  end
+  
+
   # DELETE /negozios/1 or /negozios/1.json
   def destroy
     @negozio.destroy
