@@ -66,11 +66,11 @@
           </div>
           <div>
           <% if acquirente.bloccato? %>
-          <%= button_to "Sblocca", sblocca_acquirente_path(acquirente), method: :patch, class: "btn-unblock" %>
+           <%= button_to "Sblocca", sblocca_gestione_account_path(acquirente), method: :patch, class: "btn-unblock" %>
         <% else %>
-          <%= button_to "Blocca",  blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+          <%= button_to "Blocca", blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
         <% end %>
-        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, class: "btn-delete", data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
+        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
           </div>
         </div>
       <% elsif params[:user_type] == "acquirente" && acquirente.negozio.blank? %>
@@ -81,11 +81,11 @@
           </div>
           <div>
           <% if acquirente.bloccato? %>
-          <%= button_to "Sblocca", sblocca_acquirente_path(acquirente), method: :patch, class: "btn-unblock" %>
+            <%= button_to "Sblocca", sblocca_gestione_account_path(acquirente), method: :patch, class: "btn-unblock" %>
         <% else %>
-          <%= button_to "Blocca",  blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+         <%= button_to "Blocca", blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
         <% end %>
-        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, class: "btn-delete", data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
+        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
           </div>
         </div>
       <% elsif params[:user_type] == "all" %>
@@ -99,11 +99,11 @@
           </div>
           <div>
           <% if acquirente.bloccato? %>
-          <%= button_to "Sblocca", sblocca_acquirente_path(acquirente), method: :patch, class: "btn-unblock" %>
+            <%= button_to "Sblocca", sblocca_gestione_account_path(acquirente), method: :patch, class: "btn-unblock" %>
         <% else %>
-          <%= button_to "Blocca",  blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+         <%= button_to "Blocca", blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
         <% end %>
-        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, class: "btn-delete", data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
+        <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
           </div>
         </div>
       <% end %>
