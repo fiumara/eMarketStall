@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_04_16_140512) do
+ActiveRecord::Schema.define(version: 2025_04_16_154027) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2025_04_16_140512) do
     t.text "nota"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "segnalato", default: false
     t.index ["acquirente_id"], name: "index_feedbacks_on_acquirente_id"
     t.index ["ordine_item_id"], name: "index_feedbacks_on_ordine_item_id"
     t.index ["prodotto_id"], name: "index_feedbacks_on_prodotto_id"

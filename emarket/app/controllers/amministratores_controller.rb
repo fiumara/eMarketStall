@@ -68,6 +68,10 @@ class AmministratoresController < ApplicationController
     end
   end
 
+  def feedbacks_segnalati
+    @feedbacks = Feedback.where(segnalato: true).includes(:acquirente, :prodotto)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_amministratore

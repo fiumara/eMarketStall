@@ -143,7 +143,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :feedbacks
+  resources :feedbacks do
+    member do
+      patch :segnala
+      patch :ignora_segnalazione
+    end
+  end
+
+  get 'admin/feedbacks_segnalati', to: 'amministratores#feedbacks_segnalati', as: 'admin_feedbacks_segnalati'
   
 
 

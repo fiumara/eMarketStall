@@ -1,0 +1,37 @@
+<h1>Feedback Segnalati</h1>
+
+<% if @feedbacks.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Prodotto</th>
+        <th>Acquirente</th>
+        <th>Voto</th>
+        <th>Nota</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @feedbacks.each do |feedback| %>
+        <tr>
+          <td><%= feedback.prodotto.nome_prodotto %></td>
+          <td><%= feedback.acquirente&.nome || "Utente eliminato" %></td>
+          <td><%= feedback.voto %> ★</td>
+          <td><%= feedback.nota.presence || "Nessuna nota" %></td>
+          <td>
+            <%= button_to "Elimina feedback e vai a gestione account", 
+              feedback_path(feedback, redirect_to: gestione_account_path), 
+              method: :delete, 
+              data: { confirm: "Sei sicuro di voler eliminare questo feedback?" }, 
+              class: "btn btn-danger" %>
+
+            <%= button_to "Ignora segnalazione", ignora_segnalazione_feedback_path(feedback), 
+              method: :patch, class: "btn btn-secondary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nessun feedback segnalato.</p>
+<% end %>

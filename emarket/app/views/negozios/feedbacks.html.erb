@@ -16,7 +16,14 @@
                 <strong>Nota:</strong> <%= feedback.nota %><br>
               <% end %>
               <em>Da: <%= feedback.acquirente&.nome || "Utente eliminato" %> | il <%= feedback.created_at.strftime("%d/%m/%Y") %></em>
+
             </li>
+            <% unless feedback.segnalato %>
+                <%= button_to "Segnala", segnala_feedback_path(feedback), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Sei sicuro di voler segnalare questo feedback?" } %>
+            <% else %>
+                <span class="badge bg-danger">Segnalato</span>
+            <% end %>
+
           <% end %>
         </ul>
       <% else %>

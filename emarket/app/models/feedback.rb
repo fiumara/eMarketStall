@@ -7,4 +7,10 @@ class Feedback < ApplicationRecord
   validates :nota, length: { maximum: 1000 }, allow_blank: true
 
   validates :ordine_item_id, uniqueness: true  # impedisce di lasciare più feedback per lo stesso ordine_item
+
+  scope :segnalati, -> { where(segnalato: true) }
+
+  def segnala!
+    update(segnalato: true)
+  end
 end

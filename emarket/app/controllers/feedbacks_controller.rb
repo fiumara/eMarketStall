@@ -1,5 +1,6 @@
 class FeedbacksController < ApplicationController
 before_action :authenticate_acquirente!
+before_action :set_feedback, only: [:segnala]
 
 def new
   @ordine_item = OrdineItem.find(params[:ordine_item_id])
@@ -21,10 +22,36 @@ def create
   end
 end
 
+def segnala
+  @feedback.segnalato = true
+  if @feedback.save
+    redirect_back fallback_location: root_path, notice: "Feedback segnalato. Verrà revisionato da un amministratore."
+  else
+    redirect_back fallback_location: root_path, alert: "Errore nella segnalazione del feedback."
+  end
+end
+
+def destroy
+  @feedback = Feedback.find(params[:id])
+  @feedback.destroy
+  redirect_to params[:redirect_to] || admin_feedbacks_segnalati_path, notice: "Feedback eliminato con successo."
+end
+
+def ignora_segnalazione
+  @feedback = Feedback.find(params[:id])
+  @feedback.update(segnalato: false)
+  redirect_to admin_feedbacks_segnalati_path, notice: "Segnalazione ignorata."
+end
+
+
 private
 
 def feedback_params
   params.require(:feedback).permit(:voto, :nota)
+end
+
+def set_feedback
+  @feedback = Feedback.find(params[:id])
 end
 end
 
