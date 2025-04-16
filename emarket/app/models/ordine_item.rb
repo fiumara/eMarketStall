@@ -5,6 +5,8 @@ class OrdineItem < ApplicationRecord
     before_create :salva_nome_prodotto
   
     before_create :applica_sconto
+
+    has_many :feedbacks
   
     validates :quantity, presence: true, numericality: { greater_than: 0 }
     validates :prezzo, presence: true, numericality: { greater_than_or_equal_to: 0 }

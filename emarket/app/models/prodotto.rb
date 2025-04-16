@@ -9,6 +9,8 @@ class Prodotto < ApplicationRecord
   has_many :carrello_items, dependent: :destroy
   has_many :ordine_items
 
+  has_many :feedbacks, dependent: :destroy
+
   has_one :statistica, dependent: :destroy
   accepts_nested_attributes_for :statistica
 

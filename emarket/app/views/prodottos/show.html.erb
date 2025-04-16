@@ -57,11 +57,7 @@
 
                 <p>Categoria: <%= @prodotto.categorium.nome %></p> <!-- Mostra il nome della categoria -->
 
-                <div class="reviews">
-                    <p>Recensioni</p>
-                    <span class="stars">★★★★★</span>
-                    <button class="reviews-button">Vedi tutte le recensioni</button>
-                </div>
+
             </div>
 
             <% if logged_in? && current_user.is_a?(Acquirente) %>
@@ -91,6 +87,19 @@
         <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
         <%= link_to "Elimina Prodotto", prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo prodotto?" }, class: "btn btn-danger" %>
         <% end %>
+
+
+
+        <div class="recensioni">
+          <h3>Recensioni</h3>
+            <% @feedbacks.each do |feedback| %>
+        <div class="feedback">
+          <p><strong><%= feedback.acquirente.nome_completo %></strong></p>
+          <p><%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %></p>
+          <p><%= feedback.nota %></p>
+        </div>
+          <% end %>
+        </div>
 
     </main>
 </body>

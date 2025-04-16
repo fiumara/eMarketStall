@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'feedbacks/new'
+  get 'feedbacks/create'
   get 'return_requests/index'
   get 'return_requests/new'
   get 'return_requests/create'
@@ -105,6 +107,8 @@ Rails.application.routes.draw do
   end
 
   Rails.application.routes.draw do
+  get 'feedbacks/new'
+  get 'feedbacks/create'
   get 'return_requests/index'
   get 'return_requests/new'
   get 'return_requests/create'
@@ -137,6 +141,8 @@ Rails.application.routes.draw do
       delete :elimina
     end
   end
+
+  resources :feedbacks
   
 
 

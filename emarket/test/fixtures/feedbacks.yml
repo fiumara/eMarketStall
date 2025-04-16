@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  acquirente: one
+  prodotto: one
+  ordine_item: one
+  voto: 1
+  nota: MyText
+
+two:
+  acquirente: two
+  prodotto: two
+  ordine_item: two
+  voto: 1
+  nota: MyText

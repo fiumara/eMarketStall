@@ -1,0 +1,17 @@
+<h1>Lascia un feedback per <%= @prodotto.nome_prodotto %></h1>
+
+<%= form_with model: @feedback, url: feedbacks_path do |f| %>
+  <%= hidden_field_tag "feedback[ordine_item_id]", @ordine_item.id %>
+
+  <div>
+    <%= label_tag :voto, "Voto (1-5):" %>
+    <%= f.select :voto, options_for_select((1..5).to_a), {}, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :nota, "Nota (opzionale):" %>
+    <%= f.text_area :nota, rows: 4, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Invia feedback", class: "btn btn-primary" %>
+<% end %>

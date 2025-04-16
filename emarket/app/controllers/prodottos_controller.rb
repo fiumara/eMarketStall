@@ -14,6 +14,9 @@ class ProdottosController < ApplicationController
     @promozione = @prodotto.promozione_attiva
     @prezzo_scontato = @prodotto.prezzo_scontato
 
+    @feedbacks = @prodotto.feedbacks.includes(:acquirente)
+
+
   end
 
   # GET /prodottos/new

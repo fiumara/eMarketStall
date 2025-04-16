@@ -18,14 +18,19 @@
   <tbody>
   <% @ordine.ordine_items.each do |item|  %>
     <tr>
-      <td>
-        <% if item.prodotto.present? %>
-          <%= item.prodotto.nome_prodotto %>
-        <% else %>
-          <%= item.nome_prodotto || "Prodotto eliminato" %> (Prodotto eliminato)
-          
-        <% end %>
-      </td>
+    <td>
+    <% if item.prodotto.present? %>
+      <%= item.prodotto.nome_prodotto %>
+      <% if item.feedbacks.present? %>
+        - Hai già lasciato un feedback.
+      <% else %>
+        <%= link_to "Lascia feedback", new_feedback_path(ordine_item_id: item.id), class: "btn btn-secondary" %>
+      <% end %>
+    <% else %>
+      <%= item.nome_prodotto || "Prodotto eliminato" %> (Prodotto eliminato)
+    <% end %>
+  </td>
+  
       <td><%= item.quantity %></td>
       <td><%= number_to_currency(item.prezzo) %></td>
       <td><%= number_to_currency(item.prezzo * item.quantity) %></td>
