@@ -22,11 +22,6 @@
   <p>Nessuna immagine disponibile</p>
 <% end %>
 
-
-
-      
-
-
             <button class="arrow left">‹</button>
             <button class="arrow right">›</button>
             <div class="image-pagination">.....</div>
@@ -35,29 +30,16 @@
             <div class="prodotto-description">
                 <h2>Descrizione</h2>
                 <p><%= @prodotto.descrizione %></p>
+                <p>Categoria: <%= @prodotto.categorium.nome %></p> <!-- Mostra il nome della categoria -->
                 <%= link_to 'Visualizza Negozio', visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
+                <% if @prezzo_scontato && @prezzo_scontato < @prodotto.prezzo %>
                 <p>Prezzo:
-                <% if @promozione %>
                   <span style="text-decoration: line-through;"><%= number_to_currency(@prodotto.prezzo) %></span>
                   <strong><%= number_to_currency(@prezzo_scontato) %></strong>
+                </p>
                 <% else %>
-                  <%= number_to_currency(@prodotto.prezzo) %>
+                <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
                 <% end %>
-              </p>
-              
-                <% if @promozione %>
-                  <div class="promozione-attiva">
-                  <h2>Promozione Attiva</h2>
-                  <p><strong><%= @promozione.nome %></strong></p>
-                  <p><%= @promozione.descrizione %></p>
-                  <p>Sconto: <%= number_to_percentage(@promozione.sconto, precision: 2) %></p>
-                  <p>Valida dal <%= @promozione.inizio.strftime("%d %b %Y") %> al <%= @promozione.fine.strftime("%d %b %Y") %></p>
-                  </div>
-                <% end %>
-
-                <p>Categoria: <%= @prodotto.categorium.nome %></p> <!-- Mostra il nome della categoria -->
-
-
             </div>
 
             <% if logged_in? && current_user.is_a?(Acquirente) %>

@@ -26,22 +26,36 @@ class Prodotto < ApplicationRecord
 
   # Trova la promozione attiva più recente per il prodotto o la categoria
   def promozione_attiva
-    promoziones
-      .where("inizio <= ? AND fine >= ?", Date.today, Date.today)
-      .order(created_at: :desc)
-      .first
+    oggi = Date.today
+  
+    Promozione.where("inizio <= ? AND fine >= ?", oggi, oggi)
+              .where(
+                "prodotto_id = :pid OR categorium_id = :cid OR negozio_id = :nid OR 
+                (prodotto_id IS NULL AND categorium_id IS NULL AND negozio_id IS NULL)",
+                pid: self.id,
+                cid: self.categorium_id,
+                nid: self.negozio_id
+              )
+              .order(sconto: :desc)
+              .first
   end
-
+  
   # Restituisce il prezzo con lo sconto applicato, se presente
   def prezzo_scontato
-    promo = promozione_attiva
-    if promo
-      [prezzo - (prezzo * promo.sconto / 100.0), 0].max # Evita prezzi negativi
+    oggi = Date.today
+  
+    promozioni_attive = Promozione.where("inizio <= ? AND fine >= ?", oggi, oggi)
+      .where("prodotto_id = ? OR categorium_id = ? OR tipo = ?", id, categorium_id, 'intero_sito')
+  
+    migliore_promozione = promozioni_attive.max_by(&:sconto)
+  
+    if migliore_promozione.present?
+      prezzo - (prezzo * (migliore_promozione.sconto / 100.0))
     else
       prezzo
     end
   end
-
+  
   def quantita_disponibile
     self[:quantita_disponibile] || 0 # Ritorna 0 se il valore è nullo
   end

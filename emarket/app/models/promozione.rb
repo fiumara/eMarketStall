@@ -17,7 +17,7 @@ class Promozione < ApplicationRecord
     when 'categoria'
       errors.add(:categorium, 'must be present for categoria') unless categorium_id.present?
     when 'intero_sito'
-      errors.add(:negozio, 'must be present for intero_sito') unless negozio_id.present?
+      errors.add(:negozio, 'must be present for intero_sito') if negozio_id.present?
     end
   end
   
