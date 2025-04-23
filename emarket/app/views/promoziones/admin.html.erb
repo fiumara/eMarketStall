@@ -27,7 +27,7 @@
                         </td>
                         <td class="promo-actions">
                             <%= link_to 'Modifica', edit_promozione_path(promozione), class: 'btn-edit' %>
-                            <%= link_to 'Elimina', promozione, method: :delete, data: { confirm: 'Sei sicuro?' }, class: 'btn-delete' %>
+                            <%= button_to 'Elimina', promozione, method: :delete, data: { turbo: false, confirm: 'Sei sicuro?' }, class: 'btn-delete' %>
                         </td>
                     </tr>
                 <% end %>
