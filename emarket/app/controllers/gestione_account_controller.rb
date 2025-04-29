@@ -3,7 +3,23 @@ class GestioneAccountController < ApplicationController
 
   def manage
     @acquirente = Acquirente.all
+  
+    if params[:search].present?
+      @acquirente = @acquirente.where("LOWER(nome) LIKE ? OR LOWER(cognome) LIKE ? OR LOWER(nome_utente) LIKE ?", 
+                                       "%#{params[:search].downcase}%", 
+                                       "%#{params[:search].downcase}%", 
+                                       "%#{params[:search].downcase}%")
+    end
+  
+    case params[:user_type]
+    when "acquirente"
+      @acquirente = @acquirente.select { |a| a.negozio.blank? }
+    when "venditore"
+      @acquirente = @acquirente.select { |a| a.negozio.present? }
+    end
   end
+  
+  
 
   def blocca
     acquirente = Acquirente.find(params[:id])
