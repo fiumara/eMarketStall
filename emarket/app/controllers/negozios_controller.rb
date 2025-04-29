@@ -15,6 +15,11 @@ class NegoziosController < ApplicationController
   def visualizza
   end
 
+  def seguaci
+    @negozio = Negozio.find(params[:id])
+    @seguaci = @negozio.followers
+  end
+  
   # GET /negozios/new
   def new
     @negozio = current_user.build_negozio

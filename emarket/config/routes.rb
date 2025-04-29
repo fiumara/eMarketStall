@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       get 'recensioni', to: 'recensioninegozio#index'
       get 'feedbacks', to: 'negozios#feedbacks'
       get 'visualizza', to: 'negozios#visualizza'
+      get 'seguaci'
     end
   end
 
@@ -69,7 +70,12 @@ Rails.application.routes.draw do
   resources :prodottos
   resources :recensiones
   resources :variantis
-  resources :acquirentes
+  resources :acquirentes do
+    member do
+      get 'visualizza'
+    end
+  end
+  
   resources :amministratores, only: [:create, :show, :edit, :update]
 
   resources :faqs do
