@@ -10,9 +10,14 @@ class SessionsController < ApplicationController
            end
   
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      session[:role] = params[:role]
-      redirect_to profile_path(user), notice: "Accesso effettuato con successo!"
+      if params[:role] == 'acquirente' && user.bloccato?
+        flash.now[:alert] = "Il tuo account è stato bloccato. Contatta un amministratore."
+        render :new
+      else
+        session[:user_id] = user.id
+        session[:role] = params[:role]
+        redirect_to profile_path(user), notice: "Accesso effettuato con successo!"
+      end
     elsif user && user.password_digest.blank?
       flash.now[:alert] = "Questo account è stato creato tramite Google. Usa il login con Google per accedere."
       render :new
@@ -21,6 +26,7 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+  
 
   def destroy
     session[:user_id] = nil
