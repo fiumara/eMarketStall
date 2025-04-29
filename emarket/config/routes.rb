@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
     resources :prodottos, only: [:new, :create]
     member do
-      get 'statistiche', to: 'statistichenegozio#index'
+      get :statistiche
       get 'recensioni', to: 'recensioninegozio#index'
       get 'feedbacks', to: 'negozios#feedbacks'
       get 'visualizza', to: 'negozios#visualizza'

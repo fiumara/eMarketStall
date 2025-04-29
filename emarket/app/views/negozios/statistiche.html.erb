@@ -1,0 +1,32 @@
+<h2>Statistiche generali del negozio</h2>
+<ul>
+  <li>Totale vendite: <%= @totale_vendite %></li>
+  <li>Guadagni ultimo mese: €<%= number_with_precision(@guadagni_ultimo_mese, precision: 2) %></li>
+  <li>Guadagni ultimo anno: €<%= number_with_precision(@guadagni_ultimo_anno, precision: 2) %></li>
+  <li>Prodotti in vendita: <%= @prodotti_in_vendita %></li>
+  <li>Prezzo medio: €<%= number_with_precision(@media_prezzo, precision: 2) %></li>
+</ul>
+
+<h2>Statistiche per prodotto</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome prodotto</th>
+      <th>Venduti totali</th>
+      <th>Disponibili</th>
+      <th>Venduti ultimo mese</th>
+      <th>Venduti ultimo anno</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statistiche_per_prodotto.each do |stat| %>
+      <tr>
+        <td><%= stat[:prodotto].nome_prodotto %></td>
+        <td><%= stat[:venduti] %></td>
+        <td><%= stat[:disponibili] %></td>
+        <td><%= stat[:venduti_ultimo_mese] %></td>
+        <td><%= stat[:venduti_ultimo_anno] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
