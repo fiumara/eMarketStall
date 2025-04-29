@@ -1,0 +1,25 @@
+<h1>Statistiche Generali</h1>
+
+<h2>Utenti registrati</h2>
+<p>Acquirenti totali: <%= @acquirenti_totali %></p>
+<p>Venditori totali: <%= @venditori_totali %></p>
+<p>Acquirenti questo mese: <%= @acquirenti_corrente_mese %></p>
+<p>Venditori questo mese: <%= @venditori_corrente_mese %></p>
+<p>Acquirenti quest'anno: <%= @acquirenti_corrente_anno %></p>
+<p>Venditori quest'anno: <%= @venditori_corrente_anno %></p>
+
+<h2>Ordini e vendite</h2>
+<p>Vendite totali: <%= @vendite_totali %></p>
+<p>Media acquisti per acquirente: <%= number_with_precision(@media_acquisti_per_acquirente, precision: 2) %></p>
+<p>Media articoli per ordine: <%= number_with_precision(@media_articoli_per_ordine, precision: 2) %></p>
+
+<h2>Acquirenti</h2>
+<p>Con almeno un ordine: <%= @rapporto_acquirenti_0_vs_1plus[:con_ordini] %></p>
+<p>Senza ordini: <%= @rapporto_acquirenti_0_vs_1plus[:senza_ordini] %></p>
+
+<h2>Venditori</h2>
+<p>Media prodotti in vendita per venditore: <%= number_with_precision(@media_prodotti_per_venditore, precision: 2) %></p>
+<p>Media guadagno per venditore: <%= number_to_currency(@media_guadagno_per_venditore) %></p>
+
+<h2>Acquirenti</h2>
+<p>Media spesa per acquirente: <%= number_to_currency(@media_spesa_per_acquirente) %></p>

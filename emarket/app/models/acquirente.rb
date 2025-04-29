@@ -29,7 +29,8 @@ class Acquirente < ApplicationRecord
 
   # Validazioni
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }, unless: -> { id_acquirente.present? }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
+
 
   validates :id_acquirente, uniqueness: true, allow_nil: true
 

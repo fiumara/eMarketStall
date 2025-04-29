@@ -7,9 +7,16 @@ class GestioneAccountController < ApplicationController
 
   def blocca
     acquirente = Acquirente.find(params[:id])
-    acquirente.update(bloccato: true)
-    redirect_to gestione_account_path, notice: "Utente bloccato con successo"
+    acquirente.bloccato = true
+  
+    if acquirente.save
+      redirect_to gestione_account_path, notice: "Utente bloccato con successo."
+    else
+      logger.error "Errore nel bloccare l'utente: #{acquirente.errors.full_messages.join(", ")}"
+      redirect_to gestione_account_path, alert: "Errore nel bloccare l'utente."
+    end
   end
+  
   
   def sblocca
     acquirente = Acquirente.find(params[:id])
