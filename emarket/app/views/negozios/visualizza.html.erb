@@ -17,11 +17,12 @@
         <p>Telefono: <%= @negozio.telefono %></p>
         <button>Segnala</button>
         <p>Followers: <%= @negozio.followers.count %></p>
-
-        <% if current_user && current_user.follows.exists?(negozio: @negozio) %>
-          <%= button_to "Non seguire", negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
-        <% else %>
-          <%= button_to "Segui", negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
+        <% if current_user.is_a?(Acquirente) %>
+          <% if current_user.follows.exists?(negozio: @negozio) %>
+            <%= button_to "Non seguire", negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
+          <% else %>
+            <%= button_to "Segui", negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
+          <% end %>
         <% end %>
 
       <% else %>
