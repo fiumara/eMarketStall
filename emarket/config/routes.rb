@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   get 'signup', to: 'acquirentes#new', as: 'signup'
   get 'admin_signup', to: 'amministratores#new', as: 'admin_signup'
 
+  get 'amministratore/statistiche', to: 'amministratores#statistiche', as: :statistiche_amministratore
+
+
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'

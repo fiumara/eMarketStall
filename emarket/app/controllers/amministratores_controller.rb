@@ -72,6 +72,40 @@ class AmministratoresController < ApplicationController
     @feedbacks = Feedback.where(segnalato: true).includes(:acquirente, :prodotto)
   end
 
+  def statistiche
+    @acquirenti_totali = Acquirente.count
+    @venditori_totali = Negozio.count
+  
+    @acquirenti_corrente_mese = Acquirente.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+    @venditori_corrente_mese = Negozio.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+  
+    @acquirenti_corrente_anno = Acquirente.where(created_at: Time.current.beginning_of_year..Time.current.end_of_year).count
+    @venditori_corrente_anno = Negozio.where(created_at: Time.current.beginning_of_year..Time.current.end_of_year).count
+  
+    @vendite_totali = Ordine.count
+    @media_acquisti_per_acquirente = Ordine.group(:acquirente_id).count.values.sum.to_f / Acquirente.count rescue 0
+  
+    @media_articoli_per_ordine = Ordine.joins(:ordine_items).group(:id).count.values.sum.to_f / Ordine.count rescue 0
+  
+    acquirenti_con_almeno_un_ordine = Acquirente.joins(:ordini).distinct.count
+    acquirenti_senza_ordini = Acquirente.count - acquirenti_con_almeno_un_ordine
+    @rapporto_acquirenti_0_vs_1plus = {
+      con_ordini: acquirenti_con_almeno_un_ordine,
+      senza_ordini: acquirenti_senza_ordini
+    }
+  
+    @media_prodotti_per_venditore = Negozio.joins(:prodottos).group(:id).count.values.sum.to_f / Negozio.count rescue 0
+  
+    @media_guadagno_per_venditore = Negozio.all.map do |negozio|
+      negozio.prodottos.joins(:ordine_items).sum("ordine_items.prezzo * ordine_items.quantity")
+    end.sum.to_f / Negozio.count rescue 0
+  
+    @media_spesa_per_acquirente = Acquirente.all.map do |acq|
+      acq.ordini.joins(:ordine_items).sum("ordine_items.prezzo * ordine_items.quantity")
+    end.sum.to_f / Acquirente.count rescue 0
+  end
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_amministratore
