@@ -68,6 +68,36 @@ class NegoziosController < ApplicationController
     end
   end
 
+  def statistiche
+    @negozio = Negozio.find(params[:id])
+    prodotti = @negozio.prodottos.includes(:ordine_items)
+  
+    ordine_items = prodotti.flat_map(&:ordine_items)
+  
+    # Statistiche generali
+    @totale_vendite = ordine_items.sum(&:quantity)
+    @guadagni_ultimo_mese = ordine_items.select { |oi| oi.created_at >= 1.month.ago }.sum { |oi| oi.quantity * oi.prezzo }
+    @guadagni_ultimo_anno = ordine_items.select { |oi| oi.created_at >= 1.year.ago }.sum { |oi| oi.quantity * oi.prezzo }
+    @prodotti_in_vendita = prodotti.count
+    @media_prezzo = (@negozio.prodottos.average(:prezzo) || 0).to_f
+
+  
+    # Statistiche per prodotto
+    @statistiche_per_prodotto = prodotti.map do |p|
+      items = p.ordine_items
+      {
+        prodotto: p,
+        venduti: items.sum(:quantity),
+        disponibili: p.quantita_disponibile,
+        venduti_ultimo_mese: items.where(created_at: 1.month.ago..Time.current).sum(:quantity),
+        venduti_ultimo_anno: items.where(created_at: 1.year.ago..Time.current).sum(:quantity)
+      }
+    end
+  end
+  
+  
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_negozio

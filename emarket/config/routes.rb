@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     delete 'unfollow', to: 'follows#destroy'
     resources :prodottos, only: [:new, :create]
     member do
-      get 'statistiche', to: 'statistichenegozio#index'
+      get :statistiche
       get 'recensioni', to: 'recensioninegozio#index'
       get 'feedbacks', to: 'negozios#feedbacks'
       get 'visualizza', to: 'negozios#visualizza'
