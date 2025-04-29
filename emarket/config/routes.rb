@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'follows/create'
+  get 'follows/destroy'
   get 'feedbacks/new'
   get 'feedbacks/create'
   get 'return_requests/index'
@@ -108,6 +110,8 @@ Rails.application.routes.draw do
   end
 
   Rails.application.routes.draw do
+  get 'follows/create'
+  get 'follows/destroy'
   get 'feedbacks/new'
   get 'feedbacks/create'
   get 'return_requests/index'
@@ -117,6 +121,8 @@ Rails.application.routes.draw do
   get 'return_requests/update'
     resources :negozios do
       resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
+      post 'follow', to: 'follows#create'
+      delete 'unfollow', to: 'follows#destroy'
     end
   end
 

@@ -15,9 +15,15 @@
         <p>Descrizione: <%= @negozio.descrizione %></p>
         <p>Indirizzo: <%= @negozio.indirizzo %></p>
         <p>Telefono: <%= @negozio.telefono %></p>
-        <button>Segui</button>
         <button>Segnala</button>
-        <p>Followers: 0</p> <!-- Se il conteggio dei followers è disponibile, sostituire 0 con il valore reale -->
+        <p>Followers: <%= @negozio.followers.count %></p>
+
+        <% if current_user && current_user.follows.exists?(negozio: @negozio) %>
+          <%= button_to "Non seguire", negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
+        <% else %>
+          <%= button_to "Segui", negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
+        <% end %>
+
       <% else %>
         <p>Il negozio non è stato trovato.</p>
       <% end %>

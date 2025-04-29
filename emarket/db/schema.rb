@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_04_16_154027) do
+ActiveRecord::Schema.define(version: 2025_04_29_140213) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(version: 2025_04_16_154027) do
     t.index ["acquirente_id"], name: "index_feedbacks_on_acquirente_id"
     t.index ["ordine_item_id"], name: "index_feedbacks_on_ordine_item_id"
     t.index ["prodotto_id"], name: "index_feedbacks_on_prodotto_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "acquirente_id", null: false
+    t.integer "negozio_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_follows_on_acquirente_id"
+    t.index ["negozio_id"], name: "index_follows_on_negozio_id"
   end
 
   create_table "messaggi", force: :cascade do |t|
@@ -287,6 +296,8 @@ ActiveRecord::Schema.define(version: 2025_04_16_154027) do
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade
+  add_foreign_key "follows", "acquirentes", on_delete: :cascade
+  add_foreign_key "follows", "negozios", on_delete: :cascade
   add_foreign_key "messaggi", "chat_rooms", on_delete: :cascade
   add_foreign_key "negozios", "acquirentes"
   add_foreign_key "ordine_items", "ordini"
