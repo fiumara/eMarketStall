@@ -3,7 +3,10 @@ class Acquirente < ApplicationRecord
   has_secure_password
   before_create :default_values
 
- 
+  #Follower
+  has_many :follows
+  has_many :negozi_seguiti, through: :follows, source: :negozio
+
 
   # Associazioni
   

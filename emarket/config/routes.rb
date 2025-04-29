@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'auth#callback'
   get '/auth/failure', to: 'auth#failure'
 
+  get 'follows/create'
+  get 'follows/destroy'
   get 'feedbacks/new'
   get 'feedbacks/create'
   get 'return_requests/index'
@@ -41,6 +43,8 @@ Rails.application.routes.draw do
 
   resources :negozios do
     resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
+    post 'follow', to: 'follows#create'
+    delete 'unfollow', to: 'follows#destroy'
     resources :prodottos, only: [:new, :create]
     member do
       get :statistiche
