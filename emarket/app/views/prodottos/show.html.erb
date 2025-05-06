@@ -67,7 +67,8 @@
         </div>
 
         <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
-        <%= link_to "Elimina Prodotto", prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo prodotto?" }, class: "btn btn-danger" %>
+          <%= link_to "Modifica Prodotto", edit_prodotto_path(@prodotto), class: "btn btn-warning" %>
+          <%= link_to "Elimina Prodotto", prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo prodotto?" }, class: "btn btn-danger" %>
         <% end %>
 
 

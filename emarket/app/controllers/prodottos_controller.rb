@@ -1,7 +1,7 @@
 class ProdottosController < ApplicationController
   before_action :set_negozio, only: [:new, :create]
   before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_proprietario, only: [:destroy]
+  before_action :authorize_proprietario, only: [:destroy, :edit, :update]
 
   # GET /prodottos or /prodottos.json
   def index

@@ -1,13 +1,59 @@
-<%= form_with(model: prodotto, local: true) do |form| %>
-  <% if prodotto.errors.any? %>
+
+
+
+<%= form_with(model: [@negozio, @prodotto], local: true) do |form| %>
+  <% if @prodotto.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(prodotto.errors.count, "error") %> prohibited this prodotto from being saved:</h2>
+      <h2><%= pluralize(@prodotto.errors.count, "error") %> prohibited this prodotto from being saved:</h2>
       <ul>
-        <% prodotto.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% @prodotto.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :nome_prodotto %>
+    <%= form.text_field :nome_prodotto %>
+  </div>
+
+  <div class="field">
+  <%= form.label :immagini, "Carica immagini" %>
+  <%= form.file_field :immagini, multiple: true %>
+</div>
+
+<% if @prodotto.immagini.attached? %>
+  <div>
+    <h3>Immagini attuali:</h3>
+    <% @prodotto.immagini.each do |img| %>
+      <%= image_tag img.variant(resize_to_limit: [300, 300]) %>
+    <% end %>
+  </div>
+<% end %>
+
+
+  <div class="field">
+    <%= form.label :descrizione %>
+    <%= form.text_area :descrizione %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prezzo %>
+    <%= form.number_field :prezzo, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :categorium_id, "Categoria" %>
+    <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, prompt: "Seleziona una Categoria" %>
+  </div>
+
+  <div class="field">
+  <%= form.label :quantita_disponibile, "Quantità Disponibile" %>
+  <%= form.number_field :quantita_disponibile, min: 0 %>
+</div>
+
+  <div class="actions">
+  <%= form.submit prodotto.persisted? ? "Aggiorna Prodotto" : "Crea Prodotto" %>
+  </div>
 <% end %>
