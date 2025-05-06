@@ -48,8 +48,8 @@
                   <%= hidden_field_tag :prodotto_id, @prodotto.id %>
                   <div>
                     <%= label_tag :quantity, "Quantità:" %>
-                    <%= number_field_tag :quantity, 1, min: 1 %>
-                  </div>
+                    <%= number_field_tag :quantity, 1, min: 1, max: @prodotto.quantita_disponibile %>
+                    </div>
                   <%= submit_tag "Aggiungi al carrello", class: "btn btn-primary" %>
                 <% end %>
               </div>

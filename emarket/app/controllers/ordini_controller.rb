@@ -27,10 +27,20 @@ class OrdiniController < ApplicationController
     end
   
     carrello = current_user.carrello
+
     if carrello.carrello_items.empty?
       redirect_to carrello_path, alert: "Il carrello è vuoto. Aggiungi prodotti prima di procedere al pagamento."
       return
     end
+
+# ✅ Controlla che ci sia abbastanza disponibilità per ogni prodotto
+    carrello.carrello_items.each do |item|
+    if item.quantity > item.prodotto.quantita_disponibile
+      redirect_to carrello_path, alert: "La quantità di '#{item.prodotto.nome_prodotto}' supera la disponibilità attuale (#{item.prodotto.quantita_disponibile})."
+      return
+    end
+  end
+
   
     ordini_per_negozio = carrello.carrello_items.group_by { |item| item.prodotto.negozio }
   
@@ -50,12 +60,18 @@ class OrdiniController < ApplicationController
   
         # 📌 Creiamo OrdineItems per ogni CarrelloItem
         items.each do |item|
+          prodotto = item.prodotto
           ordine.ordine_items.create!(
-            prodotto: item.prodotto,
+            prodotto: prodotto,
             quantity: item.quantity,
-            prezzo: item.prodotto.prezzo_scontato # Salviamo il prezzo scontato
+            prezzo: prodotto.prezzo_scontato
           )
+        
+          # 🔽 Diminuisci la quantità disponibile del prodotto
+          nuova_quantita = [prodotto.quantita_disponibile - item.quantity, 0].max
+          prodotto.update!(quantita_disponibile: nuova_quantita)
         end
+        
   
         ordini << ordine
   
