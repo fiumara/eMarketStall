@@ -65,5 +65,3 @@ class GestioneAccountController < ApplicationController
   
   
 end
-      
-      

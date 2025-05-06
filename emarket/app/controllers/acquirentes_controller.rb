@@ -46,6 +46,9 @@ class AcquirentesController < ApplicationController
     end
   end
   
+  def visualizza
+    @acquirente = Acquirente.find(params[:id])
+  end
 
   # DELETE /acquirentes/1 or /acquirentes/1.json
   def destroy

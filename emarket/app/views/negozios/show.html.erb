@@ -33,7 +33,8 @@
           <p class="card-text"><strong>Telefono:</strong> <%= @negozio.telefono %></p>
           <p class="card-text"><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
           <p class="card-text">
-            <button class="btn btn-outline-primary">Seguaci</button>
+          <%= link_to 'Seguaci', seguaci_negozio_path(@negozio), class: "btn btn-outline-primary" %>
+
           </p>
         </div>
       </div>
