@@ -2,95 +2,134 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= yield :title %></title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application', type: 'module', crossorigin: 'anonymous', 'data-turbo-track': 'reload' %>
- 
-
-
   <%= csrf_meta_tags %>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
+    body {
+      background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+    }
+
+    /* Header */
     .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px;
-      background-color: #f8f9fa;
-      border-bottom: 1px solid #dee2e6;
+      padding: 20px 40px;
+      background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .logo-home {
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: bold;
+      color: #fff;
       text-decoration: none;
-      color: #007bff;
+      transition: color 0.3s ease;
     }
-    
-    /* Hamburger Menu Icon */
+
+    .logo-home:hover {
+      color: #d4fc79;
+    }
+
     .hamburger-menu {
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      width: 30px;
-      height: 30px;
+      justify-content: space-between;
+      width: 35px;
+      height: 28px;
       background: transparent;
       border: none;
-      padding: 0;
-      z-index: 1001; /* Ensure it is on top */
-    }
-    
-    .hamburger-menu div {
-      width: 30px;
-      height: 3px;
-      background-color: #007bff;
-      border-radius: 5px;
-      transition: all 0.3s linear;
-      position: relative;
     }
 
-    /* Right side menu */
+    .hamburger-menu div {
+      width: 35px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    /* Right Menu */
     .right-side-menu {
       display: none;
       position: fixed;
       top: 0;
       right: 0;
-      width: 300px;
+      width: 280px;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 1000;
-      color: white;
-      padding: 20px;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(180deg, #c2e9fb, #e0c3fc);
+      z-index: 1050;
+      padding: 40px 25px;
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
       overflow-y: auto;
     }
-    
+
     .right-side-menu a {
-      color: white;
-      font-size: 1.2rem;
       display: block;
-      margin: 20px 0;
+      margin: 18px 0;
+      font-size: 1.1rem;
+      color: #2c3e50;
       text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
 
     .right-side-menu a:hover {
-      color: #ddd;
+      color: #6a11cb;
+      transform: translateX(5px);
+    }
+
+    .right-side-menu .btn-danger {
+      background-color: #ff6f61;
+      border: none;
+      margin-top: 30px;
+    }
+
+    .right-side-menu .btn-danger:hover {
+      background-color: #ff4b2b;
     }
 
     .close-btn {
       position: absolute;
-      top: 10px;
+      top: 15px;
       left: 20px;
       font-size: 2rem;
       cursor: pointer;
+      color: #333;
+    }
+
+    /* Main Content */
+    main.container {
+      padding-top: 50px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="header-content">
-      <%= link_to 'Home', root_path, class: 'logo-home' %>
+      <%= link_to 'Emarketstall', root_path, class: 'logo-home' %>
       <button class="hamburger-menu" onclick="toggleRightSideMenu()">
         <div></div>
         <div></div>
@@ -98,37 +137,35 @@
       </button>
     </div>
   </header>
-  
+
   <div id="rightSideMenu" class="right-side-menu">
-  <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
-  <% if logged_in? %>
-    <% if current_user.is_a?(Acquirente) %>
-      <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
-      <%= link_to 'Carrello', carrello_path %> <!-- Link al carrello -->
-      <%= link_to 'FAQs', faqs_path %>
-    <% elsif current_user.is_a?(Amministratore) %>
-      <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
-    <% end %>
-    <%= button_to 'Logout', logout_path, method: :delete %>
+    <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
+    <% if logged_in? %>
+      <% if current_user.is_a?(Acquirente) %>
+        <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
+        <%= link_to 'Carrello', carrello_path %>
+        <%= link_to 'FAQs', faqs_path %>
+      <% elsif current_user.is_a?(Amministratore) %>
+        <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
+      <% end %>
+      <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger w-100' %>
     <% else %>
-    <%= link_to 'Accedi', login_path %>
-    <%= link_to 'FAQs', faqs_path %>
-  <% end %>
-</div>
+      <%= link_to 'Accedi', login_path %>
+      <%= link_to 'FAQs', faqs_path %>
+    <% end %>
+  </div>
 
-
-  <main class="container mt-4">
+  <main class="container">
     <%= yield %>
   </main>
 
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
     function toggleRightSideMenu() {
-      var menu = document.getElementById("rightSideMenu");
-      if (menu.style.display === "block") {
-        menu.style.display = "none";
-      } else {
-        menu.style.display = "block";
-      }
+      const menu = document.getElementById("rightSideMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
   </script>
 </body>

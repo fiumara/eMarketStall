@@ -1,104 +1,142 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <%= csrf_meta_tags %>
-    <style>
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .dropdown-content a:hover {background-color: #f1f1f1;}
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+
+  <style>
+    body {
+      background: #f4f9fb;
+    }
+    .navbar {
+      background-color: #6f42c1; /* viola */
+    }
+    .navbar-brand, .nav-link, .navbar-toggler-icon {
+      color: #fff !important;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffe484 !important;
+    }
+    .card {
+      border: none;
+      border-radius: 16px;
+    }
+    .card-title {
+      color: #007bff;
+    }
+    .btn-primary {
+      background-color: #28a745; /* verde brillante */
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+    }
+    .btn-outline-primary {
+      border-color: #007bff;
+      color: #007bff;
+    }
+    .btn-outline-primary:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .promotion {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    footer {
+      background-color: #343a40;
+      color: #fff;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-    
-    </header>
-    <nav class="categories">
-        <% Categorium.all.each do |categorium| %>
-            <%= link_to categorium.nome, categoria_path(categorium), class: " nav-link btn btn-primary" %>
-        <% end %>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <% Categorium.all.each do |categorium| %>
+              <li class="nav-item">
+                <%= link_to categorium.nome, categoria_path(categorium), class: 'nav-link' %>
+              </li>
+            <% end %>
+          </ul>
+
+          <!-- Search -->
+          <%= form_with url: prodottos_path, method: :get, local: true, class: "d-flex" do %>
+            <%= text_field_tag :search, params[:search], placeholder: "Cerca", class: "form-control me-2 rounded-pill" %>
+            <%= submit_tag "Cerca", class: "btn btn-primary rounded-pill" %>
+          <% end %>
+        </div>
+      </div>
     </nav>
-    <main>
-        <div class="filter-search">
-            <%= form_with url: prodottos_path, method: :get, local: true do %>
-                <input type="text" name="search" placeholder="Cerca" value="<%= params[:search] %>">
-                <button type="submit" class="btn btn-primary mb-2">Cerca</button>
-            <% end %>
-        </div>
-        <div class="promotions">
-        
-                <h2>Promozioni</h2>
-                <div class="row">
-        <% if @promoziones.present? %>
-            <% @promoziones.each do |promozione| %>
-                <div class="promotion">
-                    <h2><%= link_to promozione.nome, promozione_path(promozione), class: "card-title" %></h2>
-                    <p><%= promozione.descrizione %></p>
-                </div>
-            <% end %>
-            </div>
-            <div class="show-promo">
-                <%= link_to "Mostra promo", promoziones_path %>
-            </div>
-        <% end %> 
-        
-        </div>
-        </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mt-4">
+    <!-- Promozioni -->
+    <% if @promoziones.present? %>
+      <section class="mb-5">
+        <h2 class="mb-4 text-primary">🎉 Promozioni in corso</h2>
         <div class="row">
-            <div class="col-md-12">
-                <h2>Prodotti</h2>
-                <div class="row">
-                    <% if @prodottos.present? %>
-                        <% @prodottos.each do |prodotto| %>
-                            <div class="col-md-4">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "card-title" %>
-                                        <p class="card-text"><%= prodotto.descrizione %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <% end %>
-                    <% else %>
-                        <p>No products available.</p>
-                    <% end %>
-                </div>
+          <% @promoziones.each do |promozione| %>
+            <div class="col-md-4">
+              <div class="promotion shadow-sm">
+                <h5>
+                  <%= link_to promozione.nome, promozione_path(promozione), class: "text-decoration-none text-dark fw-bold" %>
+                </h5>
+                <p><%= promozione.descrizione %></p>
+              </div>
             </div>
+          <% end %>
         </div>
-        <br>
-        
-    </main>
+        <div class="text-end mt-3">
+          <%= link_to "Mostra tutte le promozioni", promoziones_path, class: "btn btn-outline-primary" %>
+        </div>
+      </section>
+    <% end %>
+
+    <!-- Prodotti -->
+    <section>
+      <h2 class="mb-4 text-success">🛍️ Prodotti disponibili</h2>
+      <div class="row">
+        <% if @prodottos.present? %>
+          <% @prodottos.each do |prodotto| %>
+            <div class="col-md-4 mb-4">
+              <div class="card shadow-sm h-100">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "text-decoration-none" %>
+                  </h5>
+                  <p class="card-text"><%= prodotto.descrizione %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">Nessun prodotto disponibile.</p>
+        <% end %>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-5">
+    <p class="mb-0">&copy; <%= Time.current.year %> Marketplace - Tutti i diritti riservati</p>
+  </footer>
 </body>
 </html>
-
