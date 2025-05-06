@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   delete 'remove_from_wishlist/:id', to: 'lista_desideri#remove', as: 'remove_from_wishlist'
 
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
-  get 'cronologioricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
+  get 'cronologiaricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
 
   resources :resi, only: [:index, :update]
 

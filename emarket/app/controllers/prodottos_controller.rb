@@ -10,14 +10,22 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos/1 or /prodottos/1.json
   def show
-    @prodotto = @prodotto = Prodotto.find(params[:id])
+    @prodotto = Prodotto.find(params[:id])
     @promozione = @prodotto.promozione_attiva
     @prezzo_scontato = @prodotto.prezzo_scontato
-
     @feedbacks = @prodotto.feedbacks.includes(:acquirente)
-
-
+  
+    if current_user.is_a?(Acquirente)
+      CronologiaRicerca.create(acquirente: current_user, prodotto: @prodotto)
+  
+      # Mantieni solo le ultime 50
+      cronologie = CronologiaRicerca.where(acquirente: current_user).order(created_at: :desc)
+      if cronologie.count > 50
+        cronologie.offset(50).destroy_all
+      end
+    end
   end
+  
 
   # GET /prodottos/new
   def new
