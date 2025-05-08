@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 2025_05_08_162655) do
     t.string "id_acquirente"
     t.string "image_url"
     t.boolean "bloccato", default: false
-    t.boolean "privato"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.boolean "privato"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -305,8 +305,8 @@ ActiveRecord::Schema.define(version: 2025_05_08_162655) do
   add_foreign_key "carrello_items", "ordini", on_delete: :cascade
   add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
   add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "acquirentes"
-  add_foreign_key "cronologia_ricercas", "prodottos"
+  add_foreign_key "cronologia_ricercas", "acquirentes", on_delete: :cascade
+  add_foreign_key "cronologia_ricercas", "prodottos", on_delete: :cascade
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade
