@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/create'
+  get 'password_resets/edit'
+  get 'password_resets/update'
   root 'home#index'
 
   get '/auth/google_oauth2', to: 'auth#google', as: :google_auth
@@ -124,6 +128,9 @@ Rails.application.routes.draw do
       patch :ignora_segnalazione
     end
   end
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
 
   get 'admin/feedbacks_segnalati', to: 'amministratores#feedbacks_segnalati', as: 'admin_feedbacks_segnalati'
 

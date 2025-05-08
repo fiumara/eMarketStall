@@ -1,0 +1,9 @@
+<p>Ciao <%= @user.nome %>,</p>
+
+<p>Hai richiesto di reimpostare la password. Clicca qui sotto:</p>
+
+<p>
+<%= link_to 'Reimposta password', edit_password_reset_url(@user.id, token: @token) %>
+</p>
+
+<p>Se non hai richiesto tu questa operazione, ignora pure questa email.</p>

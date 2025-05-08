@@ -1,0 +1,11 @@
+<h2>Recupero password</h2>
+
+<%= form_with url: password_resets_path, local: true do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= form.submit "Invia istruzioni" %>
+  </div>
+<% end %>

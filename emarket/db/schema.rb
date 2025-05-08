@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2025_05_08_162655) do
     t.string "image_url"
     t.boolean "bloccato", default: false
     t.boolean "privato"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
