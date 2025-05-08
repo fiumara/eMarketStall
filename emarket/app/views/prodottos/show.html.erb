@@ -13,19 +13,22 @@
         <h1><%= @prodotto.nome_prodotto %></h1>
         <div class="prodotto-container">
         <% if @prodotto.immagini.attached? %>
-  <div class="image-gallery">
-    <% @prodotto.immagini.each do |img| %>
-      <%= image_tag url_for(img), width: 500, height: 500 %>
+  <div id="carousel" class="image-gallery">
+    <% @prodotto.immagini.each_with_index do |img, index| %>
+      <%= image_tag url_for(img), class: "carousel-image", id: "image-#{index}", style: (index == 0 ? "" : "display:none;") %>
     <% end %>
+
+    <div>
+    <button id="prevBtn" class="carousel-button">←</button>
+    <button id="nextBtn" class="carousel-button">→</button>
+    </div>
   </div>
 <% else %>
   <p>Nessuna immagine disponibile</p>
 <% end %>
 
-            <button class="arrow left">‹</button>
-            <button class="arrow right">›</button>
-            <div class="image-pagination">.....</div>
-        </div>
+
+            
         <div class="prodotto-details">
             <div class="prodotto-description">
                 <h2>Descrizione</h2>
@@ -87,3 +90,26 @@
     </main>
 </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const images = document.querySelectorAll(".carousel-image");
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.style.display = i === index ? "block" : "none";
+      });
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+  });
+</script>
