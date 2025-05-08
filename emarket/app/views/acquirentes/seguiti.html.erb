@@ -1,0 +1,13 @@
+<h1>Negozi che segui</h1>
+
+<% if @negozi_seguiti.any? %>
+  <ul>
+    <% @negozi_seguiti.each do |negozio| %>
+      <li>
+        <%= link_to negozio.nome_negozio, visualizza_negozio_path(negozio) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Non stai seguendo nessun negozio.</p>
+<% end %>
