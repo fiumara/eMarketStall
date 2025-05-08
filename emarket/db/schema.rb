@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_06_143300) do
+ActiveRecord::Schema.define(version: 2025_05_08_162655) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2025_05_06_143300) do
     t.string "id_acquirente"
     t.string "image_url"
     t.boolean "bloccato", default: false
+    t.boolean "privato"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|

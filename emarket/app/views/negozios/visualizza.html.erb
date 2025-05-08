@@ -35,8 +35,6 @@
       <% if @negozio&.acquirente.present? %>
         <div class="owner-details">
           <p>Nome utente: <%= @negozio.acquirente.nome_utente %></p>
-          <p>Email: <%= @negozio.acquirente.email %></p>
-          <p>Telefono: <%= @negozio.acquirente.telefono %></p>
           <p><button class="btn btn-outline-primary">scriviciI</button></p>
         </div>
       <% else %>

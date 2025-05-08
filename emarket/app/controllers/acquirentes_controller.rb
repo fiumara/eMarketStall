@@ -48,8 +48,18 @@ class AcquirentesController < ApplicationController
   
   def visualizza
     @acquirente = Acquirente.find(params[:id])
+  
+    if current_user.is_a?(Amministratore) || 
+   (current_user.is_a?(Acquirente) && current_user == @acquirente) || 
+   !@acquirente.privato
+  @profilo_limitato = false
+else
+  @profilo_limitato = true
+end
+
   end
   
+
   def seguiti
     @negozi_seguiti = current_user.negozi_seguiti
   end
@@ -73,7 +83,7 @@ class AcquirentesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def acquirente_params
     #  params.fetch(:acquirente, {})
-    params.require(:acquirente).permit(:nome, :cognome, :nome_utente, :telefono, :email, :password, :password_confirmation, :indirizzo, :profilo_privato)
+    params.require(:acquirente).permit(:nome, :cognome, :nome_utente, :telefono, :email, :password, :password_confirmation, :indirizzo, :privato)
     end
 
     def authorize_acquirente

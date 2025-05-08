@@ -30,6 +30,12 @@
     <%= form.text_field :telefono %>
   </div>
   
+  <div>
+  <%= form.check_box :privato %>
+  <%= form.label :privato, "Profilo privato" %>
+</div>
+
+
   <% if @is_new %>
   <div>
     <%= form.label :email %>
