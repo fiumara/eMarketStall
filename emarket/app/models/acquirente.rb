@@ -50,4 +50,24 @@ class Acquirente < ApplicationRecord
   def default_values
     self.bloccato ||= false
   end
+
+  def create_reset_digest
+    token = SecureRandom.urlsafe_base64
+    update(
+      reset_digest: Digest::SHA256.hexdigest(token),
+      reset_sent_at: Time.current
+    )
+    token
+  end
+
+  def reset_token_valid?(token)
+    reset_digest.present? &&
+      reset_sent_at > 2.hours.ago &&
+      Digest::SHA256.hexdigest(token) == reset_digest
+  end
+
+  def clear_reset_digest
+    update(reset_digest: nil, reset_sent_at: nil)
+  end
+  
 end

@@ -81,6 +81,12 @@ config.action_cable.allowed_request_origins = ['http://localhost:3000', /http:\/
 config.action_cable.url = "ws://localhost:3000/cable"
 config.action_cable.allowed_request_origins = [ 'http://localhost:3000' ]
 
+config.action_mailer.delivery_method = :letter_opener
+config.action_mailer.perform_deliveries = true
+
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+
 
 config.action_cable.log_tags = [
   -> request { request.env['warden'].user.try(:email) || 'Guest' },

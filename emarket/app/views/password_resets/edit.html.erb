@@ -1,0 +1,20 @@
+<h2>Nuova password</h2>
+
+<%= form_with url: password_reset_path, method: :put, local: true do |form| %>
+  <%= hidden_field_tag :email, params[:email] %>
+  <%= hidden_field_tag :token, params[:token] %>
+
+  <div>
+    <%= form.label :password, "Nuova password" %>
+    <%= form.password_field :password, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation, "Conferma password" %>
+    <%= form.password_field :password_confirmation, required: true %>
+  </div>
+
+  <div>
+    <%= form.submit "Salva" %>
+  </div>
+<% end %>
