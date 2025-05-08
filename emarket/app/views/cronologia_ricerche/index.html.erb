@@ -1,11 +1,14 @@
-<h1>Cronologia Ricerca</h1>
+<h1>Cronologia delle Ricerche</h1>
 
-<div class="cronologia-ricerche">
-  <div class="prodotto">
-    <p>Nome prodotto</p>
-    <p>Descrizione prodotto</p>
-    <p>Prezzo</p>
-    <p>★★★★★</p>
-  </div>
-  <button>Cancella cronologia</button>
-</div>
+<% if @prodotti_visualizzati.any? %>
+  <ul>
+    <% @prodotti_visualizzati.each do |prodotto| %>
+      <li>
+        <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %>
+      </li>
+    <% end %>
+  </ul>
+  <%= button_to 'Cancella cronologia', cronologia_ricerche_path, method: :delete, data: { confirm: 'Sei sicuro?' } %>
+<% else %>
+  <p>Nessuna ricerca recente.</p>
+<% end %>

@@ -8,6 +8,7 @@ class Prodotto < ApplicationRecord
   has_many :promoziones, dependent: :destroy
   has_many :carrello_items, dependent: :destroy
   has_many :ordine_items
+  has_many :cronologia_ricerches, dependent: :destroy
 
   has_many :feedbacks, dependent: :destroy
 

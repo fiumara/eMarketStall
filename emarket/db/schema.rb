@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_04_29_140213) do
+ActiveRecord::Schema.define(version: 2025_05_06_143300) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -99,6 +99,15 @@ ActiveRecord::Schema.define(version: 2025_04_29_140213) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["destinatario_type", "destinatario_id"], name: "index_chat_rooms_on_destinatario"
     t.index ["mittente_type", "mittente_id"], name: "index_chat_rooms_on_mittente"
+  end
+
+  create_table "cronologia_ricercas", force: :cascade do |t|
+    t.integer "acquirente_id", null: false
+    t.integer "prodotto_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_cronologia_ricercas_on_acquirente_id"
+    t.index ["prodotto_id"], name: "index_cronologia_ricercas_on_prodotto_id"
   end
 
   create_table "faqs", force: :cascade do |t|
@@ -293,6 +302,8 @@ ActiveRecord::Schema.define(version: 2025_04_29_140213) do
   add_foreign_key "carrello_items", "ordini", on_delete: :cascade
   add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
   add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
+  add_foreign_key "cronologia_ricercas", "acquirentes"
+  add_foreign_key "cronologia_ricercas", "prodottos"
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade
