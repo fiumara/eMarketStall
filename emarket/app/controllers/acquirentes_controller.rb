@@ -49,7 +49,11 @@ class AcquirentesController < ApplicationController
   def visualizza
     @acquirente = Acquirente.find(params[:id])
   end
-
+  
+  def seguiti
+    @negozi_seguiti = current_user.negozi_seguiti
+  end
+  
   # DELETE /acquirentes/1 or /acquirentes/1.json
   def destroy
     @acquirente.destroy

@@ -34,7 +34,7 @@
           <p class="card-text"><strong>Email:</strong> <%= @acquirente.email %></p>
           <p class="card-text"><strong>Telefono:</strong> <%= @acquirente.telefono %></p>
           <p class="card-text">
-            <button class="btn btn-outline-primary">Seguiti</button>
+            <%= link_to "Seguiti (#{@acquirente.negozi_seguiti.count})", acquirente_seguiti_path, class: "btn btn-outline-primary" %>
           </p>
           <p class="card-text"><strong>Punti Fedeltà:</strong> 0</p>
         </div>

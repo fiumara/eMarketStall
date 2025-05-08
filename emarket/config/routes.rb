@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'auth#callback'
   get '/auth/failure', to: 'auth#failure'
 
+  get 'profilo/seguiti', to: 'acquirentes#seguiti', as: :acquirente_seguiti
   get 'follows/create'
   get 'follows/destroy'
   get 'feedbacks/new'
