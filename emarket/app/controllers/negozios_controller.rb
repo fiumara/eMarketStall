@@ -43,7 +43,7 @@ class NegoziosController < ApplicationController
   def update
     respond_to do |format|
       if @negozio.update(negozio_params)
-        format.html { redirect_to negozio_url(@negozio), notice: "Negozio was successfully updated." }
+        format.html { redirect_to negozio_url(@negozio), notice: "Negozio modificato con successo." }
         format.json { render :show, status: :ok, location: @negozio }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class NegoziosController < ApplicationController
     @negozio.destroy
 
     respond_to do |format|
-      format.html { redirect_to negozios_url, notice: "Negozio was successfully destroyed." }
+      format.html { redirect_to negozios_url, notice: "Negozio cancellato con successo." }
       format.json { head :no_content }
     end
   end
@@ -106,6 +106,6 @@ class NegoziosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def negozio_params
-      params.require(:negozio).permit(:nome_negozio, :descrizione, :indirizzo, :email, :telefono)
+      params.require(:negozio).permit(:nome_negozio, :descrizione, :indirizzo, :telefono, :immagine)
     end
 end

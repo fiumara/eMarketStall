@@ -13,6 +13,11 @@
       <% if @negozio.present? %>
         <h1><%= @negozio.nome_negozio %></h1>
         <p>Descrizione: <%= @negozio.descrizione %></p>
+        <% if @negozio.immagine.attached? %>
+        <div class="mb-3">
+          <%= image_tag @negozio.immagine.variant(resize_to_limit: [300, 300]), class: "img-fluid rounded" %>
+        </div>
+      <% end %>
         <p>Indirizzo: <%= @negozio.indirizzo %></p>
         <p>Telefono: <%= @negozio.telefono %></p>
         <button>Segnala</button>
