@@ -7,6 +7,10 @@
     </div>
   </div>
 
+
+
+
+
   <div class="row">
     <!-- Sidebar -->
     <div class="col-md-3">
@@ -27,7 +31,12 @@
       <!-- Store Details -->
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Dettagli Negozio</h5>
+          <h5 class="card-title">Dettagli Negozio</h5>                                                                 
+          <% if @negozio.immagine.attached? %>
+          <div class="mb-3">
+            <%= image_tag @negozio.immagine.variant(resize_to_limit: [300, 300]), class: "img-fluid rounded" %>
+          </div>
+        <% end %>
           <p class="card-text"><strong>Nome Negozio:</strong> <%= @negozio.nome_negozio %></p>
           <p class="card-text"><strong>Email:</strong> <%= @acquirente.email %></p>
           <p class="card-text"><strong>Telefono:</strong> <%= @negozio.telefono %></p>

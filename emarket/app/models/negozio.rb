@@ -7,6 +7,8 @@ class Negozio < ApplicationRecord
     has_many :messaggi_inviati, as: :mittente, class_name: 'Messaggio', dependent: :destroy
     has_many :messaggi_ricevuti, as: :destinatario, class_name: 'Messaggio', dependent: :destroy
 
+    has_one_attached :immagine # <--- aggiunto
+
     def nome_completo
         nome_negozio
       end
