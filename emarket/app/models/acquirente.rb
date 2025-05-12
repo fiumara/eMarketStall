@@ -15,7 +15,7 @@ class Acquirente < ApplicationRecord
   has_many :wishlist_items, dependent: :destroy
   has_many :wishlist, through: :wishlist_items, source: :prodotto
   has_many :return_requests, foreign_key: :acquirente_id, dependent: :destroy
-  has_many :cronologia_ricerches, dependent: :destroy
+  has_many :cronologia_ricercas, dependent: :destroy
   has_many :feedbacks
 
   # Messaggi personalizzati
@@ -69,5 +69,5 @@ class Acquirente < ApplicationRecord
   def clear_reset_digest
     update(reset_digest: nil, reset_sent_at: nil)
   end
-  
+
 end

@@ -49,6 +49,35 @@ class ChatRoomsController < ApplicationController
     end
   end
 
+  def start
+    unless current_user.is_a?(Acquirente)
+      redirect_to root_path, alert: "Solo gli acquirenti possono contattare i negozi."
+      return
+    end
+    
+    destinatario = Negozio.find(params[:destinatario_id])
+    mittente = current_user
+  
+    chat_room = ChatRoom.find_by(
+      mittente: mittente,
+      destinatario: destinatario
+    ) || ChatRoom.find_by(
+      mittente: destinatario,
+      destinatario: mittente
+    )
+  
+    unless chat_room
+      chat_room = ChatRoom.create!(
+        mittente: mittente,
+        destinatario: destinatario,
+        nome: "Chat con #{destinatario.nome_negozio}" # oppure quello che preferisci
+      )
+    end
+  
+    redirect_to chat_room_path(chat_room)
+  end
+  
+
   private
 
 def set_chat_room
