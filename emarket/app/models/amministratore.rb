@@ -11,5 +11,9 @@ class Amministratore < ApplicationRecord
         "#{nome} #{cognome}"
     end
 
+    def self.designato
+        find_by(email: 'giovanni.neri@example.com') || first
+      end
+
     
 end

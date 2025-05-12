@@ -145,6 +145,7 @@
         <%= link_to 'Profilo Acquirente', acquirente_path(current_user) %>
         <%= link_to 'Carrello', carrello_path %>
         <%= link_to 'FAQs', faqs_path %>
+        <%= link_to "Assistenza", assistenza_chat_rooms_path, method: :post %>
       <% elsif current_user.is_a?(Amministratore) %>
         <%= link_to 'Profilo Amministratore', amministratore_path(current_user) %>
       <% end %>
