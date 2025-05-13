@@ -11,8 +11,15 @@
     <div class="form-group mb-3">
       <%= form.label :destinatario_id, "Seleziona Destinatario", class: 'form-label' %>
       <% if @destinatari_options.present? %>
-        <%= form.select :destinatario_id, options_for_select(@destinatari_options.map { |d| [d.nome_completo, d.id] }), { include_blank: "Seleziona un destinatario" }, class: 'form-select' %>
-      <% else %>
+      <%= form.select :destinatario_id,
+      options_for_select(@destinatari_options.map do |d|
+        label = d.nome_completo
+        label += " (Negozio)" if d.is_a?(Negozio)
+        [label, d.id]
+      end),
+      { include_blank: "Seleziona un destinatario" },
+      class: 'form-select' %>
+          <% else %>
         <p class="text-muted">Nessun destinatario disponibile</p>
       <% end %>
     </div>

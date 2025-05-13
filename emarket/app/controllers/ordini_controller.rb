@@ -131,6 +131,9 @@ class OrdiniController < ApplicationController
       else
         redirect_to ordini_path, alert: "Ordine non trovato o già pagato."
       end
+      
+      
+      
     else
       redirect_to ordini_path, alert: "Errore nel pagamento o ordine non valido."
     end
@@ -190,8 +193,7 @@ class OrdiniController < ApplicationController
     redirect_to session.url, allow_other_host: true
   end
   
-
-
+  
   
   
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_12_101124) do
+ActiveRecord::Schema.define(version: 2025_05_12_151653) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -24,11 +24,12 @@ ActiveRecord::Schema.define(version: 2025_05_12_101124) do
     t.string "id_acquirente"
     t.string "image_url"
     t.boolean "bloccato", default: false
-    t.integer "punti_fedelta"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "privato"
-    t.integer "points"
+    t.integer "punti_fedelta"
+    t.integer "points", default: 0
+    t.integer "punti", default: 0
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -312,8 +313,8 @@ ActiveRecord::Schema.define(version: 2025_05_12_101124) do
   add_foreign_key "carrello_items", "ordini", on_delete: :cascade
   add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
   add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "acquirentes"
-  add_foreign_key "cronologia_ricercas", "prodottos"
+  add_foreign_key "cronologia_ricercas", "acquirentes", on_delete: :cascade
+  add_foreign_key "cronologia_ricercas", "prodottos", on_delete: :cascade
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade

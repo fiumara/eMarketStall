@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: [:index, :show, :new, :create] do
     post 'messages', to: 'chat_rooms#create_message', as: :messages
     post :start, on: :collection
+    post :assistenza, on: :collection
   end
 
   resource :carrello, only: :show

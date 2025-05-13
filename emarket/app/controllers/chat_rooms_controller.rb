@@ -3,8 +3,13 @@ class ChatRoomsController < ApplicationController
   before_action :set_destinatari_options, only: %i[new create]
 
   def index
-    @chat_rooms = ChatRoom.where("mittente_id = ? OR destinatario_id = ?", current_user.id, current_user.id)
+    if current_user.is_a?(Amministratore)
+      @chat_rooms = ChatRoom.where("mittente_type = ? OR destinatario_type = ?", "Amministratore", "Amministratore")
+    else
+      @chat_rooms = ChatRoom.where("mittente_id = ? OR destinatario_id = ?", current_user.id, current_user.id)
+    end
   end
+  
 
   def show
     @messaggi = @chat_room.messaggi.order(created_at: :asc)
@@ -17,7 +22,12 @@ class ChatRoomsController < ApplicationController
   def create
     @chat_room = ChatRoom.new(chat_room_params)
     @chat_room.mittente = current_user
-
+  
+    destinatario = (Acquirente.find_by(id: params[:chat_room][:destinatario_id]) ||
+                    Negozio.find_by(id: params[:chat_room][:destinatario_id]))
+  
+    @chat_room.destinatario = destinatario
+  
     if @chat_room.save
       redirect_to @chat_room, notice: 'Chat room creata con successo!'
     else
@@ -25,6 +35,7 @@ class ChatRoomsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  
 
   def create_message
     messaggio = @chat_room.messaggi.build(
@@ -76,6 +87,30 @@ class ChatRoomsController < ApplicationController
   
     redirect_to chat_room_path(chat_room)
   end
+
+  def assistenza
+    mittente = current_user
+    destinatario = Amministratore.designato
+  
+    chat_room = ChatRoom.find_by(
+      mittente: mittente,
+      destinatario: destinatario
+    ) || ChatRoom.find_by(
+      mittente: destinatario,
+      destinatario: mittente
+    )
+  
+    unless chat_room
+      chat_room = ChatRoom.create!(
+        mittente: mittente,
+        destinatario: destinatario,
+        nome: "Assistenza #{mittente.nome_utente}"
+      )
+    end
+  
+    redirect_to chat_room_path(chat_room)
+  end
+  
   
 
   private
@@ -91,11 +126,15 @@ def set_chat_room
 end
 
 def authorized_user?(chat_room)
-  current_user.id == chat_room.mittente_id || current_user.id == chat_room.destinatario_id
+  return true if current_user.is_a?(Amministratore) &&
+                 (chat_room.mittente_type == "Amministratore" || chat_room.destinatario_type == "Amministratore")
+
+    current_user.id == chat_room.mittente_id || current_user.id == chat_room.destinatario_id
 end
 
+
   def set_destinatari_options
-    @destinatari_options = Acquirente.all + Amministratore.all + Negozio.all
+    @destinatari_options = Acquirente.all + Negozio.all
   end
 
   def chat_room_params
