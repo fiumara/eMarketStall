@@ -6,11 +6,7 @@ class ChatRoomsController < ApplicationController
     if current_user.is_a?(Amministratore)
       @chat_rooms = ChatRoom.where("mittente_type = ? OR destinatario_type = ?", "Amministratore", "Amministratore")
     else
-      @chat_rooms = ChatRoom.where(
-        "(mittente_id = ? AND mittente_type = ?) OR (destinatario_id = ? AND destinatario_type = ?)",
-        current_user.id, current_user.class.name,
-        current_user.id, current_user.class.name
-      )
+      @chat_rooms = ChatRoom.where("mittente_id = ? OR destinatario_id = ?", current_user.id, current_user.id)
     end
   end
   
@@ -133,8 +129,7 @@ def authorized_user?(chat_room)
   return true if current_user.is_a?(Amministratore) &&
                  (chat_room.mittente_type == "Amministratore" || chat_room.destinatario_type == "Amministratore")
 
-  current_user.id == chat_room.mittente_id && current_user.class.name == chat_room.mittente_type ||
-    current_user.id == chat_room.destinatario_id && current_user.class.name == chat_room.destinatario_type
+    current_user.id == chat_room.mittente_id || current_user.id == chat_room.destinatario_id
 end
 
 

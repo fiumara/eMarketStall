@@ -3,6 +3,9 @@ class Acquirente < ApplicationRecord
   has_secure_password
   before_create :default_values
 
+
+  after_initialize :set_default_punti_fedelta
+
   #Follower
   has_many :follows
   has_many :negozi_seguiti, through: :follows, source: :negozio
@@ -69,5 +72,21 @@ class Acquirente < ApplicationRecord
   def clear_reset_digest
     update(reset_digest: nil, reset_sent_at: nil)
   end
+
+  def aggiungi_punti_da_ordini(ordini)
+    totale = ordini.sum(&:totale)
+    punti = (totale / 5).floor
+    increment!(:punti, punti)
+    punti
+  end
+
+  private
+
+  def set_default_punti_fedelta
+    self.punti ||= 0
+  end
+
+
+
 
 end

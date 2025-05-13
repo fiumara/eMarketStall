@@ -36,8 +36,8 @@
           <p class="card-text">
             <%= link_to "Seguiti (#{@acquirente.negozi_seguiti.count})", acquirente_seguiti_path, class: "btn btn-outline-primary" %>
           </p>
-          <p class="card-text"><strong>Punti Fedeltà:</strong> 0</p>
-        </div>
+          <p>Hai <strong><%= current_user.punti %></strong> punti fedeltà.</p>
+          </div>
       </div>
 
       <div class="d-flex justify-content-end">

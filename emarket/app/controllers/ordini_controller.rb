@@ -124,10 +124,19 @@ class OrdiniController < ApplicationController
   
       if ordini.any?
         ordini.update_all(stato: "pagato")
-        redirect_to ordini_path, notice: "Pagamento completato con successo!"
+      
+        totale_speso = ordini.map(&:totale).sum
+        punti_guadagnati = (totale_speso / 5).floor
+      
+        current_user.increment!(:punti, punti_guadagnati)
+      
+        redirect_to ordini_path, notice: "Pagamento completato con successo! Hai guadagnato #{punti_guadagnati} punti fedeltà."
       else
         redirect_to ordini_path, alert: "Ordine non trovato o già pagato."
       end
+      
+      
+      
     else
       redirect_to ordini_path, alert: "Errore nel pagamento o ordine non valido."
     end
@@ -176,8 +185,7 @@ class OrdiniController < ApplicationController
     redirect_to session.url, allow_other_host: true
   end
   
-
-
+  
   
   
   

@@ -22,6 +22,11 @@ class Ordine < ApplicationRecord
     ordine_items.sum(&:totale)
   end
 
+  def punti_per_ordine
+    (totale / 5).floor
+  end
+
+
   private
 
   def assegna_codice_ordine
