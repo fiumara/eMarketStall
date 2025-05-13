@@ -83,7 +83,7 @@ class Acquirente < ApplicationRecord
   private
 
   def set_default_punti_fedelta
-    self.punti ||= 0
+    self.punti_fedelta ||= 0
   end
 
 
