@@ -118,13 +118,16 @@ class OrdiniController < ApplicationController
     session = Stripe::Checkout::Session.retrieve(session_id)
   
     if session.payment_status == "paid" && session.metadata["ordine_id"]
-      ordine_ids = session.metadata["ordine_id"].split(",").map(&:to_i) # Recuperiamo più ordini
-  
+      ordine_ids = session.metadata["ordine_id"].split(",").map(&:to_i)
       ordini = current_user.ordini.where(id: ordine_ids, stato: "in_attesa")
   
       if ordini.any?
-        ordini.update_all(stato: "pagato")
-        redirect_to ordini_path, notice: "Pagamento completato con successo!"
+        ordini.each do |ordine|
+          ordine.update(stato: "pagato")
+          assegna_punti_fedelta(ordine)
+        end
+  
+        redirect_to ordini_path, notice: "Pagamento completato con successo e punti fedeltà assegnati!"
       else
         redirect_to ordini_path, alert: "Ordine non trovato o già pagato."
       end
@@ -132,6 +135,17 @@ class OrdiniController < ApplicationController
       redirect_to ordini_path, alert: "Errore nel pagamento o ordine non valido."
     end
   end
+  
+  private
+  
+  def assegna_punti_fedelta(ordine)
+    punti = (ordine.totale / 10).floor
+    return if punti <= 0
+  
+    acquirente = ordine.acquirente
+    acquirente.increment!(:punti_fedelta, punti)
+  end
+  
   
   
   

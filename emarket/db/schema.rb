@@ -195,6 +195,11 @@ ActiveRecord::Schema.define(version: 2025_05_12_101124) do
     t.index ["acquirente_id"], name: "index_ordini_on_acquirente_id"
     t.index ["codice_ordine"], name: "index_ordini_on_codice_ordine", unique: true
     t.index ["negozio_id"], name: "index_ordini_on_negozio_id"
+
+    t.references :acquirente, foreign_key: true
+    t.decimal :totale, precision: 10, scale: 2
+    t.string :stato_pagamento
+    t.timestamps
   end
 
   create_table "prodottos", force: :cascade do |t|
