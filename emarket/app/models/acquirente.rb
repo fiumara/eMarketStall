@@ -20,6 +20,7 @@ class Acquirente < ApplicationRecord
   has_many :return_requests, foreign_key: :acquirente_id, dependent: :destroy
   has_many :cronologia_ricercas, dependent: :destroy
   has_many :feedbacks
+  has_many :segnalazioni_negozi, dependent: :destroy
 
   # Messaggi personalizzati
   has_many :messaggi_inviati, as: :mittente, class_name: 'Messaggio', dependent: :destroy

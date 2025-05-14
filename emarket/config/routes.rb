@@ -32,7 +32,6 @@ Rails.application.routes.draw do
 
   get 'amministratore/statistiche', to: 'amministratores#statistiche', as: :statistiche_amministratore
 
-
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
@@ -45,7 +44,7 @@ Rails.application.routes.draw do
   get 'cronologiaricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
 
   resources :resi, only: [:index, :update]
-
+  resources :segnalazioni, only: [:index, :destroy]
   resources :negozios do
     resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
     post 'follow', to: 'follows#create'
@@ -57,6 +56,9 @@ Rails.application.routes.draw do
       get 'feedbacks', to: 'negozios#feedbacks'
       get 'visualizza', to: 'negozios#visualizza'
       get 'seguaci'
+      get :segnala_form
+      post :segnala
+      delete '/segnalazioni/:id/ignora', to: 'segnalazioni#ignora', as: :segnala_ignora
     end
   end
 
@@ -121,6 +123,7 @@ Rails.application.routes.draw do
       patch :blocca
       patch :sblocca
       delete :elimina
+      delete :elimina_negozio
     end
   end
 
@@ -133,8 +136,10 @@ Rails.application.routes.draw do
 
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-
   get 'admin/feedbacks_segnalati', to: 'amministratores#feedbacks_segnalati', as: 'admin_feedbacks_segnalati'
+
+  # ✅ Nuova rotta per ignorare una segnalazione negozio
+  delete 'gestione_account/ignora_segnalazione_negozio/:id', to: 'gestione_account#ignora_segnalazione_negozio', as: 'ignora_segnalazione_negozio'
 
   # Monta Action Cable
   mount ActionCable.server => '/cable'

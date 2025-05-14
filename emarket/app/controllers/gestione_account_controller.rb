@@ -2,23 +2,29 @@ class GestioneAccountController < ApplicationController
   before_action :authenticate_amministratore!
 
   def manage
-    @acquirente = Acquirente.all
+    case params[:user_type]
+    when 'acquirente'
+      @acquirente = Acquirente.left_outer_joins(:negozio).where(negozios: { id: nil })
+    when 'venditore'
+      @acquirente = Acquirente.joins(:negozio)
+    when 'segnalati'
+      @segnalazioni = SegnalazioneNegozio.includes(:negozio, :acquirente).all
+      negozi_segnalati_ids = SegnalazioneNegozio.select(:negozio_id).distinct.pluck(:negozio_id)
+      @acquirente = Acquirente.joins(:negozio).where(negozios: { id: negozi_segnalati_ids })
+    else
+      # tutti gli acquirenti, con o senza negozio
+      @acquirente = Acquirente.all
+    end
   
     if params[:search].present?
-      @acquirente = @acquirente.where("LOWER(nome) LIKE ? OR LOWER(cognome) LIKE ? OR LOWER(nome_utente) LIKE ?", 
-                                       "%#{params[:search].downcase}%", 
-                                       "%#{params[:search].downcase}%", 
-                                       "%#{params[:search].downcase}%")
-    end
-  
-    case params[:user_type]
-    when "acquirente"
-      @acquirente = @acquirente.select { |a| a.negozio.blank? }
-    when "venditore"
-      @acquirente = @acquirente.select { |a| a.negozio.present? }
+      query = "%#{params[:search].downcase}%"
+      @acquirente = @acquirente.where(
+        "LOWER(nome) LIKE :query OR LOWER(cognome) LIKE :query OR LOWER(nome_utente) LIKE :query",
+        query: query
+      )
     end
   end
-  
+    
   
 
   def blocca
@@ -61,6 +67,17 @@ class GestioneAccountController < ApplicationController
     redirect_to gestione_account_path, notice: "Utente e negozio eliminati con successo"
   end
   
+  def elimina_negozio
+    acquirente = Acquirente.find(params[:id])
+    acquirente.negozio.destroy
+    redirect_to gestione_account_path, notice: "Negozio eliminati con successo"
+  end 
+  
+  def ignora_segnalazione_negozio
+    segnalazione = SegnalazioneNegozio.find(params[:id])
+    segnalazione.destroy
+    redirect_to gestione_account_index_path, notice: 'Segnalazione ignorata con successo.'
+  end
   
   
   

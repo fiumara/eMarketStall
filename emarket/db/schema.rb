@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_12_151653) do
+ActiveRecord::Schema.define(version: 2025_05_12_222834) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -24,12 +24,10 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
     t.string "id_acquirente"
     t.string "image_url"
     t.boolean "bloccato", default: false
+    t.integer "punti_fedelta"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "privato"
-    t.integer "punti_fedelta"
-    t.integer "points", default: 0
-    t.integer "punti", default: 0
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -196,11 +194,6 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
     t.index ["acquirente_id"], name: "index_ordini_on_acquirente_id"
     t.index ["codice_ordine"], name: "index_ordini_on_codice_ordine", unique: true
     t.index ["negozio_id"], name: "index_ordini_on_negozio_id"
-
-    t.references :acquirente, foreign_key: true
-    t.decimal :totale, precision: 10, scale: 2
-    t.string :stato_pagamento
-    t.timestamps
   end
 
   create_table "prodottos", force: :cascade do |t|
@@ -272,6 +265,17 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
     t.index ["ordine_id"], name: "index_return_requests_on_ordine_id"
   end
 
+  create_table "segnalazione_negozios", force: :cascade do |t|
+    t.string "motivo"
+    t.text "note"
+    t.integer "acquirente_id", null: false
+    t.integer "negozio_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_segnalazione_negozios_on_acquirente_id"
+    t.index ["negozio_id"], name: "index_segnalazione_negozios_on_negozio_id"
+  end
+
   create_table "statisticas", force: :cascade do |t|
     t.integer "prodotto_id", null: false
     t.integer "visualizzazioni"
@@ -336,6 +340,8 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
   add_foreign_key "return_items", "return_requests"
   add_foreign_key "return_requests", "acquirentes", on_delete: :nullify
   add_foreign_key "return_requests", "ordini"
+  add_foreign_key "segnalazione_negozios", "acquirentes"
+  add_foreign_key "segnalazione_negozios", "negozios"
   add_foreign_key "statisticas", "prodottos", on_delete: :cascade
   add_foreign_key "variantis", "prodottos", on_delete: :cascade
   add_foreign_key "wishlist_items", "acquirentes", on_delete: :cascade

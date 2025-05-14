@@ -20,7 +20,7 @@
       <% end %>
         <p>Indirizzo: <%= @negozio.indirizzo %></p>
         <p>Telefono: <%= @negozio.telefono %></p>
-        <button>Segnala</button>
+        <%= button_to "Segnala", segnala_form_negozio_path(@negozio), method: :get, class: "btn btn-danger" %>
         <p>Followers: <%= @negozio.followers.count %></p>
         <% if current_user.is_a?(Acquirente) %>
         <% if current_user.follows.exists?(negozio: @negozio) %>
