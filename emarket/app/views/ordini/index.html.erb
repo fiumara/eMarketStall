@@ -1,8 +1,8 @@
-<h1>I tuoi ordini</h1>
+<h1 class="mb-4">I tuoi ordini</h1>
 
 <% if @ordini.any? %>
-  <table class="table">
-    <thead>
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
       <tr>
         <th>Codice Ordine</th>
         <th>Data</th>
@@ -17,12 +17,11 @@
         <tr>
           <td><%= ordine.codice_ordine %></td>
           <td><%= ordine.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-          <td>€<%= ordine.totale %></td>
-          <td><%= ordine.stato.capitalize %></td>
+          <td><%= number_to_currency(ordine.totale) %></td>
+          
+          <td><%= ordine.stato.humanize %></td>
           <td><%= ordine.indirizzo %></td>
-          <td>
-            <%= link_to "Dettagli", ordine_path(ordine), class: "btn btn-info" %>
-          </td>
+          <td><%= link_to "Dettagli", ordine_path(ordine), class: "btn btn-sm btn-primary" %></td>
         </tr>
       <% end %>
     </tbody>

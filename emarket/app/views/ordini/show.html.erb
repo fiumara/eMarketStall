@@ -1,48 +1,63 @@
 <h2>Dettaglio Ordine: <%= @ordine.codice_ordine %></h2>
 
 <p><strong>Data:</strong> <%= @ordine.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-<p><strong>Totale:</strong> €<%= @ordine.totale %></p>
-<p><strong>Stato:</strong> <%= @ordine.stato.capitalize %></p>
+<p><strong>Stato:</strong> <%= @ordine.stato.humanize %></p>
 <p><strong>Indirizzo:</strong> <%= @ordine.indirizzo %></p>
 
-<h3>Prodotti nell'ordine:</h3>
-<table class="table">
+<h3 class="mt-4">Prodotti nell'ordine</h3>
+
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Nome</th>
+      <th>Prodotto</th>
       <th>Quantità</th>
-      <th>Prezzo</th>
+      <th>Prezzo Originale</th>
+      <th>Prezzo Scontato</th>
+      <th>Sconto Promozione</th>
       <th>Totale</th>
     </tr>
   </thead>
   <tbody>
-  <% @ordine.ordine_items.each do |item|  %>
-    <tr>
-    <td>
-    <% if item.prodotto.present? %>
-      <%= item.prodotto.nome_prodotto %>
-      <% if item.feedbacks.present? %>
-        - Hai già lasciato un feedback.
-      <% else %>
-        <%= link_to "Lascia feedback", new_feedback_path(ordine_item_id: item.id), class: "btn btn-secondary" %>
-      <% end %>
-    <% else %>
-      <%= item.nome_prodotto || "Prodotto eliminato" %> (Prodotto eliminato)
+    <% @ordine.ordine_items.each do |item| %>
+      <% prodotto = item.prodotto %>
+      <tr>
+        <td>
+          <% if prodotto %>
+            <%= prodotto.nome_prodotto %>
+            <% if item.feedbacks.present? %>
+              <br><span class="badge bg-success">Feedback lasciato</span>
+            <% else %>
+              <br><%= link_to "Lascia feedback", new_feedback_path(ordine_item_id: item.id), class: "btn btn-sm btn-outline-secondary mt-1" %>
+            <% end %>
+          <% else %>
+            <em>Prodotto eliminato</em>
+          <% end %>
+        </td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(prodotto&.prezzo || item.prezzo) %></td>
+        <td><%= number_to_currency(item.prezzo) %></td>
+        <td>
+          <% if prodotto && prodotto.prezzo > item.prezzo %>
+            <span class="text-success">-<%= number_to_currency(prodotto.prezzo - item.prezzo) %></span>
+          <% else %>
+            <span class="text-muted">N/A</span>
+          <% end %>
+        </td>
+        <td><%= number_to_currency(item.prezzo * item.quantity) %></td>
+      </tr>
     <% end %>
-  </td>
-  
-      <td><%= item.quantity %></td>
-      <td><%= number_to_currency(item.prezzo) %></td>
-      <td><%= number_to_currency(item.prezzo * item.quantity) %></td>
-    </tr>
-  <% end %>
-</tbody>
+  </tbody>
+</table>
 
-</table> 
-<p><strong>Totale Ordine:</strong> <%= number_to_currency(@ordine.totale) %></p>
-<% if @ordine.stato == 'completato' %>
-  <%= link_to 'Richiedi Reso',  return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger' %>
+<hr>
+
+<p><strong>Sconto Fedeltà:</strong> <%= @ordine.sconto && @ordine.sconto > 0 ? "-#{number_to_currency(@ordine.sconto)}" : "Nessuno" %></p>
+<p><strong>Totale Ordine:</strong> <%= number_to_currency(@ordine.totale - @ordine.sconto) %></p>
+
+<% if @ordine.stato == "completato" %>
+  <%= link_to 'Richiedi Reso', return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger mt-3' %>
 <% end %>
+
 <% if @ordine.stato == "in_attesa" %>
-  <%= button_to "Procedi al Pagamento", pagamento_ordine_path(@ordine), method: :post, class: "btn btn-primary" %>
+  <%= button_to "Procedi al Pagamento", pagamento_ordine_path(@ordine), method: :post, class: "btn btn-primary mt-3" %>
 <% end %>

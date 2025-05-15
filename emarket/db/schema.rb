@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_12_151653) do
+ActiveRecord::Schema.define(version: 2025_05_14_105828) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -24,12 +24,11 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
     t.string "id_acquirente"
     t.string "image_url"
     t.boolean "bloccato", default: false
+    t.integer "punti_fedelta"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "privato"
-    t.integer "punti_fedelta"
-    t.integer "points", default: 0
-    t.integer "punti", default: 0
+    t.integer "points"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -193,14 +192,10 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "negozio_id"
+    t.decimal "sconto", precision: 10, scale: 2, default: "0.0"
     t.index ["acquirente_id"], name: "index_ordini_on_acquirente_id"
     t.index ["codice_ordine"], name: "index_ordini_on_codice_ordine", unique: true
     t.index ["negozio_id"], name: "index_ordini_on_negozio_id"
-
-    t.references :acquirente, foreign_key: true
-    t.decimal :totale, precision: 10, scale: 2
-    t.string :stato_pagamento
-    t.timestamps
   end
 
   create_table "prodottos", force: :cascade do |t|
@@ -313,8 +308,8 @@ ActiveRecord::Schema.define(version: 2025_05_12_151653) do
   add_foreign_key "carrello_items", "ordini", on_delete: :cascade
   add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
   add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "prodottos", on_delete: :cascade
+  add_foreign_key "cronologia_ricercas", "acquirentes"
+  add_foreign_key "cronologia_ricercas", "prodottos"
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade

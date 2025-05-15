@@ -62,7 +62,8 @@ class OrdiniController < ApplicationController
           totale: totale,
           stato: 'in_attesa',
           indirizzo: params[:ordine][:indirizzo],
-          negozio: negozio
+          negozio: negozio,
+          sconto: use_fedelta ? (totale * 0.10).round(2) : 0
         )
 
         items.each do |item|
