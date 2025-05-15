@@ -267,6 +267,17 @@ ActiveRecord::Schema.define(version: 2025_05_14_105828) do
     t.index ["ordine_id"], name: "index_return_requests_on_ordine_id"
   end
 
+  create_table "segnalazione_negozios", force: :cascade do |t|
+    t.string "motivo"
+    t.text "note"
+    t.integer "acquirente_id", null: false
+    t.integer "negozio_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["acquirente_id"], name: "index_segnalazione_negozios_on_acquirente_id"
+    t.index ["negozio_id"], name: "index_segnalazione_negozios_on_negozio_id"
+  end
+
   create_table "statisticas", force: :cascade do |t|
     t.integer "prodotto_id", null: false
     t.integer "visualizzazioni"
@@ -331,6 +342,8 @@ ActiveRecord::Schema.define(version: 2025_05_14_105828) do
   add_foreign_key "return_items", "return_requests"
   add_foreign_key "return_requests", "acquirentes", on_delete: :nullify
   add_foreign_key "return_requests", "ordini"
+  add_foreign_key "segnalazione_negozios", "acquirentes"
+  add_foreign_key "segnalazione_negozios", "negozios"
   add_foreign_key "statisticas", "prodottos", on_delete: :cascade
   add_foreign_key "variantis", "prodottos", on_delete: :cascade
   add_foreign_key "wishlist_items", "acquirentes", on_delete: :cascade

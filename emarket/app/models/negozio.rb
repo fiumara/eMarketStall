@@ -6,6 +6,7 @@ class Negozio < ApplicationRecord
     has_many :followers, through: :follows, source: :acquirente
     has_many :messaggi_inviati, as: :mittente, class_name: 'Messaggio', dependent: :destroy
     has_many :messaggi_ricevuti, as: :destinatario, class_name: 'Messaggio', dependent: :destroy
+    has_many :segnalazioni_negozi, class_name: 'SegnalazioneNegozio', dependent: :destroy
 
     has_one_attached :immagine # <--- aggiunto
 

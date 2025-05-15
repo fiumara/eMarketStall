@@ -1,0 +1,18 @@
+<h1>Segnala il negozio "<%= @negozio.nome_negozio %>"</h1>
+
+<%= form_with url: segnala_negozio_path(@negozio), method: :post, local: true do |form| %>
+  <div>
+    <%= form.label :motivo, "Motivo della segnalazione" %><br>
+    <%= form.select :motivo, ["Contenuti inappropriati", "Attività sospetta", "Frode", "Altro"], prompt: "Seleziona un motivo", required: true %>
+  </div>
+
+  <div>
+    <%= form.label :note, "Note aggiuntive (opzionale)" %><br>
+    <%= form.text_area :note, rows: 4, placeholder: "Spiega meglio il motivo della segnalazione..." %>
+  </div>
+
+  <div>
+    <%= form.submit "Invia segnalazione", class: "btn btn-danger" %>
+    <%= link_to "Annulla", negozio_path(@negozio), class: "btn btn-secondary" %>
+  </div>
+<% end %>

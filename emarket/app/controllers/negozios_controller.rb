@@ -95,6 +95,25 @@ class NegoziosController < ApplicationController
     end
   end
   
+  def segnala_form
+    @negozio = Negozio.find(params[:id])
+  end
+  
+  def segnala
+    @negozio = Negozio.find(params[:id])
+    @segnalazione = SegnalazioneNegozio.new(
+      motivo: params[:motivo],
+      note: params[:note],
+      acquirente: current_user,
+      negozio: @negozio
+    )
+  
+    if @segnalazione.save
+      redirect_to negozio_path(@negozio), notice: "Segnalazione inviata con successo."
+    else
+      render :segnala_form, alert: "Errore nell'invio della segnalazione."
+    end
+  end
   
   
 
