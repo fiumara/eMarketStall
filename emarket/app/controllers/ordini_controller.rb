@@ -123,7 +123,10 @@ class OrdiniController < ApplicationController
 
       if ordini.any?
         ordini.each do |ordine|
-          ordine.update(stato: "pagato")
+          ordine.update(
+            stato: "pagato",
+            stripe_payment_intent_id: session.payment_intent # 👈 salva questo valore!
+          )
           assegna_punti_fedelta(ordine)
         end
         redirect_to ordini_path, notice: "Pagamento completato con successo e punti fedeltà assegnati!"

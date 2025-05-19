@@ -20,16 +20,42 @@ class NegozioReturnRequestsController < ApplicationController
     end
 
     def approve
-      if @return_request.approvato!
-        @return_request.return_items.each do |item|
-          prodotto = item.prodotto
-          prodotto.increment!(:quantita_disponibile, item.quantita)
+      ActiveRecord::Base.transaction do
+        if @return_request.approvato!
+          @return_request.return_items.each do |item|
+            prodotto = item.prodotto
+            prodotto.increment!(:quantita_disponibile, item.quantita)
+          end
+    
+          ordine = @return_request.ordine
+    
+          # Calcolo dell'importo del rimborso
+          totale_reso = @return_request.return_items.inject(0) do |somma, item|
+            ordine_item = ordine.ordine_items.find_by(prodotto_id: item.prodotto_id)
+            if ordine_item
+              somma + (item.quantita * ordine_item.prezzo)
+            else
+              somma
+            end
+          end
+    
+          if ordine.stripe_payment_intent_id.present?
+            Stripe::Refund.create({
+              payment_intent: ordine.stripe_payment_intent_id,
+              amount: (totale_reso * 100).to_i, # Importo in centesimi
+            })
+          end
+    
+          redirect_to negozio_return_requests_path, notice: "Reso approvato e rimborso eseguito."
+        else
+          redirect_to negozio_return_requests_path, alert: "Errore nell'approvazione del reso."
         end
-        redirect_to negozio_return_requests_path, notice: "Reso approvato con successo."
-      else
-        redirect_to negozio_return_requests_path, alert: "Errore nell'approvazione del reso."
       end
+    rescue Stripe::StripeError => e
+      redirect_to negozio_return_requests_path, alert: "Errore durante il rimborso: #{e.message}"
     end
+    
+    
     
   
     def reject
