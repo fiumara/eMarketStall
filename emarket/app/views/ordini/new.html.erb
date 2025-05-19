@@ -1,14 +1,14 @@
-<h2>Riepilogo Ordine</h2>
+<h2 class="mb-4">Riepilogo Ordine</h2>
 
-<h3>Codice Ordine: <%= @ordine.codice_ordine %></h3>
+<h4>Codice Ordine: <%= @ordine.codice_ordine || "Da generare" %></h4>
 
-
-<table class="table">
-  <thead>
+<table class="table table-bordered table-striped align-middle mt-3">
+  <thead class="table-dark">
     <tr>
       <th>Prodotto</th>
       <th>Quantità</th>
-      <th>Prezzo</th>
+      <th>Prezzo originale</th>
+      <th>Prezzo scontato</th>
       <th>Totale</th>
     </tr>
   </thead>
@@ -17,21 +17,57 @@
       <tr>
         <td><%= item.prodotto.nome_prodotto %></td>
         <td><%= item.quantity %></td>
-        <td>€<%= item.prodotto.prezzo %></td>
-        <td>€<%= item.prodotto.prezzo * item.quantity %></td>
+
+        <td>
+          <% if item.prodotto.prezzo > item.prezzo_unitario %>
+            <span class="text-muted" style="text-decoration: line-through;">
+              <%= number_to_currency(item.prodotto.prezzo) %>
+            </span>
+          <% else %>
+            <%= number_to_currency(item.prodotto.prezzo) %>
+          <% end %>
+        </td>
+
+        <td>
+          <% if item.prezzo_unitario < item.prodotto.prezzo %>
+            <strong class="text-success"><%= number_to_currency(item.prezzo_unitario) %></strong><br>
+            <small class="text-info">Sconto promozione</small>
+          <% else %>
+            <%= number_to_currency(item.prezzo_unitario) %>
+          <% end %>
+        </td>
+
+        <td><%= number_to_currency(item.totale) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<p><strong>Totale: €<%= current_user.carrello.carrello_items.sum { |item| item.prodotto.prezzo * item.quantity } %></strong></p>
+<% totale_carrello = current_user.carrello.carrello_items.sum(&:totale) %>
 
-<%= form_with model: @ordine, url: ordini_path, method: :post do |f| %>
-    <div>
-      <%= f.label :indirizzo, "Indirizzo di spedizione:" %>
-      <%= f.text_field :indirizzo, required: true %>
-    </div>
-    
-    <%= f.submit "Procedi al pagamento", class: "btn btn-success" %>
+<div class="mt-3">
+  <p><strong>Totale:</strong> <%= number_to_currency(totale_carrello) %></p>
+
+  <% if current_user.punti_fedelta >= 100 %>
+    <% sconto_fedelta = (totale_carrello * 0.10).round(2) %>
+    <p class="text-success">
+      Sconto fedeltà disponibile: -<%= number_to_currency(sconto_fedelta) %> (verrà applicato al pagamento)
+    </p>
+    <p><strong>Totale dopo sconto fedeltà:</strong> <%= number_to_currency(totale_carrello - sconto_fedelta) %></p>
+  <% else %>
+    <p class="text-muted">
+      Hai <strong><%= current_user.punti_fedelta %> punti</strong>. Ne servono <strong>100</strong> per ottenere il 10% di sconto.
+    </p>
   <% end %>
-  
+</div>
+
+<hr>
+
+<%= form_with model: @ordine, url: ordini_path, method: :post, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :indirizzo, "Indirizzo di spedizione:" %>
+    <%= f.text_field :indirizzo, class: "form-control", required: true %>
+  </div>
+
+  <%= f.submit "Procedi al pagamento", class: "btn btn-success" %>
+<% end %>

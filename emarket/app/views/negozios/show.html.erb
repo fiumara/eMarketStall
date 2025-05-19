@@ -53,16 +53,25 @@
         <div class="card-body">
           <h5 class="card-title">Prodotti</h5>
           <% if @negozio.prodottos.present? %>
-            <ul class="list-group list-group-flush">
-              <% @negozio.prodottos.each do |prodotto| %>
-                <li class="list-group-item">
-                  <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: 'text-decoration-none' %>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <p class="card-text">Nessun prodotto disponibile.</p>
+  <div class="row">
+    <% @negozio.prodottos.each do |prodotto| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <% if prodotto.immagini.attached? %>
+          <%= image_tag prodotto.immagini.first.variant(resize_to_limit: [250, 250]), class: "card-img-top" %>
           <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: 'text-decoration-none' %></h5>
+            <p class="card-text"><strong>Prezzo:</strong> <%= number_to_currency(prodotto.prezzo, unit: "€") %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="card-text">Nessun prodotto disponibile.</p>
+<% end %>
+
         </div>
       </div>
 
