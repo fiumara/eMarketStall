@@ -1,25 +1,25 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= t_google(notice) %></p>
 
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-12 mb-4">
-      <h1 class="text-center">Profilo Acquirente</h1>
+      <h1 class="text-center"><%= t_google("Profilo Acquirente") %></h1>
     </div>
   </div>
-  
+
   <div class="row">
     <!-- Sidebar -->
     <div class="col-md-3">
       <nav class="nav flex-column nav-pills">
-        <%= link_to 'Lista Desideri', lista_desideri_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Archivio Ordini', ordini_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-         <%= link_to 'i miei resi', return_requests_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Cronologia Ricerche', cronologia_ricerche_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Messaggi', chat_rooms_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t_google('Lista Desideri'), lista_desideri_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t_google('Archivio Ordini'), ordini_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t_google('I miei resi'), return_requests_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t_google('Cronologia Ricerche'), cronologia_ricerche_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t_google('Messaggi'), chat_rooms_path, class: 'nav-link btn btn-outline-primary mb-2' %>
         <% if @negozio %>
-          <%= link_to 'Il Tuo Negozio', negozio_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
+          <%= link_to t_google('Il Tuo Negozio'), negozio_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
         <% else %>
-          <%= link_to 'Crea Il Tuo Negozio', new_negozio_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+          <%= link_to t_google('Crea Il Tuo Negozio'), new_negozio_path, class: 'nav-link btn btn-outline-primary mb-2' %>
         <% end %>
       </nav>
     </div>
@@ -28,23 +28,24 @@
     <div class="col-md-9">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Dettagli Profilo</h5>
-          <p class="card-text"><strong>Nome:</strong> <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
-          <p class="card-text"><strong>Nome utente:</strong> <%= @acquirente.nome_utente %></p>
-          <p class="card-text"><strong>Email:</strong> <%= @acquirente.email %></p>
-          <p class="card-text"><strong>Telefono:</strong> <%= @acquirente.telefono %></p>
+          <h5 class="card-title"><%= t_google('Dettagli Profilo') %></h5>
+          <p class="card-text"><strong><%= t_google('Nome:') %></strong> <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
+          <p class="card-text"><strong><%= t_google('Nome utente:') %></strong> <%= @acquirente.nome_utente %></p>
+          <p class="card-text"><strong><%= t_google('Email:') %></strong> <%= @acquirente.email %></p>
+          <p class="card-text"><strong><%= t_google('Telefono:') %></strong> <%= @acquirente.telefono %></p>
           <p class="card-text">
-            <%= link_to "Seguiti (#{@acquirente.negozi_seguiti.count})", acquirente_seguiti_path, class: "btn btn-outline-primary" %>
+            <%= link_to t_google("Seguiti") + " (#{@acquirente.negozi_seguiti.count})", acquirente_seguiti_path, class: "btn btn-outline-primary" %>
           </p>
-          <p class="card-text"><strong>Punti Fedeltà:</strong> <%= @acquirente.punti_fedelta %></p>
-
+          <p class="card-text"><strong><%= t_google('Punti Fedeltà:') %></strong> <%= @acquirente.punti_fedelta %></p>
         </div>
       </div>
 
       <div class="d-flex justify-content-end">
-        <%= link_to 'Modifica Profilo', edit_acquirente_path(@acquirente), class: 'btn btn-warning me-2' %>
-        <%= button_to "Elimina Profilo", acquirente_path(@acquirente), method: :delete, data: { turbo: false, confirm: "Sei sicuro di voler eliminare il profilo?" }, class: "btn btn-danger" %>
-        </div>
+        <%= link_to t_google('Modifica Profilo'), edit_acquirente_path(@acquirente), class: 'btn btn-warning me-2' %>
+        <%= button_to t_google("Elimina Profilo"), root_path, method: :delete,
+              data: { turbo: false, confirm: t_google("Sei sicuro di voler eliminare il profilo?") },
+              class: "btn btn-danger" %>
+      </div>
     </div>
   </div>
 </div>

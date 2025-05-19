@@ -1,0 +1,37 @@
+# config/locales/it.yml
+it:
+  forms:
+    acquirente:
+      nome: "Nome"
+      cognome: "Cognome"
+      nome_utente: "Nome utente"
+      telefono: "Telefono"
+      privato: "Rendi profilo privato"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Conferma Password"
+    save: "Salva"
+    cancel: "Annulla"
+
+  errors:
+    messages:
+      error: "errore"
+      prevented_save: "ha impedito il salvataggio"
+
+  sessions:
+    title: "Login"
+    heading: "Accedi"
+    role: "Tipo di Utente"
+    choose_role: "Seleziona un ruolo"
+    buyer: "Acquirente"
+    admin: "Amministratore"
+    email: "Email"
+    password: "Password"
+    login: "Accedi"
+    forgot_password: "Password dimenticata?"
+    or: "oppure"
+    login_google: "Accedi con Google"
+    signup: "Iscriviti"
+
+  home:
+    cerca: "Cerca"

@@ -43,6 +43,12 @@ Rails.application.routes.draw do
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologiaricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
 
+ 
+  get "/lingua", to: "lingua#seleziona", as: :lingua
+  post "/lingua/cambia", to: "lingua#cambia", as: :cambia_lingua
+
+
+
   resources :resi, only: [:index, :update]
   resources :segnalazioni, only: [:index, :destroy]
   resources :negozios do
@@ -61,6 +67,7 @@ Rails.application.routes.draw do
       delete '/segnalazioni/:id/ignora', to: 'segnalazioni#ignora', as: :segnala_ignora
     end
   end
+
 
   resources :prodotti do
     resources :statistiche, only: [:index, :show]

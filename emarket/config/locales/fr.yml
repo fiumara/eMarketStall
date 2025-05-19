@@ -1,0 +1,35 @@
+fr:
+  forms:
+    acquirente:
+      nome: "Prénom"
+      cognome: "Nom"
+      nome_utente: "Nom d'utilisateur"
+      telefono: "Téléphone"
+      privato: "Rendre le profil privé"
+      email: "Email"
+      password: "Mot de passe"
+      password_confirmation: "Confirmer le mot de passe"
+    save: "Enregistrer"
+    cancel: "Annuler"
+  errors:
+    messages:
+      error: "erreur"
+      prevented_save: "a empêché l'enregistrement"
+
+  sessions:
+    title: "Connexion"
+    heading: "Se connecter"
+    role: "Type d'utilisateur"
+    choose_role: "Sélectionnez un rôle"
+    buyer: "Acheteur"
+    admin: "Administrateur"
+    email: "Email"
+    password: "Mot de passe"
+    login: "Connexion"
+    forgot_password: "Mot de passe oublié ?"
+    or: "ou"
+    login_google: "Connexion avec Google"
+    signup: "S'inscrire"
+
+  home:
+    cerca: "Rechercher"

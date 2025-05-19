@@ -3,8 +3,13 @@ class ApplicationController < ActionController::Base
   
   # Questo filtro protegge le azioni che richiedono un utente autenticato
   before_action :set_current_user
+  before_action :set_locale
 
   private
+
+  def set_locale
+    I18n.locale = session[:lingua] || I18n.default_locale
+  end
 
   # Imposta l'utente corrente in base alla sessione
   def set_current_user

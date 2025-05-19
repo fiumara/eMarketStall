@@ -1,0 +1,6 @@
+<h2>Scegli la lingua</h2>
+
+<%= form_with url: cambia_lingua_path, method: :post do %>
+  <%= select_tag :lingua, options_for_select(@lingue.map { |code, name| [name, code] }, session[:lingua] || "it") %>
+  <%= submit_tag "Cambia lingua" %>
+<% end %>
