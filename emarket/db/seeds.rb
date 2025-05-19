@@ -69,6 +69,16 @@ Acquirente.create!(
       email: "paolo.bianchi@example.com",
       password: "password5",
       password_confirmation: "password5"
+    },
+    {
+      id: 6,
+      nome: "matteo",
+      cognome: "Bianchi",
+      telefono: "1102334485",
+      nome_utente: "matteo.bianchi",
+      email: "matteo.bianchi@example.com",
+      password: "password6",
+      password_confirmation: "password6"
     }
   ]
 )
@@ -144,12 +154,39 @@ Negozio.create!([
   },
   {
     id: 3,
-    nome_negozio: "ceramica",
-    descrizione: "ceramiche  per la casa",
+    nome_negozio: "acc",
+    descrizione: "accessori di vario genere",
     indirizzo: "Via Firenze 7, roma",
-    email: "ceramiche@example.com",
+    email: "acc@example.com",
     telefono: "0623456789",
     acquirente_id: 3
+  },
+  {
+    id: 4,
+    nome_negozio: "Gioiellini",
+    descrizione: "gioielli fatti a mano",
+    indirizzo: "Via Roma 11, Milano",
+    email: "gioiellini@example.com",
+    telefono: "0212345778",
+    acquirente_id: 4
+  },
+  {
+    id: 5,
+    nome_negozio: "salute e bene",
+    descrizione: "articoli naturali per il corpo",
+    indirizzo: "Via Firenze 6, Torino",
+    email: "seb@example.com",
+    telefono: "0228456789",
+    acquirente_id: 5
+  },
+  {
+    id: 6,
+    nome_negozio: "penne e per",
+    descrizione: "penne stilografiche fatte a mano",
+    indirizzo: "Via Firenze 9, roma",
+    email: "penne@example.com",
+    telefono: "0623456759",
+    acquirente_id: 6
   }
 ])
 
@@ -173,12 +210,12 @@ Prodotto.create!([
     categorium_id: Categorium.find_by(nome: 'Casa').id
   },
   {
-    nome_prodotto: "vaso",
-    descrizione: "vaso in ceramica fatto a mano",
-    prezzo: 8,
-    quantita_disponibile: 7,
+    nome_prodotto: "portafoglio",
+    descrizione: "portafoglio in pelle fatto a mano",
+    prezzo: 50,
+    quantita_disponibile: 15,
     negozio_id: 3,
-    categorium_id: Categorium.find_by(nome: 'Casa').id
+    categorium_id: Categorium.find_by(nome: 'Accessori').id
   },
   {
     nome_prodotto: "Jeans Slim Fit",
@@ -222,6 +259,33 @@ Prodotto.create!([
     quantita_disponibile: 90,
     negozio_id: 2,
     categorium_id: Categorium.find_by(nome: 'Casa').id
+  },
+  
+
+  {
+    nome_prodotto: "collanina",
+    descrizione: "collana in argento fatta a mano ",
+    prezzo: 50.95,
+    quantita_disponibile: 40,
+    negozio_id: 4,
+    categorium_id: Categorium.find_by(nome: 'Gioielli').id
+  },
+  
+  {
+    nome_prodotto: "crema viso",
+    descrizione: "crema viso fatta con erbe naturali di montagna",
+    prezzo: 27.99,
+    quantita_disponibile: 60,
+    negozio_id: 5,
+    categorium_id: Categorium.find_by(nome: 'Salute e Benessere').id
+  },
+  {
+    nome_prodotto: "penna stilografica",
+    descrizione: "penna stilografica in avorio",
+    prezzo: 150.99,
+    quantita_disponibile: 90,
+    negozio_id: 6,
+    categorium_id: Categorium.find_by(nome: 'Articoli Ufficio').id
   }
 ])
 Promozione.destroy_all
@@ -247,17 +311,6 @@ Promozione.create!([
     tipo: "categoria",
     categorium_id: Categorium.find_by(nome: 'Abbigliamento').id,
     created_by: "admin"
-  },
-  {
-    nome: "vaso",
-    descrizione: "5€ di sconto sul vaso in ceramica",
-    inizio: DateTime.new(2025, 5, 1),
-    fine: DateTime.new(2025, 5, 13),
-    sconto: 5.0,
-    tipo: "singolo_prodotto",
-    prodotto_id: Prodotto.find_by(nome_prodotto: "vaso").id,
-    negozio_id: 3,
-    created_by: "negozio"
   }
   
 ])
