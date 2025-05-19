@@ -8,55 +8,60 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <main>
-    <section>
-      <% if @negozio.present? %>
-        <h1><%= @negozio.nome_negozio %></h1>
-        <p>Descrizione: <%= @negozio.descrizione %></p>
+  <main class="negozio-page container">
+    
+    <% if @negozio.present? %>
+      <section class="negozio-info card">
+        <h1 class="negozio-nome"><%= @negozio.nome_negozio %></h1>
+        <p class="negozio-descrizione"><%= @negozio.descrizione %></p>
+
         <% if @negozio.immagine.attached? %>
-        <div class="mb-3">
-          <%= image_tag @negozio.immagine.variant(resize_to_limit: [300, 300]), class: "img-fluid rounded" %>
-        </div>
-      <% end %>
-        <p>Indirizzo: <%= @negozio.indirizzo %></p>
-        <p>Telefono: <%= @negozio.telefono %></p>
-        <%= button_to "Segnala", segnala_form_negozio_path(@negozio), method: :get, class: "btn btn-danger" %>
-        <p>Followers: <%= @negozio.followers.count %></p>
-        <% if current_user.is_a?(Acquirente) %>
-        <% if current_user.follows.exists?(negozio: @negozio) %>
-        <%= button_to "Non seguire", negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
-      <% else %>
-        <%= button_to "Segui", negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
-      <% end %>
-      
+          <div class="negozio-img-wrapper">
+            <%= image_tag @negozio.immagine.variant(resize_to_limit: [300, 300]), class: "negozio-img" %>
+          </div>
         <% end %>
 
-      <% else %>
-        <p>Il negozio non è stato trovato.</p>
-      <% end %>
-    </section>
+        <p><strong>Indirizzo:</strong> <%= @negozio.indirizzo %></p>
+        <p><strong>Telefono:</strong> <%= @negozio.telefono %></p>
+        <p><strong>Followers:</strong> <%= @negozio.followers.count %></p>
 
-    <section>
+        <% if current_user.is_a?(Acquirente) %>
+          <div class="negozio-actions">
+            <%= button_to "Segnala", segnala_form_negozio_path(@negozio), method: :get, class: "btn btn-danger" %>
+
+            <% if current_user.follows.exists?(negozio: @negozio) %>
+              <%= button_to "Non seguire", negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
+            <% else %>
+              <%= button_to "Segui", negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
+            <% end %>
+
+            <%= button_to "Scrivici", start_chat_rooms_path(destinatario_id: @negozio.id, destinatario_type: "Negozio"), method: :post, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </section>
+    <% else %>
+      <p>Il negozio non è stato trovato.</p>
+    <% end %>
+
+    <section class="proprietario card">
       <% if @negozio&.acquirente.present? %>
-        <div class="owner-details">
-          <p>Nome utente: <%= @negozio.acquirente.nome_utente %></p>
-        </div>
+        <p><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
       <% else %>
         <p>Informazioni sul proprietario non disponibili.</p>
       <% end %>
     </section>
 
-    <%= button_to "Scrivici", start_chat_rooms_path(destinatario_id: @negozio.id, destinatario_type: "Negozio"), method: :post %>
-
-
-    <section class="products">
+    <section class="prodotti card">
+      <h2>Prodotti</h2>
       <% if @negozio&.prodottos.present? %>
-        <% @negozio.prodottos.each do |prodotto| %>
-          <div class="product">
-            <p>Nome prodotto: <%= prodotto.nome_prodotto %></p>
-            <p>Descrizione: <%= prodotto.descrizione %></p>
-          </div>
-        <% end %>
+        <div class="prodotti-grid">
+          <% @negozio.prodottos.each do |prodotto| %>
+            <div class="card prodotto-card">
+              <p class="prodotto-nome"><%= prodotto.nome_prodotto %></p>
+              <p class="prodotto-descrizione"><%= prodotto.descrizione %></p>
+            </div>
+          <% end %>
+        </div>
       <% else %>
         <p>Non ci sono prodotti disponibili.</p>
       <% end %>

@@ -1,40 +1,44 @@
-
 <body>
-    <div class="promo-container">
-        <h1 class="promo-header">Campagne promozionali</h1>
-        
-        <table class="promo-table">
-            <tbody>
-                <% @promoziones.each do |promozione| %>
-                    <tr>
-                        <td>
-                            <strong><%= promozione.nome %></strong>
-                            <br>
-                            <%= promozione.descrizione %>
-                        </td>
-                        <td><%= number_to_percentage(promozione.sconto, precision: 2) %></td>
-                        <td>
-                            <%= promozione.inizio.strftime("%d %b %Y") %> - <%= promozione.fine.strftime("%d %b %Y") %>
-                        </td>
-                        <td>
-                            <% if promozione.prodotto.present? %>
-                                Prodotto: <%= promozione.prodotto.nome_prodotto %>
-                            <% elsif promozione.categorium.present? %>
-                                Categoria: <%= promozione.categorium.nome %>
-                            <% else %>
-                                Tutto il sito
-                            <% end %>
-                        </td>
-                        <td class="promo-actions">
-                            <%= link_to 'Modifica', edit_promozione_path(promozione), class: 'btn-edit' %>
-                            <%= button_to 'Elimina', promozione, method: :delete, data: { turbo: false, confirm: 'Sei sicuro?' }, class: 'btn-delete' %>
-                        </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-        
-        <%= link_to 'Aggiungi promozione', new_promozione_path, class: 'add-promo-btn' %>
-    </div>
+  <div class="promo-container">
+    <h1 class="promo-header">Campagne promozionali</h1>
+
+    <table class="promo-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Sconto</th>
+          <th>Periodo</th>
+          <th>Applicato a</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @promoziones.each do |promozione| %>
+          <tr>
+            <td>
+              <strong><%= promozione.nome %></strong><br>
+              <small><%= promozione.descrizione %></small>
+            </td>
+            <td><%= number_to_percentage(promozione.sconto, precision: 2) %></td>
+            <td><%= promozione.inizio.strftime("%d %b %Y") %> - <%= promozione.fine.strftime("%d %b %Y") %></td>
+            <td>
+              <% if promozione.prodotto.present? %>
+                Prodotto: <%= promozione.prodotto.nome_prodotto %>
+              <% elsif promozione.categorium.present? %>
+                Categoria: <%= promozione.categorium.nome %>
+              <% else %>
+                Tutto il sito
+              <% end %>
+            </td>
+            <td class="promo-actions">
+              <%= link_to 'Modifica', edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
+              <%= button_to 'Elimina', promozione, method: :delete, data: { turbo: false, confirm: 'Sei sicuro?' }, class: 'btn-action btn-delete' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to 'Aggiungi promozione', new_promozione_path, class: 'add-promo-btn' %>
+  </div>
 </body>
-</html>

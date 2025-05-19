@@ -39,7 +39,7 @@ class FaqsController < ApplicationController
 
   def destroy
     @faq.destroy
-    redirect_to admin_faqs_path, notice: 'FAQ was successfully destroyed.'
+    redirect_to faqs_path, notice: 'FAQ was successfully destroyed.'
   end
 
   private
