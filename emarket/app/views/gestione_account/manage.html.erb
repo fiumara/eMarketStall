@@ -4,106 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestione Account</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    header {
-      background-color: #f8f8f8;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-    nav a {
-      text-decoration: none;
-      color: #333;
-      margin: 0 10px;
-    }
-    section {
-      margin: 20px;
-    }
-    .account-box {
-      border: 1px solid #000;
-      padding: 20px;
-      margin: 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .account-box button {
-      display: inline-block;
-      margin: 10px;
-      padding: 10px;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body>
-  <section>
-    <h2>Gestione account</h2>
-    <div>
-      <form action="<%= gestione_account_path %>" method="get">
-        <label for="user_type">Tipo utente</label>
-        <select id="user_type" name="user_type">
-        <option value="all" <%= 'selected' if params[:user_type].blank? || params[:user_type] == 'all' %>>Tutti</option>
-        <option value="acquirente" <%= 'selected' if params[:user_type] == 'acquirente' %>>Acquirenti</option>
-        <option value="venditore" <%= 'selected' if params[:user_type] == 'venditore' %>>Venditori</option>
-        <option value="segnalati" <%= 'selected' if params[:user_type] == 'segnalati' %>>Negozi segnalati</option>        
-        </select>
-        <input type="text" name="search" placeholder="Cerca" value="<%= params[:search] %>">
-        <button type="submit">Cerca</button>
-      </form>
-    </div>
+  <section class="gestione-account-container">
+    <h2 class="page-title">Gestione account</h2>
+
+    <%= form_with url: gestione_account_path, method: :get, local: true, class: "filtro-form" do %>
+      <div class="filtro-row">
+        <div class="form-group">
+          <label for="user_type">Tipo utente</label>
+          <%= select_tag :user_type, options_for_select([
+            ['Tutti', 'all'],
+            ['Acquirenti', 'acquirente'],
+            ['Venditori', 'venditore'],
+            ['Negozi segnalati', 'segnalati']
+          ], selected: params[:user_type]), class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label for="search">Cerca</label>
+          <%= text_field_tag :search, params[:search], placeholder: "Cerca per nome o negozio", class: "form-control" %>
+        </div>
+
+        <div class="form-group submit-group">
+          <label>&nbsp;</label>
+          <%= submit_tag "Cerca", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
 
     <% if @acquirente.empty? %>
-      <p>Nessun utente trovato con i criteri selezionati.</p>
+      <p class="empty-result">Nessun utente trovato con i criteri selezionati.</p>
     <% end %>
-    <% if params[:user_type] == "segnalati" %>
-      <h3>Segnalazioni ricevute</h3>
 
+    <% if params[:user_type] == "segnalati" %>
+      <h3 class="subsection-title">Segnalazioni ricevute</h3>
       <% if @segnalazioni.any? %>
         <% @segnalazioni.each do |segnalazione| %>
-            <div class="account-box">
-              <div>
-                <p><strong>Negozio:</strong> <%= link_to segnalazione.negozio.nome_negozio, negozio_path(segnalazione.negozio) %></p>
-                <p><strong>Motivo:</strong> <%= segnalazione.motivo.humanize %></p>
-                <p><strong>Note:</strong> <%= segnalazione.note.presence || "Nessuna" %></p>
-                <p><strong>Inviata da:</strong> <%= segnalazione.acquirente.nome_utente %></p>
-              </div>
-              <div>
-              <% if segnalazione.negozio.acquirente.bloccato? %>
-                <%= button_to "Sblocca", sblocca_gestione_account_path(acquirente), method: :patch, class: "btn-unblock" %>
-              <% else %>
-                <%= button_to "Blocca negozio", blocca_gestione_account_path(segnalazione.negozio.acquirente), method: :patch %>
-              <% end %>
-                <%= button_to "Elimina negozio", elimina_negozio_gestione_account_path(segnalazione.negozio.acquirente), method: :delete, data: { turbo: false, confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
-                <%= button_to "Ignora", ignora_segnalazione_negozio_path(id: segnalazione.id), method: :delete, data: { turbo: false, confirm: 'Sei sicuro di voler ignorare questa segnalazione?' } %>
-                </div>
+          <div class="account-box">
+            <div class="info">
+              <p><strong>Negozio:</strong> <%= link_to segnalazione.negozio.nome_negozio, negozio_path(segnalazione.negozio) %></p>
+              <p><strong>Motivo:</strong> <%= segnalazione.motivo.humanize %></p>
+              <p><strong>Note:</strong> <%= segnalazione.note.presence || "Nessuna" %></p>
+              <p><strong>Inviata da:</strong> <%= segnalazione.acquirente.nome_utente %></p>
             </div>
-          <% end %>
-        <% else %>
-          <p>Nessuna segnalazione ricevuta.</p>
+            <div class="azioni">
+              <% if segnalazione.negozio.acquirente.bloccato? %>
+                <%= button_to "Sblocca", sblocca_gestione_account_path(segnalazione.negozio.acquirente), method: :patch, class: "btn btn-unblock" %>
+              <% else %>
+                <%= button_to "Blocca negozio", blocca_gestione_account_path(segnalazione.negozio.acquirente), method: :patch, class: "btn btn-block" %>
+              <% end %>
+              <%= button_to "Elimina negozio", elimina_negozio_gestione_account_path(segnalazione.negozio.acquirente), method: :delete, data: { confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
+              <%= button_to "Ignora", ignora_segnalazione_negozio_path(id: segnalazione.id), method: :delete, data: { confirm: 'Ignorare la segnalazione?' }, class: 'btn btn-secondary' %>
+            </div>
+          </div>
         <% end %>
+      <% else %>
+        <p class="empty-result">Nessuna segnalazione ricevuta.</p>
       <% end %>
-     <% @acquirente.each do |acquirente| %>
+    <% end %>
+
+    <% @acquirente.each do |acquirente| %>
       <div class="account-box">
-        <div>
+        <div class="info">
           <h3><%= acquirente.nome_utente %></h3>
           <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
           <% if acquirente.negozio.present? %>
             <p>Negozio: <%= acquirente.negozio.nome_negozio %></p>
           <% end %>
         </div>
-        <div>
+        <div class="azioni">
           <% if acquirente.bloccato? %>
-            <%= button_to "Sblocca", sblocca_gestione_account_path(acquirente), method: :patch, class: "btn-unblock" %>
+            <%= button_to "Sblocca", sblocca_gestione_account_path(acquirente), method: :patch, class: "btn btn-unblock" %>
           <% else %>
-            <%= button_to "Blocca", blocca_gestione_account_path(acquirente), method: :patch, class: "btn-block" %>
+            <%= button_to "Blocca", blocca_gestione_account_path(acquirente), method: :patch, class: "btn btn-block" %>
           <% end %>
-          <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo utente?" } %>
+          <%= button_to "Elimina", elimina_gestione_account_path(acquirente), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo utente?" }, class: "btn btn-danger" %>
         </div>
       </div>
     <% end %>
