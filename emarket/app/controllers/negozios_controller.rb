@@ -109,7 +109,7 @@ class NegoziosController < ApplicationController
     )
   
     if @segnalazione.save
-      redirect_to negozio_path(@negozio), notice: "Segnalazione inviata con successo."
+      redirect_to visualizza_negozio_path(@negozio), notice: "Segnalazione inviata con successo."
     else
       render :segnala_form, alert: "Errore nell'invio della segnalazione."
     end
