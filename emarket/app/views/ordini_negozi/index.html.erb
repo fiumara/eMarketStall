@@ -1,26 +1,41 @@
-<h2>Ordini ricevuti</h2>
+<h2 class="mb-4">Ordini Ricevuti</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Codice Ordine</th>
-      <th>Data</th>
-      <th>Totale</th>
-      <th>Stato</th>
-      <th>Azioni</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @ordini.each do |ordine| %>
+<% if @ordini.any? %>
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
       <tr>
-        <td><%= ordine.codice_ordine %></td>
-        <td><%= ordine.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-        <td>€<%= ordine.totale %></td>
-        <td><%= ordine.stato.capitalize %></td>
-        <td>
-          <%= link_to "Visualizza", negozio_ordine_path(@negozio, ordine), class: "btn btn-primary" %>
-        </td>
+        <th>Codice Ordine</th>
+        <th>Data</th>
+        <th>Totale</th>
+        <th>Stato</th>
+        <th>Azioni</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @ordini.each do |ordine| %>
+        <tr>
+          <td><%= ordine.codice_ordine %></td>
+          <td><%= ordine.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+
+          <td>
+            <strong><%= number_to_currency(ordine.totale) %></strong><br>
+
+            <% if ordine.sconto.present? && ordine.sconto > 0 %>
+              <small class="text-success">
+                Sconto applicato: -<%= number_to_currency(ordine.sconto) %>
+              </small>
+            <% end %>
+          </td>
+
+          <td><span class="badge bg-secondary"><%= ordine.stato.humanize %></span></td>
+
+          <td>
+            <%= link_to "Visualizza", negozio_ordine_path(@negozio, ordine), class: "btn btn-sm btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Non hai ancora ricevuto ordini.</p>
+<% end %>
