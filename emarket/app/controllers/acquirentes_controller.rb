@@ -69,7 +69,7 @@ end
     @acquirente.destroy
 
     respond_to do |format|
-      format.html { redirect_to acquirente_url, notice: "Acquirente was successfully destroyed." }
+      format.html { redirect_to login_path, notice: "Acquirente was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -1,37 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Lista Desideri</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="lista-desideri">
-    <h2>Lista Desideri</h2>
-    <% if @wishlist.present? %>
-      <% @wishlist.each do |prodotto| %>
-        <div class="prodotto">
-          <h3><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %></h3>
-          <div class="prodotto-dettagli">
-            <div class="descrizione">
-              <p><%= prodotto.descrizione %></p>
-              <p>Prezzo: <%= number_to_currency(prodotto.prezzo) %></p>
-            </div>
-            <div class="rating">
-              <p>★★★★★</p>
-            </div>
-            <div class="elimina">
-              <%= form_with(url: remove_from_wishlist_path(prodotto), method: :delete, local: true) do %>
-                <%= submit_tag 'Elimina', class: 'btn btn-danger' %>
-              <% end %>
-            </div>
+<div class="page-wrapper lista-desideri">
+  <h2>Lista Desideri</h2>
+  <% if @wishlist.present? %>
+    <% @wishlist.each do |prodotto| %>
+      <div class="prodotto">
+        <h3><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %></h3>
+        <div class="prodotto-dettagli">
+          <div class="descrizione">
+            <p><%= prodotto.descrizione %></p>
+            <p>Prezzo: <%= number_to_currency(prodotto.prezzo) %></p>
+          </div>
+          <div class="elimina">
+            <%= form_with(url: remove_from_wishlist_path(prodotto), method: :delete, local: true) do %>
+              <%= submit_tag 'Elimina', class: 'btn btn-danger' %>
+            <% end %>
           </div>
         </div>
-      <% end %>
-    <% else %>
-      <p>La tua lista desideri è vuota.</p>
+      </div>
     <% end %>
-  </div>
-</body>
-</html>
+  <% else %>
+    <p>La tua lista desideri è vuota.</p>
+  <% end %>
+</div>

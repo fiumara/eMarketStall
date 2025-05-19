@@ -63,7 +63,7 @@ class NegoziosController < ApplicationController
     @negozio.destroy
 
     respond_to do |format|
-      format.html { redirect_to negozios_url, notice: "Negozio cancellato con successo." }
+      format.html { redirect_to acquirente_path(current_user), notice: "Negozio cancellato con successo." }
       format.json { head :no_content }
     end
   end
