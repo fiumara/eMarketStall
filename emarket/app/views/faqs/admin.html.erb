@@ -11,8 +11,8 @@
         <%= faq.risposta %>
         <div class="faq-actions">
           <%= link_to 'Modifica', edit_faq_path(faq), class: 'btn btn-primary' %>
-          <%= link_to 'Elimina', faq, method: :delete, data: { confirm: 'Sei sicuro?' }, class: 'btn btn-danger' %>
-        </div>
+          <%= button_to "Elimina", faq_path(faq), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questa FAQ?" }, class: 'btn btn-danger' %>
+          </div>
       </div>
     <% end %>
   <% else %>

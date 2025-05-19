@@ -1,6 +1,6 @@
 class CreateAcquirentes < ActiveRecord::Migration[6.1]
   def change
-    create_table :acquirentes, id: false do |t|
+    create_table :acquirentes do |t|
       t.integer :id, primary_key:true
       t.string :email
       t.string :password_digest
