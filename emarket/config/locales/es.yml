@@ -1,0 +1,36 @@
+
+es:
+  forms:
+    acquirente:
+      nome: "Nombre"
+      cognome: "Apellido"
+      nome_utente: "Nombre de usuario"
+      telefono: "Teléfono"
+      privato: "Hacer el perfil privado"
+      email: "Correo electrónico"
+      password: "Contraseña"
+      password_confirmation: "Confirmar contraseña"
+    save: "Guardar"
+    cancel: "Cancelar"
+  errors:
+    messages:
+      error: "error"
+      prevented_save: "impidió guardar el registro"
+
+  sessions:
+    title: "Iniciar sesión"
+    heading: "Acceder"
+    role: "Tipo de usuario"
+    choose_role: "Seleccione un rol"
+    buyer: "Comprador"
+    admin: "Administrador"
+    email: "Correo electrónico"
+    password: "Contraseña"
+    login: "Iniciar sesión"
+    forgot_password: "¿Olvidaste tu contraseña?"
+    or: "o"
+    login_google: "Acceder con Google"
+    signup: "Registrarse"
+
+  home:
+    cerca: "Buscar"

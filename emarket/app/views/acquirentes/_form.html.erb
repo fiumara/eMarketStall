@@ -1,7 +1,7 @@
 <%= form_with(model: @acquirente, local: true) do |form| %>
   <% if @acquirente.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@acquirente.errors.count, "error") %> impediscono di salvare questo acquirente:</h2>
+      <h2><%= pluralize(@acquirente.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %></h2>
       <ul>
         <% @acquirente.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,50 +11,49 @@
   <% end %>
 
   <div>
-    <%= form.label :nome %>
+    <%= form.label :nome, t("forms.acquirente.nome") %>
     <%= form.text_field :nome %>
   </div>
 
   <div>
-    <%= form.label :cognome %>
+    <%= form.label :cognome, t("forms.acquirente.cognome") %>
     <%= form.text_field :cognome %>
   </div>
 
   <div>
-    <%= form.label :nome_utente %>
+    <%= form.label :nome_utente, t("forms.acquirente.nome_utente") %>
     <%= form.text_field :nome_utente %>
   </div>
 
   <div>
-    <%= form.label :telefono %>
+    <%= form.label :telefono, t("forms.acquirente.telefono") %>
     <%= form.text_field :telefono %>
   </div>
-  
-  <div>
-  <%= form.check_box :privato %>
-  <%= form.label :privato, "Profilo privato" %>
-</div>
 
+  <div>
+    <%= form.check_box :privato %>
+    <%= form.label :privato, t("forms.acquirente.privato") %>
+  </div>
 
   <% if @is_new %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
+    <div>
+      <%= form.label :email, t("forms.acquirente.email") %>
+      <%= form.email_field :email %>
+    </div>
   <% end %>
 
   <div>
-    <%= form.label :password %>
+    <%= form.label :password, t("forms.acquirente.password") %>
     <%= form.password_field :password %>
   </div>
 
   <div>
-    <%= form.label :password_confirmation, "Ripeti password" %>
+    <%= form.label :password_confirmation, t("forms.acquirente.password_confirmation") %>
     <%= form.password_field :password_confirmation %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Salva" %>
-    <%= link_to 'Annulla', root_path, class: "btn" %>
+    <%= form.submit t("forms.save") %>
+    <%= link_to t("forms.cancel"), root_path, class: "btn" %>
   </div>
 <% end %>

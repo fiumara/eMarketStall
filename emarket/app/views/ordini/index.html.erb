@@ -17,8 +17,30 @@
         <tr>
           <td><%= ordine.codice_ordine %></td>
           <td><%= ordine.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-          <td><%= number_to_currency(ordine.totale) %></td>
           
+          <td>
+            <% prezzo_originale = ordine.ordine_items.sum { |item| item.prodotto&.prezzo.to_f * item.quantity } %>
+            <% prezzo_scontato = ordine.totale %>
+            <% sconto_fedelta = ordine.sconto.to_f %>
+            <% totale_finale = prezzo_scontato - sconto_fedelta %>
+
+            <% if totale_finale < prezzo_originale %>
+              <div>
+                <span class="text-muted" style="text-decoration: line-through;">
+                  <%= number_to_currency(prezzo_originale) %>
+                </span>
+                <span class="text-success fw-bold">
+                  <%= number_to_currency(totale_finale) %>
+                </span>
+                <% if sconto_fedelta > 0 %>
+                  <br><small class="text-info">Sconto fedeltà: -<%= number_to_currency(sconto_fedelta) %></small>
+                <% end %>
+              </div>
+            <% else %>
+              <%= number_to_currency(totale_finale) %>
+            <% end %>
+          </td>
+
           <td><%= ordine.stato.humanize %></td>
           <td><%= ordine.indirizzo %></td>
           <td><%= link_to "Dettagli", ordine_path(ordine), class: "btn btn-sm btn-primary" %></td>

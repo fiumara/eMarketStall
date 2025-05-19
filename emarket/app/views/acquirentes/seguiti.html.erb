@@ -1,4 +1,4 @@
-<h1>Negozi che segui</h1>
+<h1><%= t_google("Negozi che segui") %></h1>
 
 <% if @negozi_seguiti.any? %>
   <ul>
@@ -9,5 +9,5 @@
     <% end %>
   </ul>
 <% else %>
-  <p>Non stai seguendo nessun negozio.</p>
+  <p><%= t_google("Non stai seguendo nessun negozio.") %></p>
 <% end %>

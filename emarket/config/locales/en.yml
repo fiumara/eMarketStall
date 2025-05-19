@@ -29,5 +29,41 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
+# config/locales/en.yml
 en:
-  hello: "Hello world"
+  forms:
+    acquirente:
+      nome: "First Name"
+      cognome: "Last Name"
+      nome_utente: "Username"
+      telefono: "Phone"
+      privato: "Make profile private"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Confirm Password"
+    save: "Save"
+    cancel: "Cancel"
+  errors:
+    messages:
+      error: "error"
+      prevented_save: "prevented this record from being saved"
+
+  sessions:
+    title: "Login"
+    heading: "Sign In"
+    role: "User Type"
+    choose_role: "Select a role"
+    buyer: "Buyer"
+    admin: "Administrator"
+    email: "Email"
+    password: "Password"
+    login: "Login"
+    forgot_password: "Forgot password?"
+    or: "or"
+    login_google: "Sign in with Google"
+    signup: "Sign up"
+
+  home:
+    cerca: "Search"
+
+
