@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2025_05_14_105828) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "privato"
-    t.integer "points"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -319,8 +318,8 @@ ActiveRecord::Schema.define(version: 2025_05_14_105828) do
   add_foreign_key "carrello_items", "ordini", on_delete: :cascade
   add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
   add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "acquirentes"
-  add_foreign_key "cronologia_ricercas", "prodottos"
+  add_foreign_key "cronologia_ricercas", "acquirentes", on_delete: :cascade
+  add_foreign_key "cronologia_ricercas", "prodottos", on_delete: :cascade
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade
@@ -342,8 +341,8 @@ ActiveRecord::Schema.define(version: 2025_05_14_105828) do
   add_foreign_key "return_items", "return_requests"
   add_foreign_key "return_requests", "acquirentes", on_delete: :nullify
   add_foreign_key "return_requests", "ordini"
-  add_foreign_key "segnalazione_negozios", "acquirentes"
-  add_foreign_key "segnalazione_negozios", "negozios"
+  add_foreign_key "segnalazione_negozios", "acquirentes", on_delete: :cascade
+  add_foreign_key "segnalazione_negozios", "negozios", on_delete: :cascade
   add_foreign_key "statisticas", "prodottos", on_delete: :cascade
   add_foreign_key "variantis", "prodottos", on_delete: :cascade
   add_foreign_key "wishlist_items", "acquirentes", on_delete: :cascade

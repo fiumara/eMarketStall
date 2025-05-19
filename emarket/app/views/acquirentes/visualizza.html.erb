@@ -1,12 +1,13 @@
-<h1>Dati Acquirente</h1>
+<h1><%= t_google("Dati Acquirente") %></h1>
 
-<p><strong>Username:</strong> <%= @acquirente.nome_utente %></p>
+<p><strong><%= t_google("Username:") %></strong> <%= @acquirente.nome_utente %></p>
 
 <% unless @profilo_limitato %>
-  <p><strong>Nome:</strong> <%= @acquirente.nome %></p>
-  <p><strong>Cognome:</strong> <%= @acquirente.cognome %></p>
-  <p><strong>Email:</strong> <%= @acquirente.email %></p>
-  <p><strong>Telefono:</strong> <%= @acquirente.telefono %></p>
+  <p><strong><%= t_google("Nome:") %></strong> <%= @acquirente.nome %></p>
+  <p><strong><%= t_google("Cognome:") %></strong> <%= @acquirente.cognome %></p>
+  <p><strong><%= t_google("Email:") %></strong> <%= @acquirente.email %></p>
+  <p><strong><%= t_google("Telefono:") %></strong> <%= @acquirente.telefono %></p>
 <% else %>
-  <p><em>Profilo privato: i dati personali non sono visibili.</em></p>
+  <p><em><%= t_google("Profilo privato: i dati personali non sono visibili.") %></em></p>
 <% end %>
+

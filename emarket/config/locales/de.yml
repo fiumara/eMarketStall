@@ -1,0 +1,35 @@
+de:
+  forms:
+    acquirente:
+      nome: "Vorname"
+      cognome: "Nachname"
+      nome_utente: "Benutzername"
+      telefono: "Telefonnummer"
+      privato: "Profil privat machen"
+      email: "E-Mail"
+      password: "Passwort"
+      password_confirmation: "Passwort bestätigen"
+    save: "Speichern"
+    cancel: "Abbrechen"
+  errors:
+    messages:
+      error: "Fehler"
+      prevented_save: "hat das Speichern verhindert"
+
+  sessions:
+    title: "Anmeldung"
+    heading: "Einloggen"
+    role: "Benutzertyp"
+    choose_role: "Wähle eine Rolle"
+    buyer: "Käufer"
+    admin: "Administrator"
+    email: "E-Mail"
+    password: "Passwort"
+    login: "Anmelden"
+    forgot_password: "Passwort vergessen?"
+    or: "oder"
+    login_google: "Mit Google anmelden"
+    signup: "Registrieren"
+
+  home:
+    cerca: "Suchen"
