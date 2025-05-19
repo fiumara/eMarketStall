@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_14_105828) do
+ActiveRecord::Schema.define(version: 2025_05_19_123712) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 2025_05_14_105828) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "negozio_id"
     t.decimal "sconto", precision: 10, scale: 2, default: "0.0"
+    t.string "stripe_payment_intent_id"
     t.index ["acquirente_id"], name: "index_ordini_on_acquirente_id"
     t.index ["codice_ordine"], name: "index_ordini_on_codice_ordine", unique: true
     t.index ["negozio_id"], name: "index_ordini_on_negozio_id"
