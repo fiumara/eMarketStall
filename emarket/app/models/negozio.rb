@@ -12,5 +12,12 @@ class Negozio < ApplicationRecord
 
     def nome_completo
         nome_negozio
+    end
+    validate :immagine_must_be_variable
+
+    def immagine_must_be_variable
+      if immagine.attached? && !immagine.variable?
+        errors.add(:immagine, "non è un formato immagine valido o non può essere elaborata")
       end
+    end
 end

@@ -1,14 +1,18 @@
-<h1>Cronologia delle Ricerche</h1>
+<div class="page-wrapper">
+  <h1>Cronologia delle Ricerche</h1>
 
-<% if @prodotti_visualizzati.any? %>
-  <ul>
-    <% @prodotti_visualizzati.each do |prodotto| %>
-      <li>
-        <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %>
-      </li>
-    <% end %>
-  </ul>
-  <%= button_to 'Cancella cronologia', cronologia_ricerche_path, method: :delete, data: { confirm: 'Sei sicuro?' } %>
-<% else %>
-  <p>Nessuna ricerca recente.</p>
-<% end %>
+  <% if @prodotti_visualizzati.any? %>
+    <ul class="search-history">
+      <% @prodotti_visualizzati.each do |prodotto| %>
+        <li>
+          <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="button-clear">
+      <%= button_to 'Cancella cronologia', cronologia_ricerche_path, method: :delete, data: { confirm: 'Sei sicuro?' }, class: "btn btn-danger" %>
+    </div>
+  <% else %>
+    <p>Nessuna ricerca recente.</p>
+  <% end %>
+</div>

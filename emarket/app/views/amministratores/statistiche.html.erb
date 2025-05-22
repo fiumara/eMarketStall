@@ -1,25 +1,43 @@
-<h1>Statistiche Generali</h1>
+<div style="max-width: 1000px; margin: 2rem auto; padding: 2rem; background-color: #fff; border-radius: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.08); font-family: Arial, sans-serif;">
 
-<h2>Utenti registrati</h2>
-<p>Acquirenti totali: <%= @acquirenti_totali %></p>
-<p>Venditori totali: <%= @venditori_totali %></p>
-<p>Acquirenti questo mese: <%= @acquirenti_corrente_mese %></p>
-<p>Venditori questo mese: <%= @venditori_corrente_mese %></p>
-<p>Acquirenti quest'anno: <%= @acquirenti_corrente_anno %></p>
-<p>Venditori quest'anno: <%= @venditori_corrente_anno %></p>
+  <h1 style="font-size: 2rem; color: #2c3e50; text-align: center; margin-bottom: 2rem;">Statistiche Generali</h1>
 
-<h2>Ordini e vendite</h2>
-<p>Vendite totali: <%= @vendite_totali %></p>
-<p>Media acquisti per acquirente: <%= number_with_precision(@media_acquisti_per_acquirente, precision: 2) %></p>
-<p>Media articoli per ordine: <%= number_with_precision(@media_articoli_per_ordine, precision: 2) %></p>
+  <div style="margin-bottom: 2rem; padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
+    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;">Utenti registrati</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Acquirenti totali: <%= @acquirenti_totali %></li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Venditori totali: <%= @venditori_totali %></li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Acquirenti questo mese: <%= @acquirenti_corrente_mese %></li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Venditori questo mese: <%= @venditori_corrente_mese %></li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Acquirenti quest'anno: <%= @acquirenti_corrente_anno %></li>
+      <li style="padding: 0.5rem 0;">Venditori quest'anno: <%= @venditori_corrente_anno %></li>
+    </ul>
+  </div>
 
-<h2>Acquirenti</h2>
-<p>Con almeno un ordine: <%= @rapporto_acquirenti_0_vs_1plus[:con_ordini] %></p>
-<p>Senza ordini: <%= @rapporto_acquirenti_0_vs_1plus[:senza_ordini] %></p>
+  <div style="margin-bottom: 2rem; padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
+    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;">Ordini e vendite</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Vendite totali: <%= @vendite_totali %></li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Media acquisti per acquirente: <%= number_with_precision(@media_acquisti_per_acquirente, precision: 2) %></li>
+      <li style="padding: 0.5rem 0;">Media articoli per ordine: <%= number_with_precision(@media_articoli_per_ordine, precision: 2) %></li>
+    </ul>
+  </div>
 
-<h2>Venditori</h2>
-<p>Media prodotti in vendita per venditore: <%= number_with_precision(@media_prodotti_per_venditore, precision: 2) %></p>
-<p>Media guadagno per venditore: <%= number_to_currency(@media_guadagno_per_venditore) %></p>
+  <div style="margin-bottom: 2rem; padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
+    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;">Acquirenti</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Con almeno un ordine: <%= @rapporto_acquirenti_0_vs_1plus[:con_ordini] %></li>
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Senza ordini: <%= @rapporto_acquirenti_0_vs_1plus[:senza_ordini] %></li>
+      <li style="padding: 0.5rem 0;">Media spesa per acquirente: <%= number_to_currency(@media_spesa_per_acquirente) %></li>
+    </ul>
+  </div>
 
-<h2>Acquirenti</h2>
-<p>Media spesa per acquirente: <%= number_to_currency(@media_spesa_per_acquirente) %></p>
+  <div style="padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
+    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;">Venditori</h2>
+    <ul style="list-style: none; padding: 0;">
+      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;">Media prodotti in vendita per venditore: <%= number_with_precision(@media_prodotti_per_venditore, precision: 2) %></li>
+      <li style="padding: 0.5rem 0;">Media guadagno per venditore: <%= number_to_currency(@media_guadagno_per_venditore) %></li>
+    </ul>
+  </div>
+
+</div>
