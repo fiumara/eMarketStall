@@ -314,6 +314,52 @@ Promozione.create!([
   }
   
 ])
+Faq.destroy_all
+
+Faq.create!([
+  {
+    domanda: "Come posso registrarmi come acquirente?",
+    risposta: "Clicca su 'Registrati' nella home page e compila il modulo con i tuoi dati personali. Riceverai un'email di conferma."
+  },
+  {
+    domanda: "Posso aprire un negozio sul sito?",
+    risposta: "Sì, dopo esserti registrato come acquirente, puoi aprire un negozio accedendo alla tua area personale e cliccando su 'Crea un negozio'."
+  },
+  {
+    domanda: "Come funziona il sistema di promozioni?",
+    risposta: "I venditori e gli amministratori possono creare promozioni applicabili a singoli prodotti o a intere categorie. Gli sconti vengono applicati automaticamente se validi."
+  },
+  {
+    domanda: "Cosa succede se il prodotto acquistato non è disponibile?",
+    risposta: "Nel caso un prodotto non sia disponibile, riceverai un rimborso completo oppure potrai scegliere un prodotto alternativo se disponibile."
+  },
+  {
+    domanda: "Come faccio a contattare il venditore?",
+    risposta: "Puoi contattare il venditore dalla pagina del negozio cliccando su 'Contatta il venditore', se abilitato."
+  },
+  {
+    domanda: "Come segnalo un comportamento scorretto di un venditore?",
+    risposta: "Puoi segnalare un negozio cliccando su 'Segnala negozio' nella pagina del venditore. L'amministratore esaminerà la tua segnalazione."
+  },
+  {
+    domanda: "Come posso modificare i miei dati personali?",
+    risposta: "Accedi al tuo profilo e clicca su 'Modifica profilo' per aggiornare le informazioni personali e le credenziali."
+  },
+  {
+    domanda: "Posso eliminare il mio account?",
+    risposta: "Sì, puoi richiedere la cancellazione del tuo account dalle impostazioni del profilo. I tuoi negozi e prodotti saranno rimossi."
+  },
+  {
+    domanda: "Come vengono calcolati gli sconti se ci sono più promozioni?",
+    risposta: "Se più promozioni sono applicabili a un prodotto, verrà applicato automaticamente lo sconto più vantaggioso per l'utente."
+  },
+  {
+    domanda: "Chi può vedere le mie informazioni personali?",
+    risposta: "Solo tu e, in alcuni casi, gli amministratori possono visualizzare le informazioni personali. Se imposti il tuo profilo come privato, gli altri utenti non vedranno i tuoi dati."
+  }
+])
+
+puts "FAQ caricate con successo!"
 
 
 
