@@ -4,11 +4,20 @@ class ChatRoomsController < ApplicationController
 
   def index
     if current_user.is_a?(Amministratore)
-      @chat_rooms = ChatRoom.where("mittente_type = ? OR destinatario_type = ?", "Amministratore", "Amministratore")
+      @chat_rooms = ChatRoom.where("(mittente_type = ? OR destinatario_type = ?)", "Amministratore", "Amministratore")
+                             .where("(mittente_type != ? OR mittente_visible = ?) AND (destinatario_type != ? OR destinatario_visible = ?)",
+                                    current_user.class.name, true,
+                                    current_user.class.name, true)
     else
-      @chat_rooms = ChatRoom.where("mittente_id = ? OR destinatario_id = ?", current_user.id, current_user.id)
+      @chat_rooms = ChatRoom.where(
+        "(mittente_id = ? AND mittente_type = ? AND mittente_visible = ?) OR (destinatario_id = ? AND destinatario_type = ? AND destinatario_visible = ?)",
+        current_user.id, current_user.class.name, true,
+        current_user.id, current_user.class.name, true
+      )
     end
   end
+  
+  
   
 
   def show
@@ -38,6 +47,15 @@ class ChatRoomsController < ApplicationController
   
 
   def create_message
+    @chat_room = ChatRoom.find(params[:chat_room_id] || params[:id])
+  
+    # Riattiva visibilità per mittente e destinatario (in caso l'altro l'avesse eliminata)
+    if current_user == @chat_room.mittente
+      @chat_room.update(destinatario_visible: true)
+    elsif current_user == @chat_room.destinatario
+      @chat_room.update(mittente_visible: true)
+    end
+  
     messaggio = @chat_room.messaggi.build(
       messaggio_params.merge(
         mittente: current_user,
@@ -45,7 +63,7 @@ class ChatRoomsController < ApplicationController
         destinatario_id: @chat_room.destinatario_id
       )
     )
-
+  
     if messaggio.save
       ChatRoomChannel.broadcast_to(@chat_room, render_message(messaggio))
       respond_to do |format|
@@ -59,6 +77,7 @@ class ChatRoomsController < ApplicationController
       end
     end
   end
+  
 
   def start
     unless current_user.is_a?(Acquirente)
@@ -110,6 +129,26 @@ class ChatRoomsController < ApplicationController
   
     redirect_to chat_room_path(chat_room)
   end
+  
+
+  def destroy
+    @chat_room = ChatRoom.find(params[:id])
+  
+    if @chat_room.mittente == current_user
+      @chat_room.update(mittente_visible: false)
+    elsif @chat_room.destinatario == current_user
+      @chat_room.update(destinatario_visible: false)
+    else
+      redirect_to chat_rooms_path, alert: "Non sei autorizzato." and return
+    end
+  
+    if !@chat_room.mittente_visible && !@chat_room.destinatario_visible
+      @chat_room.destroy
+    end
+  
+    redirect_to chat_rooms_path, notice: "Chat eliminata con successo."
+  end
+  
   
   
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_19_123712) do
+ActiveRecord::Schema.define(version: 2025_05_22_114419) do
 
   create_table "acquirentes", force: :cascade do |t|
     t.string "email"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(version: 2025_05_19_123712) do
     t.integer "destinatario_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "mittente_visible", default: true
+    t.boolean "destinatario_visible", default: true
     t.index ["destinatario_type", "destinatario_id"], name: "index_chat_rooms_on_destinatario"
     t.index ["mittente_type", "mittente_id"], name: "index_chat_rooms_on_mittente"
   end

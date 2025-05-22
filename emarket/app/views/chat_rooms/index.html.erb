@@ -12,6 +12,12 @@
         <div class="card-body">
           <h5 class="card-title"><%= chat_room.nome %></h5>
           <%= link_to 'Entra nella Chat', chat_room_path(chat_room), class: 'btn btn-primary' %>
+
+          <%= button_to 'Elimina', chat_room_path(chat_room),
+            method: :delete,
+            data: { confirm: 'Sei sicuro di voler eliminare questa chat?' },
+            class: 'btn btn-danger ml-2' %>
+
         </div>
       </div>
     </div>

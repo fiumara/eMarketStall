@@ -29,20 +29,20 @@
     <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
     <% if logged_in? %>
       <% if current_user.is_a?(Acquirente) %>
-        <%= link_to t_google('Profilo Acquirente'), acquirente_path(current_user) %>
-        <%= link_to t_google('Carrello'), carrello_path %>
-        <%= link_to 'FAQs', faqs_path %>
-        <%= link_to t_google("Assistenza"), assistenza_chat_rooms_path, method: :post %>
-      <% elsif current_user.is_a?(Amministratore) %>
-        <%= link_to t_google('Profilo Amministratore'), amministratore_path(current_user) %>
+        <%= link_to t_google('Profilo Acquirente'), acquirente_path(current_user), class: "btn btn-link text-decoration-none text-start w-100"  %>
+        <%= link_to t_google('Carrello'), carrello_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+        <%= link_to 'FAQs', faqs_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+        <%= button_to t_google("Assistenza"), assistenza_chat_rooms_path, method: :post, class: "menu-link-button" %>
+        <% elsif current_user.is_a?(Amministratore) %>
+        <%= link_to t_google('Profilo Amministratore'), amministratore_path(current_user), class: "btn btn-link text-decoration-none text-start w-100"  %>
       <% end %>
       <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger w-100' %>
-      <%= link_to t_google("🌍 Cambia lingua"), lingua_path %>
+      <%= link_to t_google("🌍 Cambia lingua"), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
 
     <% else %>
-      <%= link_to t_google('Accedi'), login_path %>
-      <%= link_to 'FAQs', faqs_path %>
-      <%= link_to t_google("🌍 Cambia lingua"), lingua_path %>
+      <%= link_to t_google('Accedi'), login_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+      <%= link_to 'FAQs', faqs_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+      <%= link_to t_google("🌍 Cambia lingua"), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
 
     <% end %>
   </div>
