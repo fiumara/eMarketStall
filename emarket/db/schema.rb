@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2025_05_19_123712) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.boolean "privato"
+    t.integer "points"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -319,8 +320,8 @@ ActiveRecord::Schema.define(version: 2025_05_19_123712) do
   add_foreign_key "carrello_items", "ordini", on_delete: :cascade
   add_foreign_key "carrello_items", "prodottos", on_delete: :cascade
   add_foreign_key "carrellos", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "acquirentes", on_delete: :cascade
-  add_foreign_key "cronologia_ricercas", "prodottos", on_delete: :cascade
+  add_foreign_key "cronologia_ricercas", "acquirentes"
+  add_foreign_key "cronologia_ricercas", "prodottos"
   add_foreign_key "feedbacks", "acquirentes", on_delete: :nullify
   add_foreign_key "feedbacks", "ordine_items", on_delete: :cascade
   add_foreign_key "feedbacks", "prodottos", on_delete: :cascade
