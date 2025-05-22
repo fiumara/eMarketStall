@@ -1,3 +1,63 @@
 // Place all the styles related to the Statistichenegozio controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.statistiche-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .statistiche-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+  }
+  
+  .statistiche-container ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .statistiche-container ul li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border-left: 5px solid #4a90e2;
+    border-radius: 8px;
+  }
+  
+  .statistiche-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    background-color: #fefefe;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .statistiche-container th,
+  .statistiche-container td {
+    text-align: left;
+    padding: 0.8rem;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  
+  .statistiche-container th {
+    background-color: #4a90e2;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .statistiche-container tr:hover {
+    background-color: #f1f7ff;
+  }
+  
