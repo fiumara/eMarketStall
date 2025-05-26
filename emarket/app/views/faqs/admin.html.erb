@@ -1,26 +1,26 @@
+<p id="notice" style="color: green; font-weight: bold;"><%= notice %></p>
 
-<p id="notice"><%= notice %></p>
+<h1 style="text-align: center; margin-bottom: 2rem;">Gestione FAQ</h1>
 
-<h1>Gestione FAQ</h1>
-
-<div class="faq-management">
+<div class="faq-management" style="max-width: 800px; margin: 0 auto;">
   <% if @faqs.present? %>
     <% @faqs.each do |faq| %>
-      <div class="faq-item">
-        <p><%= faq.id %>. <%= faq.domanda %></p>
-        <%= faq.risposta %>
-        <div class="faq-actions">
+      <div class="faq-item" style="background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);">
+        <p style="font-weight: bold; margin-bottom: 0.5rem;"><%= faq.id %>. <%= faq.domanda %></p>
+        <p style="margin-bottom: 1rem;"><%= faq.risposta %></p>
+        <div class="faq-actions" style="display: flex; gap: 1rem;">
           <%= link_to 'Modifica', edit_faq_path(faq), class: 'btn btn-primary' %>
           <%= button_to "Elimina", faq_path(faq), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questa FAQ?" }, class: 'btn btn-danger' %>
-          </div>
+        </div>
       </div>
     <% end %>
   <% else %>
-    <p>Nessuna FAQ presente</p>
+    <p style="text-align: center;">Nessuna FAQ presente</p>
   <% end %>
-  
-  <%= link_to 'Aggiungi domanda', new_faq_path, class: 'btn btn-success' %>
-</div>
 
-<%= link_to 'Torna al profilo', amministratore_path(@amministratore) %>
+  <div style="text-align: center; margin-top: 2rem;">
+    <%= link_to 'Aggiungi domanda', new_faq_path, class: 'btn btn-success', style: 'margin-right: 1rem;' %>
+    <%= link_to 'Torna al profilo', amministratore_path(@amministratore), class: 'btn btn-secondary' %>
+  </div>
+</div>
 
