@@ -1,6 +1,10 @@
 class ChatRoomsController < ApplicationController
   before_action :set_chat_room, only: %i[show create_message]
+  before_action :authenticate_user!
+  before_action :authorize_chat_access, only: %i[show create_message destroy]
   before_action :set_destinatari_options, only: %i[new create]
+  
+  
 
   def index
     if current_user.is_a?(Amministratore)
@@ -154,22 +158,20 @@ class ChatRoomsController < ApplicationController
 
   private
 
-def set_chat_room
-  @chat_room = ChatRoom.find_by(id: params[:id] || params[:chat_room_id])
-  
-  if @chat_room.nil?
-    redirect_to chat_rooms_path, alert: 'Chat room non trovata.'
-  elsif !authorized_user?(@chat_room)
-    redirect_to chat_rooms_path, alert: 'Non sei autorizzato ad accedere a questa chatroom.'
+  def set_chat_room
+    @chat_room = ChatRoom.find_by(id: params[:id] || params[:chat_room_id])
+    redirect_to chat_rooms_path, alert: 'Chat room non trovata.' if @chat_room.nil?
   end
-end
+  
 
-def authorized_user?(chat_room)
-  return true if current_user.is_a?(Amministratore) &&
-                 (chat_room.mittente_type == "Amministratore" || chat_room.destinatario_type == "Amministratore")
-
-    current_user.id == chat_room.mittente_id || current_user.id == chat_room.destinatario_id
-end
+  def authorized_user?(chat_room)
+    return true if current_user.is_a?(Amministratore) &&
+                   (chat_room.mittente_type == "Amministratore" || chat_room.destinatario_type == "Amministratore")
+  
+    (current_user.id == chat_room.mittente_id && current_user.class.name == chat_room.mittente_type) ||
+      (current_user.id == chat_room.destinatario_id && current_user.class.name == chat_room.destinatario_type)
+  end
+  
 
 
   def set_destinatari_options
@@ -190,4 +192,12 @@ end
       locals: { messaggio: messaggio }
     )
   end
+
+
+  def authorize_chat_access
+    unless authorized_user?(@chat_room)
+      redirect_to chat_rooms_path, alert: 'Accesso negato: non sei autorizzato a visualizzare questa chat.'
+    end
+  end
+
 end

@@ -1,6 +1,8 @@
 class NegozioReturnRequestsController < ApplicationController
     before_action :authenticate_acquirente! # Assicurati di avere un metodo di autenticazione corretto
     before_action :set_return_request, only: [:show, :update, :approve, :reject]
+    before_action :authorize_negozio_return_request, only: [:show, :update, :approve, :reject]
+
 
     def index
       @return_requests = ReturnRequest.joins(:ordine)
@@ -67,6 +69,12 @@ class NegozioReturnRequestsController < ApplicationController
   
     def set_return_request
       @return_request = ReturnRequest.find(params[:id])
+    end
+    
+    def authorize_negozio_return_request
+      unless @return_request.ordine.negozio == current_user.negozio
+        redirect_to root_path, alert: "Accesso negato."
+      end
     end
   end
   

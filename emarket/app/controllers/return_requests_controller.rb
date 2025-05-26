@@ -1,6 +1,7 @@
 class ReturnRequestsController < ApplicationController
   before_action :authenticate_acquirente!
   before_action :set_return_request, only: [:show, :update]
+  before_action :authorize_acquirente_return_request, only: [:show, :update]
 
   def index
     @return_requests = current_user.return_requests.order(created_at: :desc)
@@ -60,6 +61,12 @@ class ReturnRequestsController < ApplicationController
 
   def return_request_params
     params.require(:return_request).permit(:motivo, return_items_attributes: [:prodotto_id, :quantita, :ordine_item_id])
+  end
+
+  def authorize_acquirente_return_request
+    unless @return_request.acquirente == current_user
+      redirect_to root_path, alert: "Accesso negato."
+    end
   end
   
 end

@@ -2,6 +2,8 @@ class ProdottosController < ApplicationController
   before_action :set_negozio, only: [:new, :create]
   before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
   before_action :authorize_proprietario, only: [:destroy, :edit, :update]
+  before_action :authorize_negoziante!, only: [:new, :create]
+
 
   # GET /prodottos or /prodottos.json
   def index
@@ -101,6 +103,14 @@ class ProdottosController < ApplicationController
   def prodotto_params
     params.require(:prodotto).permit(:nome_prodotto, :descrizione, :prezzo, :quantita_disponibile, :categorium_id, :negozio_id, immagini: [])
   end
+
+  def authorize_negoziante!
+    unless  current_user == @negozio.acquirente
+      #controllare meglio
+      redirect_to root_path, alert: "Non sei autorizzato a creare prodotti per questo negozio." and return
+    end
+  end
+  
   
   
   

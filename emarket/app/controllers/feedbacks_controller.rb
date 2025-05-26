@@ -4,12 +4,24 @@ before_action :set_feedback, only: [:segnala]
 
 def new
   @ordine_item = OrdineItem.find(params[:ordine_item_id])
+
+  if @ordine_item.ordine.acquirente != current_user
+    redirect_to root_path, alert: "Non sei autorizzato ad accedere a questo feedback." and return
+  end
+
   @prodotto = @ordine_item.prodotto
   @feedback = Feedback.new
 end
 
+
 def create
   @ordine_item = OrdineItem.find(params[:feedback][:ordine_item_id])
+
+  # 🔒 Verifica che l'acquirente sia il proprietario dell'ordine
+  if @ordine_item.ordine.acquirente != current_user
+    redirect_to root_path, alert: "Non sei autorizzato a lasciare un feedback per questo prodotto." and return
+  end
+
   @feedback = Feedback.new(feedback_params)
   @feedback.acquirente = current_user
   @feedback.prodotto = @ordine_item.prodotto
@@ -21,6 +33,7 @@ def create
     render :new
   end
 end
+
 
 def segnala
   @feedback.segnalato = true
