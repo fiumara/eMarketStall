@@ -1,6 +1,7 @@
 class NegoziosController < ApplicationController
   before_action :authenticate_acquirente!, except: [:visualizza]
-  before_action :set_negozio, only: [:show, :edit, :update, :destroy, :visualizza]
+  before_action :set_negozio, only: [:show, :edit, :update, :destroy, :visualizza, :statistiche, :seguaci]
+  before_action :authorize_negozio, only: [:show, :edit, :update, :destroy, :statistiche, :seguaci]
 
   # GET /negozios or /negozios.json
   def index
@@ -126,5 +127,11 @@ class NegoziosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def negozio_params
       params.require(:negozio).permit(:nome_negozio, :descrizione, :indirizzo, :telefono, :immagine)
+    end
+
+    def authorize_negozio
+      unless current_user == @negozio.acquirente
+        redirect_to root_path, alert: "Accesso negato: non sei autorizzato ad accedere a questa pagina." and return
+      end
     end
 end
