@@ -2,6 +2,9 @@ class PromozionesController < ApplicationController
     before_action :set_promozione, only: %i[show edit update destroy]
     
     before_action :authorize_negozio_or_admin, only: %i[create new edit update destroy]
+
+    before_action :authorize_promozione_owner, only: %i[edit update destroy]
+
   
     # GET /promoziones or /promoziones.json
     def index
@@ -89,5 +92,20 @@ class PromozionesController < ApplicationController
         redirect_to root_path, alert: 'Accesso negato: questa pagina è riservata agli amministratori o ai negozi.'
       end
     end
+
+    def authorize_promozione_owner
+      if @promozione.created_by == 'negozio'
+        unless current_user.is_a?(Acquirente) && current_user.negozio == @promozione.negozio
+          redirect_to root_path, alert: 'Non sei autorizzato a modificare questa promozione.'
+        end
+      elsif @promozione.created_by == 'admin'
+        unless current_user.is_a?(Amministratore)
+          redirect_to root_path, alert: 'Solo un amministratore può modificare questa promozione.'
+        end
+      else
+        redirect_to root_path, alert: 'Accesso non autorizzato.'
+      end
+    end
+    
   end
   

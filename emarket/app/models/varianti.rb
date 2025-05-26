@@ -1,2 +1,0 @@
-class Varianti < ApplicationRecord
-end
