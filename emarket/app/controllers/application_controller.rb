@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_negozio
+    if logged_in? && current_user.is_a?(Acquirente)
+      @negozio = current_user.negozio
+    end
+  end
+
   def set_locale
     I18n.locale = session[:lingua] || I18n.default_locale
   end
