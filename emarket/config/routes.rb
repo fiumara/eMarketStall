@@ -112,7 +112,6 @@ Rails.application.routes.draw do
       get 'successo', to: 'ordini#successo'
       get 'errore', to: 'ordini#errore'
     end
-    post :annulla, on: :member
     post :pagamento, on: :member
     resources :return_requests, only: [:new, :create]
   end

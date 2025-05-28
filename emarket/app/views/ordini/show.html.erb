@@ -60,5 +60,4 @@
 
 <% if @ordine.stato == "in_attesa" %>
   <%= button_to "Procedi al Pagamento", pagamento_ordine_path(@ordine), method: :post, class: "btn btn-primary mt-3" %>
-  <%= button_to "Annulla ordine", annulla_ordine_path(@ordine), method: :post, data: { confirm: "Sei sicuro di voler annullare l'ordine?" } %>
 <% end %>

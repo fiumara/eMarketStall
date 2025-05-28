@@ -16,6 +16,11 @@
         <%= link_to t_google('I miei resi'), return_requests_path, class: 'nav-link btn btn-outline-primary mb-2' %>
         <%= link_to t_google('Cronologia Ricerche'), cronologia_ricerche_path, class: 'nav-link btn btn-outline-primary mb-2' %>
         <%= link_to t_google('Messaggi'), chat_rooms_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <% if @negozio %>
+          <%= link_to t_google('Il Tuo Negozio'), negozio_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
+        <% else %>
+          <%= link_to t_google('Crea Il Tuo Negozio'), new_negozio_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <% end %>
       </nav>
     </div>
 
