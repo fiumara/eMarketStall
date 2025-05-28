@@ -1,115 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Visualizzazione Prodotto</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<main class="main-wrapper">
+  <div class="prodotto-content">
+    <div class="prodotto-gallery">
+    <h1><%= @prodotto.nome_prodotto %></h1>     
+     <% if @prodotto.immagini.attached? %>
+        <%= image_tag url_for(@prodotto.immagini.first), class: "main-image" %>
+      <% else %>
+        <div class="empty-image-placeholder">Nessuna immagine disponibile</div>
+      <% end %>
+      <div class="carousel-controls">
+        <button id="prevBtn">‹</button>
+        <button id="nextBtn">›</button>
+      </div>
+      <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
+        <div class="image-actions">
+          <%= link_to "Modifica", edit_prodotto_path(@prodotto), class: "btn-sm btn-warning" %>
+          <%= link_to "Elimina", prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn-sm btn-danger" %>
+        </div>
+      <% end %>
+    </div>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-<body>
-    <main>
-        <h1><%= @prodotto.nome_prodotto %></h1>
-        <div class="prodotto-container">
-        <% if @prodotto.immagini.attached? %>
-  <div id="carousel" class="image-gallery">
-    <% @prodotto.immagini.each_with_index do |img, index| %>
-      <%= image_tag url_for(img), class: "carousel-image", id: "image-#{index}", style: (index == 0 ? "" : "display:none;") %>
-    <% end %>
+    <div class="prodotto-details">
+     <p><strong>Descrizione</strong><br><%= @prodotto.descrizione %></p>
+      <p><strong>Prezzo:</strong> <%= number_to_currency(@prodotto.prezzo) %></p>
+      <% if @prezzo_scontato && @prezzo_scontato < @prodotto.prezzo %>
+        <p><del><%= number_to_currency(@prodotto.prezzo) %></del> <strong><%= number_to_currency(@prezzo_scontato) %></strong></p>
+      <% end %>
 
-    <div>
-    <button id="prevBtn" class="carousel-button">←</button>
-    <button id="nextBtn" class="carousel-button">→</button>
+      <%= form_with url: carrello_items_path, method: :post do %>
+        <%= hidden_field_tag :prodotto_id, @prodotto.id %>
+        <label>Quantità</label>
+        <%= number_field_tag :quantity, 1, min: 1, max: @prodotto.quantita_disponibile, class: "input-select" %>
+        <%= submit_tag "Aggiungi al carrello", class: "btn-black full-width" %>
+        <%= hidden_field_tag :redirect_back, request.original_url %>
+
+        <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
+      <% end %>
     </div>
   </div>
-<% else %>
-  <p>Nessuna immagine disponibile</p>
-<% end %>
 
-
-            
-        <div class="prodotto-details">
-            <div class="prodotto-description">
-                <h2>Descrizione</h2>
-                <p><%= @prodotto.descrizione %></p>
-                <p>Categoria: <%= @prodotto.categorium.nome %></p> <!-- Mostra il nome della categoria -->
-                <%= link_to 'Visualizza Negozio', visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
-                <% if @prezzo_scontato && @prezzo_scontato < @prodotto.prezzo %>
-                <p>Prezzo:
-                  <span style="text-decoration: line-through;"><%= number_to_currency(@prodotto.prezzo) %></span>
-                  <strong><%= number_to_currency(@prezzo_scontato) %></strong>
-                </p>
-                <% else %>
-                <p>Prezzo: <%= number_to_currency(@prodotto.prezzo) %></p>
-                <% end %>
-            </div>
-
-            <% if logged_in? && current_user.is_a?(Acquirente) %>
-              <div class="prodotto-options">
-                <%= form_with url: carrello_items_path, method: :post do %>
-                  <%= hidden_field_tag :prodotto_id, @prodotto.id %>
-                  <div>
-                    <%= label_tag :quantity, "Quantità:" %>
-                    <%= number_field_tag :quantity, 1, min: 1, max: @prodotto.quantita_disponibile %>
-                    </div>
-                  <%= submit_tag "Aggiungi al carrello", class: "btn btn-primary" %>
-                <% end %>
-              </div>
-            <% end %>
-            
-            <!-- Mostra il pulsante a forma di cuore solo agli utenti che non sono amministratori -->
-            <% if unauthenticated_user? || session[:role] == 'acquirente' %>
-              <div class="wishlist-button">
-                <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
-                  <%= hidden_field_tag :redirect_back, request.original_url %>
-                  <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
-                <% end %>
-              </div>
-            <% end %>
-        </div>
-
-        <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
-          <%= link_to "Modifica Prodotto", edit_prodotto_path(@prodotto), class: "btn btn-warning" %>
-          <%= link_to "Elimina Prodotto", prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro di voler eliminare questo prodotto?" }, class: "btn btn-danger" %>
-        <% end %>
-
-
-
-        <div class="recensioni">
-          <h3>Recensioni</h3>
-            <% @feedbacks.each do |feedback| %>
-        <div class="feedback">
-          <p><strong><%= feedback.acquirente.nome_completo %></strong></p>
-          <p><%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %></p>
-          <p><%= feedback.nota %></p>
-        </div>
-          <% end %>
-        </div>
-
-    </main>
-</body>
-</html>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const images = document.querySelectorAll(".carousel-image");
-    let currentIndex = 0;
-
-    function showImage(index) {
-      images.forEach((img, i) => {
-        img.style.display = i === index ? "block" : "none";
-      });
-    }
-
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
-    });
-
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    });
-  });
-</script>
+  <div class="recensioni">
+  <h3>Recensioni</h3>
+  <% @feedbacks.each do |feedback| %>
+    <div class="feedback">
+      <p><strong><%= feedback.acquirente.nome_completo %></strong></p>
+      <p><%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %></p>
+      <p><%= feedback.nota %></p>
+    </div>
+  <% end %>
+</div>
+</main>
