@@ -173,29 +173,6 @@ class OrdiniController < ApplicationController
     redirect_to session.url, allow_other_host: true
   end
 
-  def annulla
-    @ordine = current_user.ordini.find(params[:id])
-  
-    if @ordine.stato != "in_attesa"
-      redirect_to @ordine, alert: "L'ordine non può essere annullato in questo stato."
-      return
-    end
-  
-    ActiveRecord::Base.transaction do
-      @ordine.update!(stato: "annullato")
-  
-      @ordine.ordine_items.each do |item|
-        prodotto = item.prodotto
-        prodotto.increment!(:quantita_disponibile, item.quantity)
-      end
-    end
-  
-    redirect_to ordini_path, notice: "Ordine annullato correttamente e prodotti ripristinati nel magazzino."
-  rescue ActiveRecord::RecordNotFound
-    redirect_to ordini_path, alert: "Ordine non trovato o non autorizzato."
-  end
-  
-
   private
 
   def assegna_punti_fedelta(ordine)
