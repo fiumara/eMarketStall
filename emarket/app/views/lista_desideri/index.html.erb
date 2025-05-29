@@ -1,5 +1,5 @@
 <div class="page-wrapper lista-desideri">
-  <h2>Lista Desideri</h2>
+  <h2><%= t('acquirente.desideri') %></h2>
   <% if @wishlist.present? %>
     <% @wishlist.each do |prodotto| %>
       <div class="prodotto">
@@ -11,13 +11,13 @@
           </div>
           <div class="elimina">
             <%= form_with(url: remove_from_wishlist_path(prodotto), method: :delete, local: true) do %>
-              <%= submit_tag 'Elimina', class: 'btn btn-danger' %>
+              <%= submit_tag t('comune.elimina'), class: 'btn btn-danger' %>
             <% end %>
           </div>
         </div>
       </div>
     <% end %>
   <% else %>
-    <p>La tua lista desideri è vuota.</p>
+    <p><%= t('lista_d.vuota') %></p>
   <% end %>
 </div>

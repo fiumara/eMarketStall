@@ -20,7 +20,6 @@ en:
     nota: "Note"
     azioni: "Actions"
     no_nota: "No notes"
-
     quantita: "Quantity"
     prezzo: "Price"
     prezzo_or: "Original Price"
@@ -32,6 +31,8 @@ en:
     torna_pr: "Back to profile"
     invia: "Send"
     negozio: "Shop"
+
+    motivo:
 
   home:
     promo: "Ongoing Promotions"
@@ -160,3 +161,28 @@ en:
     torna: "Back to Chat Rooms List"
     m_data: "Sent on:"
     negozio: "(Shop)"
+
+  feedback:
+    lascia: "Leave feedback"
+    voto: "Rating (1-5):"
+    nota: "Note (optional):"
+    invia: "Send feedback"
+
+  gest:
+    titolo: "Account Management"
+    tipo: "User type"
+    tutti: "All"
+    acquirenti: "Buyers"
+    venditori: "Sellers"
+    segnalati: "Reported stores"
+    no_utente: "No user found with the selected criteria."
+    inviata: "Sent by"
+    sblocca: "Unblock"
+    blocca_n: "Block store"
+    elimina_n: "Delete store"
+    no_segn: "No reports received."
+    blocca: "Block"
+    cerca_nome: "Search by name or store"
+    segn: "Reports received"
+    ignora: "Ignore"
+

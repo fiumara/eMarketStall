@@ -20,7 +20,6 @@ fr:
     nota: "Note"
     azioni: "Actions"
     no_nota: "Aucune note"
-
     quantita: "Quantité"
     prezzo: "Prix"
     prezzo_or: "Prix original"
@@ -32,6 +31,8 @@ fr:
     torna_pr: "Retour au profil"
     invia: "Envoyer"
     negozio: "Boutique"
+
+    motivo:
 
   home:
     promo: "Promotions en cours"
@@ -160,3 +161,29 @@ fr:
     torna: "Retour à la liste des discussions"
     m_data: "Envoyé le :"
     negozio: "(Boutique)"
+
+  feedback:
+    lascia: "Laisser un commentaire pour"
+    voto: "Note (1-5) :"
+    nota: "Note (facultatif) :"
+    invia: "Envoyer le commentaire"
+
+  gest:
+    titolo: "Gestion du compte"
+    tipo: "Type d'utilisateur"
+    tutti: "Tous"
+    acquirenti: "Acheteurs"
+    venditori: "Vendeurs"
+    segnalati: "Boutiques signalées"
+    no_utente: "Aucun utilisateur trouvé avec les critères sélectionnés."
+    inviata: "Envoyé par"
+    sblocca: "Débloquer"
+    blocca_ n: "Bloquer la boutique"
+    elimina: "Supprimer la boutique"
+    no_segn: "Aucun signalement reçu."
+    blocca: "Bloquer"
+    cerca_nome: "Rechercher par nom ou boutique"
+    segn: "Signalements reçus"
+    ignora: "Ignorer"
+
+

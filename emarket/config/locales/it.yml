@@ -18,9 +18,7 @@ it:
     dettagli: "Dettagli Profilo"
     prodotto: "Prodotto"
     acquirente: "Acquirente"
-
     negozio: "Negozio"
-
     nota: "Nota"
     azioni: "Azioni"
     no_nota: "Nessuna nota"
@@ -34,8 +32,9 @@ it:
     modifica: "Modifica"
     elimina: "Elimina"
     torna_pr: "Torna al profilo"
-
     invia: "Invia"
+
+    motivo: "Motivo"
 
   home:
     promo: "Promozioni in corso"
@@ -164,6 +163,37 @@ it:
     torna: "Torna alla lista delle chat rooms"
     m_data: "Inviato il:"
     negozio: "(Negozio)"
+
+  feedback:
+    lascia: "Lascia un feedback per"
+    voto: "Voto (1-5):"
+    nota: "Nota (opzionale):"
+    invia: "Invia feedback"
+
+  gest:
+    titolo: "Gestione Account"
+    tipo: "Tipo utente"
+    tutti: "Tutti"
+    acquirenti: "Acquirenti"
+    venditori: "Venditori"
+    segnalati: "Negozi segnalati"
+    no_utente: "Nessun utente trovato con i criteri selezionati."
+    inviata: "Inviata da"
+    sblocca: "Sblocca"
+    blocca_ n: "Blocca negozio"
+    elimina: "Elimina negozio"
+    no_segn: "Nessuna segnalazione ricevuta."
+    blocca: "Blocca"
+    cerca_nome: "Cerca per nome o negozio"
+    segn: "Segnalazioni ricevute"
+    ignora: "Ignora"
+
+  lingua:
+    scegli: "Scegli la lingua"
+    cambia: "Cambia lingua"
+
+  lista_d:
+    vuota: "La tua lista desideri è vuota."
 
 
 

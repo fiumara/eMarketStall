@@ -34,6 +34,8 @@ es:
     invia: "Enviar"
     negozio: "Tienda"
 
+    negozio:
+
   home:
     promo: "Promociones actuales"
     mostrap: "Ver todas las promociones"
@@ -163,3 +165,27 @@ es:
     torna: "Volver a la lista de salas"
     m_data: "Enviado el:"
     negozio: "(Tienda)"
+
+  feedback:
+    lascia: "Dejar comentarios para"
+    voto: "Puntuación (1-5):"
+    nota: "Nota (opcional):"
+    invia: "Enviar comentarios"
+
+  gest:
+    titolo: "Gestión de cuentas"
+    tipo: "Tipo de usuario"
+    tutti: "Todos"
+    acquirenti: "Compradores"
+    venditori: "Vendedores"
+    segnalati: "Tiendas reportadas"
+    no_utente: "No se encontraron usuarios con los criterios seleccionados."
+    inviata: "Enviado por"
+    sblocca: "Desbloquear"
+    blocca_ n: "Bloquear tienda"
+    elimina: "Eliminar tienda"
+    no_segn: "No se han recibido reportes."
+    blocca: "Bloquear"
+    cerca_nome: "Buscar por nombre o tienda"
+    segn: "Reportes recibidos"
+    ignora: "Ignorar"

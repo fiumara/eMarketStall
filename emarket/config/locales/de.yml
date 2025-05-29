@@ -20,7 +20,6 @@ de:
     nota: "Notiz"
     azioni: "Aktionen"
     no_nota: "Keine Notiz vorhanden"
-
     quantita: "Menge"
     prezzo: "Preis"
     prezzo_or: "Originalpreis"
@@ -32,6 +31,8 @@ de:
     torna_pr: "Zurück zum Profil"
     invia: "Senden"
     negozio: "Shop"
+
+    motivo:
 
   home:
     promo: "Aktuelle Angebote"
@@ -160,3 +161,30 @@ de:
     torna: "Zurück zur Chatraumliste"
     m_data: "Gesendet am:"
     negozio: "(Shop)"
+
+  feedback:
+    lascia: "Feedback hinterlassen für"
+    voto: "Bewertung (1-5):"
+    nota: "Anmerkung (optional):"
+    invia: "Feedback senden"
+
+  gest:
+    titolo: "Kontoverwaltung"
+    tipo: "Benutzertyp"
+    tutti: "Alle"
+    acquirenti: "Käufer"
+    venditori: "Verkäufer"
+    segnalati: "Gemeldete Shops"
+    no_utente: "Kein Benutzer mit den ausgewählten Kriterien gefunden."
+    inviata: "Gesendet von"
+    sblocca: "Entsperren"
+    blocca_ n: "Shop sperren"
+    elimina: "Shop löschen"
+    no_segn: "Keine Meldungen erhalten."
+    blocca: "Sperren"
+    cerca_nome: "Suche nach Name oder Shop"
+    segn: "Erhaltene Meldungen"
+    ignora: "Ignorieren"
+
+
+  
