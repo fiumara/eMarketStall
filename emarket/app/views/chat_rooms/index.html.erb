@@ -2,7 +2,7 @@
 <h1 class="text-center my-4">Chat Rooms</h1>
 
 <div class="text-center mb-4">
-  <%= link_to 'Crea una nuova Chat Room', new_chat_room_path, class: 'btn btn-success' %>
+  <%= link_to t('chat.crea'), new_chat_room_path, class: 'btn btn-success' %>
 </div>
 
 <div class="row">
@@ -11,11 +11,11 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title"><%= chat_room.nome %></h5>
-          <%= link_to 'Entra nella Chat', chat_room_path(chat_room), class: 'btn btn-primary' %>
+          <%= link_to t('chat.entra'), chat_room_path(chat_room), class: 'btn btn-primary' %>
 
-          <%= button_to 'Elimina', chat_room_path(chat_room),
+          <%= button_to t('comune.elimina'), chat_room_path(chat_room),
             method: :delete,
-            data: { confirm: 'Sei sicuro di voler eliminare questa chat?' },
+            data: { confirm: t('comune.conferma')},
             class: 'btn btn-danger ml-2' %>
 
         </div>

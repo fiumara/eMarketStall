@@ -1,37 +1,37 @@
 <!-- new.html.erb -->
-<h1 class="text-center">Nuova Chat Room</h1>
+<h1 class="text-center"><%= t('chat.nuova') %></h1>
 <div class="container my-4">
   <%= form_with model: @chat_room, local: true do |form| %>
     <div class="form-group mb-3">
-      <%= form.label :nome, 'Nome della Chat Room' %>
+      <%= form.label :nome, t('chat.nome') %>
       <%= form.text_field :nome, class: 'form-control' %>
     </div>
 
     <!-- Selezione del destinatario -->
     <div class="form-group mb-3">
-      <%= form.label :destinatario_id, "Seleziona Destinatario", class: 'form-label' %>
+      <%= form.label :destinatario_id, t('chat.dest'), class: 'form-label' %>
       <% if @destinatari_options.present? %>
       <%= form.select :destinatario_id,
       options_for_select(@destinatari_options.map do |d|
         label = d.nome_completo
-        label += " (Negozio)" if d.is_a?(Negozio)
+        label +=  t("chat.negozio") if d.is_a?(Negozio)
         [label, d.id]
       end),
-      { include_blank: "Seleziona un destinatario" },
+      { include_blank: t('chat.dest') },
       class: 'form-select' %>
           <% else %>
-        <p class="text-muted">Nessun destinatario disponibile</p>
+        <p class="text-muted"><%= t('chat.no_dest') %></p>
       <% end %>
     </div>
 
     <%= form.hidden_field :destinatario_type, value: @destinatari_options.first.class.name %>
 
 
-    <%= form.submit 'Crea Chat Room', class: 'btn btn-primary' %>
+    <%= form.submit t('chat.crea'), class: 'btn btn-primary' %>
   <% end %>
 
   <div class="mt-3">
-    <%= link_to 'Torna alla lista delle chat rooms', chat_rooms_path, class: 'btn btn-secondary' %>
+    <%= link_to t('chat.torna'), chat_rooms_path, class: 'btn btn-secondary' %>
   </div>
 </div>
 

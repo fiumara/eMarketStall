@@ -18,10 +18,12 @@ it:
     dettagli: "Dettagli Profilo"
     prodotto: "Prodotto"
     acquirente: "Acquirente"
+
+    negozio: "Negozio"
+
     nota: "Nota"
     azioni: "Azioni"
     no_nota: "Nessuna nota"
-
     prodotto: "Prodotto"
     quantita: "Quantità"
     prezzo: "Prezzo"
@@ -32,6 +34,8 @@ it:
     modifica: "Modifica"
     elimina: "Elimina"
     torna_pr: "Torna al profilo"
+
+    invia: "Invia"
 
   home:
     promo: "Promozioni in corso"
@@ -146,6 +150,20 @@ it:
     nuova: "Nuova Faq"
     domanda: "Domanda"
     risposta: "Risposta"
+
+  chat:
+    crea: "Crea una nuova Chat Room"
+    entra: "Entra nella Chat"
+    no_mex: "Nessun messaggio. Scrivi il primo!"
+    scrivi: "Scrivi un messaggio..."
+    nuova: "Nuova Chat Room"
+    nome: "Nome della Chat Room"
+    dest: "Seleziona Destinatario"
+    no_dest: "Nessun destinatario disponibile"
+    crea: "Crea Chat Room"
+    torna: "Torna alla lista delle chat rooms"
+    m_data: "Inviato il:"
+    negozio: "(Negozio)"
 
 
 
