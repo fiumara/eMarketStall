@@ -30,6 +30,8 @@ en:
     modifica: "Edit"
     elimina: "Delete"
     torna_pr: "Back to profile"
+    invia: "Send"
+    negozio: "Shop"
 
   home:
     promo: "Ongoing Promotions"
@@ -144,3 +146,17 @@ en:
     nuova: "New FAQ"
     domanda: "Question"
     risposta: "Answer"
+
+  chat:
+    crea: "Create a New Chat Room"
+    entra: "Enter Chat"
+    no_mex: "No messages yet. Be the first to write!"
+    scrivi: "Write a message..."
+    nuova: "New Chat Room"
+    nome: "Chat Room Name"
+    dest: "Select Recipient"
+    no_dest: "No available recipient"
+    crea: "Create Chat Room"
+    torna: "Back to Chat Rooms List"
+    m_data: "Sent on:"
+    negozio: "(Shop)"

@@ -1,6 +1,6 @@
 <div class="message <%= 'mine' if messaggio.mittente == current_user %>">
   <strong>
-    Mittente:
+    
     <% if messaggio.mittente.is_a?(Amministratore) || messaggio.mittente.is_a?(Acquirente) %>
       <%= messaggio.mittente.nome %> <%= messaggio.mittente.cognome %>
     <% elsif messaggio.mittente.is_a?(Negozio) %>
@@ -11,6 +11,6 @@
   </strong>
   <p><%= messaggio.contenuto %></p>
   <small class="text-muted">
-  Inviato il: <%= messaggio.created_at.strftime("%d/%m/%Y %H:%M") %>
+  <%= t('chat.m_data') %><%= messaggio.created_at.strftime("%d/%m/%Y %H:%M") %>
 </small>
 </div>

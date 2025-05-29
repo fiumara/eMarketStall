@@ -30,6 +30,8 @@ de:
     modifica: "Bearbeiten"
     elimina: "Löschen"
     torna_pr: "Zurück zum Profil"
+    invia: "Senden"
+    negozio: "Shop"
 
   home:
     promo: "Aktuelle Angebote"
@@ -144,3 +146,17 @@ de:
     nuova: "Neue FAQ"
     domanda: "Frage"
     risposta: "Antwort"
+
+  chat:
+    crea: "Neuen Chatraum erstellen"
+    entra: "Chat betreten"
+    no_mex: "Keine Nachrichten. Schreibe die erste!"
+    scrivi: "Nachricht schreiben..."
+    nuova: "Neuer Chatraum"
+    nome: "Name des Chatraums"
+    dest: "Empfänger auswählen"
+    no_dest: "Kein verfügbarer Empfänger"
+    crea: "Chatraum erstellen"
+    torna: "Zurück zur Chatraumliste"
+    m_data: "Gesendet am:"
+    negozio: "(Shop)"

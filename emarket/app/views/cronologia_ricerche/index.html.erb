@@ -5,7 +5,7 @@
     <ul class="search-history">
       <% @prodotti_visualizzati.each do |prodotto| %>
         <li>
-          <%= link_to prodotto.nome_prodotto, prodotto_path(prodotto) %>
+          <%= link_to t_google(prodotto.nome_prodotto), prodotto_path(prodotto) %>
         </li>
       <% end %>
     </ul>
