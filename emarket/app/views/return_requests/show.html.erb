@@ -29,8 +29,8 @@
   <tbody>
     <% @return_request.return_items.each do |item| %>
       <tr>
-        <td><%= item.prodotto.nome_prodotto %></td>
-        <td><%= item.quantita %></td>
+        <td><%= t_google(item.prodotto.nome_prodotto) %></td>
+        <td><%= t_google(item.quantita) %></td>
       </tr>
     <% end %>
   </tbody>

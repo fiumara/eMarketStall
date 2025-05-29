@@ -5,8 +5,8 @@
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
           <div class="card-body">
-            <h5 class="card-title"><%= promozione.nome %></h5>
-            <p class="card-text"><%= promozione.descrizione %></p>
+            <h5 class="card-title"><%= t_google(promozione.nome) %></h5>
+            <p class="card-text"><%= t_google(promozione.descrizione) %></p>
             <ul class="list-unstyled">
               <li><strong>Inizio:</strong> <%= promozione.inizio.strftime('%d/%m/%Y') %></li>
               <li><strong>Fine:</strong> <%= promozione.fine.strftime('%d/%m/%Y') %></li>

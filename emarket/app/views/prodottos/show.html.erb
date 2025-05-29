@@ -1,7 +1,7 @@
 <main class="main-wrapper">
   <div class="prodotto-content">
     <div class="prodotto-gallery">
-    <h1><%= @prodotto.nome_prodotto %></h1>     
+    <h1><%= t_goole(@prodotto.nome_prodotto) %></h1>     
      <% if @prodotto.immagini.attached? %>
         <%= image_tag url_for(@prodotto.immagini.first), class: "main-image" %>
       <% else %>
@@ -43,7 +43,7 @@
   <h3>Recensioni</h3>
   <% @feedbacks.each do |feedback| %>
     <div class="feedback">
-      <p><strong><%= feedback.acquirente.nome_completo %></strong></p>
+      <p><strong><%= t_goole(feedback.acquirente.nome_completo) %></strong></p>
       <p><%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %></p>
       <p><%= feedback.nota %></p>
     </div>

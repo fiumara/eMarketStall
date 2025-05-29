@@ -5,7 +5,7 @@
 <% else %>
   <% @prodottos.each do |prodotto| %>
     <div class="card mb-4">
-      <h2><%= prodotto.nome_prodotto %></h2>
+      <h2><%= t_google(prodotto.nome_prodotto) %></h2>
 
       <% if prodotto.feedbacks.any? %>
         <ul>

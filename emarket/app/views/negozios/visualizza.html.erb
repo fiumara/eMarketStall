@@ -12,8 +12,8 @@
     
     <% if @negozio.present? %>
       <section class="negozio-info card">
-        <h1 class="negozio-nome"><%= @negozio.nome_negozio %></h1>
-        <p class="negozio-descrizione"><%= @negozio.descrizione %></p>
+        <h1 class="negozio-nome"><%= t_google(@negozio.nome_negozio) %></h1>
+        <p class="negozio-descrizione"><%= t_google(@negozio.descrizione) %></p>
 
         <% if @negozio.immagine.attached? %>
           <div class="negozio-img-wrapper">
@@ -45,7 +45,7 @@
 
     <section class="proprietario card">
       <% if @negozio&.acquirente.present? %>
-        <p><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
+        <p><strong>Proprietario:</strong> <%= t_google(@negozio.acquirente.nome_utente) %></p>
       <% else %>
         <p>Informazioni sul proprietario non disponibili.</p>
       <% end %>
@@ -57,8 +57,8 @@
         <div class="prodotti-grid">
           <% @negozio.prodottos.each do |prodotto| %>
             <div class="card prodotto-card">
-              <p class="prodotto-nome"><%= prodotto.nome_prodotto %></p>
-              <p class="prodotto-descrizione"><%= prodotto.descrizione %></p>
+              <p class="prodotto-nome"><%= t_google(prodotto.nome_prodotto) %></p>
+              <p class="prodotto-descrizione"><%= t_google(prodotto.descrizione) %></p>
             </div>
           <% end %>
         </div>
