@@ -30,6 +30,7 @@
     <% if logged_in? %>
       <% if current_user.is_a?(Acquirente) %>
       <%= link_to t_google('Profilo Acquirente'), acquirente_path(current_user), class: "btn btn-link text-decoration-none text-start w-100" %>
+      <%= link_to t_google("Messaggi"), chat_rooms_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
       <% if current_user.negozio.present? %>
         <%= link_to t_google('Il Tuo Negozio'), negozio_path(current_user.negozio), class: "btn btn-link text-decoration-none text-start w-100" %>
       <% else %>
@@ -40,6 +41,7 @@
         <%= button_to t_google("Assistenza"), assistenza_chat_rooms_path, method: :post, class: "menu-link-button" %>
         <% elsif current_user.is_a?(Amministratore) %>
         <%= link_to t_google('Profilo Amministratore'), amministratore_path(current_user), class: "btn btn-link text-decoration-none text-start w-100"  %>
+        <%= link_to t_google("Messaggi"), chat_rooms_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
       <% end %>
       <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger w-100' %>
       <%= link_to t_google("🌍 Cambia lingua"), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>

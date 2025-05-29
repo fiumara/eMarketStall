@@ -21,6 +21,7 @@
 
     <div class="prodotto-details">
      <p><strong>Descrizione</strong><br><%= @prodotto.descrizione %></p>
+     <%= link_to 'Visualizza Negozio', visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
       <p><strong>Prezzo:</strong> <%= number_to_currency(@prodotto.prezzo) %></p>
       <% if @prezzo_scontato && @prezzo_scontato < @prodotto.prezzo %>
         <p><del><%= number_to_currency(@prodotto.prezzo) %></del> <strong><%= number_to_currency(@prezzo_scontato) %></strong></p>

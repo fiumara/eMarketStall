@@ -1,5 +1,5 @@
 class ChatRoomsController < ApplicationController
-  before_action :set_chat_room, only: %i[show create_message]
+  before_action :set_chat_room, only: %i[show create_message destroy]
   before_action :authenticate_user!
   before_action :authorize_chat_access, only: %i[show create_message destroy]
   before_action :set_destinatari_options, only: %i[new create]
@@ -56,8 +56,10 @@ class ChatRoomsController < ApplicationController
     # Riattiva visibilità per mittente e destinatario (in caso l'altro l'avesse eliminata)
     if current_user == @chat_room.mittente
       @chat_room.update(destinatario_visible: true)
+      @chat_room.update(mittente_visible: true)
     elsif current_user == @chat_room.destinatario
       @chat_room.update(mittente_visible: true)
+      @chat_room.update(destinatario_visible: true)
     end
   
     messaggio = @chat_room.messaggi.build(
