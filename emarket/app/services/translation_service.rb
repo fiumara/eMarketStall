@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'cgi'
 
 class TranslationService
   GOOGLE_TRANSLATE_URL = "https://translation.googleapis.com/language/translate/v2"
@@ -26,7 +27,8 @@ class TranslationService
       json = JSON.parse(res.body)
 
       if res.is_a?(Net::HTTPSuccess)
-        json["data"]["translations"].first["translatedText"]
+        translated = json["data"]["translations"].first["translatedText"]
+        CGI.unescapeHTML(translated)
       else
         Rails.logger.error("Translation API error: #{json}")
         text # fallback in caso di errore

@@ -6,8 +6,8 @@
   <% if @faqs.present? %>
     <% @faqs.each do |faq| %>
       <div class="faq-item" style="background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);">
-        <p style="font-weight: bold; margin-bottom: 0.5rem;"><%= faq.id %>. <%= faq.domanda %></p>
-        <p style="margin-bottom: 1rem;"><%= faq.risposta %></p>
+        <p style="font-weight: bold; margin-bottom: 0.5rem;"><%= faq.id %>. <%= t_google(faq.domanda) %></p>
+        <p style="margin-bottom: 1rem;"><%= t_google(faq.risposta) %></p>
         <div class="faq-actions" style="display: flex; gap: 1rem;">
           <%= link_to t('comune.modifica'), edit_faq_path(faq), class: 'btn btn-primary' %>
           <%= button_to t('comune.elimina'), faq_path(faq), method: :delete, data: { confirm: t('comune.conferma') }, class: 'btn btn-danger' %>

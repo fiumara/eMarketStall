@@ -1,4 +1,4 @@
-<h1>Lascia un feedback per <%= @prodotto.nome_prodotto %></h1>
+<h1>Lascia un feedback per <%= t_google(@prodotto.nome_prodotto) %></h1>
 
 <%= form_with model: @feedback, url: feedbacks_path do |f| %>
   <%= hidden_field_tag "feedback[ordine_item_id]", @ordine_item.id %>

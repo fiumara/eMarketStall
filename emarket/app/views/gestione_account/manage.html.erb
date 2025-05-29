@@ -46,8 +46,8 @@
           <div class="account-box">
             <div class="info">
               <p><strong>Negozio:</strong> <%= link_to segnalazione.negozio.nome_negozio, negozio_path(segnalazione.negozio) %></p>
-              <p><strong>Motivo:</strong> <%= segnalazione.motivo.humanize %></p>
-              <p><strong>Note:</strong> <%= segnalazione.note.presence || "Nessuna" %></p>
+              <p><strong>Motivo:</strong> <%= t_google(segnalazione.motivo.humanize) %></p>
+              <p><strong>Note:</strong> <%= t_google(segnalazione.note.presence) || "Nessuna" %></p>
               <p><strong>Inviata da:</strong> <%= segnalazione.acquirente.nome_utente %></p>
             </div>
             <div class="azioni">
