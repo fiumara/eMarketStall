@@ -1,10 +1,10 @@
 <%= form_with(model: @faq, local: true) do |form| %>
   <% if @faq.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@faq.errors.count, "errore") %> impediscono di salvare questa FAQ:</h2>
+    <h2><%= pluralize(@faq.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %></h2>
     <ul>
       <% @faq.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li><%= t_google(message) %></li>
       <% end %>
     </ul>
   </div>
@@ -12,17 +12,17 @@
 
 
     <div>
-    <%= form.label :question %>
+    <%= form.label :question, t('faqs.domanda') %>
     <%= form.text_field :domanda %>
   </div>
 
   <div>
-    <%= form.label :answer %>
+    <%= form.label :answer, t('faqs.risposta') %>
     <%= form.text_field :risposta %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Salva" %>
+    <%= form.submit t("forms.save") %>
   </div>
 
 <% end %>

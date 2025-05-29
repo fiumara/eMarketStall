@@ -71,15 +71,15 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <% Categorium.all.each do |categorium| %>
               <li class="nav-item">
-                <%= link_to categorium.nome, categoria_path(categorium), class: 'nav-link' %>
+                <%= link_to t_google(categorium.nome), categoria_path(categorium), class: 'nav-link' %>
               </li>
             <% end %>
           </ul>
 
           <!-- Search -->
           <%= form_with url: prodottos_path, method: :get, local: true, class: "d-flex" do %>
-            <%= text_field_tag :search, params[:search], placeholder: "Cerca", class: "form-control me-2 rounded-pill" %>
-            <%= submit_tag "Cerca", class: "btn btn-primary rounded-pill" %>
+            <%= text_field_tag :search, params[:search], placeholder: t('comune.cerca'), class: "form-control me-2 rounded-pill" %>
+            <%= submit_tag t('comune.cerca'), class: "btn btn-primary rounded-pill" %>
           <% end %>
         </div>
       </div>
@@ -91,7 +91,7 @@
     <!-- Promozioni -->
     <% if @promoziones.present? %>
       <section class="mb-5">
-        <h2 class="mb-4 text-primary">🎉 Promozioni in corso</h2>
+        <h2 class="mb-4 text-primary">🎉<%= t('home.promo')%></h2>
         <div class="row">
           <% @promoziones.each do |promozione| %>
             <div class="col-md-4">
@@ -112,14 +112,14 @@
           <% end %>
         </div>
         <div class="text-end mt-3">
-          <%= link_to "Mostra tutte le promozioni", promoziones_path, class: "btn btn-outline-primary" %>
+          <%= link_to t('home.mostrap'), promoziones_path, class: "btn btn-outline-primary" %>
         </div>
       </section>
     <% end %>
 
     <!-- Prodotti -->
 <section>
-  <h2 class="mb-4 text-success">🛍️ Articoli artigianali unici</h2>
+  <h2 class="mb-4 text-success">🛍️ <%= t('home.art') %> </h2>
   <div class="row g-4">
     <% if @prodottos.present? %>
       <% @prodottos.each do |prodotto| %>

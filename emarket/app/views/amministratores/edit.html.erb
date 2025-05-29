@@ -1,18 +1,18 @@
-<h1>Modifica Amministratore</h1>
+<h1><%= t('comune.mod_prof')%></h1>
 
 <%= form_with(model: @amministratore, local: true) do |form| %>
   <div>
-    <%= form.label :nome %>
+    <%= form.label :nome, t("forms.nome") %>
     <%= form.text_field :nome %>
   </div>
 
   <div>
-    <%= form.label :cognome %>
+    <%= form.label :cognome, t("forms.cognome") %>
     <%= form.text_field :cognome %>
   </div>
 
   <div>
-    <%= form.label :telefono %>
+    <%= form.label :telefono, t("forms.telefono") %>
     <%= form.text_field :telefono %>
   </div>
 
@@ -27,13 +27,13 @@
   </div>
 
   <div>
-    <%= form.label :password_confirmation, "Ripeti password" %>
+    <%= form.label :password_confirmation, t("forms.password_confirmation") %>
     <%= form.password_field :password_confirmation %>
   </div>
 
   <div>
-    <%= form.submit "Salva", class: "btn btn-primary" %>
-    <%= link_to 'Annulla', amministratore_path(@amministratore), class: "btn" %>
+    <%= form.submit t("forms.save"), class: "btn btn-primary" %>
+    <%= link_to t("forms.cancel"), amministratore_path(@amministratore), class: "btn" %>
   </div>
 <% end %>
 

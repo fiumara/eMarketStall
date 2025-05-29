@@ -4,51 +4,51 @@
       <h2><%= pluralize(@acquirente.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %></h2>
       <ul>
         <% @acquirente.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li><%= t_google(message) %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
   <div>
-    <%= form.label :nome, t("forms.acquirente.nome") %>
+    <%= form.label :nome, t("forms.nome") %>
     <%= form.text_field :nome %>
   </div>
 
   <div>
-    <%= form.label :cognome, t("forms.acquirente.cognome") %>
+    <%= form.label :cognome, t("forms.cognome") %>
     <%= form.text_field :cognome %>
   </div>
 
   <div>
-    <%= form.label :nome_utente, t("forms.acquirente.nome_utente") %>
+    <%= form.label :nome_utente, t("forms.nome_utente") %>
     <%= form.text_field :nome_utente %>
   </div>
 
   <div>
-    <%= form.label :telefono, t("forms.acquirente.telefono") %>
+    <%= form.label :telefono, t("forms.telefono") %>
     <%= form.text_field :telefono %>
   </div>
 
   <div>
     <%= form.check_box :privato %>
-    <%= form.label :privato, t("forms.acquirente.privato") %>
+    <%= form.label :privato, t("forms.privato") %>
   </div>
 
   <% if @is_new %>
     <div>
-      <%= form.label :email, t("forms.acquirente.email") %>
+      <%= form.label :email %>
       <%= form.email_field :email %>
     </div>
   <% end %>
 
   <div>
-    <%= form.label :password, t("forms.acquirente.password") %>
+    <%= form.label :password, t("forms.password") %>
     <%= form.password_field :password %>
   </div>
 
   <div>
-    <%= form.label :password_confirmation, t("forms.acquirente.password_confirmation") %>
+    <%= form.label :password_confirmation, t("forms.password_confirmation") %>
     <%= form.password_field :password_confirmation %>
   </div>
 

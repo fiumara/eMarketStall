@@ -1,5 +1,5 @@
 <div class="page-wrapper">
-  <h1>Cronologia delle Ricerche</h1>
+  <h1><%= t('crono.titolo') %></h1>
 
   <% if @prodotti_visualizzati.any? %>
     <ul class="search-history">
@@ -10,9 +10,9 @@
       <% end %>
     </ul>
     <div class="button-clear">
-      <%= button_to 'Cancella cronologia', cronologia_ricerche_path, method: :delete, data: { confirm: 'Sei sicuro?' }, class: "btn btn-danger" %>
+      <%= button_to t('crono.cancella'), cronologia_ricerche_path, method: :delete, data: { confirm: t('comune.conferma') }, class: "btn btn-danger" %>
     </div>
   <% else %>
-    <p>Nessuna ricerca recente.</p>
+    <p><%= t('crono.vuota') %>.</p>
   <% end %>
 </div>

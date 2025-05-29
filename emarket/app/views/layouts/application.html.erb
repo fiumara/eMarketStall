@@ -29,25 +29,25 @@
     <span class="close-btn" onclick="toggleRightSideMenu()">&times;</span>
     <% if logged_in? %>
       <% if current_user.is_a?(Acquirente) %>
-      <%= link_to t_google('Profilo Acquirente'), acquirente_path(current_user), class: "btn btn-link text-decoration-none text-start w-100" %>
+      <%= link_to t('comune.profilo_acquirente'), acquirente_path(current_user), class: "btn btn-link text-decoration-none text-start w-100" %>
       <% if current_user.negozio.present? %>
-        <%= link_to t_google('Il Tuo Negozio'), negozio_path(current_user.negozio), class: "btn btn-link text-decoration-none text-start w-100" %>
+        <%= link_to t('comune.tuo_negozio'), negozio_path(current_user.negozio), class: "btn btn-link text-decoration-none text-start w-100" %>
       <% else %>
-        <%= link_to t_google('Crea Il Tuo Negozio'), new_negozio_path, class: "btn btn-link text-decoration-none text-start w-100" %>
+        <%= link_to t('comune.tuo_negozio'), new_negozio_path, class: "btn btn-link text-decoration-none text-start w-100" %>
       <% end %>      
-        <%= link_to t_google('Carrello'), carrello_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+        <%= link_to t('comune.carrello'), carrello_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
         <%= link_to 'FAQs', faqs_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
-        <%= button_to t_google("Assistenza"), assistenza_chat_rooms_path, method: :post, class: "menu-link-button" %>
+        <%= button_to t('layouts.assistenza'), assistenza_chat_rooms_path, method: :post, class: "menu-link-button" %>
         <% elsif current_user.is_a?(Amministratore) %>
-        <%= link_to t_google('Profilo Amministratore'), amministratore_path(current_user), class: "btn btn-link text-decoration-none text-start w-100"  %>
+        <%= link_to t('comune.profilo_amministratore'), amministratore_path(current_user), class: "btn btn-link text-decoration-none text-start w-100"  %>
       <% end %>
       <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger w-100' %>
-      <%= link_to t_google("🌍 Cambia lingua"), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+      <%= link_to t('layouts.cambia_lingua'), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
 
     <% else %>
-      <%= link_to t_google('Accedi'), login_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+      <%= link_to t('layouts.accedi'), login_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
       <%= link_to 'FAQs', faqs_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
-      <%= link_to t_google("🌍 Cambia lingua"), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
+      <%= link_to t('layouts.cambia_lingua'), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>
 
     <% end %>
   </div>

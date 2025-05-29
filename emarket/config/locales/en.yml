@@ -1,52 +1,105 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
-# config/locales/en.yml
 en:
+  comune:
+    cerca: "Search"
+    profilo_acquirente: "Buyer Profile"
+    tuo_negozio: "Your Shop"
+    crea_negozio: "Create Your Shop"
+    carrello: "Cart"
+    profilo_amministratore: "Administrator Profile"
+    messaggi: "Messages"
+    nome: "First Name:"
+    cognome: "Last Name:"
+    nome_utente: "Username:"
+    telefono: "Phone:"
+    mod_prof: "Edit Profile"
+    el_prof: "Delete Profile"
+    iscriviti: "Sign Up"
+    dettagli: "Profile Details"
+    prodotto: "Product"
+    acquirente: "Buyer"
+    nota: "Note"
+    azioni: "Actions"
+    no_nota: "No notes"
+
+    quantita: "Quantity"
+    prezzo: "Price"
+    prezzo_or: "Original Price"
+    prezzo_sc: "Discounted Price"
+    tot: "Total"
+    conferma: "Are you sure?"
+    modifica: "Edit"
+    elimina: "Delete"
+    torna_pr: "Back to profile"
+
+  home:
+    promo: "Ongoing Promotions"
+    mostrap: "Show all promotions"
+    art: "Unique Handmade Items"
+  layouts:
+    assistenza: "Support"
+    cambia_lingua: "🌍 Change Language"
+    accedi: "Login"
+  acquirente:
+    desideri: "Wishlist"
+    ordini: "Order History"
+    resi: "My Returns"
+    cronologia: "Search History"
+    punti: "Loyalty Points:"
+    seguiti: "Following"
+    negozi_seguiti: "Shops You Follow"
+    no_seguiti: "You are not following any shops."
+    privato: "Private Profile: personal data not visible."
+
+  amministratore:
+    account: "Account Management"
+    statistiche: "Statistics"
+    feedback: "Feedback Management"
+    gest_faq: "FAQ Management"
+    promo: "Promotion Management"
+    id: "Administrator ID"
+    f_titolo: "Reported Feedback"
+    f_voto: "Rating"
+    f_utente_eliminato: "User deleted"
+    f_elimina: "Delete feedback and go to account management"
+    f_conferma: "Are you sure you want to delete this feedback?"
+    f_ignora: "Ignore report"
+    no_feedback: "No reported feedback"
+    s_titolo: "General Statistics"
+    s_utenti: "Registered Users"
+    s_acq_tot: "Total buyers:"
+    s_vend_tot: "Total sellers:"
+    s_acq_mese: "Buyers this month:"
+    s_vend_mese: "Sellers this month:"
+    s_acq_anno: "Buyers this year:"
+    s_vend_anno: "Sellers this year:"
+    s_ord_ven: "Orders and Sales"
+    s_ven_tot: "Total sales:"
+    s_med_acq: "Average purchases per buyer:"
+    s_med_art: "Average items per order:"
+    s_acq: "Buyers"
+    s_acq1: "With at least one order:"
+    s_acq0: "Without orders:"
+    s_med_spesa: "Average spending per buyer:"
+    s_vend: "Sellers"
+    s_med_prod: "Average products on sale per seller:"
+    s_med_guadagno: "Average earnings per seller:"
+
   forms:
-    acquirente:
-      nome: "First Name"
-      cognome: "Last Name"
-      nome_utente: "Username"
-      telefono: "Phone"
-      privato: "Make profile private"
-      email: "Email"
-      password: "Password"
-      password_confirmation: "Confirm Password"
+    nome: "First Name"
+    cognome: "Last Name"
+    nome_utente: "Username"
+    telefono: "Phone"
+    privato: "Make profile private"
+    email: "Email"
+    password: "Password"
+    password_confirmation: "Confirm Password"
     save: "Save"
     cancel: "Cancel"
+
   errors:
     messages:
       error: "error"
-      prevented_save: "prevented this record from being saved"
+      prevented_save: "prevented saving"
 
   sessions:
     title: "Login"
@@ -57,13 +110,37 @@ en:
     admin: "Administrator"
     email: "Email"
     password: "Password"
-    login: "Login"
+    login: "Sign In"
     forgot_password: "Forgot password?"
     or: "or"
     login_google: "Sign in with Google"
-    signup: "Sign up"
+    signup: "Sign Up"
 
-  home:
-    cerca: "Search"
+  carrello:
+    titolo: "Your Cart"
+    sconto_pr: "Promotion Discount"
+    rimuovi: "Remove"
+    tot: "Cart Total:"
+    sconto_f: "Loyalty Discount Available: "
+    tot_sc: "Total after loyalty discount:"
+    pf1: "You have"
+    pf2: "points"
+    pf3: "You need"
+    pf4: "for a 10% loyalty discount"
+    paga: "Proceed to Payment"
+    vuoto: "Your cart is empty."
 
+  crono:
+    titolo: "Search History"
+    cancella: "Clear history"
+    vuota: "No recent searches"
 
+  faqs:
+    titolo: "Frequently Asked Questions"
+    ad_titolo: "FAQ Management"
+    nessuna: "No FAQs available"
+    aggiungi: "Add Question"
+    modifica: "Edit FAQ"
+    nuova: "New FAQ"
+    domanda: "Question"
+    risposta: "Answer"
