@@ -9,9 +9,9 @@
                 <% @promoziones.each do |promozione| %>
                     <tr>
                         <td>
-                            <strong><%= promozione.nome %></strong>
+                            <strong><%= t_google(promozione.nome) %></strong>
                             <br>
-                            <%= promozione.descrizione %>
+                            <%= t_google(promozione.descrizione) %>
                         </td>
                         <td><%= number_to_percentage(promozione.sconto, precision: 2) %></td>
                         <td>

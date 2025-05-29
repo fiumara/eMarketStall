@@ -10,7 +10,7 @@
   <% @ordine.ordine_items.each do |ordine_item| %>
     <div>
       <label>
-        <%= ordine_item.prodotto.nome_prodotto %> - Quantità acquistata: <%= ordine_item.quantity %>
+        <%= t_google(ordine_item.prodotto.nome_prodotto) %> - Quantità acquistata: <%= ordine_item.quantity %>
       </label>
   
       <!-- Quantità da restituire -->

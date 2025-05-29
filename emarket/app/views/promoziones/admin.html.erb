@@ -16,8 +16,8 @@
         <% @promoziones.each do |promozione| %>
           <tr>
             <td>
-              <strong><%= promozione.nome %></strong><br>
-              <small><%= promozione.descrizione %></small>
+              <strong><%= t_google(promozione.nome) %></strong><br>
+              <small><%= t_google(promozione.descrizione) %></small>
             </td>
             <td><%= number_to_percentage(promozione.sconto, precision: 2) %></td>
             <td><%= promozione.inizio.strftime("%d %b %Y") %> - <%= promozione.fine.strftime("%d %b %Y") %></td>

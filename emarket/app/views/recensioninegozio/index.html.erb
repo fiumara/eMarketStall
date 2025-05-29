@@ -44,7 +44,7 @@
   <% @recensioni.each do |recensione| %>
     <div class="recensione-container">
       <div class="recensione-header">
-        <h3><%= recensione.prodotto.nome_prodotto %></h3>
+        <h3><%= t_google(recensione.prodotto.nome_prodotto) %></h3>
         <span>
           <% 5.times do |i| %>
             <% if i < recensione.valutazione %>
@@ -56,10 +56,10 @@
         </span>
       </div>
       <div class="recensione-content">
-        <p><%= recensione.contenuto %></p>
+        <p><%= t_google(recensione.contenuto) %></p>
       </div>
       <div class="recensione-footer">
-        <span>Nome acquirente: <%= recensione.acquirente.nome_utente %></span>
+        <span>Nome acquirente: <%= t_google(recensione.acquirente.nome_utente) %></span>
         <button>Segnala</button>
       </div>
     </div>
