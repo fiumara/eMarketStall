@@ -41,7 +41,7 @@
         <%= button_to t('layouts.assistenza'), assistenza_chat_rooms_path, method: :post, class: "menu-link-button" %>
         <% elsif current_user.is_a?(Amministratore) %>
         <%= link_to t('comune.profilo_amministratore'), amministratore_path(current_user), class: "btn btn-link text-decoration-none text-start w-100"  %>
-        <%= link_to t('comune.messaggi'), chat_rooms_path, class: 'nav-link btn btn-outline-primary mb-2' %>      
+        <%= link_to t('comune.messaggi'), chat_rooms_path, class: "btn btn-link text-decoration-none text-start w-100" %>      
         <% end %>
       <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger w-100' %>
       <%= link_to t('layouts.cambia_lingua'), lingua_path, class: "btn btn-link text-decoration-none text-start w-100"  %>

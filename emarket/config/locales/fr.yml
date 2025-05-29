@@ -30,6 +30,8 @@ fr:
     modifica: "Modifier"
     elimina: "Supprimer"
     torna_pr: "Retour au profil"
+    invia: "Envoyer"
+    negozio: "Boutique"
 
   home:
     promo: "Promotions en cours"
@@ -144,3 +146,17 @@ fr:
     nuova: "Nouvelle FAQ"
     domanda: "Question"
     risposta: "Réponse"
+
+  chat:
+    crea: "Créer une nouvelle salle de discussion"
+    entra: "Entrer dans la discussion"
+    no_mex: "Aucun message. Soyez le premier à écrire !"
+    scrivi: "Écrire un message..."
+    nuova: "Nouvelle salle de discussion"
+    nome: "Nom de la salle"
+    dest: "Sélectionner un destinataire"
+    no_dest: "Aucun destinataire disponible"
+    crea: "Créer la salle"
+    torna: "Retour à la liste des discussions"
+    m_data: "Envoyé le :"
+    negozio: "(Boutique)"

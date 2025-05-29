@@ -5,15 +5,15 @@
     <% if @messaggi.any? %>
       <%= render @messaggi %>
     <% else %>
-      <p class="text-muted">Nessun messaggio. Scrivi il primo!</p>
+      <p class="text-muted"><%= t('chat.no_mex') %></p>
     <% end %>
   </div>
 
   <%= form_with(url: chat_room_messages_path(@chat_room), remote: true, id: 'new_message') do |form| %>
     <div class="form-group">
-      <%= form.text_area :contenuto, placeholder: "Scrivi un messaggio...", class: "form-control", name: "messaggio[contenuto]" %>
+      <%= form.text_area :contenuto, placeholder: t('chat.scrivi'), class: "form-control", name: "messaggio[contenuto]" %>
     </div>
-    <%= form.submit 'Invia', class: 'btn btn-primary' %>
+    <%= form.submit t('comune.invia'), class: 'btn btn-primary' %>
   <% end %>
   
 </div>
