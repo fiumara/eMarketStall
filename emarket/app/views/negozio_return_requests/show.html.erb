@@ -20,8 +20,8 @@
 </p>
 
 <% if current_user == @return_request.ordine.negozio.acquirente %>
-  <%= button_to t('approva'), approve_negozio_return_request_path(@return_request), method: :patch, class: "btn btn-success" %>
-  <%= button_to t('rifiuta'), reject_negozio_return_request_path(@return_request), method: :patch, class: "btn btn-danger" %>
+  <%= button_to t('resi.approva'), approve_negozio_return_request_path(@return_request), method: :patch, class: "btn btn-success" %>
+  <%= button_to t('resi.rifiuta'), reject_negozio_return_request_path(@return_request), method: :patch, class: "btn btn-danger" %>
 <% end %>
 
 

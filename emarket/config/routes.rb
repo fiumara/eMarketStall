@@ -42,6 +42,8 @@ Rails.application.routes.draw do
 
   get 'archivio ordini', to: 'archivio_ordini#index', as: 'archivio_ordini'
   get 'cronologiaricerche', to: 'cronologia_ricerche#index', as: 'cronologia_ricerche'
+  delete 'cronologia_ricerche', to: 'cronologia_ricerche#destroy', as: :cancella_cronologia
+
 
  
   get "/lingua", to: "lingua#seleziona", as: :lingua
