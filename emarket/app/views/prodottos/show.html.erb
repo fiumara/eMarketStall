@@ -35,8 +35,16 @@
         <%= submit_tag t('prodotto.agg'), class: "btn-black full-width" %>
         <%= hidden_field_tag :redirect_back, request.original_url %>
 
-        <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
+       
       <% end %>
+      <% if unauthenticated_user? || session[:role] == 'acquirente' %>
+              <div class="wishlist-button">
+                <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
+                  <%= hidden_field_tag :redirect_back, request.original_url %>
+                  <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
+                <% end %>
+              </div>
+            <% end %>
     </div>
   </div>
 
