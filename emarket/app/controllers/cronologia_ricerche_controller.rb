@@ -9,4 +9,10 @@ class CronologiaRicercheController < ApplicationController
       .limit(50)
       .map(&:prodotto)
   end
+
+  def destroy
+    CronologiaRicerca.where(acquirente: current_user).delete_all
+    redirect_to cronologia_ricerche_path, notice: "Cronologia cancellata"
+  end
+  
 end

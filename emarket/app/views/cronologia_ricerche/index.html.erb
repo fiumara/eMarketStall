@@ -11,7 +11,7 @@
       <% end %>
     </ul>
     <div class="button-clear">
-      <%= button_to t('crono.cancella'), cronologia_ricerche_path, method: :delete, data: { confirm: t('comune.conferma') }, class: "btn btn-danger" %>
+    <%= button_to t('crono.cancella'), cancella_cronologia_path, method: :delete, data: { confirm: t('comune.conferma') }, class: "btn btn-danger" %>
     </div>
   <% else %>
     <p><%= t('crono.vuota') %>.</p>

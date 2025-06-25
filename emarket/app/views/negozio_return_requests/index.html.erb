@@ -15,11 +15,11 @@
     <% @return_requests.each do |return_request| %>
       <tr>
         <td><%= return_request.id %></td>
-        <td><%= link_to "t('comune.ordine')" + " ##{return_request.ordine.id}", ordine_path(return_request.ordine) %></td>
+        <td><%= link_to t("comune.ordine") + " ##{return_request.ordine.id}", ordine_path(return_request.ordine) %></td>
         <td><%= return_request.acquirente.email %></td>
         <td><%= return_request.stato %></td>
         <td>
-          <%= link_to "t('comune.visualizza')", negozio_return_request_path(return_request), class: "btn btn-info" %>
+          <%= link_to t("comune.visualizza"), negozio_return_request_path(return_request), class: "btn btn-info" %>
         </td>
       </tr>
     <% end %>
