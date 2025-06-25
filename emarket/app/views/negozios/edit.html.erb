@@ -1,8 +1,9 @@
-<h1>Modifica Negozio</h1>
+<p id="notice"><%= t_google(notice) %></p>
+<h1><%= t('negozio.edit') =%></h1>
 
 <%= render 'form', negozio: @negozio %>
 
-<%= link_to 'indietro', @negozio %> 
+<%= link_to t('forms.cancel'), @negozio %> 
 
 
 

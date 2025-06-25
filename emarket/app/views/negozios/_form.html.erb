@@ -2,42 +2,42 @@
 <%= form_with(model: @negozio, local: true) do |form| %>
   <% if @negozio.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@negozio.errors.count, "error") %> impedisce la creazione del negozio:</h2>
+      <h2><%= pluralize(@negozio.errors.count, t("errors.messages.error")) %> t("errors.messages.prevented_save") </h2>
       <ul>
         <% @negozio.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li><%= t_google(message) %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= form.label :nome %>
+    <%= form.label :nome, t("forms.nome") %>
     <%= form.text_field :nome_negozio %>
   </div>
 
   <div class="field">
-    <%= form.label :descrizione %>
+    <%= form.label :descrizione, t("forms.descrizione") %>
     <%= form.text_area :descrizione %>
   </div>
 
   <div class="field">
-    <%= form.label :indirizzo %>
+    <%= form.label :indirizzo, t("negozio.indirizzo") %>
     <%= form.text_field :indirizzo %>
   </div>
 
   <div class="field">
-    <%= form.label :telefono %>
+    <%= form.label :telefono, t("forms.telefono") %>
     <%= form.text_field :telefono %>
   </div>
 
   <div class="field mb-4">
-      <%= form.label :immagine, "Immagine Negozio" %>
+      <%= form.label :immagine, t("negozio.immagine") %>
       <%= form.file_field :immagine, class: "form-control" %>
     </div>
 
   <div class="actions">
-   <%= form.submit negozio.persisted? ? "Aggiorna Negozio" : "Crea Negozio" %>
+   <%= form.submit negozio.persisted? ? t("negozio.aggiorna") : t("negozio.new") %>
   </div>
 <% end %>
 </div>

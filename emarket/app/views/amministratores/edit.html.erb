@@ -1,3 +1,4 @@
+<p id="notice"><%= t_google(notice) %></p>
 <h1><%= t('comune.mod_prof')%></h1>
 
 <%= form_with(model: @amministratore, local: true) do |form| %>
@@ -17,12 +18,12 @@
   </div>
 
   <div>
-    <%= form.label :email %>
+    <%= form.label :email, t("forms.email") %>
     <%= form.email_field :email %>
   </div>
 
   <div>
-    <%= form.label :password %>
+    <%= form.label :password, t("forms.password") %>
     <%= form.password_field :password %>
   </div>
 

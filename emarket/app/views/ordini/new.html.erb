@@ -1,15 +1,16 @@
-<h2 class="mb-4">Riepilogo Ordine</h2>
+<p id="notice"><%= t_google(notice) %></p>
+<h2 class="mb-4"><%= t('ordini.riepilogo') %></h2>
 
-<h4>Codice Ordine: <%= @ordine.codice_ordine || "Da generare" %></h4>
+<h4><%= t('ordini.cod') %>: <%= @ordine.codice_ordine || t("ordini.cod_g") %></h4>
 
 <table class="table table-bordered table-striped align-middle mt-3">
   <thead class="table-dark">
     <tr>
-      <th>Prodotto</th>
-      <th>Quantità</th>
-      <th>Prezzo originale</th>
-      <th>Prezzo scontato</th>
-      <th>Totale</th>
+      <th><%= t('comune.prodotto') %></th>
+      <th><%= t('comune.quantita') %></th>
+      <th><%= t('comune.prezzo_or') %></th>
+      <th><%= t('comune.prezzo_sc') %></th>
+      <th><%= t('comune.tot') %></th>
     </tr>
   </thead>
   <tbody>
@@ -31,7 +32,7 @@
         <td>
           <% if item.prezzo_unitario < item.prodotto.prezzo %>
             <strong class="text-success"><%= number_to_currency(item.prezzo_unitario) %></strong><br>
-            <small class="text-info">Sconto promozione</small>
+            <small class="text-info"><%= t('carrello.sconto_pr') %></small>
           <% else %>
             <%= number_to_currency(item.prezzo_unitario) %>
           <% end %>
@@ -46,17 +47,17 @@
 <% totale_carrello = current_user.carrello.carrello_items.sum(&:totale) %>
 
 <div class="mt-3">
-  <p><strong>Totale:</strong> <%= number_to_currency(totale_carrello) %></p>
+  <p><strong><%= t('comune.tot') %>:</strong> <%= number_to_currency(totale_carrello) %></p>
 
   <% if current_user.punti_fedelta >= 100 %>
     <% sconto_fedelta = (totale_carrello * 0.10).round(2) %>
     <p class="text-success">
-      Sconto fedeltà disponibile: -<%= number_to_currency(sconto_fedelta) %> (verrà applicato al pagamento)
+    <%= t('carrello.sconto_f') %> -<%= number_to_currency(sconto_fedelta) %> ('ordini.nota_sc')
     </p>
-    <p><strong>Totale dopo sconto fedeltà:</strong> <%= number_to_currency(totale_carrello - sconto_fedelta) %></p>
+    <p><strong><%= t('carrello.tot_sc') %> </strong> <%= number_to_currency(totale_carrello - sconto_fedelta) %></p>
   <% else %>
     <p class="text-muted">
-      Hai <strong><%= current_user.punti_fedelta %> punti</strong>. Ne servono <strong>100</strong> per ottenere il 10% di sconto.
+      <%= t('carrello.pf1') %> <strong><%= current_user.punti_fedelta %> <%= t('carrello.pf2') %></strong>. <%= t('carrello.pf3') %> <strong>100</strong> <%= t('carrello.pf4') %>.
     </p>
   <% end %>
 </div>
@@ -65,9 +66,9 @@
 
 <%= form_with model: @ordine, url: ordini_path, method: :post, local: true do |f| %>
   <div class="mb-3">
-    <%= f.label :indirizzo, "Indirizzo di spedizione:" %>
+    <%= f.label :indirizzo, t("ordini.spedizione") %>
     <%= f.text_field :indirizzo, class: "form-control", required: true %>
   </div>
 
-  <%= f.submit "Procedi al pagamento", class: "btn btn-success" %>
+  <%= f.submit t('carrello.paga'), class: "btn btn-success" %>
 <% end %>

@@ -1,16 +1,17 @@
-<h1>Richiesta di Reso</h1>
+<p id="notice"><%= t_google(notice) %></p>
+<h1><%= t('resi.richiesta') %></h1>
 
 <%= form_with(model: @return_request, url: return_requests_path, method: :post) do |f| %>
   <%= hidden_field_tag :ordine_id, @ordine.id %>
 
-  <p><strong>Motivo del reso:</strong></p>
+  <p><strong><%= t('resi.motivo') %>:</strong></p>
   <%= f.text_area :motivo, required: true %>
 
-  <h3>Seleziona le quantità dei prodotti da restituire:</h3>
+  <h3><%= t('resi.numero') %>:</h3>
   <% @ordine.ordine_items.each do |ordine_item| %>
     <div>
       <label>
-        <%= t_google(ordine_item.prodotto.nome_prodotto) %> - Quantità acquistata: <%= ordine_item.quantity %>
+        <%= t_google(ordine_item.prodotto.nome_prodotto) %> - <%= t('resi.numero_acq') %>: <%= ordine_item.quantity %>
       </label>
   
       <!-- Quantità da restituire -->
@@ -30,5 +31,5 @@
   <% end %>
   
 
-  <%= f.submit "Invia richiesta di reso" %>
+  <%= f.submit t("resi.invia") %>
 <% end %>

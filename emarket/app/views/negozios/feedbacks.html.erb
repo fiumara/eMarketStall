@@ -1,7 +1,8 @@
-<h1>Feedback ricevuti - <%= @negozio.nome_negozio %></h1>
+<p id="notice"><%= t_google(notice) %></p>
+<h1><%= t('negozio.feedback') =%> - <%= @negozio.nome_negozio %></h1>
 
 <% if @prodottos.empty? %>
-  <p>Questo negozio non ha prodotti.</p>
+  <p><%= t('negozio.no_prodotti') =%></p>
 <% else %>
   <% @prodottos.each do |prodotto| %>
     <div class="card mb-4">
@@ -11,23 +12,23 @@
         <ul>
           <% prodotto.feedbacks.each do |feedback| %>
             <li>
-              <strong>Voto:</strong> <%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %><br>
+              <strong><%= t('negozio.voto_f') =%>:</strong> <%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %><br>
               <% if feedback.nota.present? %>
-                <strong>Nota:</strong> <%= feedback.nota %><br>
+                <strong><%= t('comune.nota') =%>:</strong> <%= t_google(feedback.nota) %><br>
               <% end %>
-              <em>Da: <%= feedback.acquirente&.nome || "Utente eliminato" %> | il <%= feedback.created_at.strftime("%d/%m/%Y") %></em>
+              <em><%= t('comune.da') =%>: <%= feedback.acquirente&.nome || t("negozio.no_utente_f") %> | <%= t('comune.data') =%>: <%= feedback.created_at.strftime("%d/%m/%Y") %></em>
 
             </li>
             <% unless feedback.segnalato %>
-                <%= button_to "Segnala", segnala_feedback_path(feedback), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Sei sicuro di voler segnalare questo feedback?" } %>
+                <%= button_to t("gest.segnala"), segnala_feedback_path(feedback), method: :patch, class: "btn btn-warning btn-sm", data: { confirm: "Sei sicuro di voler segnalare questo feedback?" } %>
             <% else %>
-                <span class="badge bg-danger">Segnalato</span>
+                <span class="badge bg-danger"><%= t("gest.segnala") =%></span>
             <% end %>
 
           <% end %>
         </ul>
       <% else %>
-        <p>Nessuna recensione per questo prodotto.</p>
+        <p><%= t('prodotto.no_feedback') =%></p>
       <% end %>
     </div>
   <% end %>

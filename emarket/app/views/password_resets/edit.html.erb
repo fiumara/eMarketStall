@@ -1,20 +1,21 @@
-<h2>Nuova password</h2>
+<p id="notice"><%= t_google(notice) %></p>
+<h2><%= t('pw_reset.nuova') %></h2>
 
 <%= form_with url: password_reset_path, method: :put, local: true do |form| %>
   <%= hidden_field_tag :email, params[:email] %>
   <%= hidden_field_tag :token, params[:token] %>
 
   <div>
-    <%= form.label :password, "Nuova password" %>
+    <%= form.label :password, t('pw_reset.nuova') %>
     <%= form.password_field :password, required: true %>
   </div>
 
   <div>
-    <%= form.label :password_confirmation, "Conferma password" %>
+    <%= form.label :password_confirmation, t('forms.password_confirmation') %>
     <%= form.password_field :password_confirmation, required: true %>
   </div>
 
   <div>
-    <%= form.submit "Salva" %>
+    <%= form.submit t('forms.save') %>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-
+<p id="notice"><%= t_google(notice) %></p>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -98,15 +98,15 @@
               <div class="promotion shadow-sm">
               <h5>
               <% if promozione.prodotto_id.present? && promozione.prodotto %>
-                <%= link_to promozione.nome, prodotto_path(promozione.prodotto), class: "text-decoration-none text-dark fw-bold" %>
+                <%= link_to t_google(promozione.nome), prodotto_path(promozione.prodotto), class: "text-decoration-none text-dark fw-bold" %>
               <% elsif promozione.categorium_id.present? && promozione.categorium %>
-                <%= link_to promozione.nome, categoria_path(promozione.categorium), class: "text-decoration-none text-dark fw-bold" %>
+                <%= link_to t_google(promozione.nome), categoria_path(promozione.categorium), class: "text-decoration-none text-dark fw-bold" %>
               <% else %>
-                <%= promozione.nome %>
+                <%= t_google(promozione.nome) %>
               <% end %>
               <h5>
             
-                <p><%= promozione.descrizione %></p>
+                <p><%= t_google(promozione.descrizione) %></p>
               </div>
             </div>
           <% end %>
@@ -136,13 +136,13 @@
         </div>
       <% else %>
         <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px; border-radius: 12px;">
-          <span class="text-muted">Nessuna immagine</span>
+          <span class="text-muted"><%= t('prodotto.no_imm') %></span>
         </div>
       <% end %>
 
       <div class="card-body d-flex flex-column">
-        <h5 class="card-title"><%= prodotto.nome_prodotto %></h5>
-        <p class="card-text text-muted" style="flex-grow: 1;"><%= truncate(prodotto.descrizione, length: 80) %></p>
+        <h5 class="card-title"><%= t_google(prodotto.nome_prodotto) %></h5>
+        <p class="card-text text-muted" style="flex-grow: 1;"><%= truncate(t_google(prodotto.descrizione), length: 80) %></p>
         <strong class="text-success fs-5">
           <%= number_to_currency(prodotto.prezzo, unit: "€") %>
         </strong>

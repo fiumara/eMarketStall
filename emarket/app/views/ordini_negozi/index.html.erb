@@ -1,14 +1,15 @@
-<h2 class="mb-4">Ordini Ricevuti</h2>
+<p id="notice"><%= t_google(notice) %></p>
+<h2 class="mb-4"><%= t('ordini.negozio') %></h2>
 
 <% if @ordini.any? %>
   <table class="table table-bordered table-hover align-middle">
     <thead class="table-dark">
       <tr>
-        <th>Codice Ordine</th>
-        <th>Data</th>
-        <th>Totale</th>
-        <th>Stato</th>
-        <th>Azioni</th>
+        <th><%= t('ordini.cod') %></th>
+        <th><%= t('comune.data') %></th>
+        <th><%= t('comune.tot') %></th>
+        <th><%= t('comune.stato') %></th>
+        <th><%= t('comune.azioni') %></th>
       </tr>
     </thead>
     <tbody>
@@ -22,20 +23,20 @@
 
             <% if ordine.sconto.present? && ordine.sconto > 0 %>
               <small class="text-success">
-                Sconto applicato: -<%= number_to_currency(ordine.sconto) %>
+              <%= t('ordini.sconto') %>: -<%= number_to_currency(ordine.sconto) %>
               </small>
             <% end %>
           </td>
 
-          <td><span class="badge bg-secondary"><%= ordine.stato.humanize %></span></td>
+          <td><span class="badge bg-secondary"><%= t_google(ordine.stato.humanize) %></span></td>
 
           <td>
-            <%= link_to "Visualizza", negozio_ordine_path(@negozio, ordine), class: "btn btn-sm btn-primary" %>
+            <%= link_to t("comune.visualizza"), negozio_ordine_path(@negozio, ordine), class: "btn btn-sm btn-primary" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p>Non hai ancora ricevuto ordini.</p>
+  <p><%= t('ordini.no_ord_n') %></p>
 <% end %>

@@ -1,3 +1,4 @@
+<p id="notice"><%= t_google(notice) %></p>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -45,7 +46,7 @@
         <% @segnalazioni.each do |segnalazione| %>
           <div class="account-box">
             <div class="info">
-              <p><strong><%= t('comune.negozio') %>:</strong> <%= link_to segnalazione.negozio.nome_negozio, negozio_path(segnalazione.negozio) %></p>
+              <p><strong><%= t('comune.negozio') %>:</strong> <%= link_to segnalazione.negozio.nome_negozio, visualizza_negozio_path(segnalazione.negozio) %></p>
               <p><strong><%= t('comune.motivo') %>:</strong> <%= t_google(segnalazione.motivo.humanize) %></p>
               <p><strong><%= t('comune.nota') %>:</strong> <%= t_google(segnalazione.note.presence) || "Nessuna" %></p>
               <p><strong><%= t('gest.inviata') %>:</strong> <%= segnalazione.acquirente.nome_utente %></p>

@@ -1,15 +1,16 @@
-<h1 class="mb-4">I tuoi ordini</h1>
+<p id="notice"><%= t_google(notice) %></p>
+<h1 class="mb-4"><%= t('ordini.tuoi') %></h1>
 
 <% if @ordini.any? %>
   <table class="table table-hover table-bordered">
     <thead class="thead-dark">
       <tr>
-        <th>Codice Ordine</th>
-        <th>Data</th>
-        <th>Totale</th>
-        <th>Stato</th>
-        <th>Indirizzo</th>
-        <th>Azioni</th>
+        <th><%= t('ordini.cod') %></th>
+        <th><%= t('comune.data') %></th>
+        <th><%= t('comune.tot') %></th>
+        <th><%= t('comune.stato') %></th>
+        <th><%= t('ordini.indirizzo') %></th>
+        <th><%= t('comune.azioni') %></th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +34,7 @@
                   <%= number_to_currency(totale_finale) %>
                 </span>
                 <% if sconto_fedelta > 0 %>
-                  <br><small class="text-info">Sconto fedeltà: -<%= number_to_currency(sconto_fedelta) %></small>
+                  <br><small class="text-info"><%= t('ordini.fedelta') %>: -<%= number_to_currency(sconto_fedelta) %></small>
                 <% end %>
               </div>
             <% else %>
@@ -41,13 +42,13 @@
             <% end %>
           </td>
 
-          <td><%= ordine.stato.humanize %></td>
+          <td><%= t_google(ordine.stato.humanize) %></td>
           <td><%= ordine.indirizzo %></td>
-          <td><%= link_to "Dettagli", ordine_path(ordine), class: "btn btn-sm btn-primary" %></td>
+          <td><%= link_to t('comune.dett'), ordine_path(ordine), class: "btn btn-sm btn-primary" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p>Non hai ancora effettuato ordini.</p>
+  <p><%= t('ordini.no_ord') %></p>
 <% end %>

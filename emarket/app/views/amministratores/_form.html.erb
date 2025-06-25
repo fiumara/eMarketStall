@@ -5,13 +5,13 @@
 
       <ul>
         <% amministratore.errors.each do |error| %>
-          <li><%= google_t(error.full_message) %></li>
+          <li><%= t_google(error.full_message) %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= google_t(form.submit) %>
+    <%= t_google(form.submit) %>
   </div>
 <% end %>

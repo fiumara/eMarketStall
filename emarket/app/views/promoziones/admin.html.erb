@@ -1,15 +1,16 @@
+<p id="notice"><%= t_google(notice) %></p>
 <body>
   <div class="promo-container">
-    <h1 class="promo-header">Campagne promozionali</h1>
+    <h1 class="promo-header"><%= t('promo.admin') %></h1>
 
     <table class="promo-table">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Sconto</th>
-          <th>Periodo</th>
-          <th>Applicato a</th>
-          <th>Azioni</th>
+          <th><%= t('comune.nome') %></th>
+          <th><%= t('promo.sconto') %></th>
+          <th><%= t('promo.periodo') %></th>
+          <th><%= t('promo.appl') %></th>
+          <th><%= t('comune.azioni') %></th>
         </tr>
       </thead>
       <tbody>
@@ -23,22 +24,22 @@
             <td><%= promozione.inizio.strftime("%d %b %Y") %> - <%= promozione.fine.strftime("%d %b %Y") %></td>
             <td>
               <% if promozione.prodotto.present? %>
-                Prodotto: <%= promozione.prodotto.nome_prodotto %>
+                <%= t('comune.prodotto') %>: <%= t_google(promozione.prodotto.nome_prodotto) %>
               <% elsif promozione.categorium.present? %>
-                Categoria: <%= promozione.categorium.nome %>
+                <%= t('promo.cat') %>: <%= t_google(promozione.categorium.nome) %>
               <% else %>
-                Tutto il sito
+                <%= t('promo.tutto') %>
               <% end %>
             </td>
             <td class="promo-actions">
-              <%= link_to 'Modifica', edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
-              <%= button_to 'Elimina', promozione, method: :delete, data: { turbo: false, confirm: 'Sei sicuro?' }, class: 'btn-action btn-delete' %>
+              <%= link_to t('comune.nome'), edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
+              <%= button_to t('comune.nome'), promozione, method: :delete, data: { turbo: false, confirm: t('comune.conferma') }, class: 'btn-action btn-delete' %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <%= link_to 'Aggiungi promozione', new_promozione_path, class: 'add-promo-btn' %>
+    <%= link_to t('promo.aggiungi'), new_promozione_path, class: 'add-promo-btn' %>
   </div>
 </body>

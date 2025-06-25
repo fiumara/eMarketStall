@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= t_google(notice) %></p>
 
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-12 mb-4">
-      <h1 class="text-center">Negozio</h1>
+      <h1 class="text-center"><%= t('comune.negozio') =%></h1>
     </div>
   </div>
 
@@ -15,13 +15,13 @@
     <!-- Sidebar -->
     <div class="col-md-3">
       <nav class="nav flex-column nav-pills">
-        <%= link_to 'Statistiche', statistiche_negozio_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Promozioni', negozio_promoziones_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Aggiungi Prodotto', new_negozio_prodotto_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Messaggi', chat_rooms_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Gestione Resi', negozio_return_requests_path, class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Recensioni', feedbacks_negozio_path(current_user.negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
-        <%= link_to 'Ordini Ricevuti', negozio_ordini_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('comune.statistiche'), statistiche_negozio_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('comune.promo'), negozio_promoziones_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('negozio.aggiungi'), new_negozio_prodotto_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('comune.messaggi'), chat_rooms_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('negozio.resi'), negozio_return_requests_path, class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('negozio.rec'), feedbacks_negozio_path(current_user.negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
+        <%= link_to t('negozio.ordini'), negozio_ordini_path(@negozio), class: 'nav-link btn btn-outline-primary mb-2' %>
 
       </nav>
     </div>
@@ -31,18 +31,18 @@
       <!-- Store Details -->
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Dettagli Negozio</h5>                                                                 
+          <h5 class="card-title"><%= t('negozio.dett') =%></h5>                                                                 
           <% if @negozio.immagine.attached? %>
           <div class="mb-3">
             <%= image_tag @negozio.immagine.variant(resize_to_limit: [300, 300]), class: "img-fluid rounded" %>
           </div>
         <% end %>
-          <p class="card-text"><strong>Nome Negozio:</strong> <%= @negozio.nome_negozio %></p>
-          <p class="card-text"><strong>Email:</strong> <%= @acquirente.email %></p>
-          <p class="card-text"><strong>Telefono:</strong> <%= @negozio.telefono %></p>
-          <p class="card-text"><strong>Proprietario:</strong> <%= @negozio.acquirente.nome_utente %></p>
+          <p class="card-text"><strong><%= t('negozio.nome') =%>:</strong> <%= @negozio.nome_negozio %></p>
+          <p class="card-text"><strong><%= t('comune.email') =%>:</strong> <%= @acquirente.email %></p>
+          <p class="card-text"><strong><%= t('comune.telefono') =%></strong> <%= @negozio.telefono %></p>
+          <p class="card-text"><strong><%= t('negozio.proprietario') =%>:</strong> <%= @negozio.acquirente.nome_utente %></p>
           <p class="card-text">
-          <%= link_to 'Seguaci', seguaci_negozio_path(@negozio), class: "btn btn-outline-primary" %>
+          <%= link_to t('negozio.seguaci'), seguaci_negozio_path(@negozio), class: "btn btn-outline-primary" %>
 
           </p>
         </div>
@@ -51,7 +51,7 @@
       <!-- Store Products -->
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Prodotti</h5>
+          <h5 class="card-title"><%= t('negozio.prodotti') =%></h5>
           <% if @negozio.prodottos.present? %>
   <div class="row">
     <% @negozio.prodottos.each do |prodotto| %>
@@ -61,23 +61,23 @@
           <%= image_tag prodotto.immagini.first.variant(resize_to_limit: [250, 250]), class: "card-img-top" %>
           <% end %>
           <div class="card-body">
-            <h5 class="card-title"><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: 'text-decoration-none' %></h5>
-            <p class="card-text"><strong>Prezzo:</strong> <%= number_to_currency(prodotto.prezzo, unit: "€") %></p>
+            <h5 class="card-title"><%= link_to t_google(prodotto.nome_prodotto), prodotto_path(prodotto), class: 'text-decoration-none' %></h5>
+            <p class="card-text"><strong><%= t('comune.prezzo') =%>:</strong> <%= number_to_currency(prodotto.prezzo, unit: "€") %></p>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 <% else %>
-  <p class="card-text">Nessun prodotto disponibile.</p>
+  <p class="card-text"><%= t('negozio.no_prod') =%></p>
 <% end %>
 
         </div>
       </div>
 
       <div class="d-flex justify-content-end">
-        <%= link_to 'Modifica Negozio', edit_negozio_path(@negozio), class: 'btn btn-warning me-2' %>
-        <%= button_to 'Elimina Negozio', negozio_path(@negozio), method: :delete, data: { turbo: false, confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
+        <%= link_to t('negozio.edit'), edit_negozio_path(@negozio), class: 'btn btn-warning me-2' %>
+        <%= button_to t('negozio.delete'), negozio_path(@negozio), method: :delete, data: { turbo: false, confirm: 'Sei sicuro di voler eliminare il profilo?' }, class: 'btn btn-danger' %>
       </div>
     </div>
   </div>

@@ -25,12 +25,12 @@
           <h5 class="card-title"><%= t('comune.dettagli') %></h5>
           <p class="card-text"><strong><%= t('comune.nome') %></strong> <%= @acquirente.nome %> <%= @acquirente.cognome %></p>
           <p class="card-text"><strong><%= t('comune.nome_utente') %></strong> <%= @acquirente.nome_utente %></p>
-          <p class="card-text"><strong> E-mail: </strong> <%= @acquirente.email %></p>
+          <p class="card-text"><strong><%= t('sessions.email') %>: </strong> <%= @acquirente.email %></p>
           <p class="card-text"><strong><%= t('comune.telefono') %></strong> <%= @acquirente.telefono %></p>
           <p class="card-text">
             <%= link_to t('acquirente.seguiti') + " (#{@acquirente.negozi_seguiti.count})", acquirente_seguiti_path, class: "btn btn-outline-primary" %>
           </p>
-          <p class="card-text"><strong><%= t_google('Punti Fedeltà:') %></strong> <%= @acquirente.punti_fedelta %></p>
+          <p class="card-text"><strong><%= t('acquirente.punti') %></strong> <%= @acquirente.punti_fedelta %></p>
         </div>
       </div>
 

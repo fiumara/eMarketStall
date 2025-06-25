@@ -1,4 +1,5 @@
-<h2 class="text-center my-4">Seguaci del Negozio</h2>
+<p id="notice"><%= t_google(notice) %></p>
+<h2 class="text-center my-4"><%= t('negozio.seguaci_n') =%></h2>
 <% @seguaci.each do |acquirente| %>
   <li class="list-group-item">
     <%= link_to acquirente.nome_completo, visualizza_acquirente_path(acquirente), class: "text-decoration-none" %>

@@ -1,3 +1,5 @@
+<p id="notice"><%= t_google(notice) %></p>
+
 <h1><%= t('comune.dettagli') %></h1>
 
 <p><strong><%= t('comune.nome_utente') %></strong> <%= @acquirente.nome_utente %></p>
@@ -5,7 +7,7 @@
 <% unless @profilo_limitato %>
   <p><strong><%= t('comune.nome') %></strong> <%= @acquirente.nome %></p>
   <p><strong><%= t('comune.cognome') %></strong> <%= @acquirente.cognome %></p>
-  <p><strong>E-mail: </strong> <%= @acquirente.email %></p>
+  <p><strong><%= t('sessions.email') %>: </strong> <%= @acquirente.email %></p>
   <p><strong><%= t('comune.telefono') %></strong> <%= @acquirente.telefono %></p>
 <% else %>
   <p><em><%= t('acquirente.privato') %></em></p>

@@ -1,5 +1,6 @@
+<p id="notice"><%= t_google(notice) %></p>
 <div class="container mt-5">
-  <h1 class="mb-4 text-center">Promozioni Attive</h1>
+  <h1 class="mb-4 text-center"><%= t('promo.index') %></h1>
   <div class="row">
     <% @promoziones.each do |promozione| %>
       <div class="col-md-4">
@@ -8,20 +9,20 @@
             <h5 class="card-title"><%= t_google(promozione.nome) %></h5>
             <p class="card-text"><%= t_google(promozione.descrizione) %></p>
             <ul class="list-unstyled">
-              <li><strong>Inizio:</strong> <%= promozione.inizio.strftime('%d/%m/%Y') %></li>
-              <li><strong>Fine:</strong> <%= promozione.fine.strftime('%d/%m/%Y') %></li>
-              <li><strong>Sconto:</strong> <%= number_to_percentage(promozione.sconto , precision: 2) %></li>
+              <li><strong><%= t('promo.inizio') %>:</strong> <%= promozione.inizio.strftime('%d/%m/%Y') %></li>
+              <li><strong><%= t('promo.fine') %>:</strong> <%= promozione.fine.strftime('%d/%m/%Y') %></li>
+              <li><strong><%= t('promo.sconto') %>:</strong> <%= number_to_percentage(promozione.sconto , precision: 2) %></li>
             </ul>
             <p class="card-text">
             <% if promozione.prodotto.present? %>
-              <%= link_to 'Vedi Prodotto Scontato', prodotto_path(promozione.prodotto), class: 'btn btn-primary' %>
+              <%= link_to t('promo.vedi_prod'), prodotto_path(promozione.prodotto), class: 'btn btn-primary' %>
             <% elsif promozione.categorium.present? %>
-              <%= link_to 'Vedi Prodotti Scontati', categoria_path(promozione.categorium), class: 'btn btn-success' %>
+              <%= link_to t('promo.vedi_cat'), categoria_path(promozione.categorium), class: 'btn btn-success' %>
             <% else %>
-              <span class="text-muted">Nessun prodotto o categoria associata</span>
+              <span class="text-muted"><%= t('promo.no_p_c') %></span>
             <% end %>
           </p>
-                    </div>
+            </div>
         </div>
       </div>
     <% end %>

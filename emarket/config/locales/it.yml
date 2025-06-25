@@ -33,8 +33,20 @@ it:
     elimina: "Elimina"
     torna_pr: "Torna al profilo"
     invia: "Invia"
-
     motivo: "Motivo"
+    
+    amministratore: "Amministratore"
+    data: "Data"
+    stato: "Stato"
+    dett: "Dettagli"
+    ordine: "Ordine"
+
+    statistiche: "Statistiche"
+    promo: "Promozioni"
+    annulla: "Annulla"
+    da: "Da"
+
+    visualizza: "Visualizza"
 
   home:
     promo: "Promozioni in corso"
@@ -101,32 +113,34 @@ it:
     save: "Salva"
     cancel: "Annulla"
 
+    descrizione: "Descrizione"
+
   errors:
     messages:
       error: "errore"
       prevented_save: "ha impedito il salvataggio"
 
   sessions:
-    title: "Login"
-    heading: "Accedi"
     role: "Tipo di Utente"
-    choose_role: "Seleziona un ruolo"
-    buyer: "Acquirente"
-    admin: "Amministratore"
     email: "Email"
     password: "Password"
     login: "Accedi"
     forgot_password: "Password dimenticata?"
     or: "oppure"
     login_google: "Accedi con Google"
-    signup: "Iscriviti"
 
   carrello:
     titolo: "Il tuo carrello"
     sconto_pr: "Sconto promozione"
     rimuovi: "Rimuovi"
     tot: "Totale carrello:"
-    sconto_f: "Sconto fedeltà disponibile: "
+
+
+
+    sconto_f: "Sconto fedeltà disponibile"
+
+
+
     tot_sc: "Totale dopo sconto fedeltà:"
     pf1: "Hai"
     pf2: "punti"
@@ -188,6 +202,10 @@ it:
     segn: "Segnalazioni ricevute"
     ignora: "Ignora"
 
+
+    segnala: "Segnala"
+    segnalato: "Segnalato"
+
   lingua:
     scegli: "Scegli la lingua"
     cambia: "Cambia lingua"
@@ -195,7 +213,161 @@ it:
   lista_d:
     vuota: "La tua lista desideri è vuota."
 
+  prodotto:
+    no_imm: "Nessuna immagine disponibile"
+    descrizione: "Descrizione"
+    negozio: "Visualizza Negozio"
+    agg: "Aggiungi al carrello"
+    recensioni: "Recensioni"
+
+    no_feedback: "Nessuna recensione per questo prodotto."
+    prezzo_app: "Prezzo applicato"
+    scontato: "(Scontato)"
 
 
-  
+  pw_reset:
+    recuper: "Recupero password"
+    istruzioni: "Invia istruzioni"
+    nuova: "Nuova password"
+    email1: "Ciao"
+    email2: "Hai richiesto di reimpostare la password. Clicca qui sotto"
+    link: "Reimposta password"
+    email3: "Se non hai richiesto tu questa operazione, ignora pure questa email."
+
+  ordini:
+    tuoi: "I tuoi ordini"
+    cod: "Codice Ordine"
+    cod_g: "Da generare"
+    indirizzo: "Indirizzo"
+    fedelta: "Sconto fedeltà"
+    no_ord: "Non hai ancora effettuato ordini."
+    riepilogo: "Riepilogo Ordine"
+    nota_sc: (verrà applicato al pagamento)
+    spedizione: "Indirizzo di spedizione:"
+    dett: "Dettaglio Ordine:"
+    prodotti: "Prodotti nell'ordine"
+    prod_el: "Prodotto eliminato"
+    tot: "Totale Ordine"
+    feedback: "Lascia feedback"
+    feedback_l: "Feedback lasciato"
+    reso: "Richiedi Reso"
+    annulla: "Annulla ordine"
+    no_sconto: "Nessuno"
+
+    negozio: "Ordini Ricevuti"
+    sconto: "Sconto applicato"
+    no_ord_n: "Non hai ancora ricevuto ordini."
+    indirizzo_sp: "Indirizzo di spedizione"
+    riepilogo_tot: "Riepilogo Totale"
+    promo_punti: "(Promozioni o punti fedeltà)"
+    agg_stato: "Aggiorna Stato Ordine"
+    stato: "Stato Ordine"
+    aggiorna: "Aggiorna Stato"
+
+
+  resi:
+    dett: "Dettaglio Reso"
+    id: "ID Reso"
+    data: "Data Richiesta"
+    in_attesa: "In Attesa"
+    approvato: "Approvato"
+    rifiutato: "Rifiutato"
+    no_stato: "Non Specificato"
+    prodotti: "Prodotti Resi"
+    prodotto: "Nome Prodotto"
+    quantita: "Quantità Resa"
+    torna: "Torna ai Resi"
+    titolo: "I Miei Resi"
+    richiesta: "Richiesta di Reso"
+    motivo: "Motivo del reso"
+    numero: "Seleziona le quantità dei prodotti da restituire"
+    numero_acq: " Quantità acquistata"
+    invia: "Invia richiesta di reso"
+
+    gestione: "Gestione Resi"
+    cliente: "Cliente"
+    approva: "Approva"
+    rifiuta: "Rifiuta"
+
+
+  negozio:
+    dett: "Dettagli Negozio"
+    nome: "Nome Negozio"
+    proprietario: "Proprietario"
+    seguaci: "Seguaci"
+    aggiungi: "Aggiungi Prodotto"
+    resi: "Gestione Resi"
+    ordini: "Ordini Ricevuti"
+    rec: "Recensioni"
+    prodotti: "Prodotti"
+    no_prodotti: "Nessun prodotto disponibile."
+    indirizzo: "Indirizzo"
+    non_seguire: "Non seguire"
+    segui: "Segui"
+    scrivici: "Scrivici"
+    no_neg: "Il negozio non è stato trovato."
+    no_prop: "Informazioni sul proprietario non disponibili."
+    seguaci_n: "Seguaci del Negozio"
+    new: "Crea il tuo Negozio"
+    edit: "Modifica Negozio"
+    delete: "Elimina Negozio"
+    immagine: "Immagine Negozio"
+    aggiorna: "Aggiorna Negozio"
+    feedback: "Feedback ricevuti"
+    voto_f: "Voto"
+    no_utente_ f: "Utente eliminato"
+
+  stat_n:
+    gen: "Statistiche generali del negozio"
+    tot: "Totale vendite"
+    guad_mese: "Guadagni ultimo mese"
+    guad_anno: "Guadagni ultimo anno"
+    prod_vendita: "Prodotti in vendita"
+    prezzo_medio: "Prezzo medio"
+
+    prod: "Statistiche per prodotto"
+    nome: "Nome prodotto"
+    vend: "Venduti totali"
+    disp: "Disponibili"
+    vend_mese: "Venduti ultimo mese"
+    vend_anno: "Venduti ultimo anno"
+
+
+
+
+  segn_n:
+    titolo: "Segnala il negozio"
+    motivo: "Motivo della segnalazione"
+    m1: "Contenuti inappropriati"
+    m2: "Attività sospetta"
+    m3: "Frode"
+    altro: "Altro"
+    sel: "Seleziona un motivo"
+    note: "Note aggiuntive (opzionale)"
+    spiega: "Spiega meglio il motivo della segnalazione..."
+    invia: "Invia segnalazione"
+
+
+  promo:
+    index: "Promozioni Attive"
+    inizio: "Inizio"
+    fine: "Fine"
+    sconto: "Sconto"
+    vedi_prod: "Vedi Prodotto Scontato"
+    vedi_cat: "Vedi Prodotti Scontati"
+    no_p_c: "Nessun prodotto o categoria associata"
+    new: "Nuova Promozione"
+    edit: "Modifica Promozione"
+    tipo: "Tipo"
+    sito: "Intero Sito"
+    cat: "Categoria"
+    sel_p: "Seleziona Prodotto"
+    sel_c: "Seleziona Categoria"
+    negozio: "Campagne promozionali negozio"
+    tutto: "Tutto il sito"
+    aggiungi: "Aggiungi promozione"
+    admin: "Campagne promozionali"
+    periodo: "Periodo"
+    appl: "Applicato a"
+
 

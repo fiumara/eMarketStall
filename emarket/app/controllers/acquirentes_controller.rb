@@ -27,7 +27,10 @@ class AcquirentesController < ApplicationController
   def create
     @acquirente = Acquirente.new(acquirente_params)
     if @acquirente.save
-      redirect_to login_path, notice: 'Acquirente registrato con successo. Per favore, effettuare l\'accesso.'
+      messaggio = "Acquirente registrato con successo. Per favore, effettuare l\'accesso."
+      messaggio_tradotto = TranslationService.translate(messaggio, session[:lingua] || "it")
+      redirect_to login_path, notice: messaggio_tradotto
+
     else
       render :new
     end
@@ -69,7 +72,10 @@ end
     @acquirente.destroy
 
     respond_to do |format|
-      format.html { redirect_to login_path, notice: "Acquirente was successfully destroyed." }
+      messaggio = "Acquirente was successfully destroyed."
+      messaggio_tradotto = TranslationService.translate(messaggio, session[:lingua] || "it")
+
+      format.html { redirect_to login_path, notice: messaggio_tradotto }
       format.json { head :no_content }
     end
   end
@@ -89,7 +95,9 @@ end
     def authorize_acquirente
       puts "🔹 Controllo autorizzazione per #{current_user&.id} vs #{@acquirente.id}"
       unless current_user == @acquirente
-        redirect_to root_path, alert: "Accesso negato: non sei autorizzato ad accedere a questa pagina." and return
+        messaggio = "Accesso negato: non sei autorizzato ad accedere a questa pagina."
+        messaggio_tradotto = TranslationService.translate(messaggio, session[:lingua] || "it")
+        redirect_to root_path, alert: messaggio_tradotto and return
       end
     end
 end

@@ -1,20 +1,21 @@
-<h2>Dettaglio Ordine: <%= @ordine.codice_ordine %></h2>
+<p id="notice"><%= t_google(notice) %></p>
+<h2><%= t('ordini.dett') %><%= @ordine.codice_ordine %></h2>
 
-<p><strong>Data:</strong> <%= @ordine.created_at.strftime("%d/%m/%Y %H:%M") %></p>
-<p><strong>Stato:</strong> <%= @ordine.stato.humanize %></p>
-<p><strong>Indirizzo:</strong> <%= @ordine.indirizzo %></p>
+<p><strong><%= t('comune.data') %>:</strong> <%= @ordine.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong><%= t('comune.stato') %>:</strong> <%= t_google(@ordine.stato.humanize) %></p>
+<p><strong><%= t('ordini.indirizzo') %>:</strong> <%= @ordine.indirizzo %></p>
 
-<h3 class="mt-4">Prodotti nell'ordine</h3>
+<h3 class="mt-4"><%= t('ordini.prodotti') %></h3>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Prodotto</th>
-      <th>Quantità</th>
-      <th>Prezzo Originale</th>
-      <th>Prezzo Scontato</th>
-      <th>Sconto Promozione</th>
-      <th>Totale</th>
+      <th><%= t('comune.prodotto') %></th>
+      <th><%= t('comune.quantita') %></th>
+      <th><%= t('comune.prezzo_or') %></th>
+      <th><%= t('comune.prezzo_sc') %></th>
+      <th><%= t('carrello.sconto_pr') %></th>
+      <th><%= t('comune.tot') %></th>
     </tr>
   </thead>
   <tbody>
@@ -23,14 +24,14 @@
       <tr>
         <td>
           <% if prodotto %>
-            <%= prodotto.nome_prodotto %>
+            <%= t_google(prodotto.nome_prodotto) %>
             <% if item.feedbacks.present? %>
-              <br><span class="badge bg-success">Feedback lasciato</span>
+              <br><span class="badge bg-success"><%= t('ordini.feedback_l') %></span>
             <% else %>
-              <br><%= link_to "Lascia feedback", new_feedback_path(ordine_item_id: item.id), class: "btn btn-sm btn-outline-secondary mt-1" %>
+              <br><%= link_to t('ordini.feedback'), new_feedback_path(ordine_item_id: item.id), class: "btn btn-sm btn-outline-secondary mt-1" %>
             <% end %>
           <% else %>
-            <em>Prodotto eliminato</em>
+            <em><%= t('ordini.prod_el') %></em>
           <% end %>
         </td>
         <td><%= item.quantity %></td>
@@ -51,14 +52,14 @@
 
 <hr>
 
-<p><strong>Sconto Fedeltà:</strong> <%= @ordine.sconto && @ordine.sconto > 0 ? "-#{number_to_currency(@ordine.sconto)}" : "Nessuno" %></p>
-<p><strong>Totale Ordine:</strong> <%= number_to_currency(@ordine.totale - @ordine.sconto) %></p>
+<p><strong><%= t('carrello.sconto_f') %>:</strong> <%= @ordine.sconto && @ordine.sconto > 0 ? "-#{number_to_currency(@ordine.sconto)}" : t("ordini.no_sconto") %></p>
+<p><strong><%= t('ordini.tot') %>:</strong> <%= number_to_currency(@ordine.totale - @ordine.sconto) %></p>
 
 <% if @ordine.stato == "completato" %>
-  <%= link_to 'Richiedi Reso', return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger mt-3' %>
+  <%= link_to t('ordini.reso'), return_requests_new_path(ordine_id: @ordine.id), class: 'btn btn-danger mt-3' %>
 <% end %>
 
 <% if @ordine.stato == "in_attesa" %>
-  <%= button_to "Procedi al Pagamento", pagamento_ordine_path(@ordine), method: :post, class: "btn btn-primary mt-3" %>
-  <%= button_to "Annulla ordine", annulla_ordine_path(@ordine), method: :post, data: { confirm: "Sei sicuro di voler annullare l'ordine?" } %>
+  <%= button_to t('carrello.paga'), pagamento_ordine_path(@ordine), method: :post, class: "btn btn-primary mt-3" %>
+  <%= button_to t('ordini.annulla'), annulla_ordine_path(@ordine), method: :post, data: { confirm: t("comune.conferma") } %>
 <% end %>

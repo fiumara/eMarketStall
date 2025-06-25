@@ -1,3 +1,4 @@
+<p id="notice"><%= t_google(notice) %></p>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,38 +22,38 @@
           </div>
         <% end %>
 
-        <p><strong>Indirizzo:</strong> <%= @negozio.indirizzo %></p>
-        <p><strong>Telefono:</strong> <%= @negozio.telefono %></p>
+        <p><strong><%= t('negozio.indirizzo') =%>:</strong> <%= @negozio.indirizzo %></p>
+        <p><strong><%= t('comune.telefono') =%></strong> <%= @negozio.telefono %></p>
         <p><strong>Followers:</strong> <%= @negozio.followers.count %></p>
 
         <% if current_user.is_a?(Acquirente) %>
           <div class="negozio-actions">
-            <%= button_to "Segnala", segnala_form_negozio_path(@negozio), method: :get, class: "btn btn-danger" %>
+            <%= button_to t('gest.segnala') , segnala_form_negozio_path(@negozio), method: :get, class: "btn btn-danger" %>
 
             <% if current_user.follows.exists?(negozio: @negozio) %>
-              <%= button_to "Non seguire", negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
+              <%= button_to t('negozio.non_seguire'), negozio_unfollow_path(@negozio), method: :delete, class: "btn btn-warning" %>
             <% else %>
-              <%= button_to "Segui", negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
+              <%= button_to t('negozio.segui'), negozio_follow_path(@negozio), method: :post, class: "btn btn-primary" %>
             <% end %>
 
-            <%= button_to "Scrivici", start_chat_rooms_path(destinatario_id: @negozio.id, destinatario_type: "Negozio"), method: :post, class: "btn btn-secondary" %>
+            <%= button_to t('negozio.scrivici'), start_chat_rooms_path(destinatario_id: @negozio.id, destinatario_type: "Negozio"), method: :post, class: "btn btn-secondary" %>
           </div>
         <% end %>
       </section>
     <% else %>
-      <p>Il negozio non è stato trovato.</p>
+      <p><%= t('negozio.no_neg') =%></p>
     <% end %>
 
     <section class="proprietario card">
       <% if @negozio&.acquirente.present? %>
-        <p><strong>Proprietario:</strong> <%= t_google(@negozio.acquirente.nome_utente) %></p>
+        <p><strong><%= t('negozio.proprietario') =%>:</strong> <%= t_google(@negozio.acquirente.nome_utente) %></p>
       <% else %>
-        <p>Informazioni sul proprietario non disponibili.</p>
+        <p><%= t('negozio.no_prop') =%></p>
       <% end %>
     </section>
 
     <section class="prodotti card">
-      <h2>Prodotti</h2>
+      <h2><%= t('negozio.prodotti') =%></h2>
       <% if @negozio&.prodottos.present? %>
         <div class="prodotti-grid">
           <% @negozio.prodottos.each do |prodotto| %>
@@ -63,7 +64,7 @@
           <% end %>
         </div>
       <% else %>
-        <p>Non ci sono prodotti disponibili.</p>
+        <p><%= t('negozio.no_prodotti') =%></p>
       <% end %>
     </section>
   </main>

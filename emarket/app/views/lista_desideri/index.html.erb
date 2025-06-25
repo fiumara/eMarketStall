@@ -1,12 +1,13 @@
+<p id="notice"><%= t_google(notice) %></p>
 <div class="page-wrapper lista-desideri">
   <h2><%= t('acquirente.desideri') %></h2>
   <% if @wishlist.present? %>
     <% @wishlist.each do |prodotto| %>
       <div class="prodotto">
-        <h3><%= link_to prodotto.nome_prodotto, prodotto_path(prodotto), class: "prodotto-link" %></h3>
+        <h3><%= link_to t_google(prodotto.nome_prodotto), prodotto_path(prodotto), class: "prodotto-link" %></h3>
         <div class="prodotto-dettagli">
           <div class="descrizione">
-            <p><%= prodotto.descrizione %></p>
+            <p><%= t_google(prodotto.descrizione) %></p>
             <p>Prezzo: <%= number_to_currency(prodotto.prezzo) %></p>
           </div>
           <div class="elimina">

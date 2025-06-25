@@ -15,14 +15,21 @@ class CarrelloItemsController < ApplicationController
           # Aggiungi un nuovo elemento al carrello
           carrello.carrello_items.create(prodotto: prodotto, quantity: params[:quantity], ordine_id: nil)
         end
+
+        messaggio = "#{prodotto.nome_prodotto} aggiunto al carrello!"
+        messaggio_tradotto = TranslationService.translate(messaggio, session[:lingua] || "it")
+        redirect_to carrello_path, notice: messaggio_tradotto
+
     
-        redirect_to carrello_path, notice: "#{prodotto.nome_prodotto} aggiunto al carrello!"
       end
     def destroy
       carrello_item = CarrelloItem.find(params[:id])
       carrello_item.destroy
   
-      redirect_to carrello_path, notice: "Elemento rimosso dal carrello."
+      messaggio = "Elemento rimosso dal carrello."
+      messaggio_tradotto = TranslationService.translate(messaggio, session[:lingua] || "it")
+      redirect_to carrello_path, notice: messaggio_tradotto
+
     end
   end
   

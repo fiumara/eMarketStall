@@ -1,29 +1,30 @@
-<h1>Dettaglio Reso</h1>
+<p id="notice"><%= t_google(notice) %></p>
+<h1><%= t('resi.dett') %></h1>
 
-<p><strong>ID Reso:</strong> <%= @return_request.id %></p>
-<p><strong>Ordine:</strong> <%= link_to "Ordine ##{@return_request.ordine.id}", ordine_path(@return_request.ordine) %></p>
-<p><strong>Motivo:</strong> <%= @return_request.motivo %></p>
-<p><strong>Data Richiesta:</strong> <%= @return_request.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong><%= t('resi.id') %>:</strong> <%= @return_request.id %></p>
+<p><strong><%= t('comune.ordine') %>:</strong> <%= link_to t('comune.ordine') + " ##{@return_request.ordine.id}", ordine_path(@return_request.ordine) %></p>
+<p><strong><%= t('comune.motivo') %>:</strong> <%= t_google(@return_request.motivo) %></p>
+<p><strong><%= t('resi.data') %>:</strong> <%= @return_request.created_at.strftime("%d/%m/%Y %H:%M") %></p>
 
-<p><strong>Stato:</strong> 
+<p><strong><%= t('comune.stato') %>:</strong> 
   <% case @return_request.stato %>
     <% when "in_attesa" %>
-      <span class="badge bg-warning">In Attesa</span>
+      <span class="badge bg-warning"><%= t('resi.in_attesa') %></span>
     <% when "approvato" %>
-      <span class="badge bg-success">Approvato</span>
+      <span class="badge bg-success"><%= t('resi.approvato') %></span>
     <% when "rifiutato" %>
-      <span class="badge bg-danger">Rifiutato</span>
+      <span class="badge bg-danger"><%= t('resi.rifiutato') %></span>
     <% else %>
-      <span class="badge bg-secondary"><%= @return_request.stato.present? ? @return_request.stato.capitalize : "Non Specificato" %></span>
+      <span class="badge bg-secondary"><%= @return_request.stato.present? ? @return_request.stato.capitalize : t("resi.no_stato") %></span>
   <% end %>
 </p>
 
-<h3>Prodotti Resi:</h3>
+<h3><%= t('resi.prodotti') %>:</h3>
 <table class="table">
   <thead>
     <tr>
-      <th>Nome Prodotto</th>
-      <th>Quantità Resa</th>
+      <th><%= t('resi.prodotto') %></th>
+      <th><%= t('resi.quantita') %></th>
     </tr>
   </thead>
   <tbody>
@@ -36,5 +37,5 @@
   </tbody>
 </table>
 
-<%= link_to "Torna ai Resi", return_requests_path, class: "btn btn-primary" %>
+<%= link_to t('resi.torna'), return_requests_path, class: "btn btn-primary" %>
 
