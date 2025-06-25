@@ -32,8 +32,8 @@
               <% end %>
             </td>
             <td class="promo-actions">
-              <%= link_to t('comune.nome'), edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
-              <%= button_to t('comune.nome'), promozione, method: :delete, data: { turbo: false, confirm: t('comune.conferma') }, class: 'btn-action btn-delete' %>
+              <%= link_to t('comune.modifica'), edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
+              <%= button_to t('comune.elimina'), promozione, method: :delete, data: { turbo: false, confirm: t('comune.conferma') }, class: 'btn-action btn-delete' %>
             </td>
           </tr>
         <% end %>

@@ -1,81 +1,114 @@
-body {
-    font-family: sans-serif;
-  }
-  
-  .main-wrapper {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .breadcrumb {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .highlight {
-    background-color: yellow;
-    color: black;
-  }
-  
-  .prodotto-content {
-    display: flex;
-    gap: 40px;
-    border-top: 1px solid #ccc;
-    padding-top: 20px;
-  }
-  
-  .prodotto-gallery {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .main-image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  .prodotto-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .input-select,
-  .input-area {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .btn-black {
-    background-color: black;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    display: inline-block;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .feedback {
-    background-color: #f1f1f1;
-    padding: 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-  }
+.main-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.prodotto-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.prodotto-gallery {
+  flex: 1 1 45%;
+  position: relative;
+}
+
+.prodotto-details {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.main-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.empty-image-placeholder {
+  padding: 4rem;
+  text-align: center;
+  background: #f4f4f4;
+  color: #999;
+  border-radius: 8px;
+}
+
+.carousel-controls {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.carousel-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #444;
+}
+
+.image-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.prodotto-descrizione {
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.prezzo {
+  font-size: 1.2rem;
+}
+
+.prezzo-originale {
+  color: #888;
+  margin-right: 0.5rem;
+}
+
+.prezzo-scontato {
+  color: #c00;
+  font-weight: bold;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.heart-button {
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e00;
+  transition: transform 0.2s;
+}
+
+.heart-button:hover {
+  transform: scale(1.2);
+}
+
+.recensioni {
+  border-top: 1px solid #ddd;
+  padding-top: 2rem;
+}
+
+.feedback {
+  background: #fafafa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.feedback-voto {
+  color: #f5a623;
+  font-size: 1.2rem;
+}
