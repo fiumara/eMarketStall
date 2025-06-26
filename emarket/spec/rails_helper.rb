@@ -65,3 +65,10 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+Capybara.register_driver :selenium_chrome_headless do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: Selenium::WebDriver::Chrome::Options.new(args: ['headless', 'disable-gpu']))
+  end
+  
+  Capybara.javascript_driver = :selenium_chrome_headless
+  
