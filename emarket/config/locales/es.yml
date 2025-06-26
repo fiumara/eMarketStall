@@ -366,3 +366,9 @@ es:
     admin: "Campañas promocionales"
     periodo: "Período"
     appl: "Aplicado a"
+
+  date:
+    order:
+      - :day
+      - :month
+      - :year

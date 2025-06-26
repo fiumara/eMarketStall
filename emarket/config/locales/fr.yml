@@ -370,3 +370,9 @@ fr:
     admin: "Campagnes promotionnelles"
     periodo: "Période"
     appl: "Appliqué à"
+
+  date:
+    order:
+      - :day
+      - :month
+      - :year

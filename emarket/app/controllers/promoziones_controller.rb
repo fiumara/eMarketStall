@@ -36,17 +36,17 @@ class PromozionesController < ApplicationController
     def create
       @promozione = Promozione.new(promozione_params)
       if current_user.is_a?(Acquirente) && current_user.negozio.present?
-           @promozione.negozio = current_user.negozio
-           @promozione.created_by = 'negozio'
-            @promozione.tipo = 'singolo_prodotto'
-          elsif current_user.is_a?(Amministratore)
-            @promozione.created_by = 'admin'
-          end
-        
-  
+        @promozione.negozio = current_user.negozio
+        @promozione.created_by = 'negozio'
+        @promozione.tipo = 'singolo_prodotto'
+      elsif current_user.is_a?(Amministratore)
+        @promozione.created_by = 'admin'
+      end
+    
       respond_to do |format|
         if @promozione.save
-          format.html { redirect_to @promozione, notice: 'Promozione creata con successo.' }
+          path = current_user.is_a?(Amministratore) ? admin_promoziones_path : negozio_promoziones_path
+          format.html { redirect_to path, notice: 'Promozione creata con successo.' }
           format.json { render :show, status: :created, location: @promozione }
         else
           format.html { render :new }
@@ -54,12 +54,14 @@ class PromozionesController < ApplicationController
         end
       end
     end
+    
   
     # PATCH/PUT /promoziones/1 or /promoziones/1.json
     def update
       respond_to do |format|
         if @promozione.update(promozione_params)
-          format.html { redirect_to @promozione, notice: 'Promozione aggiornata con successo.' }
+          path = current_user.is_a?(Amministratore) ? admin_promoziones_path : negozio_promoziones_path
+          format.html { redirect_to path, notice: 'Promozione aggiornata con successo.' }
           format.json { render :show, status: :ok, location: @promozione }
         else
           format.html { render :edit }
@@ -67,6 +69,7 @@ class PromozionesController < ApplicationController
         end
       end
     end
+    
   
     # DELETE /promoziones/1 or /promoziones/1.json
     def destroy

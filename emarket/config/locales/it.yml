@@ -379,4 +379,10 @@ it:
     periodo: "Periodo"
     appl: "Applicato a"
 
+  date:
+    order:
+      - :day
+      - :month
+      - :year
+
 

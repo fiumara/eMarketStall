@@ -32,7 +32,7 @@
           <td>
             <% if item.prezzo_unitario < item.prodotto.prezzo %>
               <strong class="text-success"><%= number_to_currency(item.prezzo_unitario) %></strong>
-              <br><small class="text-info"><%= t('carrello.scont_pr') %></small>
+              <br><small class="text-info"><%= t('carrello.sconto_pr') %></small>
             <% else %>
               <%= number_to_currency(item.prezzo_unitario) %>
             <% end %>

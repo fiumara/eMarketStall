@@ -368,3 +368,9 @@ de:
     admin: "Aktionen-Verwaltung"
     periodo: "Zeitraum"
     appl: "Angewendet auf"
+
+  date:
+    order:
+      - :day
+      - :month
+      - :year
