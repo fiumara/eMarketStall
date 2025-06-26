@@ -47,6 +47,9 @@ en:
     promo: "Current Promotions"
     mostrap: "Show all promotions"
     art: "Unique handcrafted items"
+    vuota: "No products available at the moment. Come back soon to discover new handmade creations."
+    diritti: "All rights reserved"
+
 
   layouts:
     assistenza: "Support"
@@ -210,6 +213,14 @@ en:
     no_feedback: "No reviews for this product."
     prezzo_app: "Applied Price"
     scontato: "(Discounted)"
+    nuovo: "New Product"
+    modifica: "Edit Product"
+    carica_imm: "Upload Images"
+    imm: "Current Images"
+    quantita: "Available Quantity"
+    aggiorna: "Update Product"
+    crea: "Create Product"
+
 
   pw_reset:
     recuper: "Password Recovery"

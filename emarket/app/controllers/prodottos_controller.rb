@@ -7,7 +7,8 @@ class ProdottosController < ApplicationController
 
   # GET /prodottos or /prodottos.json
   def index
-    @prodottos = Prodotto.search(params[:search])
+    translated_query = translate_to_italian(params[:search])
+    @prodottos = Prodotto.search(translated_query)
   end
 
   # GET /prodottos/1 or /prodottos/1.json
@@ -110,6 +111,14 @@ class ProdottosController < ApplicationController
       redirect_to root_path, alert: "Non sei autorizzato a creare prodotti per questo negozio." and return
     end
   end
+
+
+  def translate_to_italian(text)
+    return text if text.blank?
+  
+    TranslationService.translate(text, "it", I18n.locale.to_s)
+  end
+  
   
   
   

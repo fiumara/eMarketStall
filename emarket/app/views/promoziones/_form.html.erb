@@ -1,7 +1,7 @@
 <%= form_with(model: promozione, local: true) do |form| %>
   <% if promozione.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(promozione.errors.count, t("errors.messages.error")) %> t("errors.messages.prevented_save")</h2>
+      <h2><%= pluralize(promozione.errors.count, t("errors.messages.error")) %><%= t("errors.messages.prevented_save") %></h2>
       <ul>
         <% promozione.errors.full_messages.each do |message| %>
           <li><%= t_google(message) %></li>
@@ -43,18 +43,16 @@
 
     <div class="field" id="prodotto_field">
       <%= form.label :prodotto_id, t("comune.prodotto") %>
-      <%= form.collection_select :prodotto_id, Prodotto.all, :id, :nome_prodotto, include_blank: t("promo.sel_p") %>
-    </div>
+      <%= form.select :prodotto_id, options_for_select([[t("promo.sel_p"), ""]] + translated_prodotti_options) %>    </div>
 
     <div class="field" id="categoria_field">
       <%= form.label :categorium_id, t("promo.cat") %>
-      <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, include_blank: t("promo.sel_c") %>
-    </div>
+      <%= form.select :categorium_id, options_for_select([[t("promo.sel_c"), ""]] + translated_categorie_options) %>    </div>
   <% elsif current_user.is_a?(Acquirente) && current_user.negozio.present? %>
     <div class="field">
       <%= form.hidden_field :tipo, value: 'singolo_prodotto' %>
       <%= form.label :prodotto_id, t("comune.prodotto") %>
-      <%= form.collection_select :prodotto_id, current_user.negozio.prodottos, :id, :nome_prodotto, include_blank: t("promo.sel_p") %>
+      <%= form.select :prodotto_id, options_for_select([[t("promo.sel_p"), ""]] + translated_negozio_prodotti_options(current_user.negozio)) %>
     </div>
   <% end %>
 

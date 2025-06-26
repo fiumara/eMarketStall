@@ -52,6 +52,9 @@ fr:
     promo: "Promotions en cours"
     mostrap: "Voir toutes les promotions"
     art: "Articles artisanaux uniques"
+    vuota: "Aucun produit disponible pour le moment. Revenez bientôt pour découvrir de nouvelles créations artisanales."
+    diritti: "Tous droits réservés"
+
 
   layouts:
     assistenza: "Assistance"
@@ -220,6 +223,14 @@ fr:
     no_feedback: "Aucun avis pour ce produit."
     prezzo_app: "Prix appliqué"
     scontato: "(Réduit)"
+    nuovo: "Nouveau Produit"
+    modifica: "Modifier le Produit"
+    carica_imm: "Télécharger des images"
+    imm: "Images actuelles"
+    quantita: "Quantité Disponible"
+    aggiorna: "Mettre à jour le Produit"
+    crea: "Créer le Produit"
+
 
   pw_reset:
     recuper: "Récupération du mot de passe"

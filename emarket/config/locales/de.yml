@@ -52,6 +52,9 @@ de:
     promo: "Laufende Aktionen"
     mostrap: "Alle Aktionen anzeigen"
     art: "Einzigartige handgemachte Artikel"
+    vuota: "Derzeit sind keine Produkte verfügbar. Schau bald wieder vorbei, um neue handgefertigte Kreationen zu entdecken."
+    diritti: "Alle Rechte vorbehalten"
+
   layouts:
     assistenza: "Support"
     cambia_lingua: "🌍 Sprache wechseln"
@@ -218,6 +221,14 @@ de:
     no_feedback: "Keine Bewertungen für dieses Produkt."
     prezzo_app: "Angewandter Preis"
     scontato: "(Reduziert)"
+    nuovo: "Neues Produkt"
+    modifica: "Produkt bearbeiten"
+    carica_imm: "Bilder hochladen"
+    imm: "Aktuelle Bilder"
+    quantita: "Verfügbare Menge"
+    aggiorna: "Produkt aktualisieren"
+    crea: "Produkt erstellen"
+
 
   pw_reset:
     recuper: "Passwort wiederherstellen"

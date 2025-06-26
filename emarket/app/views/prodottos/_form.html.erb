@@ -1,10 +1,8 @@
 
-
-
 <%= form_with(model: [@negozio, @prodotto], local: true) do |form| %>
   <% if @prodotto.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@prodotto.errors.count, "error") %> prohibited this prodotto from being saved:</h2>
+      <h2><%= pluralize(@prodotto.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %>:</h2>
       <ul>
         <% @prodotto.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -14,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :nome_prodotto %>
+    <%= form.label :nome_prodotto, t("forms.nome") %>
     <%= form.text_field :nome_prodotto %>
   </div>
 
   <div class="field">
-  <%= form.label :immagini, "Carica immagini" %>
+  <%= form.label :immagini, t("prodotto.carica_imm") %>
   <%= form.file_field :immagini, multiple: true %>
 </div>
 
 <% if @prodotto.immagini.attached? %>
   <div>
-    <h3>Immagini attuali:</h3>
+    <h3><%= t('prodotto.imm') %>:</h3>
     <% @prodotto.immagini.each do |img| %>
       <%= image_tag img.variant(resize_to_limit: [300, 300]) %>
     <% end %>
@@ -34,26 +32,26 @@
 
 
   <div class="field">
-    <%= form.label :descrizione %>
+    <%= form.label :descrizione, t("forms.descrizione") %>
     <%= form.text_area :descrizione %>
   </div>
 
   <div class="field">
-    <%= form.label :prezzo %>
+    <%= form.label :prezzo, t("comune.prezzo") %>
     <%= form.number_field :prezzo, step: 0.01 %>
   </div>
 
   <div class="field">
-    <%= form.label :categorium_id, "Categoria" %>
-    <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, prompt: "Seleziona una Categoria" %>
+    <%= form.label :categorium_id, t("promo.cat") %>
+    <%= form.collection_select :categorium_id, Categorium.all, :id, :nome, prompt: t("promo.sel_c") %>
   </div>
 
   <div class="field">
-  <%= form.label :quantita_disponibile, "Quantità Disponibile" %>
+  <%= form.label :quantita_disponibile, t("prodotto.quantita") %>
   <%= form.number_field :quantita_disponibile, min: 0 %>
 </div>
 
   <div class="actions">
-  <%= form.submit prodotto.persisted? ? "Aggiorna Prodotto" : "Crea Prodotto" %>
+  <%= form.submit prodotto.persisted? ? t("prodotto.aggiorna") : t("prodotto.crea") %>
   </div>
 <% end %>

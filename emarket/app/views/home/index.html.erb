@@ -178,7 +178,7 @@
         });
       </script>
     <% else %>
-      <p class="text-muted">Nessun prodotto disponibile al momento. Torna presto per scoprire nuove creazioni artigianali.</p>
+      <p class="text-muted"><%= t('home.vuota') %></p>
     <% end %>
   
 
@@ -188,7 +188,7 @@
 
   <!-- Footer -->
   <footer class="text-center py-4 mt-5">
-    <p class="mb-0">&copy; <%= Time.current.year %> Marketplace - Tutti i diritti riservati</p>
+    <p class="mb-0">&copy; <%= Time.current.year %> eMarketStall - <%= t('home.diritti') %></p>
   </footer>
 </body>
 </html>

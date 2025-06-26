@@ -52,6 +52,8 @@ it:
     promo: "Promozioni in corso"
     mostrap: "Mostra tutte le promozioni"
     art: "Articoli artigianali unici"
+    vuota: "Nessun prodotto disponibile al momento. Torna presto per scoprire nuove creazioni artigianali."
+    diritti: "Tutti i diritti riservati"
   layouts:
     assistenza: "Assistenza"
     cambia_lingua: "🌍 Cambia lingua"
@@ -219,10 +221,17 @@ it:
     negozio: "Visualizza Negozio"
     agg: "Aggiungi al carrello"
     recensioni: "Recensioni"
-
     no_feedback: "Nessuna recensione per questo prodotto."
     prezzo_app: "Prezzo applicato"
     scontato: "(Scontato)"
+
+    nuovo: "Nuovo Prodotto"
+    modifica: "Modifica Prodotto"
+    carica_imm: "Carica immagini"
+    imm: "Immagini attuali"
+    quantita: "Quantità Disponibile"
+    aggiorna: "Aggiorna Prodotto"
+    crea: "Crea Prodotto"
 
 
   pw_reset:

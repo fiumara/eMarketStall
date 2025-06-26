@@ -15,6 +15,9 @@ module Emarket
 
     config.i18n.fallbacks = true
 
+    config.i18n.default_locale = :it
+
+
 
     
 
