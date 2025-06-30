@@ -1,4 +1,6 @@
-<p id="notice"><%= t_google(notice) %></p>
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
+<p><%= t_google(notice) %></p>
 <h1><%= t('comune.mod_prof')%></h1>
 
 <%= form_with(model: @amministratore, local: true) do |form| %>

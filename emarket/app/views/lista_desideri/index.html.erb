@@ -1,4 +1,6 @@
-<p id="notice"><%= t_google(notice) %></p>
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
+<p><%= t_google(notice) %></p>
 <div class="page-wrapper lista-desideri">
   <h2><%= t('acquirente.desideri') %></h2>
   <% if @wishlist.present? %>

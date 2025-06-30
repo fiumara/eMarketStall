@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
 <%= form_with(model: @faq, local: true) do |form| %>
   <% if @faq.errors.any? %>
   <div id="error_explanation">

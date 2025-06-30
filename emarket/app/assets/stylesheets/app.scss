@@ -1,0 +1,70 @@
+// Place all the styles related to the Acquirentes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "bootstrap";
+@import "negozios";
+@import "custom";
+
+// Stili coerenti con application.scss
+body {
+  background: linear-gradient(135deg, #f5ecd9 0%, #fffaf0 100%);
+  font-family: 'Georgia', serif;
+  color: #5d3a1a;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5d3a1a;
+  font-family: 'Georgia', serif;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(93, 58, 26, 0.1);
+  background-color: #fffaf0;
+}
+
+.card-title {
+  color: #5d3a1a;
+}
+
+.btn-warning {
+  background-color: #d7b899;
+  color: #5d3a1a;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #c5a784;
+  color: #fff;
+}
+
+.btn-outline-primary {
+  color: #5d3a1a;
+  border-color: #b76e22;
+}
+
+.btn-outline-primary:hover {
+  background-color: #b76e22;
+  color: #fff;
+  border-color: #b76e22;
+}
+
+.btn-danger {
+  background-color: #b76e22;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #a0522d;
+  color: #fff;
+}
+
+a {
+  color: #5d3a1a;
+}
+
+a:hover {
+  color: #a86e45;
+}

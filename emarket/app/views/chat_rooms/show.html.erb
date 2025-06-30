@@ -1,4 +1,6 @@
-<p id="notice"><%= t_google(notice) %></p>
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
+<p><%= t_google(notice) %></p>
 <div id="chat-room" data-chat-room-id="<%= @chat_room.id %>">
   <h2>Chat Room - <%= @chat_room.nome %></h2>
 
