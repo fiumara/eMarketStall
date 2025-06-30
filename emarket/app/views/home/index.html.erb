@@ -10,51 +10,67 @@
   <%= csrf_meta_tags %>
 
   <style>
-    body {
-      background: #f4f9fb;
-    }
-    .navbar {
-      background-color: #6f42c1; /* viola */
-    }
-    .navbar-brand, .nav-link, .navbar-toggler-icon {
-      color: #fff !important;
-    }
-    .navbar-nav .nav-link:hover {
-      color: #ffe484 !important;
-    }
-    .card {
-      border: none;
-      border-radius: 16px;
-    }
-    .card-title {
-      color: #007bff;
-    }
-    .btn-primary {
-      background-color: #28a745; /* verde brillante */
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #218838;
-    }
-    .btn-outline-primary {
-      border-color: #007bff;
-      color: #007bff;
-    }
-    .btn-outline-primary:hover {
-      background-color: #007bff;
-      color: #fff;
-    }
-    .promotion {
-      background: #e3f2fd;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-    footer {
-      background-color: #343a40;
-      color: #fff;
-    }
-  </style>
+  body {
+    background: linear-gradient(135deg, #f5ecd9 0%, #fffaf0 100%);
+    font-family: 'Georgia', serif;
+    color: #5d3a1a;
+  }
+
+  .navbar {
+    background-color: #d7b899;
+  }
+
+  .navbar-brand,
+  .nav-link,
+  .navbar-toggler-icon {
+    color: #5d3a1a !important;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #b76e22 !important;
+  }
+
+  .card {
+    border: none;
+    border-radius: 16px;
+  }
+
+  .card-title {
+    color: #5d3a1a;
+  }
+
+  .btn-primary {
+    background-color: #a86e45;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #b76e22;
+  }
+
+  .btn-outline-primary {
+    border-color: #a86e45;
+    color: #a86e45;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #a86e45;
+    color: #fff;
+  }
+
+  .promotion {
+    background: #f5ecd9;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  footer {
+    background-color: #5d3a1a;
+    color: #fff;
+  }
+</style>
+
 </head>
 
 <body>
@@ -144,7 +160,16 @@
         <h5 class="card-title"><%= t_google(prodotto.nome_prodotto) %></h5>
         <p class="card-text text-muted" style="flex-grow: 1;"><%= truncate(t_google(prodotto.descrizione), length: 80) %></p>
         <strong class="text-success fs-5">
-          <%= number_to_currency(prodotto.prezzo, unit: "€") %>
+        <% prezzo_scontato = prodotto.prezzo_scontato %>
+        <% if prezzo_scontato && prezzo_scontato < prodotto.prezzo %>
+          <p class="mb-0">
+            <del class="text-danger"><%= number_to_currency(prodotto.prezzo, unit: "€") %></del>
+            <strong class="text-success fs-5"><%= number_to_currency(prezzo_scontato, unit: "€") %></strong>
+          </p>
+        <% else %>
+          <strong class="text-success fs-5"><%= number_to_currency(prodotto.prezzo, unit: "€") %></strong>
+        <% end %>
+        
         </strong>
       </div>
     </div>

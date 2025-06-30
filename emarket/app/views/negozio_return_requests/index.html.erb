@@ -17,7 +17,7 @@
         <td><%= return_request.id %></td>
         <td><%= link_to t("comune.ordine") + " ##{return_request.ordine.id}", ordine_path(return_request.ordine) %></td>
         <td><%= return_request.acquirente.email %></td>
-        <td><%= return_request.stato %></td>
+        <td><%= t_google(return_request.stato) %></td>
         <td>
           <%= link_to t("comune.visualizza"), negozio_return_request_path(return_request), class: "btn btn-info" %>
         </td>

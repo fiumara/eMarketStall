@@ -15,8 +15,11 @@ class Prodotto < ApplicationRecord
 
   has_one :statistica, dependent: :destroy
   accepts_nested_attributes_for :statistica
-
-  validates :quantita_disponibile, numericality: { greater_than_or_equal_to: 0 }
+  validates :nome_prodotto, presence: true
+  validates :descrizione, presence: true
+  validates :prezzo, presence: true, numericality: { greater_than: 0 }
+  validates :categorium_id, presence: true
+  validates :quantita_disponibile, presence: true, numericality: { greater_than: 0 }
 
   def self.search(term)
     if term

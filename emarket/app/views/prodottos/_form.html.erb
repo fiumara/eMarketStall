@@ -1,15 +1,16 @@
 
 <%= form_with(model: [@negozio, @prodotto], local: true) do |form| %>
   <% if @prodotto.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@prodotto.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %>:</h2>
-      <ul>
-        <% @prodotto.errors.full_messages.each do |message| %>
-          <li><%= t_google(message) %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div id="error_explanation">
+    <h2><%= t("errors.messages.missing_fields") %>:</h2>
+    <ul>
+      <% @prodotto.errors.attribute_names.uniq.each do |attribute, _| %>
+        <li><%= Prodotto.human_attribute_name(attribute) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
   <div class="field">
     <%= form.label :nome_prodotto, t("forms.nome") %>

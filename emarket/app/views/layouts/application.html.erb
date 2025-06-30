@@ -16,7 +16,9 @@
 <body>
   <header>
     <div class="header-content">
-      <%= link_to 'Emarketstall', root_path, class: 'logo-home' %>
+    <%= link_to root_path, class: 'logo-home' do %>
+      <%= image_tag 'logo.jpeg', alt: 'Emarketstall Logo', class: 'logo-img' %>
+    <% end %>
       <button class="hamburger-menu" onclick="toggleRightSideMenu()">
         <div></div>
         <div></div>

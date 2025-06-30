@@ -2,10 +2,10 @@
 <%= form_with(model: @negozio, local: true) do |form| %>
   <% if @negozio.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@negozio.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %>:</h2>
-      <ul>
-        <% @negozio.errors.full_messages.each do |message| %>
-          <li><%= t_google(message) %></li>
+    <h2><%= t("errors.messages.missing_fields") %>:</h2>      
+    <ul>
+        <% @negozio.errors.attribute_names.uniq.each do |attribute| %>
+          <li><%= Negozio.human_attribute_name(attribute) %></li>
         <% end %>
       </ul>
     </div>
