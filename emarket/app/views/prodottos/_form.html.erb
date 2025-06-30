@@ -5,7 +5,7 @@
       <h2><%= pluralize(@prodotto.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %>:</h2>
       <ul>
         <% @prodotto.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li><%= t_google(message) %></li>
         <% end %>
       </ul>
     </div>

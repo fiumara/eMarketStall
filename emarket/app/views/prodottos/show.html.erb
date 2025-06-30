@@ -21,9 +21,9 @@
              <%= t('comune.modifica') %>
           <% end %>
 
-          <%= link_to prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn-action btn-delete" do %>
-             <%= t('comune.elimina') %>
-          <% end %>
+          <%= button_to t('comune.elimina'), prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn-action btn-delete" %>
+             
+          
         </div>
       <% end %>
     </div>

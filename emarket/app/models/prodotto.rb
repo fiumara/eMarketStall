@@ -1,7 +1,8 @@
 class Prodotto < ApplicationRecord
   has_many_attached :immagini, dependent: :destroy
   belongs_to :negozio
-  belongs_to :categorium
+  belongs_to :categoria, class_name: 'Categorium', foreign_key: 'categorium_id'
+
 
   has_many :wishlist_items, dependent: :destroy
   has_many :wishlisted_by, through: :wishlist_items, source: :acquirente

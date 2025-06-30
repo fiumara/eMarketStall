@@ -1,7 +1,7 @@
 <%= form_with(model: @acquirente, local: true) do |form| %>
   <% if @acquirente.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@acquirente.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %></h2>
+      <h2><%= pluralize(@acquirente.errors.count, t("errors.messages.error")) %> <%= t("errors.messages.prevented_save") %>:</h2>
       <ul>
         <% @acquirente.errors.full_messages.each do |message| %>
           <li><%= t_google(message) %></li>
