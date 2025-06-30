@@ -2,91 +2,93 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+
+
 .login-body {
-    background: #f8f9fa;
-    font-family: 'Segoe UI', sans-serif;
-  }
-  
-  .login-container {
-    max-width: 400px;
-    margin: 60px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-title {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #343a40;
-  }
-  
-  .alert-message {
-    color: #dc3545;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .role-toggle {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .role-option {
-    display: none;
-  }
-  
-  .role-label {
-    padding: 12px 20px;
-    border: 2px solid #28a745;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 500;
-    color: #28a745;
-    background-color: #fff;
-    transition: all 0.3s ease;
-    flex: 1;
-    text-align: center;
-    margin: 0 5px;
-  }
-  
-  .role-option:checked + .role-label {
-    background-color: #28a745;
-    color: #fff;
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
-    border-color: #218838;
-  }
-  
-  .role-label:hover {
-    background-color: #e6f4ea;
-  }
-  
-  .extra-links {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .or-separator {
-    margin: 10px 0;
-    font-weight: 500;
-    color: #6c757d;
-  }
-  
-  .text-link {
-    display: inline-block;
-    margin-bottom: 8px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .text-link:hover {
-    text-decoration: underline;
-  }
-  
+  background: #f5ecd9;
+  font-family: 'Georgia', serif;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 60px auto;
+  background: #fffaf0;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(93, 58, 26, 0.1);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #5d3a1a;
+}
+
+.alert-message {
+  color: #c1443c;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.role-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.role-option {
+  display: none;
+}
+
+.role-label {
+  padding: 12px 20px;
+  border: 2px solid #a86e45;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #a86e45;
+  background-color: #fffaf0;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.role-option:checked + .role-label {
+  background-color: #a86e45;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(168, 110, 69, 0.5);
+  border-color: #b76e22;
+}
+
+.role-label:hover {
+  background-color: #f0e7d8;
+}
+
+.extra-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.or-separator {
+  margin: 10px 0;
+  font-weight: 500;
+  color: #7b6241;
+}
+
+.text-link {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #b76e22;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
