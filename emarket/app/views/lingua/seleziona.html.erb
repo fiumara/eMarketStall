@@ -1,4 +1,6 @@
-<p id="notice"><%= t_google(notice) %></p>
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
+<p><%= t_google(notice) %></p>
 <h2><%= t('lingua.scegli') %></h2>
 
 <%= form_with url: cambia_lingua_path, method: :post do %>

@@ -1,4 +1,4 @@
-<p id="notice"><%= t_google(notice) %></p>
+<p><%= t_google(notice) %></p>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= t('gest.titolo') %></title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-</head>
+  <%= stylesheet_link_tag 'app', media: 'all' %></head>
 <body>
   <section class="gestione-account-container">
     <h2 class="page-title"><%= t('gest.titolo') %></h2>

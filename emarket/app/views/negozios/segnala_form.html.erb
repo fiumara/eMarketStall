@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
 <h1><%= t('segn_n.titolo') =%> "<%= @negozio.nome_negozio %>"</h1>
 
 <%= form_with url: segnala_negozio_path(@negozio), method: :post, local: true do |form| %>

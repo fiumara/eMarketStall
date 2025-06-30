@@ -1,4 +1,6 @@
-<p id="notice"><%= t_google(notice) %></p>
+<%= stylesheet_link_tag 'app', media: 'all' %>
+
+<p><%= t_google(notice) %></p>
 <main class="main-wrapper">
   <div class="prodotto-content">
     <div class="prodotto-gallery">
@@ -21,9 +23,9 @@
              <%= t('comune.modifica') %>
           <% end %>
 
-          <%= link_to prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn-action btn-delete" do %>
-             <%= t('comune.elimina') %>
-          <% end %>
+          <%= button_to t('comune.elimina'), prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn-action btn-delete" %>
+             
+          
         </div>
       <% end %>
     </div>
