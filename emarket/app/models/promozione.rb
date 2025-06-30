@@ -3,6 +3,9 @@ class Promozione < ApplicationRecord
   belongs_to :prodotto, optional: true
   belongs_to :categorium, optional: true
 
+  validates :nome, :descrizione, :inizio, :fine, :sconto, :tipo, presence: true
+  validates :prodotto_id, presence: true, if: -> { tipo == 'singolo_prodotto' }
+  validates :categorium_id, presence: true, if: -> { tipo == 'categoria' }
   validates :created_by, presence: true
   validates :tipo, inclusion: { in: %w[singolo_prodotto intero_sito categoria] }
 
