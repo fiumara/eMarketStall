@@ -1,128 +1,116 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
 
- @import "bootstrap";
- @import "negozios";
- @import "custom";
+@import "bootstrap";
+@import "negozios";
+@import "custom";
 
+body {
+  background: linear-gradient(135deg, #f5ecd9 0%, #fffaf0 100%);
+  font-family: 'Georgia', serif;
+  color: #5d3a1a;
+}
 
- 
- body {
-   background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   color: #2c3e50;
- }
+/* HEADER */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #d7b899;
+  box-shadow: 0 4px 8px rgba(93, 58, 26, 0.1);
+}
 
- /* Header */
- .header-content {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 20px 40px;
-   background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- }
+.logo-home {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #5d3a1a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
- .logo-home {
-   font-size: 2rem;
-   font-weight: bold;
-   color: #fff;
-   text-decoration: none;
-   transition: color 0.3s ease;
- }
+.logo-img {
+  max-height: 70px;
+}
 
- .logo-home:hover {
-   color: #d4fc79;
- }
+.logo-home:hover {
+  color: #a86e45;
+}
 
- .hamburger-menu {
-   cursor: pointer;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   width: 35px;
-   height: 28px;
-   background: transparent;
-   border: none;
- }
+/* HAMBURGER MENU */
+.hamburger-menu {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35px;
+  height: 28px;
+  background: transparent;
+  border: none;
+}
 
- .hamburger-menu div {
-   width: 35px;
-   height: 4px;
-   background-color: #fff;
-   border-radius: 5px;
-   transition: all 0.3s ease;
- }
+.hamburger-menu div {
+  width: 35px;
+  height: 4px;
+  background-color: #5d3a1a;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
 
- /* Right Menu */
- .right-side-menu {
-   display: none;
-   position: fixed;
-   top: 0;
-   right: 0;
-   width: 280px;
-   height: 100%;
-   background: linear-gradient(180deg, #c2e9fb, #e0c3fc);
-   z-index: 1050;
-   padding: 40px 25px;
-   box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
-   overflow-y: auto;
- }
+/* RIGHT SIDE MENU */
+.right-side-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100%;
+  background: linear-gradient(180deg, #ecd9c6, #f5ecd9);
+  z-index: 1050;
+  padding: 40px 25px;
+  box-shadow: -4px 0 12px rgba(93, 58, 26, 0.2);
+  overflow-y: auto;
+}
 
- .right-side-menu a {
-   display: block;
-   margin: 18px 0;
-   font-size: 1.1rem;
-   color: #2c3e50;
-   text-decoration: none;
-   font-weight: 500;
-   transition: all 0.3s ease;
- }
+.right-side-menu a {
+  display: block;
+  margin: 18px 0;
+  font-size: 1.1rem;
+  color: #5d3a1a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
 
- .right-side-menu a:hover {
-   color: #6a11cb;
-   transform: translateX(5px);
- }
+.right-side-menu a:hover {
+  color: #b76e22;
+  transform: translateX(5px);
+}
 
- .right-side-menu .btn-danger {
-   background-color: #ff6f61;
-   border: none;
-   margin-top: 30px;
- }
+.right-side-menu .btn-danger {
+  background-color: #b76e22;
+  border: none;
+  margin-top: 30px;
+}
 
- .right-side-menu .btn-danger:hover {
-   background-color: #ff4b2b;
- }
+.right-side-menu .btn-danger:hover {
+  background-color: #a0522d;
+}
 
- .close-btn {
-   position: absolute;
-   top: 15px;
-   left: 20px;
-   font-size: 2rem;
-   cursor: pointer;
-   color: #333;
- }
+.close-btn {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #5d3a1a;
+}
 
- /* Main Content */
- main.container {
-   padding-top: 50px;
-   animation: fadeIn 0.6s ease-in-out;
- }
+/* MAIN CONTENT */
+main.container {
+  padding-top: 50px;
+  animation: fadeIn 0.6s ease-in-out;
+}
 
- /* Fa sembrare il button_to come un link nel menu laterale */
+/* BUTTON_TO STYLE */
 .menu-link-button {
   background: none;
   border: none;
@@ -135,7 +123,7 @@
 .menu-link-button button {
   background: none;
   border: none;
-  color: #2c3e50;
+  color: #5d3a1a;
   font-size: 1.1rem;
   font-weight: 500;
   text-decoration: none;
@@ -145,19 +133,19 @@
 }
 
 .menu-link-button button:hover {
-  color: #6a11cb;
+  color: #a86e45;
   transform: translateX(5px);
   cursor: pointer;
 }
 
-
- @keyframes fadeIn {
-   from {
-     opacity: 0;
-     transform: translateY(15px);
-   }
-   to {
-     opacity: 1;
-     transform: translateY(0);
-   }
- }
+/* FADE IN */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
