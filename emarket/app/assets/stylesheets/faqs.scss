@@ -1,50 +1,59 @@
 // Place all the styles related to the Faqs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
 h1.text-center.my-4 {
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #6f42c1; // viola intenso
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#faqAccordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion-item {
+  border: 1px solid #e0d4c1; // bordo sabbia chiaro
+  border-radius: 14px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  background-color: #fffaf4; // sfondo caldo
+}
+
+.accordion-button {
+  background-color: #fdf5ec; // sfondo beige chiaro
+  font-weight: 600;
+  color: #a86e45; // terra
+  border-radius: 0;
+  padding: 1.1rem 1.5rem;
+  font-size: 1.05rem;
+  transition: background 0.3s ease;
+
+  &:focus {
+    box-shadow: none;
   }
-  
-  #faqAccordion {
-    max-width: 800px;
-    margin: 0 auto;
+
+  &:hover {
+    background-color: #f5e9dc;
   }
-  
-  .accordion-item {
-    border: 1px solid #dee2e6;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-  }
-  
-  .accordion-button {
-    background-color: #f8f9fa;
-    font-weight: 500;
-    color: #34495e;
-    border-radius: 0;
-    padding: 1rem 1.25rem;
-  
-    &:focus {
-      box-shadow: none;
-    }
-  }
-  
-  .accordion-button::after {
-    transition: transform 0.2s ease;
-  }
-  
-  .accordion-button:not(.collapsed)::after {
-    transform: rotate(90deg);
-  }
-  
-  .accordion-body {
-    background-color: #ffffff;
-    border-top: 1px solid #dee2e6;
-    color: #555;
-    padding: 1rem 1.25rem;
-    line-height: 1.6;
-  }
-  
+}
+
+.accordion-button::after {
+  transition: transform 0.2s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(90deg);
+}
+
+.accordion-body {
+  background-color: #fff;
+  border-top: 1px solid #e0d4c1;
+  color: #555;
+  padding: 1.2rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}

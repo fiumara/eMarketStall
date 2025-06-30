@@ -226,8 +226,8 @@ Prodotto.create!([
     categorium_id: Categorium.find_by(nome: 'Abbigliamento').id
   },
   {
-    nome_prodotto: "sedia",
-    descrizione: "sedia in vimini ",
+    nome_prodotto: "sgabello",
+    descrizione: "sgabello in vimini ",
     prezzo: 24.90,
     quantita_disponibile: 30,
     negozio_id: 2,

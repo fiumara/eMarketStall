@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background-color: #fffaf4;
 }
 
 .prodotto-content {
@@ -29,15 +30,15 @@
   max-height: 400px;
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .empty-image-placeholder {
   padding: 4rem;
   text-align: center;
-  background: #f4f4f4;
-  color: #999;
-  border-radius: 8px;
+  background: #fdf5ec;
+  color: #bfbfbf;
+  border-radius: 12px;
 }
 
 .carousel-controls {
@@ -50,7 +51,11 @@
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: #444;
+  color: #6f42c1;
+
+  &:hover {
+    color: #5a359e;
+  }
 }
 
 .image-actions {
@@ -60,27 +65,47 @@
 }
 
 .prodotto-descrizione {
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .prezzo {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #a86e45; // terra
 }
 
 .prezzo-originale {
-  color: #888;
+  color: #bfbfbf;
   margin-right: 0.5rem;
+  text-decoration: line-through;
 }
 
 .prezzo-scontato {
-  color: #c00;
+  color: #e53935;
   font-weight: bold;
 }
 
 .full-width {
   width: 100%;
   margin-top: 1rem;
+
+  button {
+    background-color: #6f42c1;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #5a359e;
+    }
+  }
 }
 
 .heart-button {
@@ -88,27 +113,28 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #e00;
+  color: #e53935;
   transition: transform 0.2s;
-}
 
-.heart-button:hover {
-  transform: scale(1.2);
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .recensioni {
-  border-top: 1px solid #ddd;
+  border-top: 2px solid #d3b58f;
   padding-top: 2rem;
 }
 
 .feedback {
-  background: #fafafa;
+  background: #fdf9f2;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 1rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
 .feedback-voto {
-  color: #f5a623;
+  color: #f5a623; // stella oro
   font-size: 1.2rem;
 }

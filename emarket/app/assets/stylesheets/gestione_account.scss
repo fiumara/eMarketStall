@@ -1,112 +1,139 @@
 // Place all the styles related to the Gestione_account controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-
 .gestione-account-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #fefefe;
-    border-radius: 8px;
-  
-    .page-title {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: #222;
-      text-align: center;
-    }
-  
-    .filtro-form {
-      .filtro-row {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fffaf4; // beige chiaro
+  border-radius: 12px;
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #6f42c1; // viola
+    text-align: center;
+  }
+
+  .filtro-form {
+    .filtro-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+      margin-bottom: 2rem;
+
+      .form-group {
         display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        align-items: flex-end;
-        margin-bottom: 2rem;
-  
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 250px;
-        }
-  
-        .form-control {
-          padding: 0.6rem;
+        flex-direction: column;
+        flex: 1 1 250px;
+      }
+
+      .form-control {
+        padding: 0.6rem;
+        font-size: 1rem;
+        border: 1px solid #d3b58f; // bordo sabbia
+        border-radius: 8px;
+        background-color: #fdf5ec;
+      }
+
+      .submit-group {
+        flex: 0 0 auto;
+
+        .btn-primary {
+          padding: 0.65rem 1.2rem;
+          font-weight: bold;
           font-size: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 6px;
-        }
-  
-        .submit-group {
-          flex: 0 0 auto;
-  
-          .btn-primary {
-            padding: 0.65rem 1.2rem;
-            font-weight: bold;
-            font-size: 1rem;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-  
-            &:hover {
-              background-color: #0056b3;
-            }
+          background-color: #6f42c1; // viola
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.2s ease-in-out;
+
+          &:hover {
+            background-color: #5a359e;
           }
         }
       }
     }
-  
-    .account-box {
-      border: 1px solid #ddd;
-      border-left: 4px solid #007bff;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
+  }
+
+  .account-box {
+    border: 1px solid #e0d4c1; // bordo beige
+    border-left: 5px solid #6f42c1; // accento viola
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #fefcf7; // beige molto chiaro
+
+    .info {
+      flex: 1;
+    }
+
+    .azioni {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      background-color: #f9f9f9;
-  
-      .info {
-        flex: 1;
-      }
-  
-      .azioni {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-  
-        .btn {
-          padding: 0.5rem 1rem;
-          border: none;
-          border-radius: 4px;
-          color: #fff;
-          cursor: pointer;
-          font-size: 0.9rem;
-          text-align: center;
-  
-          &.btn-danger { background-color: #dc3545; }
-          &.btn-unblock { background-color: #28a745; }
-          &.btn-block { background-color: #ff9800; }
-          &.btn-secondary { background-color: #6c757d; }
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0.9rem;
+        text-align: center;
+        font-weight: 500;
+
+        &.btn-danger {
+          background-color: #e53935;
+
+          &:hover {
+            background-color: #c62828;
+          }
+        }
+
+        &.btn-unblock {
+          background-color: #4caf50;
+
+          &:hover {
+            background-color: #388e3c;
+          }
+        }
+
+        &.btn-block {
+          background-color: #ff9800;
+
+          &:hover {
+            background-color: #e68900;
+          }
+        }
+
+        &.btn-secondary {
+          background-color: #6c757d;
+
+          &:hover {
+            background-color: #5a6268;
+          }
         }
       }
     }
-  
-    .empty-result {
-      text-align: center;
-      font-style: italic;
-      color: #666;
-      margin-top: 1rem;
-    }
-  
-    .subsection-title {
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      color: #333;
-    }
   }
-  
+
+  .empty-result {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    margin-top: 1rem;
+  }
+
+  .subsection-title {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: #a86e45; // terra
+  }
+}
