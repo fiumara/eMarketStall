@@ -8,53 +8,61 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'app', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body class="login-body">
 
-  <main class="login-container">
-    <h2 class="login-title"><%= t('sessions.login') %></h2>
-  
-    <% if flash[:alert] %>
-      <p class="alert-message"><%= t_google(flash[:alert]) %></p>
-    <% end %>
+<main class="login-container container py-5">
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card p-4 shadow-sm">
 
-    <%= form_with url: login_path, local: true, class: "login-form" do |form| %>
+      <h2 class="text-center mb-4 login-title"><%= t('sessions.login') %></h2>
 
-      <div class="form-group">
-        <label for="role"><%= t('sessions.role') %></label>
-        <div class="role-toggle">
-          <%= form.radio_button :role, 'acquirente', id: 'role_acquirente', class: "role-option" %>
-          <label for="role_acquirente" class="role-label"><%= t('comune.acquirente') %></label>
+      <% if flash[:alert] %>
+        <p class="alert-message text-danger text-center"><%= t_google(flash[:alert]) %></p>
+      <% end %>
 
-          <%= form.radio_button :role, 'amministratore', id: 'role_amministratore', class: "role-option" %>
-          <label for="role_amministratore" class="role-label"><%= t('comune.amministratore') %></label>
+      <%= form_with url: login_path, local: true, class: "login-form" do |form| %>
+        <div class="mb-3">
+          <label for="role"><%= t('sessions.role') %></label>
+          <div class="d-flex justify-content-between gap-2">
+            <div class="form-check">
+              <%= form.radio_button :role, 'acquirente', id: 'role_acquirente', class: "form-check-input" %>
+              <%= form.label :role_acquirente, t('comune.acquirente'), class: "form-check-label" %>
+            </div>
+            <div class="form-check">
+              <%= form.radio_button :role, 'amministratore', id: 'role_amministratore', class: "form-check-input" %>
+              <%= form.label :role_amministratore, t('comune.amministratore'), class: "form-check-label" %>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= form.label :email, t('sessions.email') %>
-        <%= form.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-      </div>
-    
-      <div class="form-group">
-        <%= form.label :password, t('sessions.password') %>
-        <%= form.password_field :password, autocomplete: "current-password", class: "form-control" %>
-      </div>
-    
-      <div class="form-group">
-        <%= form.submit t('sessions.login'), class: "btn btn-success w-100" %>
-      </div>
-    <% end %>
+        <div class="mb-3">
+          <%= form.label :email, t('sessions.email') %>
+          <%= form.text_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
 
-    <div class="extra-links">
-      <%= link_to t('sessions.forgot_password'), new_password_reset_path, class: "text-link" %>
-      <p class="or-separator"><%= t('sessions.or') %></p>
-      <%= link_to t('sessions.login_google'), '/auth/google_oauth2', class: "btn btn-outline-primary w-100" %>
-      <%= link_to t('comune.iscriviti'), signup_path, class: "btn btn-secondary w-100 mt-2" %>
+        <div class="mb-3">
+          <%= form.label :password, t('sessions.password') %>
+          <%= form.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <%= form.submit t('sessions.login'), class: "btn btn-success w-100 mb-2" %>
+      <% end %>
+
+      <div class="text-center">
+        <%= link_to t('sessions.forgot_password'), new_password_reset_path, class: "text-link d-block my-2" %>
+        <p class="or-separator my-2"><%= t('sessions.or') %></p>
+        <%= link_to t('sessions.login_google'), '/auth/google_oauth2', class: "btn btn-outline-primary w-100 mb-2" %>
+        <%= link_to t('comune.iscriviti'), signup_path, class: "btn btn-secondary w-100" %>
+      </div>
     </div>
-  </main>
+  </div>
+</div>
+</main>
+
 
 </body>
 </html>

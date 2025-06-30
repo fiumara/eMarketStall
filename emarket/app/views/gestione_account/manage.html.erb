@@ -1,4 +1,3 @@
-<p><%= t_google(notice) %></p>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -6,51 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= t('gest.titolo') %></title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'app', media: 'all' %></head>
+  <%= stylesheet_link_tag 'app', media: 'all' %>
+</head>
+
 <body>
   <section class="gestione-account-container">
     <h2 class="page-title"><%= t('gest.titolo') %></h2>
 
-    <%= form_with url: gestione_account_path, method: :get, local: true, class: "filtro-form" do %>
-      <div class="filtro-row">
-        <div class="form-group">
-          <label for="user_type"><%= t('gest.tipo') %></label>
-          <%= select_tag :user_type, options_for_select([
-            [t('gest.tutti'), 'all'],
-            [t('gest.acquirenti'), 'acquirente'],
-            [t('gest.venditori'), 'venditore'],
-            [t('gest.segnalati'), 'segnalati']
-          ], selected: params[:user_type]), class: "form-control" %>
-        </div>
+    <%= form_with url: gestione_account_path, method: :get, local: true, class: "filtro-form d-flex gap-3 align-items-end flex-wrap" do %>
+      <div class="form-group">
+        <label for="user_type"><%= t('gest.tipo') %></label>
+        <%= select_tag :user_type, options_for_select([
+          [t('gest.tutti'), 'all'],
+          [t('gest.acquirenti'), 'acquirente'],
+          [t('gest.venditori'), 'venditore'],
+          [t('gest.segnalati'), 'segnalati']
+        ], selected: params[:user_type]), class: "form-control" %>
+      </div>
 
-        <div class="form-group">
-          <label for="search"><%= t('comune.cerca') %></label>
-          <%= text_field_tag :search, params[:search], placeholder: t('gest.cerca_nome'), class: "form-control" %>
-        </div>
+      <div class="form-group">
+        <label for="search"><%= t('comune.cerca') %></label>
+        <%= text_field_tag :search, params[:search], placeholder: t('gest.cerca_nome'), class: "form-control" %>
+      </div>
 
-        <div class="form-group submit-group">
-          <label>&nbsp;</label>
-          <%= submit_tag t('comune.cerca'), class: "btn btn-primary" %>
-        </div>
+      <div class="form-group">
+        <label>&nbsp;</label>
+        <%= submit_tag t('comune.cerca'), class: "btn btn-primary w-100" %>
       </div>
     <% end %>
 
-    <% if @acquirente.empty? %>
-      <p class="empty-result"><%= t('gest.no_utente') %></p>
+    <% if @acquirente.empty? && params[:user_type] != "segnalati" %>
+      <p class="empty-result mt-4"><%= t('gest.no_utente') %></p>
     <% end %>
 
     <% if params[:user_type] == "segnalati" %>
-      <h3 class="subsection-title"><%= t('gest.segn') %></h3>
+      <h3 class="subsection-title mt-4"><%= t('gest.segn') %></h3>
       <% if @segnalazioni.any? %>
         <% @segnalazioni.each do |segnalazione| %>
-          <div class="account-box">
+          <div class="account-box d-flex justify-content-between align-items-start">
             <div class="info">
               <p><strong><%= t('comune.negozio') %>:</strong> <%= link_to segnalazione.negozio.nome_negozio, visualizza_negozio_path(segnalazione.negozio) %></p>
               <p><strong><%= t('comune.motivo') %>:</strong> <%= t_google(segnalazione.motivo.humanize) %></p>
               <p><strong><%= t('comune.nota') %>:</strong> <%= t_google(segnalazione.note.presence) || "Nessuna" %></p>
               <p><strong><%= t('gest.inviata') %>:</strong> <%= segnalazione.acquirente.nome_utente %></p>
             </div>
-            <div class="azioni">
+            <div class="azioni d-flex flex-column gap-2">
               <% if segnalazione.negozio.acquirente.bloccato? %>
                 <%= button_to t('gest.sblocca'), sblocca_gestione_account_path(segnalazione.negozio.acquirente), method: :patch, class: "btn btn-unblock" %>
               <% else %>
@@ -62,12 +61,12 @@
           </div>
         <% end %>
       <% else %>
-        <p class="empty-result"><%= t('gest.no_segn') %></p>
+        <p class="empty-result mt-3"><%= t('gest.no_segn') %></p>
       <% end %>
     <% end %>
 
     <% @acquirente.each do |acquirente| %>
-      <div class="account-box">
+      <div class="account-box d-flex justify-content-between align-items-start">
         <div class="info">
           <h3><%= acquirente.nome_utente %></h3>
           <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
@@ -75,7 +74,7 @@
             <p><%= t('comune.negozio') %>: <%= acquirente.negozio.nome_negozio %></p>
           <% end %>
         </div>
-        <div class="azioni">
+        <div class="azioni d-flex flex-column gap-2">
           <% if acquirente.bloccato? %>
             <%= button_to t('gest.sblocca'), sblocca_gestione_account_path(acquirente), method: :patch, class: "btn btn-unblock" %>
           <% else %>

@@ -1,47 +1,47 @@
 <%= stylesheet_link_tag 'app', media: 'all' %>
-
 <p id="notice"><%= t_google(notice) %></p>
-<body>
-  <div class="promo-container">
-    <h1 class="promo-header"><%= t('promo.admin') %></h1>
 
-    <table class="promo-table">
-      <thead>
+<main class="promo-container">
+  <h1 class="promo-header"><%= t('promo.admin') %></h1>
+
+  <table class="promo-table">
+    <thead>
+      <tr>
+        <th><%= t('comune.nome') %></th>
+        <th><%= t('promo.sconto') %></th>
+        <th><%= t('promo.periodo') %></th>
+        <th><%= t('promo.appl') %></th>
+        <th><%= t('comune.azioni') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @promoziones.each do |promozione| %>
         <tr>
-          <th><%= t('comune.nome') %></th>
-          <th><%= t('promo.sconto') %></th>
-          <th><%= t('promo.periodo') %></th>
-          <th><%= t('promo.appl') %></th>
-          <th><%= t('comune.azioni') %></th>
+          <td>
+            <strong><%= t_google(promozione.nome) %></strong><br>
+            <small><%= t_google(promozione.descrizione) %></small>
+          </td>
+          <td><%= number_to_percentage(promozione.sconto, precision: 2) %></td>
+          <td><%= promozione.inizio.strftime("%d %b %Y") %> - <%= promozione.fine.strftime("%d %b %Y") %></td>
+          <td>
+            <% if promozione.prodotto.present? %>
+              <%= t('comune.prodotto') %>: <%= t_google(promozione.prodotto.nome_prodotto) %>
+            <% elsif promozione.categorium.present? %>
+              <%= t('promo.cat') %>: <%= t_google(promozione.categorium.nome) %>
+            <% else %>
+              <%= t('promo.tutto') %>
+            <% end %>
+          </td>
+          <td class="promo-actions">
+            <%= link_to t('comune.modifica'), edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
+            <%= button_to t('comune.elimina'), promozione, method: :delete, data: { confirm: t('comune.conferma'), turbo: false }, class: 'btn-action btn-delete' %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @promoziones.each do |promozione| %>
-          <tr>
-            <td>
-              <strong><%= t_google(promozione.nome) %></strong><br>
-              <small><%= t_google(promozione.descrizione) %></small>
-            </td>
-            <td><%= number_to_percentage(promozione.sconto, precision: 2) %></td>
-            <td><%= promozione.inizio.strftime("%d %b %Y") %> - <%= promozione.fine.strftime("%d %b %Y") %></td>
-            <td>
-              <% if promozione.prodotto.present? %>
-                <%= t('comune.prodotto') %>: <%= t_google(promozione.prodotto.nome_prodotto) %>
-              <% elsif promozione.categorium.present? %>
-                <%= t('promo.cat') %>: <%= t_google(promozione.categorium.nome) %>
-              <% else %>
-                <%= t('promo.tutto') %>
-              <% end %>
-            </td>
-            <td class="promo-actions">
-              <%= link_to t('comune.modifica'), edit_promozione_path(promozione), class: 'btn-action btn-edit' %>
-              <%= button_to t('comune.elimina'), promozione, method: :delete, data: { turbo: false, confirm: t('comune.conferma') }, class: 'btn-action btn-delete' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 
-    <%= link_to t('promo.aggiungi'), new_promozione_path, class: 'add-promo-btn' %>
+  <div class="promo-footer">
+    <%= link_to t('promo.aggiungi'), new_promozione_path, class: 'btn-action btn-add' %>
   </div>
-</body>
+</main>

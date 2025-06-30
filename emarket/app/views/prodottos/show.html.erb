@@ -1,74 +1,72 @@
 <%= stylesheet_link_tag 'app', media: 'all' %>
 
 <p><%= t_google(notice) %></p>
-<main class="main-wrapper">
-  <div class="prodotto-content">
-    <div class="prodotto-gallery">
-      <h1><%= t_google(@prodotto.nome_prodotto) %></h1>     
+<main class="main-wrapper container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card prodotto-card p-4 shadow-sm mb-4">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h1 class="mb-3"><%= t_google(@prodotto.nome_prodotto) %></h1>
 
-      <% if @prodotto.immagini.attached? %>
-        <%= image_tag url_for(@prodotto.immagini.first), class: "main-image" %>
-      <% else %>
-        <div class="empty-image-placeholder"><%= t('prodotto.no_imm') %></div>
-      <% end %>
+            <% if @prodotto.immagini.attached? %>
+              <%= image_tag url_for(@prodotto.immagini.first), class: "main-image img-fluid rounded" %>
+            <% else %>
+              <div class="empty-image-placeholder"><%= t('prodotto.no_imm') %></div>
+            <% end %>
 
-      <div class="carousel-controls">
-        <button id="prevBtn">‹</button>
-        <button id="nextBtn">›</button>
+            <div class="carousel-controls mt-2 text-center">
+              <button id="prevBtn" class="btn btn-outline-secondary">‹</button>
+              <button id="nextBtn" class="btn btn-outline-secondary">›</button>
+            </div>
+
+            <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
+              <div class="d-flex gap-2 mt-3">
+                <%= link_to t('comune.modifica'), edit_prodotto_path(@prodotto), class: 'btn btn-warning me-2' %>
+                <%= button_to t('comune.elimina'), prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn btn-danger w-100" %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="col-md-6">
+            <p><strong><%= t('prodotto.descrizione') %>:</strong><br><%= t_google(@prodotto.descrizione) %></p>
+
+            <p><strong><%= t('comune.prezzo') %>:</strong> <%= number_to_currency(@prodotto.prezzo) %></p>
+            <% if @prezzo_scontato && @prezzo_scontato < @prodotto.prezzo %>
+              <p><del><%= number_to_currency(@prodotto.prezzo) %></del> <strong><%= number_to_currency(@prezzo_scontato) %></strong></p>
+            <% end %>
+
+            <%= link_to t('prodotto.negozio'), visualizza_negozio_path(@prodotto.negozio), class: 'btn btn-outline-primary my-3' %>
+
+            <% if unauthenticated_user? || session[:role] == 'acquirente' %>
+              <%= form_with url: carrello_items_path, method: :post, class: "mb-3" do %>
+                <%= hidden_field_tag :prodotto_id, @prodotto.id %>
+                <label class="form-label"><%= t('comune.quantita') %></label>
+                <%= number_field_tag :quantity, 1, min: 1, max: @prodotto.quantita_disponibile, class: "form-control mb-2" %>
+                <%= submit_tag t('prodotto.agg'), class: "btn btn-success w-100" %>
+                <%= hidden_field_tag :redirect_back, request.original_url %>
+              <% end %>
+
+              <%= form_with url: add_to_wishlist_path(@prodotto), method: :post, class: "text-center" do %>
+                <%= hidden_field_tag :redirect_back, request.original_url %>
+                <%= submit_tag '❤', class: 'btn btn-outline-danger rounded-circle px-3 py-1' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
 
-      <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
-        <div class="image-actions">
-          <%= link_to edit_prodotto_path(@prodotto), class: "btn-action btn-edit" do %>
-             <%= t('comune.modifica') %>
-          <% end %>
-
-          <%= button_to t('comune.elimina'), prodotto_path(@prodotto), method: :delete, data: { confirm: "Sei sicuro?" }, class: "btn-action btn-delete" %>
-             
-          
-        </div>
-      <% end %>
-    </div>
-
-    <div class="prodotto-details">
-      <p><strong><%= t('prodotto.descrizione') %></strong><br><%= t_google(@prodotto.descrizione) %></p>
-      <%= link_to t('prodotto.negozio'), visualizza_negozio_path(@prodotto.negozio), class: 'store-button' %>
-
-      <p><strong><%= t('comune.prezzo') %>:</strong> <%= number_to_currency(@prodotto.prezzo) %></p>
-      <% if @prezzo_scontato && @prezzo_scontato < @prodotto.prezzo %>
-        <p><del><%= number_to_currency(@prodotto.prezzo) %></del> <strong><%= number_to_currency(@prezzo_scontato) %></strong></p>
-      <% end %>
-
-      
-
-      <% if unauthenticated_user? || session[:role] == 'acquirente' %>
-
-      <%= form_with url: carrello_items_path, method: :post do %>
-        <%= hidden_field_tag :prodotto_id, @prodotto.id %>
-        <label><%= t('comune.quantita') %></label>
-        <%= number_field_tag :quantity, 1, min: 1, max: @prodotto.quantita_disponibile, class: "input-select" %>
-        <%= submit_tag t('prodotto.agg'), class: "btn-black full-width" %>
-        <%= hidden_field_tag :redirect_back, request.original_url %>
-      <% end %>
-
-        <div class="wishlist-button">
-          <%= form_with url: add_to_wishlist_path(@prodotto), method: :post do %>
-            <%= hidden_field_tag :redirect_back, request.original_url %>
-            <%= submit_tag '❤', class: 'heart-button', id: 'wishlist-button' %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="recensioni">
-    <h3><%= t('prodotto.recensioni') %></h3>
-    <% @feedbacks.each do |feedback| %>
-      <div class="feedback">
-        <p><strong><%= feedback.acquirente.nome_completo %></strong></p>
-        <p><%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %></p>
-        <p><%= t_google(feedback.nota) %></p>
+      <div class="card recensioni-card p-4 shadow-sm">
+        <h3 class="mb-3"><%= t('prodotto.recensioni') %></h3>
+        <% @feedbacks.each do |feedback| %>
+          <div class="feedback mb-3 p-3 rounded" style="background-color:#fffaf0;">
+            <p class="mb-1"><strong><%= feedback.acquirente.nome_completo %></strong></p>
+            <p class="text-warning mb-1"><%= '★' * feedback.voto + '☆' * (5 - feedback.voto) %></p>
+            <p class="text-muted"><%= t_google(feedback.nota) %></p>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </main>
+

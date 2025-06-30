@@ -68,3 +68,227 @@ a {
 a:hover {
   color: #a86e45;
 }
+
+
+// LOGIN PAGE STYLES
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  color: #5d3a1a;
+  font-family: 'Georgia', serif;
+}
+
+.login-form {
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #d7b899;
+    background-color: #fffaf0;
+  }
+
+  .form-control:focus {
+    border-color: #b76e22;
+    box-shadow: 0 0 0 0.2rem rgba(183, 110, 34, 0.25);
+  }
+}
+
+.alert-message {
+  font-size: 0.9rem;
+  color: #a94442;
+  background-color: #f9e2e2;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.text-link {
+  color: #5d3a1a;
+  text-decoration: underline;
+}
+
+.text-link:hover {
+  color: #a86e45;
+}
+
+.or-separator {
+  font-size: 0.85rem;
+  color: #b76e22;
+}
+
+.prodotto-card {
+  background-color: #fffaf0;
+  border-radius: 16px;
+  border: none;
+}
+
+.main-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(93, 58, 26, 0.1);
+}
+
+.carousel-controls button {
+  font-size: 1.5rem;
+  margin: 0 10px;
+  padding: 0.25rem 0.75rem;
+  border: none;
+  background: none;
+  color: #5d3a1a;
+}
+
+.carousel-controls button:hover {
+  color: #a86e45;
+  cursor: pointer;
+}
+
+.recensioni-card {
+  background-color: #fffaf0;
+  margin-top: 3rem;
+  border-radius: 16px;
+  border: none;
+}
+
+.feedback {
+  border-left: 4px solid #d7b899;
+}
+
+.heart-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #b76e22;
+}
+
+.heart-button:hover {
+  color: #a0522d;
+}
+
+
+.promo-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+.promo-header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.promo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.promo-table th, .promo-table td {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: left;
+}
+
+.promo-table thead {
+  background-color: #f0f0f0;
+}
+
+.promo-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #ec971f;
+}
+
+.btn-delete {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c9302c;
+}
+
+.btn-add {
+  background-color: #5cb85c;
+  color: white;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+.btn-add:hover {
+  background-color: #4cae4c;
+}
+
+.promo-footer {
+  text-align: center;
+}
+
+.gestione-account-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.filtro-form {
+  margin-bottom: 2rem;
+}
+
+.account-box {
+  border: 1px solid #ccc;
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  background-color: #f9f9f9;
+}
+
+.account-box .info {
+  max-width: 65%;
+}
+
+.account-box .azioni {
+  min-width: 150px;
+  text-align: right;
+}
+
+.btn-unblock {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-block {
+  background-color: #f44336;
+  color: white;
+}
+
