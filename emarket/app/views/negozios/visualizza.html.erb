@@ -56,12 +56,13 @@
       <h2><%= t('negozio.prodotti') =%></h2>
       <% if @negozio&.prodottos.present? %>
         <div class="prodotti-grid">
-          <% @negozio.prodottos.each do |prodotto| %>
-            <div class="card prodotto-card">
-              <p class="prodotto-nome"><%= t_google(prodotto.nome_prodotto) %></p>
-              <p class="prodotto-descrizione"><%= t_google(prodotto.descrizione) %></p>
-            </div>
+        <% @negozio.prodottos.each do |prodotto| %>
+          <%= link_to prodotto_path(prodotto), class: "card prodotto-card text-decoration-none text-dark" do %>
+            <p class="prodotto-nome"><%= t_google(prodotto.nome_prodotto) %></p>
+            <p class="prodotto-descrizione"><%= t_google(prodotto.descrizione) %></p>
           <% end %>
+        <% end %>
+        
         </div>
       <% else %>
         <p><%= t('negozio.no_prodotti') =%></p>

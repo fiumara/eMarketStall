@@ -26,6 +26,7 @@ class AcquirentesController < ApplicationController
   # POST /acquirentes or /acquirentes.json
   def create
     @acquirente = Acquirente.new(acquirente_params)
+    @is_new = true
     if @acquirente.save
       messaggio = "Acquirente registrato con successo. Per favore, effettuare l\'accesso."
       messaggio_tradotto = TranslationService.translate(messaggio, session[:lingua] || "it")
