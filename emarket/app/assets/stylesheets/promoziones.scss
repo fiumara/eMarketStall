@@ -1,107 +1,104 @@
-// Place all the styles related to the Promoziones controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
 .promo-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fffdf8; // bianco caldo
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(80, 67, 56, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  color: #5b4a3f;
+}
+
+.promo-header {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #5b4a3f; // marrone scuro
+  font-weight: bold;
+  text-align: center;
+}
+
+.promo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+
+  thead {
+    background-color: #f0eae2; // beige sabbia chiaro
+
+    th {
+      padding: 14px;
+      text-align: left;
+      font-weight: 600;
+      color: #4e443b; // marrone leggero
+    }
   }
-  
-  .promo-header {
-    font-size: 26px;
-    margin-bottom: 20px;
-    color: #0f0516; // viola moderno
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .promo-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-  
-    thead {
-      background-color: #f0f0f0;
-  
-      th {
-        padding: 14px;
-        text-align: left;
-        font-weight: 600;
-        color: #333;
+
+  tbody {
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #e0dcd5;
+      vertical-align: top;
+
+      small {
+        color: #7c6f66; // grigio caldo
+        font-size: 13px;
       }
     }
-  
-    tbody {
-      td {
-        padding: 14px;
-        border-bottom: 1px solid #e0e0e0;
-        vertical-align: top;
-  
-        small {
-          color: #777;
-          font-size: 13px;
-        }
-      }
-  
-      tr:hover {
-        background-color: #f9f9f9;
-      }
+
+    tr:hover {
+      background-color: #f9f7f1;
     }
   }
-  
-  .promo-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+}
+
+.promo-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.btn-edit {
+  background-color: #4caf50; // verde naturale
+  color: white;
+
+  &:hover {
+    background-color: #3e8e41;
   }
-  
-  .btn-action {
-    padding: 8px 14px;
-    font-size: 14px;
-    border-radius: 8px;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    font-weight: 500;
-    display: inline-block;
+}
+
+.btn-delete {
+  background-color: #d36c50; // rosso terracotta
+  color: white;
+
+  &:hover {
+    background-color: #bb4f35;
   }
-  
-  .btn-edit {
-    background-color: #4caf50; // verde
-    color: white;
-  
-    &:hover {
-      background-color: #388e3c;
-    }
+}
+
+.add-promo-btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 12px 20px;
+  background-color: #4caf50; // verde naturale
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #3e8e41;
   }
-  
-  .btn-delete {
-    background-color: #e53935; // rosso acceso
-    color: white;
-  
-    &:hover {
-      background-color: #c62828;
-    }
-  }
-  
-  .add-promo-btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 20px;
-    background-color: #0dad30; // viola
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background 0.2s ease;
-  
-    &:hover {
-      background-color: #00a053;
-    }
-  }
-  
+}
