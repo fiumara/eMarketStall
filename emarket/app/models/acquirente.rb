@@ -32,7 +32,7 @@ class Acquirente < ApplicationRecord
   has_many :ordini, class_name: "Ordine", dependent: :destroy
 
   # Validazioni
-  validates :nome, :cognome, :nome_utente, :telefono, presence: true
+
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, on: :create

@@ -8,16 +8,22 @@ RSpec.describe "CarrelloItems", type: :request do
           email: "test@example.com",
           password: "password123"
         )
-        @negozio = @acquirente.create_negozio!(nome_negozio: "Il Mio Negozio")
+        @negozio = @acquirente.create_negozio!(
+          nome_negozio: "Il Mio Negozio",
+          telefono: "1234567890" # ✅ aggiunto campo obbligatorio
+        )
+
       
         @categoria = Categorium.create!(nome: "Accessori") # ✅ aggiunta categoria
       
         @prodotto = @negozio.prodottos.create!(
-          nome_prodotto: "Borsa artigianale",
-          prezzo: 50,
-          quantita_disponibile: 10,
-          categorium: @categoria # ✅ associata categoria
-        )
+  nome_prodotto: "Borsa artigianale",
+  prezzo: 50,
+  quantita_disponibile: 10,
+  descrizione: "In vera pelle",
+  categorium_id: @categoria.id
+)
+
       
         stub_request(:get, /translation.googleapis.com/).to_return(
           body: '{"data":{"translations":[{"translatedText":"Borsa artigianale aggiunto al carrello!"}]}}',
