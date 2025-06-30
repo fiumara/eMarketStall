@@ -16,7 +16,7 @@ class AuthController < ApplicationController
       return
     end
 
-    # Ottieni il token di accesso
+    # token di accesso
     token_response = fetch_access_token(code)
     access_token = token_response['access_token']
 
@@ -25,7 +25,7 @@ class AuthController < ApplicationController
       return
     end
 
-    # Ottieni i dati dell'utente
+    #  dati dell'utente
     user_info = fetch_user_info(access_token)
     acquirente = google_login({
       email: user_info['email'],

@@ -53,7 +53,7 @@ class ChatRoomsController < ApplicationController
   def create_message
     @chat_room = ChatRoom.find(params[:chat_room_id] || params[:id])
   
-    # Riattiva visibilità per mittente e destinatario (in caso l'altro l'avesse eliminata)
+    
     if current_user == @chat_room.mittente
       @chat_room.update(destinatario_visible: true)
       @chat_room.update(mittente_visible: true)
@@ -106,7 +106,7 @@ class ChatRoomsController < ApplicationController
       chat_room = ChatRoom.create!(
         mittente: mittente,
         destinatario: destinatario,
-        nome: "Chat con #{destinatario.nome_negozio}" # oppure quello che preferisci
+        nome: "Chat con #{destinatario.nome_negozio}" 
       )
     end
   

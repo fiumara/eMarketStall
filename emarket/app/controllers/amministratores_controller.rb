@@ -3,26 +3,26 @@ class AmministratoresController < ApplicationController
   before_action :authenticate_amministratore!, only: %i[ show edit update destroy ]
   before_action :authorize_amministratore, only: %i[ show edit update destroy ]
 
-  # GET /amministratores or /amministratores.json
+  
   def index
     @amministratores = Amministratore.all
   end
 
-  # GET /amministratores/1 or /amministratores/1.json
+  
   def show
     @amministratore = Amministratore.find(params[:id])
   end
 
-  # GET /amministratores/new
+  
   def new
     @amministratore = Amministratore.new
   end
 
-  # GET /amministratores/1/edit
+  
   def edit
   end
 
-  # POST /amministratores or /amministratores.json
+  
   def create
     @amministratore = Amministratore.new(amministratore_params)
 
@@ -45,7 +45,7 @@ class AmministratoresController < ApplicationController
     end
   end
 
-  # PATCH/PUT /amministratores/1 or /amministratores/1.json
+  
   def update
     respond_to do |format|
       if @amministratore.update(amministratore_params)
@@ -58,7 +58,7 @@ class AmministratoresController < ApplicationController
     end
   end
 
-  # DELETE /amministratores/1 or /amministratores/1.json
+  
   def destroy
     @amministratore.destroy
 
@@ -107,14 +107,14 @@ class AmministratoresController < ApplicationController
   
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_amministratore
       @amministratore = Amministratore.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    
     def amministratore_params
-    #  params.fetch(:amministratore, {})
+  
     params.require(:amministratore).permit(:nome, :cognome, :email, :password, :password_confirmation)
     end
 

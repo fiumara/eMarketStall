@@ -40,7 +40,7 @@ class OrdiniController < ApplicationController
     ordini = []
     stripe_line_items = []
 
-    # Verifica e applica sconto fedeltà
+    # Verifica e applica sconto fede
     discount_coupon_id = nil
     use_fedelta = false
 
@@ -125,7 +125,7 @@ class OrdiniController < ApplicationController
         ordini.each do |ordine|
           ordine.update(
             stato: "pagato",
-            stripe_payment_intent_id: session.payment_intent # 👈 salva questo valore!
+            stripe_payment_intent_id: session.payment_intent 
           )
           assegna_punti_fedelta(ordine)
         end

@@ -1,19 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-#prodottos = Prodotto.create ([{id: 1}, { nome_prodotto: 'Maglietta'}, {descrizione: 'Maglietta bianca'}, {prezzo: 5}])
-#Prodotto.create(id: 1, prodotto: prodottos.first)
-
-#acquirentes = Acquirente.create ([{id: 1}, { nome: 'Maria'}, {cognome: 'Rossi'}, {telefono: '1234'}, {nome_utente: 'MRossi'}, {email:'maria.rossi@example.it'}, {password: 'password1'}, {password_confirmation: 'password1'}])
-#Acquirente.create(id: 1, acquirente: acquirentes.first)
-
-# db/seeds.rb
-
 # Cancella tutti i record esistenti nella tabella 'acquirentes'
 Acquirente.destroy_all
 
@@ -84,7 +68,7 @@ Acquirente.create!(
 )
 
 
-# db/seeds.rb
+
 
 # Cancella tutti i record esistenti nella tabella 'amministratores'
 Amministratore.destroy_all
