@@ -2,7 +2,7 @@
 <h1><%= t('resi.dett') %></h1>
 
 <p><strong><%= t('resi.id') %>:</strong> <%= @return_request.id %></p>
-<p><strong><%= t('comune.ordine') %>:</strong> <%= link_to "Ordine ##{@return_request.ordine.id}", ordine_path(@return_request.ordine) %></p>
+<p><strong><%= t('comune.ordine') %>:</strong> <%= link_to t("comune.ordine") +"##{@return_request.ordine.id}", ordine_path(@return_request.ordine) %></p>
 <p><strong><%= t('comune.motivo') %>:</strong> <%= t_google(@return_request.motivo) %></p>
 <p><strong><%= t('resi.data') %>:</strong> <%= @return_request.created_at.strftime("%d/%m/%Y %H:%M") %></p>
 

@@ -1,10 +1,9 @@
 <%= form_with(model: promozione, local: true) do |form| %>
   <% if promozione.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(promozione.errors.count, t("errors.messages.error")) %><%= t("errors.messages.prevented_save") %></h2>
-      <ul>
-        <% promozione.errors.full_messages.each do |message| %>
-          <li><%= t_google(message) %></li>
+    <h2><%= t("errors.messages.missing_fields") %>:</h2>      <ul>
+    <% promozione.errors.attribute_names.uniq.each do |attribute| %>
+      <li><%= Promozione.human_attribute_name(attribute) %></li>
         <% end %>
       </ul>
     </div>

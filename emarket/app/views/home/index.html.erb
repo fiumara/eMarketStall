@@ -144,7 +144,16 @@
         <h5 class="card-title"><%= t_google(prodotto.nome_prodotto) %></h5>
         <p class="card-text text-muted" style="flex-grow: 1;"><%= truncate(t_google(prodotto.descrizione), length: 80) %></p>
         <strong class="text-success fs-5">
-          <%= number_to_currency(prodotto.prezzo, unit: "€") %>
+        <% prezzo_scontato = prodotto.prezzo_scontato %>
+        <% if prezzo_scontato && prezzo_scontato < prodotto.prezzo %>
+          <p class="mb-0">
+            <del class="text-danger"><%= number_to_currency(prodotto.prezzo, unit: "€") %></del>
+            <strong class="text-success fs-5"><%= number_to_currency(prezzo_scontato, unit: "€") %></strong>
+          </p>
+        <% else %>
+          <strong class="text-success fs-5"><%= number_to_currency(prodotto.prezzo, unit: "€") %></strong>
+        <% end %>
+        
         </strong>
       </div>
     </div>

@@ -13,6 +13,7 @@ class Negozio < ApplicationRecord
     def nome_completo
         nome_negozio
     end
+    validates :nome_negozio, :telefono, presence: true
     validate :immagine_must_be_variable
 
     def immagine_must_be_variable

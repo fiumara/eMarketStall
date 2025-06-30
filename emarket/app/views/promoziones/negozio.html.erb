@@ -19,7 +19,7 @@
                         </td>
                         <td>
                             <% if promozione.prodotto.present? %>
-                                <%= t('comune.prodotto') %>: <%= promozione.prodotto.nome_prodotto %>
+                                <%= t('comune.prodotto') %>: <%= t_google(promozione.prodotto.nome_prodotto) %>
                                 <% elsif promozione.categorium.present? %>
                                 <%= t('promo.cat') %>: <%= promozione.categorium.nome %>
                                 
