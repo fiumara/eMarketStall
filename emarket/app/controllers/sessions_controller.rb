@@ -47,7 +47,7 @@ class SessionsController < ApplicationController
     user = Acquirente.find_or_create_by(email: email) do |u|
       u.nome = user_info['info']['first_name']
       u.cognome = user_info['info']['last_name']
-      u.password = SecureRandom.hex(10) # Password casuale per compatibilità con has_secure_password
+      u.password = SecureRandom.hex(10) 
       u.id_acquirente = user_info['uid']
       u.image_url = user_info['info']['image']
     end

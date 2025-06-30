@@ -1,5 +1,5 @@
 class NegozioReturnRequestsController < ApplicationController
-    before_action :authenticate_acquirente! # Assicurati di avere un metodo di autenticazione corretto
+    before_action :authenticate_acquirente! 
     before_action :set_return_request, only: [:show, :update, :approve, :reject]
     before_action :authorize_negozio_return_request, only: [:show, :update, :approve, :reject]
 
@@ -44,7 +44,7 @@ class NegozioReturnRequestsController < ApplicationController
           if ordine.stripe_payment_intent_id.present?
             Stripe::Refund.create({
               payment_intent: ordine.stripe_payment_intent_id,
-              amount: (totale_reso * 100).to_i, # Importo in centesimi
+              amount: (totale_reso * 100).to_i,
             })
           end
     

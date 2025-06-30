@@ -17,7 +17,7 @@ end
 def create
   @ordine_item = OrdineItem.find(params[:feedback][:ordine_item_id])
 
-  # 🔒 Verifica che l'acquirente sia il proprietario dell'ordine
+  # Verifica che l'acquirente sia il proprietario dell'ordine
   if @ordine_item.ordine.acquirente != current_user
     redirect_to root_path, alert: "Non sei autorizzato a lasciare un feedback per questo prodotto." and return
   end

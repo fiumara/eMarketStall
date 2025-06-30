@@ -1,5 +1,5 @@
 class SegnalazioniController < ApplicationController
-    before_action :authenticate_admin! # oppure altro metodo per autenticare l'amministratore
+    before_action :authenticate_admin! 
   
     def index
       @segnalazioni = SegnalazioneNegozio.includes(:negozio, :acquirente).all

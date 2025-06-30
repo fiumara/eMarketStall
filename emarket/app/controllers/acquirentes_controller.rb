@@ -3,27 +3,27 @@ class AcquirentesController < ApplicationController
   before_action :authenticate_acquirente!, only: %i[ show edit update destroy ]
   before_action :authorize_acquirente, only: %i[ show edit update destroy ]
 
-  # GET /acquirentes or /acquirentes.json
+  
   
 
-  # GET /acquirentes/1 or /acquirentes/1.json
+
  def show
     @acquirente = Acquirente.find(params[:id])
     @negozio = @acquirente.negozio
   end
 
-  # GET /acquirentes/new
+
   def new
     @acquirente = Acquirente.new
     @is_new = true
   end
 
-  # GET /acquirentes/1/edit
+  
   def edit
     @is_new = false
   end
 
-  # POST /acquirentes or /acquirentes.json
+
   def create
     @acquirente = Acquirente.new(acquirente_params)
     if @acquirente.save
@@ -36,7 +36,7 @@ class AcquirentesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /acquirentes/1 or /acquirentes/1.json
+  
   def update
     respond_to do |format|
       if @acquirente.update(acquirente_params)
@@ -67,7 +67,7 @@ end
     @negozi_seguiti = current_user.negozi_seguiti
   end
   
-  # DELETE /acquirentes/1 or /acquirentes/1.json
+  
   def destroy
     @acquirente.destroy
 
@@ -81,14 +81,14 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_acquirente
       @acquirente = Acquirente.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+  
     def acquirente_params
-    #  params.fetch(:acquirente, {})
+  
     params.require(:acquirente).permit(:nome, :cognome, :nome_utente, :telefono, :email, :password, :password_confirmation, :indirizzo, :privato)
     end
 

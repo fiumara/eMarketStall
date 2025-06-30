@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   
-  # Questo filtro protegge le azioni che richiedono un utente autenticato
+  # protegge le azioni che richiedono un utente autenticato
   before_action :set_current_user
   before_action :set_locale
 
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     # Trova o crea l'utente nel database
     user = Acquirente.find_or_create_by(email: user_info[:email]) do |new_user|
       new_user.nome = user_info[:nome]
-      new_user.telefono = user_info[:id_acquirente] # Ad esempio, usa id_acquirente per il telefono o gestiscilo diversamente
+      new_user.telefono = user_info[:id_acquirente] 
       new_user.nome_utente = user_info[:nome].parameterize if user_info[:nome]
       # Assegna una password casuale solo se si tratta di un nuovo record
       new_user.password = SecureRandom.hex(10)
