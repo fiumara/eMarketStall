@@ -20,6 +20,7 @@ class Prodotto < ApplicationRecord
   validates :prezzo, presence: true, numericality: { greater_than: 0 }
   validates :categorium_id, presence: true
   validates :quantita_disponibile, presence: true, numericality: { greater_than: 0 }
+  validate :immagini_varie_valide
 
   def self.search(term)
     if term
@@ -63,5 +64,13 @@ class Prodotto < ApplicationRecord
   
   def quantita_disponibile
     self[:quantita_disponibile] || 0 # Ritorna 0 se il valore è nullo
+  end
+
+  def immagini_varie_valide
+    immagini.each do |immagine|
+      unless immagine.variable?
+        errors.add(:immagini, 'deve essere una immagine JPG o PNG')
+      end
+    end
   end
 end

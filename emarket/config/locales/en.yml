@@ -220,6 +220,7 @@ en:
     quantita: "Available Quantity"
     aggiorna: "Update Product"
     crea: "Create Product"
+    formato_non_supportato: "Image not supported (use JPG or PNG)"
 
 
   pw_reset:

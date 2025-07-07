@@ -226,6 +226,7 @@ es:
     quantita: "Cantidad Disponible"
     aggiorna: "Actualizar Producto"
     crea: "Crear Producto"
+    formato_non_supportato: "Imagen no compatible (use JPG o PNG)"
 
 
   pw_reset:

@@ -230,6 +230,7 @@ fr:
     quantita: "Quantité Disponible"
     aggiorna: "Mettre à jour le Produit"
     crea: "Créer le Produit"
+    formato_non_supportato: "Image non prise en charge (utilisez JPG ou PNG)"
 
 
   pw_reset:

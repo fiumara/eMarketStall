@@ -232,6 +232,7 @@ it:
     quantita: "Quantità Disponibile"
     aggiorna: "Aggiorna Prodotto"
     crea: "Crea Prodotto"
+    formato_non_supportato: "Immagine non supportata (usa JPG o PNG)"
 
 
   pw_reset:

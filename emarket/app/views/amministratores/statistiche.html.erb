@@ -2,45 +2,45 @@
 
 <p><%= t_google(notice) %></p>
 
-<div style="max-width: 1000px; margin: 2rem auto; padding: 2rem; background-color: #fff; border-radius: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.08); font-family: Arial, sans-serif;">
+<div class="admin-stats-container">
 
-  <h1 style="font-size: 2rem; color: #2c3e50; text-align: center; margin-bottom: 2rem;"><%= t('amministratore.s_titolo') %></h1>
+  <h1 class="admin-stats-title"><%= t('amministratore.s_titolo') %></h1>
 
-  <div style="margin-bottom: 2rem; padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
-    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;"><%= t('amministratore.s_utenti') %></h2>
-    <ul style="list-style: none; padding: 0;">
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_acq_tot') %> <%= @acquirenti_totali %></li>
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_vend_tot') %> <%= @venditori_totali %></li>
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_acq_mese') %> <%= @acquirenti_corrente_mese %></li>
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_vend_mese') %> <%= @venditori_corrente_mese %></li>
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_acq_anno') %> <%= @acquirenti_corrente_anno %></li>
-      <li style="padding: 0.5rem 0;"><%= t('amministratore.s_vend_anno') %> <%= @venditori_corrente_anno %></li>
+  <div class="admin-card">
+    <h2 class="admin-card-title"><%= t('amministratore.s_utenti') %></h2>
+    <ul class="admin-list">
+      <li><%= t('amministratore.s_acq_tot') %> <%= @acquirenti_totali %></li>
+      <li><%= t('amministratore.s_vend_tot') %> <%= @venditori_totali %></li>
+      <li><%= t('amministratore.s_acq_mese') %> <%= @acquirenti_corrente_mese %></li>
+      <li><%= t('amministratore.s_vend_mese') %> <%= @venditori_corrente_mese %></li>
+      <li><%= t('amministratore.s_acq_anno') %> <%= @acquirenti_corrente_anno %></li>
+      <li><%= t('amministratore.s_vend_anno') %> <%= @venditori_corrente_anno %></li>
     </ul>
   </div>
 
-  <div style="margin-bottom: 2rem; padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
-    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;"><%= t('amministratore.s_ord_ven') %></h2>
-    <ul style="list-style: none; padding: 0;">
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_ven_tot') %> <%= @vendite_totali %></li>
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_med_acq') %> <%= number_with_precision(@media_acquisti_per_acquirente, precision: 2) %></li>
-      <li style="padding: 0.5rem 0;"><%= t('amministratore.s_med_art') %> <%= number_with_precision(@media_articoli_per_ordine, precision: 2) %></li>
+  <div class="admin-card">
+    <h2 class="admin-card-title"><%= t('amministratore.s_ord_ven') %></h2>
+    <ul class="admin-list">
+      <li><%= t('amministratore.s_ven_tot') %> <%= @vendite_totali %></li>
+      <li><%= t('amministratore.s_med_acq') %> <%= number_with_precision(@media_acquisti_per_acquirente, precision: 2) %></li>
+      <li><%= t('amministratore.s_med_art') %> <%= number_with_precision(@media_articoli_per_ordine, precision: 2) %></li>
     </ul>
   </div>
 
-  <div style="margin-bottom: 2rem; padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
-    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;"><%= t('amministratore.s_acq') %></h2>
-    <ul style="list-style: none; padding: 0;">
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_acq1') %> <%= @rapporto_acquirenti_0_vs_1plus[:con_ordini] %></li>
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_acq1') %> <%= @rapporto_acquirenti_0_vs_1plus[:senza_ordini] %></li>
-      <li style="padding: 0.5rem 0;"><%= t('amministratore.s_med_spesa') %> <%= number_to_currency(@media_spesa_per_acquirente) %></li>
+  <div class="admin-card">
+    <h2 class="admin-card-title"><%= t('amministratore.s_acq') %></h2>
+    <ul class="admin-list">
+      <li><%= t('amministratore.s_acq1') %> <%= @rapporto_acquirenti_0_vs_1plus[:con_ordini] %></li>
+      <li><%= t('amministratore.s_acq0') %> <%= @rapporto_acquirenti_0_vs_1plus[:senza_ordini] %></li>
+      <li><%= t('amministratore.s_med_spesa') %> <%= number_to_currency(@media_spesa_per_acquirente) %></li>
     </ul>
   </div>
 
-  <div style="padding: 1rem; border-left: 5px solid #4a90e2; background-color: #f9f9f9; border-radius: 12px;">
-    <h2 style="font-size: 1.5rem; color: #34495e; border-bottom: 1px solid #ddd; padding-bottom: 0.3rem;"><%= t('amministratore.s_vend') %></h2>
-    <ul style="list-style: none; padding: 0;">
-      <li style="padding: 0.5rem 0; border-bottom: 1px dashed #e0e0e0;"><%= t('amministratore.s_med_prod') %> <%= number_with_precision(@media_prodotti_per_venditore, precision: 2) %></li>
-      <li style="padding: 0.5rem 0;"><%= t('amministratore.s_med_guadagno') %> <%= number_to_currency(@media_guadagno_per_venditore) %></li>
+  <div class="admin-card">
+    <h2 class="admin-card-title"><%= t('amministratore.s_vend') %></h2>
+    <ul class="admin-list">
+      <li><%= t('amministratore.s_med_prod') %> <%= number_with_precision(@media_prodotti_per_venditore, precision: 2) %></li>
+      <li><%= t('amministratore.s_med_guadagno') %> <%= number_to_currency(@media_guadagno_per_venditore) %></li>
     </ul>
   </div>
 

@@ -107,7 +107,7 @@
     <!-- Promozioni -->
     <% if @promoziones.present? %>
       <section class="mb-5">
-        <h2 class="mb-4 text-primary">🎉<%= t('home.promo')%></h2>
+        <h2 class="text-center">🎉<%= t('home.promo')%></h2>
         <div class="row">
           <% @promoziones.each do |promozione| %>
             <div class="col-md-4">
@@ -135,7 +135,7 @@
 
     <!-- Prodotti -->
 <section>
-  <h2 class="mb-4 text-success">🛍️ <%= t('home.art') %> </h2>
+  <h2 class="text-center">🛍️ <%= t('home.art') %> </h2>
   <div class="row g-4">
     <% if @prodottos.present? %>
       <% @prodottos.each do |prodotto| %>

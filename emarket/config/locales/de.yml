@@ -228,6 +228,7 @@ de:
     quantita: "Verfügbare Menge"
     aggiorna: "Produkt aktualisieren"
     crea: "Produkt erstellen"
+    formato_non_supportato: "Bild wird nicht unterstützt (verwenden Sie JPG oder PNG)"
 
 
   pw_reset:

@@ -10,15 +10,22 @@
             <h1 class="mb-3"><%= t_google(@prodotto.nome_prodotto) %></h1>
 
             <% if @prodotto.immagini.attached? %>
-              <%= image_tag url_for(@prodotto.immagini.first), class: "main-image img-fluid rounded" %>
-            <% else %>
-              <div class="empty-image-placeholder"><%= t('prodotto.no_imm') %></div>
-            <% end %>
+  <div class="image-carousel-wrapper position-relative">
+    <div id="carousel" class="d-flex overflow-hidden" style="max-width: 100%; scroll-behavior: smooth;">
+      <% @prodotto.immagini.each do |img| %>
+        <%= image_tag img.variant(resize_to_limit: [300, 300]), class: "img-thumbnail me-2", style: "min-width: 300px;" %>
+      <% end %>
+    </div>
 
-            <div class="carousel-controls mt-2 text-center">
-              <button id="prevBtn" class="btn btn-outline-secondary">‹</button>
-              <button id="nextBtn" class="btn btn-outline-secondary">›</button>
-            </div>
+    <div class="carousel-controls mt-2 text-center">
+      <button id="prevBtn" class="btn btn-outline-secondary me-2">‹</button>
+      <button id="nextBtn" class="btn btn-outline-secondary">›</button>
+    </div>
+  </div>
+<% else %>
+  <div class="empty-image-placeholder"><%= t('prodotto.no_imm') %></div>
+<% end %>
+
 
             <% if logged_in? && current_user == @prodotto.negozio.acquirente %>
               <div class="d-flex gap-2 mt-3">
@@ -69,4 +76,25 @@
     </div>
   </div>
 </main>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const carousel = document.getElementById("carousel");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+
+    const scrollAmount = 320; // px
+
+    nextBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+  });
+</script>
+
 

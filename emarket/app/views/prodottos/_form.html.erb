@@ -20,15 +20,22 @@
 
   <div class="field">
   <%= form.label :immagini, t("prodotto.carica_imm") %>
-  <%= form.file_field :immagini, multiple: true %>
-</div>
+  <%= form.file_field :immagini, multiple: true, accept: 'image/png,image/jpeg', class: "form-control" %>
+  </div>
 
 <% if @prodotto.immagini.attached? %>
   <div>
     <h3><%= t('prodotto.imm') %>:</h3>
     <% @prodotto.immagini.each do |img| %>
-      <%= image_tag img.variant(resize_to_limit: [300, 300]) %>
+      <% if img.variable? %>
+        <%= image_tag img.variant(resize_to_limit: [300, 300]) %>
+      <% else %>
+        <div class="alert alert-warning">
+          <%= t('prodotto.formato_non_supportato') %>
+        </div>
+      <% end %>
     <% end %>
+    
   </div>
 <% end %>
 
