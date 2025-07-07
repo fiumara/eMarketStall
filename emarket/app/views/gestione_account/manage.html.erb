@@ -68,7 +68,7 @@
     <% @acquirente.each do |acquirente| %>
       <div class="account-box d-flex justify-content-between align-items-start">
         <div class="info">
-          <h3><%= acquirente.nome_utente %></h3>
+          <h3><%= link_to acquirente.nome_utente || "User #{acquirente.id}" , visualizza_acquirente_path(acquirente), class: "text-decoration-none" %></h3>
           <p><%= acquirente.nome %> <%= acquirente.cognome %></p>
           <% if acquirente.negozio.present? %>
             <p><%= t('comune.negozio') %>: <%= acquirente.negozio.nome_negozio %></p>
