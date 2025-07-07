@@ -3,9 +3,9 @@
 
 <%= form_with(model: @negozio, local: true) do |form| %>
   <% if @negozio.errors.any? %>
-    <div id="error_explanation">
-    <h2><%= t("errors.messages.missing_fields") %>:</h2>      
-    <ul>
+    <div class="alert alert-danger border border-danger shadow-sm rounded p-3 mb-4">
+    <h4 class="alert-heading"><%= t("errors.messages.missing_fields") %>:</h4>
+    <ul class="mb-0">
         <% @negozio.errors.attribute_names.uniq.each do |attribute| %>
           <li><%= Negozio.human_attribute_name(attribute) %></li>
         <% end %>
@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :nome, t("forms.nome") %>
+    <%= form.label :nome, t("negozio.nome") %>
     <%= form.text_field :nome_negozio %>
   </div>
 

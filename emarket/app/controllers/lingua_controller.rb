@@ -13,7 +13,7 @@ class LinguaController < ApplicationController
     
       def cambia
         session[:lingua] = params[:lingua]
-        redirect_back fallback_location: root_path, notice: "Lingua cambiata in #{params[:lingua]}"
+        redirect_back fallback_location: root_path
       end
   end
   

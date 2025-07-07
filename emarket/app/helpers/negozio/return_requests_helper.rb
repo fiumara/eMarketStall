@@ -1,2 +1,0 @@
-module Negozio::ReturnRequestsHelper
-end

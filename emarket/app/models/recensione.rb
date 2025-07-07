@@ -1,5 +1,0 @@
-class Recensione < ApplicationRecord
-
-
-    
-end
