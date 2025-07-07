@@ -63,7 +63,7 @@ class Prodotto < ApplicationRecord
   end
   
   def quantita_disponibile
-    self[:quantita_disponibile] || 0 # Ritorna 0 se il valore è nullo
+    self[:quantita_disponibile] || 0 
   end
 
   def immagini_varie_valide

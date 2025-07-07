@@ -11,7 +11,6 @@ const chatId = chatRoomElement.dataset.chatId;
 
 consumer.subscriptions.create({ channel: "MessageChannel", chat_id: chatId }, {
   connected() {
-    // Chiamato quando la connessione al canale è stabilita
   },
 
   disconnected() {
@@ -30,7 +29,6 @@ consumer.subscriptions.create({ channel: "MessageChannel", chat_id: chatId }, {
   
 
   speak(message) {
-    // Invia il messaggio al canale
     return this.perform('speak', { message: message });
   }
 });

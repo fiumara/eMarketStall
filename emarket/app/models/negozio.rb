@@ -1,4 +1,5 @@
 class Negozio < ApplicationRecord
+    
     belongs_to :acquirente
     has_many :prodottos, dependent: :destroy
     has_many :promoziones, dependent: :destroy
@@ -8,13 +9,14 @@ class Negozio < ApplicationRecord
     has_many :messaggi_ricevuti, as: :destinatario, class_name: 'Messaggio', dependent: :destroy
     has_many :segnalazioni_negozi, class_name: 'SegnalazioneNegozio', dependent: :destroy
 
-    has_one_attached :immagine # <--- aggiunto
+    has_one_attached :immagine 
+
+    validates :nome_negozio, :telefono, presence: true
+    validate :immagine_must_be_variable
 
     def nome_completo
         nome_negozio
     end
-    validates :nome_negozio, :telefono, presence: true
-    validate :immagine_must_be_variable
 
     def immagine_must_be_variable
       if immagine.attached? && !immagine.variable?

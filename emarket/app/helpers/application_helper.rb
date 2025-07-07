@@ -3,7 +3,7 @@ module ApplicationHelper
       TranslationService.translate(text, session[:lingua] || "it")
   end
 
-    # app/helpers/application_helper.rb
+    
 def translated_prodotti_options
 Prodotto.all.map { |p| [t_google(p.nome_prodotto), p.id] }
 end

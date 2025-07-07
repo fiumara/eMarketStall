@@ -22,7 +22,7 @@ document.addEventListener("turbolinks:load", () => {
     }
   );
 
-  // Aggiungi la possibilità di inviare messaggi tramite il pulsante o il tasto "Enter"
+  // Aggiungi la possibilità di inviare messaggi tramite il pulsante 
   const messageInput = document.getElementById("message_input");
   const sendButton = document.getElementById("send_message_button");
 

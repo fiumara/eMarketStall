@@ -50,8 +50,11 @@ Rails.application.routes.draw do
   post "/lingua/cambia", to: "lingua#cambia", as: :cambia_lingua
 
 
+  get 'admin/feedbacks_segnalati', to: 'amministratores#feedbacks_segnalati', as: 'admin_feedbacks_segnalati'
+  delete 'gestione_account/ignora_segnalazione_negozio/:id', to: 'gestione_account#ignora_segnalazione_negozio', as: 'ignora_segnalazione_negozio'
 
-  resources :resi, only: [:index, :update]
+
+
   resources :segnalazioni, only: [:index, :destroy]
   resources :negozios do
     resources :ordini, controller: 'ordini_negozi', only: [:index, :show, :update]
@@ -146,11 +149,7 @@ Rails.application.routes.draw do
 
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  get 'admin/feedbacks_segnalati', to: 'amministratores#feedbacks_segnalati', as: 'admin_feedbacks_segnalati'
-
-  # ✅ Nuova rotta per ignorare una segnalazione negozio
-  delete 'gestione_account/ignora_segnalazione_negozio/:id', to: 'gestione_account#ignora_segnalazione_negozio', as: 'ignora_segnalazione_negozio'
-
+  
   # Monta Action Cable
   mount ActionCable.server => '/cable'
 end

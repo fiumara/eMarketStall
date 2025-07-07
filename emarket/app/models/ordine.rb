@@ -4,10 +4,11 @@ class Ordine < ApplicationRecord
 
   before_create :assegna_codice_ordine
 
+  #Assiciazioni
   has_many :ordine_items, dependent: :destroy
   has_many :prodottos, through: :ordine_items
 
-  has_many :return_requests, dependent: :destroy  # Associazione con i resi
+  has_many :return_requests, dependent: :destroy  
   
   enum stato: { 
     in_attesa: 'in_attesa', 
