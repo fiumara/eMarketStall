@@ -16,8 +16,7 @@ RSpec.describe 'Aggiunta prodotto al carrello', type: :system, js: true do
 
     @negozio = @acquirente.create_negozio!(
       nome_negozio: "Negozio Test",
-      telefono: "1234567890" # ✅ richiesto dalla validazione
-      # immagine non necessaria nei test
+      telefono: "1234567890" 
     )
 
     @categoria = Categorium.create!(nome: "Gioielli")
@@ -40,13 +39,13 @@ RSpec.describe 'Aggiunta prodotto al carrello', type: :system, js: true do
     visit login_path
     fill_in 'Email', with: @acquirente.email
     fill_in 'Password', with: 'password123'
-    choose('role_acquirente') # ✅ seleziona esplicitamente il ruolo
-    click_button I18n.t('sessions.login') # usa la traduzione reale
+    choose('role_acquirente') 
+    click_button I18n.t('sessions.login') 
 
   
     visit prodotto_path(@prodotto)
     fill_in 'quantity', with: 2
-    click_button I18n.t('prodotto.agg') # ✅ usa la traduzione corretta
+    click_button I18n.t('prodotto.agg') 
   
     expect(page).to have_content("Anello aggiunto al carrello!")
     expect(@acquirente.reload.carrello.carrello_items.count).to eq(1)

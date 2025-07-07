@@ -10,11 +10,11 @@ RSpec.describe "CarrelloItems", type: :request do
         )
         @negozio = @acquirente.create_negozio!(
           nome_negozio: "Il Mio Negozio",
-          telefono: "1234567890" # ✅ aggiunto campo obbligatorio
+          telefono: "1234567890" 
         )
 
       
-        @categoria = Categorium.create!(nome: "Accessori") # ✅ aggiunta categoria
+        @categoria = Categorium.create!(nome: "Accessori") 
       
         @prodotto = @negozio.prodottos.create!(
   nome_prodotto: "Borsa artigianale",
